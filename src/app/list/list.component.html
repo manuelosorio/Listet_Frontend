@@ -1,0 +1,14 @@
+<div *ngFor="let list of lists;">
+  <ul>
+    <li>
+      {{list.name}}
+      <a [routerLink]="['/' + list.author ]">
+        {{list.author}}
+      </a>
+      <div *ngFor="let item of list.items">
+        <input type="checkbox"  [value]="[item.name]" id="{{item.name}}" />
+        <label for="{{item.name}}">{{item.name}}</label>
+      </div>
+    </li>
+  </ul>
+</div>
