@@ -12,4 +12,14 @@ export class UsersService {
   getUsers() {
     return this.http.get(window.location.protocol + '//' + window.location.hostname + ':3000/users');
   }
+
+  createUser(value) {
+    const postUrl = window.location.protocol + '//' + window.location.hostname + ':3000/new/user';
+    this.http.post(postUrl, value)
+      .subscribe(
+      (res) => {
+        console.log(res);
+      }
+    );
+  }
 }
