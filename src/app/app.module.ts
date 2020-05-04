@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListComponent,
     ProfileComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
