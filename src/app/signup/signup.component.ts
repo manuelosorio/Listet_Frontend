@@ -32,10 +32,8 @@ export class SignupComponent implements OnInit {
 
     this.userService.createUser(data);
     this.signupForm.reset();
-    this.router.navigate(['/users']);
+    this.router.navigate(['/users']).then(r => console.log(r));
   }
 
-  private getUsers() {
 
-  }
 }

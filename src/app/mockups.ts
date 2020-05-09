@@ -1,5 +1,7 @@
-export let mockedLists: { id: number, name: string, description: string, author: string,
-  date: string, deadline: string,  image: string, public: number, items: { name: string, deadline: string, completed: boolean }[]}[];
+export let mockedLists: {
+  id: number, name: string, description: string, author: string,
+  date: string, deadline: string,  image: string, public: number,
+  items: { name: string, deadline: string, completed: boolean }[]}[];
 mockedLists = [
   {
     id: 0,
