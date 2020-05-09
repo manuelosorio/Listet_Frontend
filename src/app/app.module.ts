@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {IconsModule} from './icons/icons.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    IconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
