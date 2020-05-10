@@ -1,0 +1,33 @@
+@use "../../sass/variables"
+footer
+  padding: 55px 0
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  width: 80%
+  margin: 0 auto
+  align-items: center
+.social
+  display: flex
+  flex-direction: row
+  &--icon
+    display: flex
+    position: relative
+    border-radius: 50%
+    background: variables.$primary
+    color: variables.$black
+    width: 2.8125rem
+    height: 2.8125rem
+    margin: 0 1rem
+    box-shadow: variables.$shadow
+    transition: variables.$t-easeOutBack
+    &:hover
+      box-shadow: variables.$shadow-hover
+      transform: translateY(3px)
+      background: darken(variables.$primary, 12%)
+      color: darken(variables.$black, 100%)
+    i-feather
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)

@@ -1,0 +1,18 @@
+@use "variables"
+@import url('https://use.typekit.net/ape0zgx.css')
+*
+  box-sizing: border-box
+  &:before, &:after
+    box-sizing: inherit
+html
+  font-size: 100%
+body
+  margin: 0
+  padding: 0
+  font: variables.$f-size--small variables.$fira-sans
+app-root
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+main
+  flex: 1 0 auto
