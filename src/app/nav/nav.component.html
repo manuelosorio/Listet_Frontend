@@ -1,8 +1,14 @@
-<nav>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/lists">Lists</a> </li>
-    <li><a routerLink="/users">All Users</a></li>
-    <li><a routerLink="/signup">Signup</a></li>
+<nav class="navigation">
+  <a routerLink="/" class="navigation__logo"><img src="/assets/images/logo.svg" alt="Listet"></a>
+  <ul class="navigation__links">
+    <li class="navigation__links-item"><a routerLink="/">Home</a></li>
+    <li class="navigation__links-item"><a routerLink="/lists">All Lists</a> </li>
+    <li class="navigation__links-item">
+      <button class="btn">Login</button>
+      <form>
+
+      </form>
+    </li>
+    <li class="navigation__links-item"><a routerLink="/register">Register</a></li>
   </ul>
 </nav>

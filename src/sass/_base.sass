@@ -16,3 +16,18 @@ app-root
   flex-direction: column
 main
   flex: 1 0 auto
+button
+  border: none
+  background: none
+  font-size: 1rem
+.btn
+  background: variables.$primary
+  border-radius: 2rem
+  box-shadow: variables.$shadow
+  padding: 0.65rem 2rem
+  transition: variables.$t-easeOutBack
+  &:hover
+    background: variables.$primary-darken
+    box-shadow: variables.$shadow-hover
+    color: variables.$black-darken
+    transform: translateY(3px)

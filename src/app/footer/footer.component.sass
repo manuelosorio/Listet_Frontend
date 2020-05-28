@@ -4,9 +4,10 @@ footer
   display: flex
   flex-direction: row
   justify-content: space-between
-  width: 80%
+  width: 88%
   margin: 0 auto
   align-items: center
+
 .social
   display: flex
   flex-direction: row
@@ -24,8 +25,8 @@ footer
     &:hover
       box-shadow: variables.$shadow-hover
       transform: translateY(3px)
-      background: darken(variables.$primary, 12%)
-      color: darken(variables.$black, 100%)
+      background: variables.$primary-darken
+      color: variables.$black-darken
     i-feather
       position: absolute
       left: 50%
