@@ -5,10 +5,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.sass']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.sass']
 })
-export class SignupComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   signupForm;
 
   constructor(
@@ -29,7 +29,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(data) {
-
     this.userService.createUser(data);
     this.signupForm.reset();
     this.router.navigate(['/users']).then(r => console.log(r));

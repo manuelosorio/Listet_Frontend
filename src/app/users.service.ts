@@ -14,7 +14,7 @@ export class UsersService {
   }
 
   createUser(value) {
-    const postUrl = window.location.protocol + '//' + window.location.hostname + ':3000/new/user';
+    const postUrl = window.location.protocol + '//' + window.location.hostname + ':3000/register';
     this.http.post(postUrl, value)
       .subscribe(
       (res) => {

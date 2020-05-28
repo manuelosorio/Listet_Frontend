@@ -9,7 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SignupComponent } from './signup/signup.component';
+import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IconsModule} from './icons/icons.module';
 import { FooterComponent } from './footer/footer.component';
@@ -21,7 +21,7 @@ import { FooterComponent } from './footer/footer.component';
     ProfileComponent,
     HomeComponent,
     NavComponent,
-    SignupComponent,
+    RegisterComponent,
     FooterComponent
   ],
   imports: [
