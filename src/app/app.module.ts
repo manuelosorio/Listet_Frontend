@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IconsModule} from './icons/icons.module';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     NavComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
