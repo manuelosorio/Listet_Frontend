@@ -2,13 +2,11 @@
   <ul>
     <li>
       {{list.name}}
-      <a [routerLink]="['/' + list.author ]">
-        {{list.author}}
+      <em *ngIf="list['deadline']">Deadline: {{ list['deadline'] }} </em>
+      <em>Created: {{ list['creation_date'] }} </em>
+      <a [routerLink]="['/' + list['username']]">
+        {{ list['username'] }}
       </a>
-      <div *ngFor="let item of list.items">
-        <input type="checkbox"  [value]="[item.name]" id="{{item.name}}" />
-        <label for="{{item.name}}">{{item.name}}</label>
-      </div>
     </li>
   </ul>
 </div>
