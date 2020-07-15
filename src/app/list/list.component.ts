@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mockedLists } from '../mockups';
 import {ListsService} from '../lists.service';
-// import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -9,7 +9,8 @@ import {ListsService} from '../lists.service';
 })
 export class ListComponent implements OnInit {
   // lists = mockedLists;
-  constructor(private listService: ListsService) { }
+  constructor(private listService: ListsService,
+              private router: Router) { }
   lists: object;
 
   ngOnInit(): void {
@@ -19,6 +20,11 @@ export class ListComponent implements OnInit {
       const currentDay = new Date();
       console.log(currentDay);
     });
-  }
 
+  }
+  redirect(slug): void {
+    this.router.navigateByUrl(`/${slug}`).then(r => {
+      return r;
+    });
+  }
 }

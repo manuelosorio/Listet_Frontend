@@ -1,13 +1,20 @@
 <div *ngFor="let list of lists;">
   <ul>
-    <li>
-      {{list.name}}
-      <em *ngIf="list['deadline']">Deadline: {{ list['deadline'] }} </em>
-      <em>Created: {{ list['creation_date'] }} </em>
-      <a [routerLink]="['/' + list['username']]">
-        {{ list['username'] }}
-      </a>
-      <p *ngIf="list['description']">{{ list['description'] }}</p>
+    <li class="card" (click)="redirect([ '/' + list['username'] + '/' +list['slug']])">
+        <div class="l-row">
+          <h3 class="card__title">{{list['name']}}</h3>
+          <em *ngIf="list['deadline']" class="">Deadline: {{ list['deadline'] }} </em>
+        </div>
+        <div class="l-row">
+          <a [routerLink]="['/' + list['username']]"  [class.test]>
+            {{ list['username'] }}
+          </a>
+
+          <em>Created: {{ list['creation_date'] }} </em>
+        </div>
+        <div class="l-row">
+          <p *ngIf="list['description']">{{ list['description'] }}</p>
+        </div>
     </li>
   </ul>
 </div>
