@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { mockedLists } from '../mockups';
-import {ListsService} from '../lists.service';
+import { mockedLists } from '../../_services/mockups';
+import {ListsService} from '../../_services/lists.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-list',

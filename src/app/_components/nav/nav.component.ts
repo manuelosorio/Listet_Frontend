@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from '../users.service';
+import {UsersService} from '../user/users.service';
 
 @Component({
   selector: 'app-nav',
