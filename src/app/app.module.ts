@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { ListComponent } from './list/list.component';
-import { ProfileComponent } from './profile/profile.component';
-import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
+import { UserComponent } from './_components/user/user.component';
+import { ListComponent } from './_components/list/list.component';
+import { ProfileComponent } from './_pages/profile/profile.component';
+import { HomeComponent } from './_pages/home/home.component';
+import { NavComponent } from './_components/nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './_components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {IconsModule} from './icons/icons.module';
-import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
+import {IconsModule} from './_modules/icons/icons.module';
+import { FooterComponent } from './_components/footer/footer.component';
+import { LoginComponent } from './_components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
