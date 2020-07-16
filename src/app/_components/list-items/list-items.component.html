@@ -1,0 +1,14 @@
+<h3>List Items</h3>
+<ng-container *ngFor="let item of items">
+  <section>
+    <label for="{{item['id']}}" class="list-item">
+      <input type="checkbox" id="{{item['id']}}">
+      <div class="info">
+        <p><em >Item</em> {{item["item"]}}</p>
+        <p><em >Deadline:</em> {{item["deadline"]}}</p>
+      </div>
+    </label>
+
+  </section>
+</ng-container>
+
