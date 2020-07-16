@@ -12,4 +12,14 @@ export class ListsService {
   getLists() {
     return this.http.get(environment.host + '/lists');
   }
+
+  getList(username, slug) {
+    return this.http.get(environment.host + `/list/${username}/${slug}`);
+  }
+  getListItems(username, slug) {
+    return this.http.get(environment.host + `/list/${username}/${slug}/items`);
+  }
+  getListComments(id, slug) {
+    return this.http.get(environment.host + `/list/${id}/${slug}/comments`);
+  }
 }

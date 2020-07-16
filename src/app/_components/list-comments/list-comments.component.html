@@ -1,0 +1,10 @@
+<h3>Comments</h3>
+<section *ngFor="let comment of comments">
+  <div class="comment">
+    <p>Creation Date: {{ comment['creation_date'] }}</p>
+    <p>Comment By: {{ comment['firstName'] }} {{ comment['lastName'] }}</p>
+    <p>username: {{ comment['username'] }}</p>
+    <p>Comment Message: {{ comment['comment'] }}</p>
+  </div>
+</section>
+
