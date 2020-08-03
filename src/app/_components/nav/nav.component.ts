@@ -7,7 +7,7 @@ import {UsersService} from '../../_services/users.service';
   styleUrls: ['./nav.component.sass']
 })
 export class NavComponent implements OnInit {
-  authenticated;
+  authenticated: boolean;
   constructor(
     private userService: UsersService,
   ) {
@@ -19,22 +19,5 @@ export class NavComponent implements OnInit {
     this.userService.logoutUser();
   }
   ngOnInit(): void {
-    /**
-     * TODO: Write the actual auth check!
-     *       Current method is for testing purposes
-     *       and is not secure!
-     */
-    // this.userService.isAuth().subscribe(
-    //   data => {
-    //     if (!data) {
-    //       this.login = false;
-    //       console.log('User not logged in');
-    //     } else {
-    //       this.login = true;
-    //       this.user = data;
-    //     }
-    //   }
-    // );
-  // this.userService.isAuth();
   }
 }
