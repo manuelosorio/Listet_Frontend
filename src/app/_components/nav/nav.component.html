@@ -1,6 +1,6 @@
 <ng-template #navDefault>
   <nav class="navigation">
-    <a routerLink="/" class="navigation__logo"><img src="../../assets/images/logo.svg" alt="Listet"></a>
+    <a routerLink="/" class="navigation__logo"><img src="assets/images/logo.svg" alt="Listet"></a>
     <ul class="navigation__links">
       <li class="navigation__links-item"><a routerLink="/">Home</a></li>
       <li class="navigation__links-item"><a routerLink="/lists">All Lists</a></li>
@@ -12,7 +12,7 @@
   </nav>
 </ng-template>
 <nav class="navigation" *ngIf="authenticated === true else navDefault">
-  <a routerLink="/" class="navigation__logo"><img src="../../assets/images/logo.svg" alt="Listet"></a>
+  <a routerLink="/" class="navigation__logo"><img src="assets/images/logo.svg" alt="Listet"></a>
   <ul class="navigation__links">
     <li class="navigation__links-item"><a routerLink="/">Home</a></li>
     <li class="navigation__links-item"><a routerLink="/lists">All Lists</a></li>
