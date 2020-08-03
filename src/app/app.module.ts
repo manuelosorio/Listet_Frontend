@@ -18,6 +18,9 @@ import { ListDetailsComponent } from './_pages/list-details/list-details.compone
 import { ListHeaderComponent } from './_components/list-header/list-header.component';
 import { ListCommentsComponent } from './_components/list-comments/list-comments.component';
 import { ListItemsComponent } from './_components/list-items/list-items.component';
+import {NotFoundComponent} from './_pages/not-found/not-found.component';
+import {AuthGuard} from './guards/auth.guard';
+import {GuestGuard} from './guards/guest.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,8 @@ import { ListItemsComponent } from './_components/list-items/list-items.componen
     ListDetailsComponent,
     ListHeaderComponent,
     ListCommentsComponent,
-    ListItemsComponent
+    ListItemsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,7 @@ import { ListItemsComponent } from './_components/list-items/list-items.componen
     FormsModule,
     IconsModule,
   ],
-  providers: [],
+  providers: [GuestGuard, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
