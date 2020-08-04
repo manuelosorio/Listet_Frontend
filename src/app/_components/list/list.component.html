@@ -1,12 +1,12 @@
 <ul>
   <ng-container *ngFor="let list of lists;">
-    <li class="card" (click)="redirect([ '/' + list['username'] + '/' +list['slug']])">
+    <li class="card" (click)="redirect([ '/l/' + list['username'] + '/' +list['slug']])">
       <div class="l-row">
         <h3 class="card__title">{{list['name']}}</h3>
         <em *ngIf="list['deadline']" class="">Deadline: {{ list['deadline'] }} </em>
       </div>
       <div class="l-row">
-        <a [routerLink]="['/' + list['username']]"  [class.test]>
+        <a [routerLink]="['/u/' + list['username']]"  [class.test]>
           {{ list['username'] }}
         </a>
 

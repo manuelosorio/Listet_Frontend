@@ -30,6 +30,7 @@ import { HomeComponent } from './_pages/home/home.component';
 import { ListDetailsComponent } from './_pages/list-details/list-details.component';
 import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
+import {BackButtonComponent} from './_components/back-button/back-button.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { ProfileComponent } from './_pages/profile/profile.component';
     ListHeaderComponent,
     ListCommentsComponent,
     ListItemsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BackButtonComponent
   ],
   imports: [
     BrowserModule,

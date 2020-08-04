@@ -18,12 +18,11 @@ import {NotFoundComponent} from './_pages/not-found/not-found.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'lists', component: ListComponent},
-  {path: 'log-in', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   {path: 'users', component: UserComponent, canActivate: [GuestGuard]},
-  {path: ':username', component: HomeComponent },
-  {path: ':username/:slug', component: ListDetailsComponent },
+  {path: 'u/:username', component: HomeComponent },
+  {path: 'l/:username/:slug', component: ListDetailsComponent },
   {path: '**', component: NotFoundComponent },
 ];
 
