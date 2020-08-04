@@ -1,7 +1,27 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
-  <label for="username">Username</label>
-  <input type="text" formControlName="username" id="username">
-  <label for="password">Password</label>
-  <input type="password" formControlName="password" id="password">
-  <button class="button" type="submit">Log In</button>
-</form>
+<div class='l-container'>
+  <app-back-button></app-back-button>
+  <form [formGroup]='loginForm' (ngSubmit)='onSubmit(loginForm.value)' class='form'>
+    <fieldset class='form__fieldset'>
+      <input type='text' formControlName='username' id='username' class='form__input' placeholder='username'>
+      <label for='username' class='form__label'>Username</label>
+    </fieldset>
+    <fieldset class='form__fieldset'>
+      <input type='password' formControlName='password' id='password' class='form__input' placeholder='password'>
+      <label for='password' class='form__label'>Password</label>
+    </fieldset>
+    <div class='form__row'>
+      <fieldset class='form__fieldset form__fieldset--row'>
+        <input type='checkbox' value='remember-me' id='remember-me' formControlName='remember' class='form__input--checkbox' (change)='checked($event)'>
+        <label for='remember-me'>
+          <ng-container *ngIf='isChecked === true else iconDefault'><i-feather name='check-square'></i-feather></ng-container>
+          <ng-template #iconDefault><i-feather name='square'></i-feather></ng-template>
+          <span>Remember Me</span></label>
+      </fieldset>
+      <a routerLink='/forgot-password' class='forgot'>Forgot Password?</a>
+    </div>
+    <div class='form__row'>
+      <button class='btn btn--primary form__btn' type='submit'>Log In</button>
+      <a routerLink='/register' class='btn'>New User?</a>
+    </div>
+  </form>
+</div>

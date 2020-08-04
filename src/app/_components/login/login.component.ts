@@ -9,20 +9,26 @@ import {UsersService} from '../../_services/users.service';
 })
 export class LoginComponent implements OnInit {
   loginForm;
+  isChecked: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
   ) {
     this.loginForm = formBuilder.group({
       username: '',
-      password: ''
+      password: '',
+      remember: ''
     });
   }
 
   ngOnInit(): void {
+    this.isChecked = false;
   }
   onSubmit(data) {
     this.userService.loginUser(data);
     this.loginForm.reset();
+  }
+  checked(event) {
+    return this.isChecked = event.target.checked;
   }
 }
