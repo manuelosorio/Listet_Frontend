@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../../_services/users.service';
+import {NavigationEnd, Router} from '@angular/router';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -8,15 +10,34 @@ import {UsersService} from '../../_services/users.service';
 })
 export class NavComponent implements OnInit {
   authenticated: boolean;
+  router: Router;
+  hideNavPaths = [
+    '/login',
+    '/register'
+  ].toString().split(',');
+  loginPath: boolean;
   constructor(
     private userService: UsersService,
+    router: Router
   ) {
     this.userService.authenticated.subscribe(authenticated => {
       this.authenticated = authenticated;
     });
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+      ).subscribe((event: NavigationEnd) => {
+        for (const path of this.hideNavPaths) {
+          if (location.pathname.indexOf(path) === 0) {
+            this.loginPath = true;
+            break;
+          }
+          this.loginPath = false;
+        }
+      });
   }
   logout() {
     this.userService.logoutUser();
+    location.reload();
   }
   ngOnInit(): void {
   }
