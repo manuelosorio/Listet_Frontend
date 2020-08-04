@@ -1,0 +1,26 @@
+@use '../variables'
+.btn
+  border-radius: 2rem
+  display: block
+  padding: 0.65rem 2rem
+  text-align: center
+  transition: variables.$t-easeOutBack
+  width: fit-content
+  cursor: pointer
+  &:focus
+    outline: none
+  &--primary
+    background: variables.$primary
+    box-shadow: variables.$shadow
+    &:hover
+      background: variables.$primary-darken
+      box-shadow: variables.$shadow-hover
+      color: variables.$black-darken
+      transform: translateY(3px)
+  &--go-back
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0
+    span
+      padding: 1rem
