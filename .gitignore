@@ -44,3 +44,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/src/app/_services/router.service.ts
+/src/app/_services/RouterHistory.model.ts
