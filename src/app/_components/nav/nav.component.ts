@@ -37,7 +37,11 @@ export class NavComponent implements OnInit {
   }
   logout() {
     this.userService.logoutUser();
-    location.reload();
+    // TODO: Find a proper way to
+    //       accomplish this same effect.
+    setTimeout(() => {
+      location.reload();
+      }, 100);
   }
   ngOnInit(): void {
   }
