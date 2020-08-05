@@ -50,7 +50,7 @@ import {BackButtonComponent} from './_components/back-button/back-button.compone
     BackButtonComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
