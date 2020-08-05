@@ -27,7 +27,7 @@ export class NavComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
       ).subscribe((event: NavigationEnd) => {
         for (const path of this.hideNavPaths) {
-          if (location.pathname.indexOf(path) === 0) {
+          if (event.urlAfterRedirects.indexOf(path) === 0) {
             this.loginPath = true;
             break;
           }
