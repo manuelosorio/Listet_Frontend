@@ -9,14 +9,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent implements OnInit {
-  signupForm;
+  registrationForm;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private router: Router
   ) {
-    this.signupForm = formBuilder.group({
+    this.registrationForm = formBuilder.group({
       firstName: '',
       lastName: '',
       email: '',
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(data) {
     this.userService.createUser(data);
-    this.signupForm.reset();
+    this.registrationForm.reset();
     this.router.navigate(['/users']).then(r => console.log(r));
   }
 

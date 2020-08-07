@@ -1,14 +1,32 @@
-<h1>User Signup</h1>
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
-  <label for="firstName">First Name</label>
-  <input type="text" formControlName="firstName" name="firstName" id="firstName">
-  <label for="lastName">Last Name</label>
-  <input type="text" formControlName="lastName"  id="lastName">
-  <label for="username">Username</label>
-  <input type="text" formControlName="username"  id="username">
-  <label for="email">Email</label>
-  <input type="email" formControlName="email"  id="email">
-  <label for="password">Password</label>
-  <input type="password" formControlName="password"  id="password">
-  <button class="button" type="submit">Signup</button>
-</form>
+<div class='l-container'>
+<app-back-button></app-back-button>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)" class='form'>
+    <div class="form__fieldset--row">
+      <fieldset class='form__fieldset form__column' >
+        <input type="text" formControlName="firstName" name="firstName" class='form__input'
+               id="firstName" placeholder="First Name">
+        <label for="firstName" class='form__label'>First Name</label>
+      </fieldset>
+      <fieldset class='form__fieldset form__column' >
+        <input type="text" formControlName="lastName" class='form__input' id="lastName" placeholder="Last Name">
+        <label for="lastName" class='form__label'>Last Name</label>
+      </fieldset>
+    </div>
+    <fieldset class='form__fieldset'>
+      <input type="text" formControlName="username" class='form__input'  id="username" placeholder="Username">
+      <label for="username" class='form__label'>Username</label>
+    </fieldset>
+    <fieldset class='form__fieldset'>
+      <input type="email" formControlName="email" class='form__input' id="email" placeholder="Email">
+      <label for="email" class='form__label'>Email</label>
+    </fieldset>
+    <fieldset class='form__fieldset'>
+      <input type="password" formControlName="password" class='form__input' id="password" placeholder="Password">
+      <label for="password" class='form__label'>Password</label>
+    </fieldset>
+    <div class='form__row'>
+      <button class='btn btn--primary form__btn' type="submit">Register</button>
+      <a routerLink='/login' class='btn'>Existing User?</a>
+    </div>
+  </form>
+</div>
