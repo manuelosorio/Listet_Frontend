@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:3000'
+  host: window.location.protocol + '//' + window.location.hostname + ':3000'
 };
 
 /*
