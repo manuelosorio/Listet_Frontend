@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 
 @Component({
@@ -15,9 +15,13 @@ export class LoginComponent implements OnInit {
     private userService: UsersService,
   ) {
     this.loginForm = formBuilder.group({
-      username: '',
-      password: '',
-      remember: ''
+      username: ['', [
+        Validators.required
+      ]],
+      password: ['', [
+        Validators.required
+      ]],
+      remember: [false]
     });
   }
 
@@ -30,5 +34,11 @@ export class LoginComponent implements OnInit {
   }
   checked(event) {
     return this.isChecked = event.target.checked;
+  }
+  get username() {
+    return this.loginForm.get('username');
+  }
+  get password() {
+    return this.loginForm.get('password');
   }
 }

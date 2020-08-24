@@ -22,12 +22,16 @@ export class UsersService {
   }
 
   createUser(value) {
-    this.http.post(environment.host + '/register', value, {
+    return this.http.post(environment.host + '/register', value, {
       withCredentials: true
     })
       .subscribe(
       (res) => {
         console.log(res);
+      }, err => {
+        if (err) {
+          console.log(err.error.message);
+        }
       }
     );
   }
