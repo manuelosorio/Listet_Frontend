@@ -28,6 +28,7 @@ export class UsersService {
       .subscribe(
       (res) => {
         console.log(res);
+        this.router.navigate(['/login']).then();
       }, err => {
         if (err) {
           console.log(err.error.message);
@@ -43,6 +44,7 @@ export class UsersService {
         this.authenticatedSubject.next(true);
         console.log(res && res.firstName && res.lastName ?
           `Welcome ${res.firstName} ${res.lastName}` : 'Logged in!');
+        this.router.navigate(['/']).then();
       }, (err) => {
         this.authenticatedSubject.next(false);
         err.error ? console.error(err.error)
