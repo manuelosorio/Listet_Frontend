@@ -1,6 +1,9 @@
 <div class='l-container'>
   <app-back-button></app-back-button>
   <form [formGroup]='loginForm' (ngSubmit)='onSubmit(loginForm.value)' class='form'>
+    <div class="flag--err" *ngIf="errorMessage != null">
+      {{ errorMessage }}
+    </div>
     <fieldset class='form__fieldset'>
       <input type='text' formControlName='username' id='username' class='form__input' placeholder='username'>
       <label for='username' class='form__label'>Username</label>

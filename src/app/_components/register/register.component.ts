@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
-import {Router} from '@angular/router';
+import {UserError} from '../../models/errors/user.error';
 
 @Component({
   selector: 'app-signup',
@@ -10,11 +10,10 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registrationForm;
-
+  errorMessage: string;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
-    private router: Router
   ) {
     this.registrationForm = formBuilder.group({
       firstName: ['', [
@@ -42,8 +41,9 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(data) {
     this.userService.createUser(data);
-    this.registrationForm.reset();
-    this.router.navigate(['/users']).then(r => console.log(r));
+    this.userService.authenticationErr.subscribe( (res: UserError) => {
+      this.errorMessage = res.error.message;
+    });
   }
   get username() {
     return this.registrationForm.get('username');

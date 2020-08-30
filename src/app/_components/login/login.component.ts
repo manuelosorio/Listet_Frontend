@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
+import {UserError} from '../../models/errors/user.error';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import {UsersService} from '../../_services/users.service';
 export class LoginComponent implements OnInit {
   loginForm;
   isChecked: boolean;
+  errorMessage: string;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
@@ -30,7 +32,9 @@ export class LoginComponent implements OnInit {
   }
   onSubmit(data) {
     this.userService.loginUser(data);
-    this.loginForm.reset();
+    this.userService.authenticationErr.subscribe( (res: UserError) => {
+      this.errorMessage = res.error.message;
+    });
   }
   checked(event) {
     return this.isChecked = event.target.checked;

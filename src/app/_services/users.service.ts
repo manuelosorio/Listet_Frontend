@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {UserError} from '../models/errors/user.error';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,13 @@ import {map} from 'rxjs/operators';
 export class UsersService {
   private authenticatedSubject: Subject<boolean>;
   public authenticated: Observable<boolean>;
-  constructor(private http: HttpClient) {
+  private authenticationErrSubject: Subject<UserError>;
+  public authenticationErr: Observable<UserError>;
+  constructor(private http: HttpClient, private router: Router) {
     this.authenticatedSubject = new Subject();
+    this.authenticationErrSubject = new Subject();
     this.authenticated = this.authenticatedSubject.asObservable();
+    this.authenticationErr = this.authenticationErrSubject.asObservable();
     this.isAuth();
   }
 
@@ -31,6 +37,7 @@ export class UsersService {
         this.router.navigate(['/login']).then();
       }, err => {
         if (err) {
+          this.authenticationErrSubject.next({error: {message: err.error.message, code: err.status}});
           console.log(err.error.message);
         }
       }
@@ -47,8 +54,8 @@ export class UsersService {
         this.router.navigate(['/']).then();
       }, (err) => {
         this.authenticatedSubject.next(false);
-        err.error ? console.error(err.error)
-          : console.log('Unknown error has occurred!');
+        err.error ? this.authenticationErrSubject.next({error: {message: err.error.message, code: err.error.status}})
+          : this.authenticationErrSubject.next({error: {message: 'Unknown error has occurred!', code: 502}});
       }
     );
   }
