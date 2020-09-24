@@ -85,8 +85,8 @@
     </fieldset>
     <!--   End Password   -->
     <div class='form__row'>
-      <button *ngIf="registrationForm.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Log In</button>
-      <ng-template #submit><button class='btn btn--primary form__btn'>Log In</button></ng-template>
+      <button *ngIf="registrationForm.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Register</button>
+      <ng-template #submit><button class='btn btn--primary form__btn'>Register</button></ng-template>
       <a routerLink='/login' class='btn'>Existing User?</a>
     </div>
   </form>
