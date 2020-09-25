@@ -1,31 +1,92 @@
 <div class='l-container'>
 <app-back-button></app-back-button>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)" class='form'>
+    {{ errorMessage }}
     <div class="form__fieldset--row">
+      <!--   Start First Name   -->
       <fieldset class='form__fieldset form__column' >
-        <input type="text" formControlName="firstName" name="firstName" class='form__input'
-               id="firstName" placeholder="First Name">
-        <label for="firstName" class='form__label'>First Name</label>
+        <input type="text" autocomplete="given-name" formControlName="firstName" name="first-name" class='form__input' id="first-name" placeholder="e.g. Joe">
+        <label for="first-name" class='form__label'>First Name</label>
+        <!--   If First Name is Valid   -->
+        <i-feather class="form__input--validation valid" *ngIf="firstName.valid" name='check'></i-feather>
+        <!--   If First Name is Invalid   -->
+        <ng-container *ngIf="firstName.invalid && firstName.touched">
+          <i-feather class="form__input--validation invalid" name='x'></i-feather>
+          <div class="error__message">
+            First Name is required.
+          </div>
+        </ng-container>
+        <!--   End First Name Validation   -->
       </fieldset>
+      <!--   End Fist Name   -->
+      <!--   Start Last Name   -->
       <fieldset class='form__fieldset form__column' >
-        <input type="text" formControlName="lastName" class='form__input' id="lastName" placeholder="Last Name">
-        <label for="lastName" class='form__label'>Last Name</label>
+        <input type="text" formControlName="lastName" class='form__input' autocomplete="family-name" id="last-name" placeholder="Last Name">
+        <label for="last-name" class='form__label'>Last Name</label>
+        <!--   If Last Name is Valid   -->
+        <i-feather class="form__input--validation valid" *ngIf="lastName.valid" name='check'></i-feather>
+        <!--   If Last Name is Invalid   -->
+        <ng-container *ngIf="lastName.invalid && lastName.touched">
+          <i-feather class="form__input--validation invalid" name='x'></i-feather>
+          <div class="error__message">
+            Last Name is required.
+          </div>
+        </ng-container>
+        <!--   End Last Name Validation   -->
       </fieldset>
     </div>
+    <!--   End Last Name   -->
+    <!--   Start Username   -->
     <fieldset class='form__fieldset'>
-      <input type="text" formControlName="username" class='form__input'  id="username" placeholder="Username">
+      <input type="text" formControlName="username" class='form__input' autocomplete="username" id="username" placeholder="Username">
       <label for="username" class='form__label'>Username</label>
+      <!--   If Username is Valid   -->
+      <i-feather class="form__input--validation valid" *ngIf="username.valid" name='check'></i-feather>
+      <!--   If Username is Invalid   -->
+      <ng-container *ngIf="username.invalid && username.touched">
+        <i-feather class="form__input--validation invalid" name='x'></i-feather>
+        <div class="error__message">
+          Username is required.
+        </div>
+      </ng-container>
+      <!--   End Username Validation   -->
     </fieldset>
+    <!--   End Username   -->
+    <!--   Start Email   -->
     <fieldset class='form__fieldset'>
-      <input type="email" formControlName="email" class='form__input' id="email" placeholder="Email">
+      <input type="email" formControlName="email" class='form__input' autocomplete="email" id="email" placeholder="Email">
       <label for="email" class='form__label'>Email</label>
+      <!--   If Email is Valid   -->
+      <i-feather class="form__input--validation valid" *ngIf="email.valid" name='check'></i-feather>
+      <!--   If Email is Invalid   -->
+      <ng-container *ngIf="email.invalid && email.touched">
+        <i-feather class="form__input--validation invalid" name='x'></i-feather>
+        <div class="error__message">
+          Valid Email is required.
+        </div>
+      </ng-container>
+      <!--   End Email Validation   -->
     </fieldset>
+    <!--   End Email   -->
+    <!--   Start Password   -->
     <fieldset class='form__fieldset'>
       <input type="password" formControlName="password" class='form__input' id="password" placeholder="Password">
-      <label for="password" class='form__label'>Password</label>
+      <label for="password" class='form__label' >Password</label>
+      <!--   If Password is Valid   -->
+      <i-feather class="form__input--validation valid" *ngIf="password.valid" name='check'></i-feather>
+      <!--   If Password is Invalid   -->
+      <ng-container *ngIf="password.invalid && password.touched">
+        <i-feather class="form__input--validation invalid" name='x'></i-feather>
+        <div class="error__message">
+          Valid Password is required.
+        </div>
+      </ng-container>
+      <!--   End Password Validation   -->
     </fieldset>
+    <!--   End Password   -->
     <div class='form__row'>
-      <button class='btn btn--primary form__btn' type="submit">Register</button>
+      <button *ngIf="registrationForm.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Register</button>
+      <ng-template #submit><button class='btn btn--primary form__btn'>Register</button></ng-template>
       <a routerLink='/login' class='btn'>Existing User?</a>
     </div>
   </form>

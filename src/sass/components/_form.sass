@@ -58,6 +58,15 @@
         color: vars.$grey
         span
           margin-left: 1rem
+    &--validation
+      position: absolute
+      right: 1rem
+      top: 50%
+      transform: translateY(-50%)
+      &.valid
+        color: vars.$green
+      &.invalid
+        color: vars.$red
   &__label
     position: absolute
     top: 50%
@@ -90,3 +99,9 @@
       transform: none
 .form__row + .form__fieldset
   margin-top: 1.5rem
+.ng-valid ~ .error__message
+  display: none
+.error__message
+  color: vars.$red
+  position: absolute
+  //top: -1rem

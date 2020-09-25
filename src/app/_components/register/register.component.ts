@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
-import {Router} from '@angular/router';
+import {UserError} from '../../models/errors/user.error';
 
 @Component({
   selector: 'app-signup',
@@ -10,18 +10,30 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registrationForm;
-
+  errorMessage: string;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
-    private router: Router
   ) {
     this.registrationForm = formBuilder.group({
-      firstName: '',
-      lastName: '',
-      email: '',
-      username: '',
-      password: ''
+      firstName: ['', [
+        Validators.required
+      ]],
+      lastName: ['', [
+        Validators.required
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/)
+      ]],
+      username: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/),
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/)
+      ]]
     });
   }
 
@@ -30,8 +42,24 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(data) {
     this.userService.createUser(data);
-    this.registrationForm.reset();
-    this.router.navigate(['/users']).then(r => console.log(r));
+    this.userService.authenticationErr.subscribe( (res: UserError) => {
+      this.errorMessage = res.error.message;
+    });
+  }
+  get username() {
+    return this.registrationForm.get('username');
+  }
+  get password() {
+    return this.registrationForm.get('password');
+  }
+  get email() {
+    return this.registrationForm.get('email');
+  }
+  get firstName() {
+    return this.registrationForm.get('firstName');
+  }
+  get lastName() {
+    return this.registrationForm.get('lastName');
   }
 
 

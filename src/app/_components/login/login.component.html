@@ -1,13 +1,22 @@
 <div class='l-container'>
   <app-back-button></app-back-button>
   <form [formGroup]='loginForm' (ngSubmit)='onSubmit(loginForm.value)' class='form'>
+    <div class="flag--err" *ngIf="errorMessage != null">
+      {{ errorMessage }}
+    </div>
     <fieldset class='form__fieldset'>
-      <input type='text' formControlName='username' id='username' class='form__input' placeholder='username'>
+      <input type='text' formControlName='username' autocomplete="username" name="username" id='username' class='form__input' placeholder='username'>
       <label for='username' class='form__label'>Username</label>
+      <div class="error__message" *ngIf="username.invalid && username.touched">
+        Username is required.
+      </div>
     </fieldset>
     <fieldset class='form__fieldset'>
-      <input type='password' formControlName='password' id='password' class='form__input' placeholder='password'>
+      <input type='password' formControlName='password' id='password' autocomplete="current-password" name="password" class='form__input' placeholder='password'>
       <label for='password' class='form__label'>Password</label>
+      <div class="error__message" *ngIf="password.invalid && password.touched">
+        Password is required.
+      </div>
     </fieldset>
     <div class='form__row'>
       <fieldset class='form__fieldset form__fieldset--row'>
@@ -20,7 +29,8 @@
       <a routerLink='/forgot-password' class='forgot'>Forgot Password?</a>
     </div>
     <div class='form__row'>
-      <button class='btn btn--primary form__btn' type='submit'>Log In</button>
+      <button *ngIf="username.invalid || password.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Log In</button>
+      <ng-template #submit><button class='btn btn--primary form__btn'>Log In</button></ng-template>
       <a routerLink='/register' class='btn'>New User?</a>
     </div>
   </form>

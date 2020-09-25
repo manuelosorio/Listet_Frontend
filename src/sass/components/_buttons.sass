@@ -4,6 +4,7 @@
   display: block
   padding: 0.65rem 2rem
   text-align: center
+  color: variables.$black
   transition: variables.$t-easeOutBack
   width: fit-content
   cursor: pointer
@@ -24,3 +25,11 @@
     padding: 0
     span
       padding: 1rem
+  &--disabled
+    background: variables.$disabled
+    border: solid 1 px variables.$disabled
+    cursor: not-allowed
+    color: variables.$disabled-text
+    &:hover
+      background: variables.$disabled
+      box-shadow: inherit
