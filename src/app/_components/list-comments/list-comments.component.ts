@@ -18,12 +18,9 @@ export class ListCommentsComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
-    this.listService.getList(this.username, this.slug).subscribe(header => {
-      this.id = this.getId(header);
-      this.listService.getListComments(this.id, this.slug).subscribe(data => {
+    this.listService.getListComments(this.username, this.slug).subscribe(data => {
         this.comments = data;
         return this.comments;
-      });
     });
 
   }

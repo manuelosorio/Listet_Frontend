@@ -19,7 +19,7 @@ export class ListsService {
   getListItems(username, slug) {
     return this.http.get(environment.host + `/list/${username}/${slug}/items`);
   }
-  getListComments(id, slug) {
-    return this.http.get(environment.host + `/list/${id}/${slug}/comments`);
+  getListComments(username, slug) {
+    return this.http.get(environment.host + `/list/${username}/${slug}/comments`);
   }
 }
