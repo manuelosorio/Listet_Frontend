@@ -12,7 +12,8 @@
     "dev:ssr": "ng run todo-list:serve-ssr",
     "serve:ssr": "node dist/todo-list/server/main.js",
     "build:ssr": "ng build --prod --base-href /projects/listet/ && ng run todo-list:server:production",
-    "prerender": "ng run todo-list:prerender"
+    "prerender": "ng run todo-list:prerender",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
@@ -31,7 +32,7 @@
     "mysql2": "^2.1.0",
     "rxjs": "~6.6.2",
     "tslib": "^1.13.0",
-    "zone.js": "~0.11.0"
+    "zone.js": "~0.11.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.7",
