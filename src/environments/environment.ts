@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: window.location.protocol + '//' + window.location.hostname + ':3000'
+  host: 'https://api.listet.local/'
 };
 
 /*
