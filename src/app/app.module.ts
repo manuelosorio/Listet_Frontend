@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ import { ListDetailsComponent } from './_pages/list-details/list-details.compone
 import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import {BackButtonComponent} from './_components/back-button/back-button.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +59,8 @@ import {BackButtonComponent} from './_components/back-button/back-button.compone
     ReactiveFormsModule,
     FormsModule,
     IconsModule,
+    NgxMasonryModule,
+    BrowserAnimationsModule
   ],
   providers: [GuestGuard, AuthGuard],
   bootstrap: [AppComponent]

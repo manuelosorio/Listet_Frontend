@@ -1,9 +1,9 @@
-<ul>
-  <ng-container *ngFor="let list of lists;">
-    <li class="card" (click)="redirect([ '/l/' + list['owner_username'] + '/' +list['slug']])">
+<ngx-masonry [options]="masonryOptions" [ordered]="true" class="lists-container">
+  <div ngxMasonryItem class="masonry-item" *ngFor="let list of masonryLists">
+    <div  class="list card" (click)="redirect([ '/l/' + list['owner_username'] + '/' +list['slug']])">
       <div class="l-row">
         <h3 class="card__title">{{list['name']}}</h3>
-        <em *ngIf="list['deadline']" class="">Deadline: {{ list['deadline'] }} </em>
+        <em *ngIf="list['deadline']" class="deadline">Deadline: {{ list['deadline'] }} </em>
       </div>
       <div class="l-row">
         <a [routerLink]="['/u/' + list['owner_username']]"  [class.test]>
@@ -15,6 +15,6 @@
       <div class="l-row">
         <p *ngIf="list['description']">{{ list['description'] }}</p>
       </div>
-    </li>
-  </ng-container>
-</ul>
+    </div>
+  </div>
+</ngx-masonry>
