@@ -1,12 +1,21 @@
+@use "../../../sass/variables"
 ul, li
   list-style-type: none
   margin: 0
   padding: 0
 .masonry-item
-  width: 48%
-  margin-top: 1%
+  width: 100%
+  margin-top: 1rem
+  @media (min-width: variables.$medium)
+    width: 46%
 .card
   padding: 1rem 1.35rem
+  &__description
+    height: 2ch
+    text-overflow: ellipsis
+    overflow: hidden
+
+    white-space: nowrap
 .deadline
   position: absolute
   top: 2%

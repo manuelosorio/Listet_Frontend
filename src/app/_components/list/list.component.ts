@@ -15,7 +15,6 @@ export class ListComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     gutter: 20,
     animations: {},
-    percentPosition: true
   };
   masonryLists = [];
 
