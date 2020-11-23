@@ -1,23 +1,28 @@
 <nav class="navigation">
-  <a routerLink="/" class="navigation__logo"><img src="assets/images/logo.svg" alt="Listet"></a>
+  <div class="navigation--row">
+    <a routerLink="/" class="navigation--logo"><img src="assets/images/logo.svg" alt="Listet"></a>
+    <ng-container *ngIf="this.loginPath === false">
+      <button class="navigation--menu" (click)="toggleActive()"><i-feather name="menu" [class.is-active]='isActive' ></i-feather><span class="menu--text">Menu</span></button>
+    </ng-container>
+  </div>
   <ng-container *ngIf="this.loginPath === false">
-    <ul class="navigation__links">
-      <li class="navigation__links-item"><a routerLink="/">Home</a></li>
-      <li class="navigation__links-item"><a routerLink="/lists">All Lists</a></li>
-      <li class="navigation__links-item"><a routerLink="/users">All Users</a></li>
+    <ul class="navigation--links" [class.is-active]="isActive">
+      <li class="navigation--links-item"><a routerLink="/">Home</a></li>
+      <li class="navigation--links-item"><a routerLink="/lists">All Lists</a></li>
+      <li class="navigation--links-item"><a routerLink="/users">All Users</a></li>
       <ng-container *ngIf="authenticated === true else navDefault">
-        <li class="navigation__links-item">
+        <li class="navigation--links-item">
           <button class="btn btn--primary">New Post</button>
         </li>
-        <li class="navigation__links-item"><a (click)="logout()">Logout</a></li>
+        <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
       </ng-container>
     </ul>
   </ng-container>
 </nav>
 
 <ng-template #navDefault>
-  <li class="navigation__links-item">
+  <li class="navigation--links-item">
     <a class="btn btn--primary" routerLink="/login">Log In</a>
   </li>
-  <li class="navigation__links-item"><a routerLink="/register">Register</a></li>
+  <li class="navigation--links-item"><a routerLink="/register">Register</a></li>
 </ng-template>

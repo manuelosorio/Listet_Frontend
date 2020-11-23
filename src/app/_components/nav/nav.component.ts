@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
     '/register'
   ].toString().split(',');
   loginPath: boolean;
+  isActive = false;
   constructor(
     private userService: UsersService,
     router: Router
@@ -42,6 +43,9 @@ export class NavComponent implements OnInit {
     setTimeout(() => {
       location.reload();
       }, 100);
+  }
+  toggleActive() {
+    this.isActive  = !this.isActive;
   }
   ngOnInit(): void {
   }

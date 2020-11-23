@@ -2,22 +2,67 @@
 .navigation
   display: flex
   padding: 1rem
-  height: 93px
-  width: 88%
+  //height: 93px
+  width: 90%
   justify-content: center
   margin: 0 auto
   align-items: center
-  &__logo
+  flex-direction: column
+  position: relative
+  z-index: 10
+  @media (min-width: variables.$medium)
+    flex-direction: row
+  &--row
+    display: flex
+    justify-content: space-between
+    align-items: center
+  &--logo
     display: block
     width: 200px
-  &__links
+  &--links
     display: flex
-    width: 65%
+    width: 96vw
     list-style: none
     justify-content: flex-end
     align-items: center
+    flex-direction: column
+    top: 10px
+    position: relative
+    background: variables.$silver
+    transition: variables.$t-easeOutBack
+    overflow: hidden
+    max-height: 0
+    //margin-top: 0.45rem
     &-item
-      + .navigation__links-item
+      transition: variables.$t-easeOutBack
+      transition-delay: .6ms
+      + .navigation--links-item
+        margin-top: 8%
+    &.is-active
+      max-height: initial
+      padding: 2rem
+      //top: 1rem
+    @media (min-width: variables.$medium)
+      flex-direction: row
+      top: initial
+      position: relative
+      background: transparent
+      padding: 2rem
+      overflow: visible
+      &-item  + .navigation--links-item
+        margin-top: 0
         margin-left: 8%
-
+      &.is-active
+        overflow: initial
+        height: initial
+        top: initial
+  &--menu
+    display: flex
+    align-items: center
+    outline: 0
+    margin-left: 2rem
+    @media (min-width: variables.$medium)
+      display: none
+.menu--text
+  margin-left: 0.75rem
 

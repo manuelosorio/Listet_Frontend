@@ -1,0 +1,21 @@
+svg.feather
+  transition: $t-easeOutBack
+  &-menu
+    line
+      stroke: $grey
+      transition: $t-easeOutBack
+
+.is-active
+  svg.feather-menu
+    transform: rotate(135deg)
+    transition-duration: 0.5s
+    transform-origin: center
+    line
+      stroke: $black
+      transform-origin: center
+      &:first-child
+        transform: rotate(90deg)
+      &:nth-child(2)
+        transform: translateY(25%)
+      &:last-child
+        transform: translateX(-100%)
