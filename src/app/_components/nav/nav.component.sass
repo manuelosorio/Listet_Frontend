@@ -1,9 +1,9 @@
 @use "../../../sass/variables"
 .navigation
   display: flex
-  padding: 1rem
+  padding: 1rem 0
   //height: 93px
-  width: 90%
+  width: 100%
   justify-content: center
   margin: 0 auto
   align-items: center
@@ -12,6 +12,8 @@
   z-index: 10
   @media (min-width: variables.$medium)
     flex-direction: row
+    width: 90%
+    padding: 1rem
   &--row
     display: flex
     justify-content: space-between
@@ -21,7 +23,7 @@
     width: 200px
   &--links
     display: flex
-    width: 96vw
+    width: 100%
     list-style: none
     justify-content: flex-end
     align-items: center
@@ -32,6 +34,7 @@
     transition: variables.$t-easeOutBack
     overflow: hidden
     max-height: 0
+    padding: 0
     //margin-top: 0.45rem
     &-item
       transition: variables.$t-easeOutBack
@@ -40,7 +43,7 @@
         margin-top: 8%
     &.is-active
       max-height: initial
-      padding: 2rem
+      padding: 2rem 0
       //top: 1rem
     @media (min-width: variables.$medium)
       flex-direction: row

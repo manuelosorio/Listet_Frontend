@@ -59,6 +59,33 @@ export class UsersService {
       }
     );
   }
+  requestPasswordReset(value) {
+    this.http.post(environment.host + '/reset-password', value, {
+      withCredentials: true
+    }).subscribe(
+    (res: string) => {
+      console.log('response', res);
+      console.log('data', value);
+      this.router.navigate(['/login']).then();
+    }, (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
+  resetPassword(token, value) {
+    this.http.put(environment.host + '/reset-password/' + token, value, {
+      withCredentials: true
+    }).subscribe(
+    (res: string) => {
+      console.log('response', res);
+      this.router.navigate(['/login']).then();
+    }, (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
   logoutUser() {
     this.http.post(environment.host + '/logout', {}, {
       withCredentials: true

@@ -1,4 +1,4 @@
-<div class='l-container'>
+<div class='l-container__form'>
 <app-back-button></app-back-button>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)" class='form'>
     {{ errorMessage }}
@@ -44,9 +44,12 @@
       <i-feather class="form__input--validation valid" *ngIf="username.valid" name='check'></i-feather>
       <!--   If Username is Invalid   -->
       <ng-container *ngIf="username.invalid && username.touched">
-        <i-feather class="form__input--validation invalid" name='x'></i-feather>
-        <div class="error__message">
+        <i-feather class="form__input--v0ialidation invalid" name='x'></i-feather>
+        <div class="error__message" *ngIf="username.errors.required">
           Username is required.
+        </div>
+        <div class="class__error" *ngIf="username.errors.pattern">
+          Username is invalid
         </div>
       </ng-container>
       <!--   End Username Validation   -->

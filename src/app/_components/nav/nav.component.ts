@@ -13,7 +13,10 @@ export class NavComponent implements OnInit {
   router: Router;
   hideNavPaths = [
     '/login',
-    '/register'
+    '/register',
+    '/forgot-password',
+    '/reset-password',
+    '/reset-password/**'
   ].toString().split(',');
   loginPath: boolean;
   isActive = false;

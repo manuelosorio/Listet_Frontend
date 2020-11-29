@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Components
+import {ForgotPasswordComponent} from './_components/forgot-password/forgot-password.component';
 import {ListComponent} from './_components/list/list.component';
 import {LoginComponent} from './_components/login/login.component';
 import {RegisterComponent} from './_components/register/register.component';
+import {ResetPasswordComponent} from './_components/reset-password/reset-password.component';
 import {UserComponent} from './_components/user/user.component';
 
 // Guards
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: 'users', component: UserComponent, canActivate: [GuestGuard]},
   {path: 'u/:username', component: HomeComponent },
   {path: 'l/:username/:slug', component: ListDetailsComponent },
+  {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard]},
+  {path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundComponent },
 ];
 
