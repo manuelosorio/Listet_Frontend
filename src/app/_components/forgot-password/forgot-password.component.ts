@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
+import {SeoService} from '../../_services/seo.service';
+import {MetaTagModel} from '../../models/metatag.model';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,9 +11,11 @@ import {UsersService} from '../../_services/users.service';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm;
+  private meta: MetaTagModel;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
+    private seoService: SeoService
   ) {
     this.forgotPasswordForm = formBuilder.group({
       email: ['', [
@@ -19,9 +23,17 @@ export class ForgotPasswordComponent implements OnInit {
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/)
       ]],
     });
+    this.meta = {
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Forgot Password',
+      image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+      url: 'https://listet.manuelosorio.me/forgot-password/'
+    };
   }
 
   ngOnInit(): void {
+    this.seoService.updateInfo(this.meta);
   }
   get email() {
     return this.forgotPasswordForm.get('email');

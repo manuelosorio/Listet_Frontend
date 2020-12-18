@@ -7,14 +7,32 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import {environment} from './src/environments/environment';
 
 const domino = require('domino');
 const fs = require('fs');
 const path = require('path');
 
-const template = fs.readFileSync(path.join('dist/todo-list/browser', 'index.html')).toString();
+const template = fs.readFileSync(path.join('dist/browser', 'index.html')).toString();
 const win = domino.createWindow(template);
+const SitemapGenerator = require('sitemap-generator');
 
+// create generator
+const generator = SitemapGenerator(environment.url, {
+  stripQuerystring: false,
+  lastMod: true,
+  filepath: './dist/browser/assets/sitemap.xml'
+});
+
+// register event listeners
+generator.on('done', () => {
+  // sitemaps created
+});
+generator.on('error', (err) => {
+  console.log(err);
+});
+// start the crawler
+generator.start();
 win.Object = Object;
 win.Math = Math;
 global.window = win;
@@ -22,7 +40,7 @@ global.document = win.document;
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/todo-list/browser');
+  const distFolder = join(process.cwd(), 'dist/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)

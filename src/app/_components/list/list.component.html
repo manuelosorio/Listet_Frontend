@@ -1,6 +1,6 @@
 <ngx-masonry [options]="masonryOptions" [ordered]="true" class="lists-container">
   <div ngxMasonryItem class="masonry-item" *ngFor="let list of masonryLists">
-    <div  class="list card" (click)="redirect([ '/l/' + list['owner_username'] + '/' +list['slug']])">
+    <div  class="list card" [routerLink]="[ '/l/' + list['owner_username'] + '/' +list['slug']]">
       <div class="l-row">
         <h3 class="card__title">{{list['name']}}</h3>
         <em *ngIf="list['deadline']" class="deadline">Deadline: {{ list['deadline'] }} </em>

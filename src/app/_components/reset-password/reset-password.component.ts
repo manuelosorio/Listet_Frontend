@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 import {ActivatedRoute} from '@angular/router';
+import {MetaTagModel} from '../../models/metatag.model';
+import {SeoService} from '../../_services/seo.service';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -10,10 +12,12 @@ import {ActivatedRoute} from '@angular/router';
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm;
   private token: string;
+  private meta: MetaTagModel;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SeoService
   ) {
     this.resetPasswordForm = formBuilder.group({
       password: ['', [
@@ -21,10 +25,18 @@ export class ResetPasswordComponent implements OnInit {
         Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/)
       ]]
     });
+    this.meta = {
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Reset Password',
+      image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+      url: 'https://listet.manuelosorio.me/reset-password/'
+    };
   }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params.token;
+    this.seoService.updateInfo(this.meta);
   }
   get password() {
     return this.resetPasswordForm.get('password');

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 import {UserError} from '../../models/errors/user.error';
+import {MetaTagModel} from '../../models/metatag.model';
+import {SeoService} from '../../_services/seo.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +14,11 @@ export class LoginComponent implements OnInit {
   loginForm;
   isChecked: boolean;
   errorMessage: string;
+  private meta: MetaTagModel;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
+    private seoService: SeoService
   ) {
     this.loginForm = formBuilder.group({
       username: ['', [
@@ -25,10 +29,18 @@ export class LoginComponent implements OnInit {
       ]],
       remember: [false]
     });
+    this.meta = {
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Login',
+      image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+      url: 'https://listet.manuelosorio.me/login/'
+    };
   }
 
   ngOnInit(): void {
     this.isChecked = false;
+    this.seoService.updateInfo(this.meta);
   }
   onSubmit(data) {
     this.userService.loginUser(data);

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://listet.manuelosorio.me/assets/sitemap.xml

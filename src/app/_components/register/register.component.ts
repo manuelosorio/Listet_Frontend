@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 import {UserError} from '../../models/errors/user.error';
+import {MetaTagModel} from '../../models/metatag.model';
+import {SeoService} from '../../_services/seo.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,9 +13,11 @@ import {UserError} from '../../models/errors/user.error';
 export class RegisterComponent implements OnInit {
   registrationForm;
   errorMessage: string;
+  private meta: MetaTagModel;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
+    private seoService: SeoService
   ) {
     this.registrationForm = formBuilder.group({
       firstName: ['', [
@@ -35,9 +39,17 @@ export class RegisterComponent implements OnInit {
         Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/)
       ]]
     });
+    this.meta = {
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Register Account',
+      image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+      url: 'https://listet.manuelosorio.me/register/'
+    };
   }
 
   ngOnInit(): void {
+    this.seoService.updateInfo(this.meta);
   }
 
   onSubmit(data) {
