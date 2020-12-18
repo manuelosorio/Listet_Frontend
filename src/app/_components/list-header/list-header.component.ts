@@ -35,7 +35,8 @@ export class ListHeaderComponent implements OnInit {
         author: data[0].firstName + ' ' + data[0].lastName,
         description: listDescription,
         title: 'Listet App - ' + data[0].name,
-        image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+        openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
         url: `https://listet.manuelosorio.me/l/${this.username}/${this.slug}`
       };
       this.seoService.updateInfo(this.meta);

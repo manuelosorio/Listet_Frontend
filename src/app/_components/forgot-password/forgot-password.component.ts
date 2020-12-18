@@ -27,7 +27,8 @@ export class ForgotPasswordComponent implements OnInit {
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Forgot Password',
-      image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
       url: 'https://listet.manuelosorio.me/forgot-password/'
     };
   }

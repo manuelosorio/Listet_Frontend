@@ -43,7 +43,8 @@ export class RegisterComponent implements OnInit {
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Register Account',
-      image: 'https://listet.manuelosorio.me/assets/images/listet-banner.jpg/',
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
       url: 'https://listet.manuelosorio.me/register/'
     };
   }
