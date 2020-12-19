@@ -30,7 +30,6 @@
     "angular-feather": "^6.0.10",
     "express": "^4.15.2",
     "masonry-layout": "^4.2.2",
-    "mysql2": "^2.1.0",
     "ngx-masonry": "^10.0.6",
     "rxjs": "~6.6.2",
     "sitemap-generator": "^8.5.1",
