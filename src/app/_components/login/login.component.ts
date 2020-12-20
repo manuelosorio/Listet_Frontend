@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private seoService: SeoService
   ) {
     this.loginForm = formBuilder.group({
-      username: ['', [
+      email: ['', [
         Validators.required
       ]],
       password: ['', [
@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
   checked(event) {
     return this.isChecked = event.target.checked;
   }
-  get username() {
-    return this.loginForm.get('username');
+  get email() {
+    return this.loginForm.get('email');
   }
   get password() {
     return this.loginForm.get('password');

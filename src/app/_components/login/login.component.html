@@ -8,10 +8,10 @@
       {{ errorMessage }}
     </div>
     <fieldset class='form__fieldset'>
-      <input type='text' formControlName='username' autocomplete="username" name="username" id='username' class='form__input' placeholder='username'>
-      <label for='username' class='form__label'>Username</label>
-      <div class="error__message" *ngIf="username.invalid && username.touched">
-        Username is required.
+      <input type='text' formControlName='email' autocomplete="email" name="email" id='email' class='form__input' placeholder='email'>
+      <label for='email' class='form__label'>Email</label>
+      <div class="error__message" *ngIf="email.invalid && email.touched">
+        email is required.
       </div>
     </fieldset>
     <fieldset class='form__fieldset'>
@@ -32,7 +32,7 @@
       <a routerLink='/forgot-password' class='forgot'>Forgot Password?</a>
     </div>
     <div class='form__row'>
-      <button *ngIf="username.invalid || password.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Log In</button>
+      <button *ngIf="email.invalid || password.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Log In</button>
       <ng-template #submit><button class='btn btn--primary form__btn'>Log In</button></ng-template>
       <a routerLink='/register' class='btn'>New User?</a>
     </div>
