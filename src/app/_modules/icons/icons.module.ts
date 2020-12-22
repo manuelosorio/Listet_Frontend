@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArrowLeft, Check, CheckSquare, ChevronLeft, Github, Heart, Linkedin, Menu,
-  Search, Square, Trash, Twitter, User, X } from 'angular-feather/icons';
+import { ArrowLeft, Check, CheckSquare, ChevronLeft, Frown, Github, Heart, Linkedin, Menu,
+  Search, Square, Trash, Twitter, User, X, XCircle } from 'angular-feather/icons';
 import {FeatherModule} from 'angular-feather';
 
 
@@ -10,6 +10,7 @@ const icons: any = {
   Check,
   CheckSquare,
   ChevronLeft,
+  Frown,
   Github,
   Heart,
   Linkedin,
@@ -19,7 +20,8 @@ const icons: any = {
   Trash,
   Twitter,
   User,
-  X
+  X,
+  XCircle
 };
 
 @NgModule({
