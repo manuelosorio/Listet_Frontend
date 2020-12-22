@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Components
-import {ForgotPasswordComponent} from './_components/forgot-password/forgot-password.component';
 import {ListComponent} from './_components/list/list.component';
-import {LoginComponent} from './_components/login/login.component';
-import {RegisterComponent} from './_components/register/register.component';
-import {ResetPasswordComponent} from './_components/reset-password/reset-password.component';
 import {UserComponent} from './_components/user/user.component';
 
 // Guards
@@ -15,8 +11,13 @@ import {AuthGuard} from './guards/auth.guard';
 
 // Pages
 import {HomeComponent} from './_pages/home/home.component';
+import {ForgotPasswordComponent} from './_pages/forgot-password/forgot-password.component';
 import {ListDetailsComponent} from './_pages/list-details/list-details.component';
+import {LoginComponent} from './_pages/login/login.component';
 import {NotFoundComponent} from './_pages/not-found/not-found.component';
+import {RegisterComponent} from './_pages/register/register.component';
+import {ResetPasswordComponent} from './_pages/reset-password/reset-password.component';
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'lists', component: ListComponent},
