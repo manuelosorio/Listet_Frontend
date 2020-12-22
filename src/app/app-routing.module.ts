@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // Components
 import {ListComponent} from './_components/list/list.component';
 import {UserComponent} from './_components/user/user.component';
+import {VerifyAccountComponent} from './_components/verify-account/verify-account.component';
 
 // Guards
 import {GuestGuard} from './guards/guest.guard';
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'l/:username/:slug', component: ListDetailsComponent },
   {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard]},
   {path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard]},
+  {path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundComponent },
 ];
 

@@ -7,6 +7,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 
 // Components
 import { AppComponent } from './app.component';
+import { AlertComponent } from './_components/alert/alert.component';
 import { BackButtonComponent } from './_components/back-button/back-button.component';
 import { FooterComponent } from './_components/footer/footer.component';
 import { ListComponent } from './_components/list/list.component';
@@ -36,9 +37,11 @@ import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
+import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     UserComponent,
     ListComponent,
     ProfileComponent,
@@ -54,7 +57,8 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
     NotFoundComponent,
     BackButtonComponent,
     ResetPasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    VerifyAccountComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

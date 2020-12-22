@@ -13,6 +13,10 @@ import {UserError} from '../models/errors/user.error';
 export class UsersService {
   private authenticatedSubject: Subject<boolean>;
   public authenticated: Observable<boolean>;
+
+  private verifiedSubject: Subject<boolean>;
+  public verified: Observable<boolean>;
+
   private authenticationErrSubject: Subject<UserError>;
   public authenticationErr: Observable<UserError>;
   constructor(private http: HttpClient, private router: Router) {
@@ -20,7 +24,10 @@ export class UsersService {
     this.authenticationErrSubject = new Subject();
     this.authenticated = this.authenticatedSubject.asObservable();
     this.authenticationErr = this.authenticationErrSubject.asObservable();
+    this.verifiedSubject = new Subject();
+    this.verified = this.verifiedSubject.asObservable();
     this.isAuth();
+    this.isVerified();
   }
 
   getUsers() {
@@ -102,11 +109,33 @@ export class UsersService {
       console.log('Oops, something went wrong getting the logged in status');
     });
   }
+  isVerified() {
+    return this.http.get(environment.host + '/session', {
+      withCredentials: true
+    }).subscribe((res: any) => {
+      this.verifiedSubject.next(res.verified);
+      if (res.verified === false) {
+        console.log(res.verified);
+        // this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
+      }
+    }, () => {
+      console.log('Oops, something went wrong getting the verification status');
+    });
+  }
   isLoggedIn() {
     return this.http.get(environment.host + '/session', {
       withCredentials: true
     }).pipe(map(res => {
       return res;
     }));
+  }
+  verifyAccount(token) {
+    return this.http.get(environment.host + '/verify-account/' + token, {
+      withCredentials: true
+      }
+    ).subscribe(res => {
+      console.log(res);
+      this.router.navigate(['/']);
+    });
   }
 }
