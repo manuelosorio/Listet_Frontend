@@ -4,6 +4,7 @@ import {UsersService} from '../../_services/users.service';
 import {UserError} from '../../models/errors/user.error';
 import {MetaTagModel} from '../../models/metatag.model';
 import {SeoService} from '../../_services/seo.service';
+import {AlertService} from '../../_services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,10 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
   private meta: MetaTagModel;
   constructor(
+    private alertService: AlertService,
     private formBuilder: FormBuilder,
     private userService: UsersService,
-    private seoService: SeoService
+    private seoService: SeoService,
   ) {
     this.loginForm = formBuilder.group({
       email: ['', [
@@ -47,7 +49,13 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(data);
     this.userService.authenticationErr.subscribe( (res: UserError) => {
       this.errorMessage = res.error.message;
+      this.alertService.error(this.errorMessage);
     });
+    this.verify();
+
+  }
+  verify() {
+    this.userService.isVerified();
   }
   checked(event) {
     return this.isChecked = event.target.checked;
