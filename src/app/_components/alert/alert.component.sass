@@ -1,0 +1,25 @@
+@use '../../../sass/variables'
+.alert
+  background: variables.$grey
+  color: variables.$black
+  padding: 0.5rem 1rem
+  //line-height: 0.25
+  &--success
+    background: variables.$green
+    color: variables.$bg
+  &--warning
+    background: variables.$primary
+    color: variables.$black
+  &--error
+    background: variables.$red
+    color: variables.$bg
+  div
+    display: flex
+    flex-direction: row
+    width: 98%
+    max-width: 1400px
+    margin: auto
+    justify-content: space-between
+    align-items: center
+  i-feather
+    cursor: pointer

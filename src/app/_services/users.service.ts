@@ -6,6 +6,7 @@ import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {UserError} from '../models/errors/user.error';
+import {AlertService} from './alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,11 @@ export class UsersService {
 
   private authenticationErrSubject: Subject<UserError>;
   public authenticationErr: Observable<UserError>;
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertService: AlertService
+  ) {
     this.authenticatedSubject = new Subject();
     this.authenticationErrSubject = new Subject();
     this.authenticated = this.authenticatedSubject.asObservable();
@@ -56,9 +61,11 @@ export class UsersService {
     }).subscribe(
       (res: any) => {
         this.authenticatedSubject.next(true);
-        console.log(res && res.firstName && res.lastName ?
-          `Welcome ${res.firstName} ${res.lastName}` : 'Logged in!');
-        this.router.navigate(['/']).then();
+        console.log(res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
+          : this.alertService.success(res.message));
+        setTimeout(() => {
+          this.router.navigate(['/']).then();
+        }, 2000);
       }, (err) => {
         this.authenticatedSubject.next(false);
         err.error ? this.authenticationErrSubject.next({error: {message: err.error.message, code: err.error.status}})

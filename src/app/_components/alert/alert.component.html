@@ -1,0 +1,6 @@
+<div *ngIf="message" [ngClass]="message.cssClass">
+  <div>
+    <p>{{message.text}}</p>
+    <i-feather name="X-Circle" (click)="closeFlashMessage()"></i-feather>
+  </div>
+</div>
