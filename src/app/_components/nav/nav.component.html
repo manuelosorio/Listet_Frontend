@@ -12,7 +12,7 @@
       <li class="navigation--links-item"><a routerLink="/users">All Users</a></li>
       <ng-container *ngIf="authenticated === true else navDefault">
         <li class="navigation--links-item">
-          <button class="btn btn--primary">New List</button>
+          <a class="btn btn--primary" routerLink="/create-list">Create List</a>
         </li>
         <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
       </ng-container>
