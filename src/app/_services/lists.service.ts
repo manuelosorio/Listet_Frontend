@@ -22,4 +22,10 @@ export class ListsService {
   getListComments(username, slug) {
     return this.http.get(environment.host + `/list/${username}/${slug}/comments`);
   }
+
+  createList(data) {
+    return this.http.post(environment.host + '/create-list', data, {
+      withCredentials: true
+    });
+  }
 }

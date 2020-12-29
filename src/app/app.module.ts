@@ -38,6 +38,7 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
+import {CreateListComponent} from './_pages/create-list/create-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import { VerifyAccountComponent } from './_components/verify-account/verify-acco
     BackButtonComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    CreateListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
