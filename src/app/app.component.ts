@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {CanonicalService} from './shared/canonical.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {CanonicalService} from './shared/canonical.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Listet';
   constructor(
     private canonicalService: CanonicalService
