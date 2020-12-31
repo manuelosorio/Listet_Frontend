@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 import {UserError} from '../../models/errors/user.error';
 import {MetaTagModel} from '../../models/metatag.model';
@@ -12,7 +12,7 @@ import {AlertService} from '../../_services/alert.service';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  loginForm;
+  loginForm: FormGroup;
   isChecked: boolean;
   errorMessage: string;
   private meta: MetaTagModel;

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertService} from '../../_services/alert.service';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ListsService} from '../../_services/lists.service';
 import {Router} from '@angular/router';
 
@@ -14,7 +14,7 @@ export interface Response {
   templateUrl: './create-list.component.html'
 })
 export class CreateListComponent implements OnInit {
-  createListForm;
+  createListForm: FormGroup;
   isPrivate: boolean;
   allowComments;
   private redirectURL;
