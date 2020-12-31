@@ -28,4 +28,9 @@ export class ListsService {
       withCredentials: true
     });
   }
+  createComment(data) {
+    return this.http.post(environment.host + '/create-comment', data, {
+      withCredentials: true
+    });
+  }
 }

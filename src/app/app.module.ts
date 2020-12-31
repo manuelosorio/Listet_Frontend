@@ -39,6 +39,9 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 import {CreateListComponent} from './_pages/create-list/create-list.component';
+import { CreateCommentComponent } from './_components/create-comment/create-comment.component';
+import { AddItemComponent } from './_components/add-item/add-item.component';
+import {ListDataService} from './shared/list-data.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +63,9 @@ import {CreateListComponent} from './_pages/create-list/create-list.component';
     ResetPasswordComponent,
     ForgotPasswordComponent,
     VerifyAccountComponent,
-    CreateListComponent
+    CreateListComponent,
+    CreateCommentComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -72,7 +77,8 @@ import {CreateListComponent} from './_pages/create-list/create-list.component';
     NgxMasonryModule,
     BrowserAnimationsModule
   ],
-  providers: [GuestGuard, AuthGuard],
+  providers: [GuestGuard, AuthGuard, ListDataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
