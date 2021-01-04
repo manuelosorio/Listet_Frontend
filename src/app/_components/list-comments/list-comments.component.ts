@@ -1,8 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ListsService} from '../../_services/lists.service';
 import {ActivatedRoute} from '@angular/router';
-import {interval, Subscription} from 'rxjs';
-import {timeInterval} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {WebsocketService} from '../../_services/websocket.service';
 
 @Component({
   selector: 'app-list-comments',
@@ -14,27 +14,36 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   private username: any;
   private slug: any;
   private getComments: Subscription;
-  private interval: Subscription;
+  private commentWS;
+  // commentSubscription: Subscription;
+  private connect: Subscription;
+
   constructor(private listService: ListsService,
-              private route: ActivatedRoute) {
-    // TODO:
-    //  Find a way to reload component on new comment creation without running ngOnInit every 800ms
-    this.interval  = interval(800).pipe(timeInterval()).subscribe(() => {
-      this.ngOnInit();
-    });
-  }
+              private route: ActivatedRoute,
+              private websocketService: WebsocketService
+  ) {}
   ngOnInit(): void {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.getComments  = this.listService.getListComments(this.username, this.slug).subscribe(data => {
-        this.comments = data;
-        return this.comments;
+      this.comments = data;
+      return this.comments;
+  });
+    this.connect = this.websocketService.listen('connect').subscribe(() => {
+      console.log('connected');
     });
-
+    this.commentWS = this.websocketService.listen('CreateComment').subscribe(data => {
+      console.log('Created Comment:', data);
+      this.ngOnInit();
+    });
   }
   ngOnDestroy(): void {
-  // Attempts memory leaks prevention caused by this interval ngOnInit hack
-    this.interval.unsubscribe();
+
+    this.connect.unsubscribe();
+    this.websocketService.listen('disconnect').subscribe(() => {
+      console.log('disconnected');
+    }).unsubscribe();
   }
 
 }
+// New comment test. Hopefully this works.

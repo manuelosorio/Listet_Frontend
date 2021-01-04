@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ListsService} from '../../_services/lists.service';
 import {ListDataService} from '../../shared/list-data.service';
+import {WebsocketService} from '../../_services/websocket.service';
 
 @Component({
   selector: 'app-create-comment',
@@ -11,11 +12,13 @@ import {ListDataService} from '../../shared/list-data.service';
 export class CreateCommentComponent implements OnInit {
   listData;
   commentForm: FormGroup;
+  commentData;
   private id;
   constructor(
     private formBuilder: FormBuilder,
     private listService: ListsService,
-    private listDataService: ListDataService
+    private listDataService: ListDataService,
+    private websocketService: WebsocketService
   ) {
     this.commentForm = formBuilder.group({
       comment: ['', [
@@ -37,14 +40,12 @@ export class CreateCommentComponent implements OnInit {
   }
   onSubmit(data) {
     data.list_id = this.id;
-    console.log(data);
-    this.listService.createComment(data).subscribe(res => {
-      console.log(res);
+    this.listService.createComment(data).subscribe(() => {
+      this.commentData = data;
+      this.websocketService.emit('CreateComment', this.commentData);
       this.commentForm.reset();
     }, error => {
       console.error(error);
-    }, () => {
-      console.log('complete');
     });
   }
 }
