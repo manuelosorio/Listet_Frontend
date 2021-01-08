@@ -1,22 +1,30 @@
-import { Injectable } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import { io } from 'socket.io-client';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Observable, Subject } from 'rxjs';
+import { io, Socket } from 'socket.io-client';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
-  socket: any;
-  comments: Subject<any>;
-  constructor() {
-    this.socket = io(environment.websocket, {
-      withCredentials: true
-    });
-    this.comments = (this.connect()
-      .pipe((myResponse: any): any => {
-      return myResponse;
-    }) as Subject<any>);
+  private isBrowser: boolean = isPlatformBrowser(this.platformId);
+  // comments: Subject<any>;
+  private socket: Socket;
+  constructor(
+    // tslint:disable-next-line:ban-types
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (this.isBrowser) {
+      this.socket = io(environment.websocket, {
+        withCredentials: true,
+        path: 'socket-io',
+      });
+      // this.comments = (this.connect()
+      //   .pipe((myResponse: any): any => {
+      //     return myResponse;
+      //   }) as Subject<any>);
+    }
   }
 
   connect(): Subject<MessageEvent> {
@@ -45,7 +53,11 @@ export class WebsocketService {
       });
     });
   }
+
   emit(event: string, data: any) {
     this.socket.emit(event, data);
+  }
+  disconnect() {
+    this.socket.disconnect();
   }
 }

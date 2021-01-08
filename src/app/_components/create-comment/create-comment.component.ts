@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ListsService} from '../../_services/lists.service';
 import {ListDataService} from '../../shared/list-data.service';
 import {WebsocketService} from '../../_services/websocket.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-create-comment',
   templateUrl: './create-comment.component.html',
   styleUrls: ['./create-comment.component.sass']
 })
-export class CreateCommentComponent implements OnInit {
+export class CreateCommentComponent implements OnInit, OnDestroy {
   listData;
   commentForm: FormGroup;
   commentData;
+  private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private id;
   constructor(
+    // tslint:disable-next-line:ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
     private formBuilder: FormBuilder,
     private listService: ListsService,
     private listDataService: ListDataService,
@@ -26,6 +30,9 @@ export class CreateCommentComponent implements OnInit {
         Validators.minLength(20)
       ]]
     });
+    // if (this.isBrowser) {
+    //   this.websocketService.connect();
+    // }
   }
 
   ngOnInit(): void {
@@ -42,10 +49,14 @@ export class CreateCommentComponent implements OnInit {
     data.list_id = this.id;
     this.listService.createComment(data).subscribe(() => {
       this.commentData = data;
-      this.websocketService.emit('CreateComment', this.commentData);
+      if (this.isBrowser) {
+        this.websocketService.emit('CreateComment', this.commentData);
+      }
       this.commentForm.reset();
     }, error => {
       console.error(error);
     });
+  }
+  ngOnDestroy(): void {
   }
 }
