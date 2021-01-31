@@ -23,14 +23,7 @@ import {CreateListComponent} from './_pages/create-list/create-list.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'lists', component: ListComponent},
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: [{
-      author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
-      title: 'Listet App - Login',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/login'
-    }]},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   {path: 'users', component: UserComponent, canActivate: [GuestGuard]},
   {path: 'u/:username', component: HomeComponent },
