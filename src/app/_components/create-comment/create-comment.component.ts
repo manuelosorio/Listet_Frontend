@@ -16,6 +16,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   commentData;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private id;
+  public commentsEnabled: boolean;
   constructor(
     // tslint:disable-next-line:ban-types
     @Inject(PLATFORM_ID) private platformId: Object,

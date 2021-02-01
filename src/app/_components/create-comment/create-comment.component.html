@@ -1,3 +1,4 @@
+<ng-container *ngIf="commentsEnabled">
   <form class="card" [formGroup]="commentForm" (ngSubmit)='onSubmit(commentForm.value)'>
     <fieldset class="form__fieldset--row">
       <textarea formControlName="comment" name="comment" id="comment" placeholder="Write a comment..."></textarea>
@@ -6,6 +7,6 @@
       <button *ngIf="comment.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Comment</button>
     </div>
   </form>
-
+</ng-container>
 
 <ng-template #submit><button class='btn btn--primary form__btn'>Comment</button></ng-template>
