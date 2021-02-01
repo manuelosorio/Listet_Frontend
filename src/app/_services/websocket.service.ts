@@ -1,63 +1,53 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Observable, Subject } from 'rxjs';
+import { Observable, fromEvent, Subscriber } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from '../../environments/environment';
+import { Comment } from "../models/comment.model";
+import { CommentEvents } from "../helper/comment.events";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  // comments: Subject<any>;
   private socket: Socket;
+  private connectionData: string;
   constructor(
-    // tslint:disable-next-line:ban-types
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
+  }
+  connect(connectionData) {
     if (this.isBrowser) {
+      this.connectionData = connectionData;
       this.socket = io(environment.websocket, {
         withCredentials: true,
-        path: 'socket-io',
+        path: '/socket-io',
+        transports: ["polling"],
+        forceNew: true,
       });
-      // this.comments = (this.connect()
-      //   .pipe((myResponse: any): any => {
-      //     return myResponse;
-      //   }) as Subject<any>);
     }
   }
-
-  connect(): Subject<MessageEvent> {
-    const observable = new Observable(observer => {
-      this.socket.on('CreateComment', (data) => {
-        console.log('comment has been created:', data);
-        observer.next(data);
-      });
-      return () => {
-        this.socket.disconnect();
-      };
-    });
-    const observer$ = new Observable((observer) => {
-      observer.next();
-    });
-    return Subject.create(observer$, observable);
-  }
-
-  // createComment(comment) {
-  //   this.comments.next();
-  // }
   listen(event: string) {
-    return new Observable((subscriber) => {
+    return new Observable((subscriber: Subscriber<any>) => {
       this.socket.on(event, (data) => {
         subscriber.next(data);
       });
     });
   }
-
+  public onCreateComment(): Observable<Comment> {
+    return fromEvent(this.socket, `${CommentEvents.CREATE_COMMENT}`);
+  }
+  public onUpdateComment(_listInfo): Observable<Comment> {
+    return fromEvent(this.socket, `${CommentEvents.UPDATE_COMMENT}`)
+  }
+  public onDeleteComment(_listInfo): Observable<Comment> {
+    return fromEvent(this.socket, `${CommentEvents.DELETE_COMMENT}`)
+  }
   emit(event: string, data: any) {
     this.socket.emit(event, data);
   }
-  disconnect() {
+  disconnect(): void {
     this.socket.disconnect();
   }
 }

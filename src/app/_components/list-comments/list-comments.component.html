@@ -1,15 +1,21 @@
 <section class="l-container">
   <h3>Comments</h3>
   <div class="l-row">
-    <app-create-comment class="app-create-comment"></app-create-comment>
+      <app-create-comment class="app-create-comment"></app-create-comment>
   </div>
-  <div class="l-row">
-    <div class="card comment" *ngFor="let comment of comments">
-      <p>Creation Date: {{ comment['creation_date'] }}</p>
-      <p>Comment By: {{ comment['firstName'] }} {{ comment['lastName'] }}</p>
-      <p>username: {{ comment['username'] }}</p>
-      <p>Comment Message: {{ comment['comment'] }}</p>
+  <ng-container *ngIf="commentsEnabled else commentsDisabled">
+    <div class="l-row">
+      <div class="card comment" *ngFor="let comment of comments">
+        <p>Creation Date: {{ comment['creation_date'] }}</p>
+        <p>Comment By: {{ comment['firstName'] }} {{ comment['lastName'] }}</p>
+        <p>username: {{ comment['username'] }}</p>
+        <p>Comment Message: {{ comment['comment'] }}</p>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </section>
-
+<ng-template #commentsDisabled>
+  <div class="l-row">
+    <p>This list doesn't have comments enabled</p>
+  </div>
+</ng-template>
