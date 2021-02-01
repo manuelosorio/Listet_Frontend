@@ -35,9 +35,6 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.listService.getLists().subscribe(data => {
       this.lists = data;
-      console.log(this.lists);
-      const currentDay = new Date();
-      console.log(currentDay);
       this.show(this.lists);
     });
     this.seoService.updateInfo(this.meta);

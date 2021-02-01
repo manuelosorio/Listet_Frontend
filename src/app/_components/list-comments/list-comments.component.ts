@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {WebsocketService} from '../../_services/websocket.service';
 import { isPlatformBrowser } from '@angular/common';
+import { ListDataService } from '../../shared/list-data.service';
 
 @Component({
   selector: 'app-list-comments',
@@ -11,45 +12,44 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./list-comments.component.sass']
 })
 export class ListCommentsComponent implements OnInit, OnDestroy {
-  comments: object;
-  private username: any;
-  private slug: any;
-  private getComments: Subscription;
-  private commentWS;
-  // commentSubscription: Subscription;
-  // private connect: Subscription;
+  private readonly username: string;
+  private readonly slug: string;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-
+  private getComments: Subscription;
+  public commentsEnabled: boolean;
+  public comments: Array<object>;
+  private listData: Subscription;
   constructor(
-    // tslint:disable-next-line:ban-types
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
+    private listDataService: ListDataService,
     private route: ActivatedRoute,
     private websocketService: WebsocketService
   ) {
+    this.username = this.route.snapshot.params.username;
+    this.slug = this.route.snapshot.params.slug;
+    this.listService.getListComments(this.username, this.slug);
+    this.websocketService.connect(`${this.username}-${this.slug}`);
     if (this.isBrowser) {
-      // console.log('PlatformID: %s IsBrowser: %s', this.platformId, this.isBrowser);
-      // this.connect = this.websocketService.listen('connect').subscribe(() => {
-      //   console.log('connected');
-      // });
-      this.commentWS = this.websocketService.listen('CreateComment').subscribe(data => {
-        console.log('Created Comment:', data);
-        this.ngOnInit();
+      this.websocketService.onCreateComment().subscribe(comment => {
+        console.log('Comment was created!')
+        if (comment.listInfo === `${this.username}-${this.slug}`)
+          this.comments.push(comment);
       });
     }
   }
   ngOnInit(): void {
-    this.username = this.route.snapshot.params.username;
-    this.slug = this.route.snapshot.params.slug;
-    this.getComments  = this.listService.getListComments(this.username, this.slug).subscribe(data => {
-      this.comments = data;
+    this.listData = this.listDataService.listData.subscribe((data: any) => {
+      this.commentsEnabled = data.allow_comments === 1;
+    });
+    this.getComments = this.listService.comment$.subscribe(comments => {
+      this.comments= comments;
       return this.comments;
-  });
+    });
   }
   ngOnDestroy(): void {
-    // this.connect.unsubscribe();
-    // this.websocketService.disconnect();
+    this.websocketService.disconnect();
+    this.listData.unsubscribe();
+    this.getComments.unsubscribe();
   }
-
 }
-// New comment test. Hopefully this works.
