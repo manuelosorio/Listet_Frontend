@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core
 import {ListsService} from '../../_services/lists.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {WebsocketService} from '../../_services/websocket.service';
+// import {WebsocketService} from '../../_services/websocket.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ListDataService } from '../../shared/list-data.service';
 
@@ -24,18 +24,18 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     private listService: ListsService,
     private listDataService: ListDataService,
     private route: ActivatedRoute,
-    private websocketService: WebsocketService
+    // private websocketService: WebsocketService
   ) {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.listService.getListComments(this.username, this.slug);
-    this.websocketService.connect(`${this.username}-${this.slug}`);
+    // this.websocketService.connect(`${this.username}-${this.slug}`);
     if (this.isBrowser) {
-      this.websocketService.onCreateComment().subscribe(comment => {
-        console.log('Comment was created!')
-        if (comment.listInfo === `${this.username}-${this.slug}`)
-          this.comments.push(comment);
-      });
+      // this.websocketService.onCreateComment().subscribe(comment => {
+      //   console.log('Comment was created!')
+      //   if (comment.listInfo === `${this.username}-${this.slug}`)
+      //     this.comments.push(comment);
+      // });
     }
   }
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.websocketService.disconnect();
+    // this.websocketService.disconnect();
     this.listData.unsubscribe();
     this.getComments.unsubscribe();
   }
