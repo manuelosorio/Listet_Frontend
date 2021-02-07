@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
-import { WebsocketService } from '../../_services/websocket.service';
-import { CommentEvents } from "../../helper/comment.events";
+// import { WebsocketService } from '../../_services/websocket.service';
+// import { CommentEvents } from "../../helper/comment.events";
 
 @Component({
   selector: 'app-create-comment',
@@ -26,7 +26,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
     private listService: ListsService,
     private listDataService: ListDataService,
     private route: ActivatedRoute,
-    private websocketService: WebsocketService
+    // private websocketService: WebsocketService
 
   ) {
     this.username = this.route.snapshot.params.username;
@@ -53,9 +53,9 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   onSubmit(data) {
     data.list_id = this.id;
     this.listService.createComment(data).subscribe(() => {
-      this.commentData = data;
-      this.commentData.listInfo = `${this.username}-${this.slug}`
-      this.websocketService.emit(CommentEvents.CREATE_COMMENT, this.commentData);
+      // this.commentData = data;
+      // this.commentData.listInfo = `${this.username}-${this.slug}`
+      // this.websocketService.emit(CommentEvents.CREATE_COMMENT, this.commentData);
       this.commentForm.reset();
     }, error => {
       console.error(error);
