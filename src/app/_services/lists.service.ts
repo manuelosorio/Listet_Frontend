@@ -42,4 +42,10 @@ export class ListsService {
       withCredentials: true
     });
   }
+
+  createListItem(data) {
+    return this.http.post(environment.host + '/add-item', data, {
+      withCredentials: true
+    })
+  }
 }

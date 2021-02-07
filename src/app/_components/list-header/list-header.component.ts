@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MetaTagModel} from '../../models/metatag.model';
 import {SeoService} from '../../_services/seo.service';
 import {ListDataService} from '../../shared/list-data.service';
+import { UsersService } from "../../_services/users.service";
 
 @Component({
   selector: 'app-list-header',
@@ -17,19 +18,29 @@ export class ListHeaderComponent implements OnInit {
   private meta: MetaTagModel;
   listId: string;
   listData;
+  isOwner: boolean
   constructor(private listService: ListsService,
               private route: ActivatedRoute,
               private seoService: SeoService,
-              private listDataService: ListDataService) {
+              private listDataService: ListDataService,
+              private userService: UsersService) {
+    userService.isAuth();
+    this.username = this.route.snapshot.params.username;
+    this.slug = this.route.snapshot.params.slug;
+    userService.username$.subscribe(res => {
+      this.isOwner = this.username === res;
+    });
   }
 
   ngOnInit(): void {
-    this.username = this.route.snapshot.params.username;
-    this.slug = this.route.snapshot.params.slug;
     this.listService.getList(this.username, this.slug).subscribe(data => {
       this.header = data;
       this.listId = data[0].id;
-      this.listData = {id: this.listId, allow_comments: data[0].allow_comments};
+      this.listData = {
+        id: this.listId,
+        allow_comments: data[0].allow_comments,
+        isOwner: this.isOwner
+      };
       this.listDataService.setData(this.listData);
       let listDescription;
       if (data[0].description !== null) {

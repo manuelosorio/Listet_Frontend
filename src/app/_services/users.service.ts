@@ -19,7 +19,7 @@ export class UsersService {
   public verified: Observable<boolean>;
 
   private usernameSubject: Subject<string>;
-  public username: Observable<string>;
+  public username$: Observable<string>;
 
   private authenticationErrSubject: Subject<UserError>;
   public authenticationErr: Observable<UserError>;
@@ -34,9 +34,8 @@ export class UsersService {
     this.authenticationErr = this.authenticationErrSubject.asObservable();
     this.verifiedSubject = new Subject();
     this.verified = this.verifiedSubject.asObservable();
-
     this.usernameSubject = new Subject<string>();
-    this.username = this.usernameSubject.asObservable();
+    this.username$ = this.usernameSubject.asObservable();
     this.isAuth();
     this.isVerified();
   }
@@ -67,6 +66,7 @@ export class UsersService {
     }).subscribe(
       (res: any) => {
         this.authenticatedSubject.next(true);
+        this.usernameSubject.next(res.username);
         console.log(res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
           : this.alertService.success(res.message));
         setTimeout(() => {
@@ -119,7 +119,7 @@ export class UsersService {
     }).subscribe((res: any) => {
 
       this.authenticatedSubject.next(res.authenticated);
-      this.usernameSubject.next(res.username)
+      this.usernameSubject.next(res.username);
     }, () => {
       console.log('Oops, something went wrong getting the logged in status');
     });

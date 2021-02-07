@@ -1,14 +1,24 @@
 <h3>List Items</h3>
 <ng-container *ngFor="let item of items">
-  <section>
-    <label for="{{item['id']}}" class="list-item">
-      <input type="checkbox" id="{{item['id']}}">
+  <section *ngIf="isOwner else listItemDisabled">
+    <label for="item-{{item['id']}}" class="list-item">
+      <input type="checkbox" id="item-{{item['id']}}">
       <div class="info">
         <p><em >Item</em> {{item["item"]}}</p>
         <p><em >Deadline:</em> {{item["deadline"]}}</p>
       </div>
     </label>
-
   </section>
+  <ng-template #listItemDisabled>
+    <label for="item-{{item['id']}}" class="list-item">
+      <input disabled type="checkbox" id="item-{{item['id']}}">
+      <div class="info">
+        <p><em >Item</em> {{item["item"]}}</p>
+        <p><em >Deadline:</em> {{item["deadline"]}}</p>
+      </div>
+    </label>
+  </ng-template>
 </ng-container>
+
+<app-add-item></app-add-item>
 
