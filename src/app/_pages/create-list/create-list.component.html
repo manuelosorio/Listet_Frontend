@@ -23,7 +23,7 @@
     <div class="l-row">
       <!-- Description -->
       <fieldset class='form__fieldset l-column'>
-        <input type='checkbox' value='is_private' id='is_private' formControlName='is_private' class='form__input--checkbox' (change)='isPrivateChecked($event)'>
+        <input type='checkbox' checked='checked' value='is_private' id='is_private' formControlName='is_private' class='form__input--checkbox' (change)='isPrivateChecked($event)'>
         <!-- Private List -->
         <label class="form__label" for='is_private'>
           <ng-container *ngIf='isPrivate === true else iconDefault'><i-feather name='check-square'></i-feather></ng-container>

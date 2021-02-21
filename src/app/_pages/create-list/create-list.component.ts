@@ -32,11 +32,12 @@ export class CreateListComponent implements OnInit {
       description: [''],
       deadline: [''],
       is_private: [''],
-      allow_comments: [''],
+      allow_comments: [true],
     });
   }
 
   ngOnInit(): void {
+    this.allowComments = true;
   }
 
   onSubmit(data) {
