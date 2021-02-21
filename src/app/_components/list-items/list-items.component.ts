@@ -17,25 +17,30 @@ import { ListDataService } from "../../shared/list-data.service";
  *
  */
 export class ListItemsComponent implements OnInit {
-
+  lists: object;
   items;
+  isOwner: boolean;
+  deadline: Date;
   private username: any;
   private slug: any;
-  isOwner: boolean;
+  isChecked: boolean;
   constructor(private listService: ListsService,
               private route: ActivatedRoute,
               private listDataService: ListDataService) {
-  }
-
-  lists: object;
-
-  ngOnInit(): void {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.listDataService.listData.subscribe(data => {
+      console.log(this.isOwner);
       this.isOwner = data.isOwner;
     })
+  }
+  checked(event) {
+    return this.isChecked = event.target.checked;
+  }
+
+  ngOnInit(): void {
     this.listService.getListItems(this.username, this.slug).subscribe(data => {
+      data[0].deadline = new Date(data[0].deadline);
       return this.items = data;
     });
   }

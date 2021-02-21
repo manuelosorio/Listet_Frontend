@@ -1,9 +1,22 @@
-.list-item
+@use "~src/sass/variables"
+section
   display: flex
+  flex-direction: column
+.list-item
+  display: inline-flex
   flex-direction: row
   align-items: center
-  margin: 1rem 1rem
-input
-  padding: 0
-  margin: 0 1rem
-  display: block
+  margin: 1rem 0
+  background: #fff
+  box-shadow: variables.$shadow
+  border-radius: 0.6em
+  padding: 1rem
+  position: relative
+  border: variables.$silver 1px solid
+  //max-width: 75ch
+  &__checkbox
+  &__info
+    max-width: 15ch
+    margin: 0 1em
+    @media (min-width: variables.$medium)
+      max-width: 60ch

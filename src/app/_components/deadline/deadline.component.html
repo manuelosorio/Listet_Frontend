@@ -1,0 +1,12 @@
+<ng-container *ngIf="hasDeadline">
+  <ng-container *ngIf="isComplete else notComplete">
+    <em class="complete">Completed</em>
+  </ng-container>
+
+  <ng-template #notComplete>
+    <small [class.danger]="isOverDue">
+      <i-feather name="clock"></i-feather>
+      {{formattedDeadline}}
+    </small>
+  </ng-template>
+</ng-container>

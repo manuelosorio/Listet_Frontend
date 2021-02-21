@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ListsService} from '../../_services/lists.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MetaTagModel} from '../../models/metatag.model';
 import {SeoService} from '../../_services/seo.service';
 import {ListDataService} from '../../shared/list-data.service';
 import { UsersService } from "../../_services/users.service";
+import { DateUtil } from "../../utils/dateUtil";
+import { ListModel } from "../../models/list.model";
 
 @Component({
   selector: 'app-list-header',
@@ -12,15 +14,18 @@ import { UsersService } from "../../_services/users.service";
   styleUrls: ['./list-header.component.sass']
 })
 export class ListHeaderComponent implements OnInit {
-  header: object;
+  header;
   private username: any;
   private slug: any;
   private meta: MetaTagModel;
   listId: string;
   listData;
   isOwner: boolean
+  formattedCreationDate: string
+  deadline: Date
   constructor(private listService: ListsService,
               private route: ActivatedRoute,
+              private router: Router,
               private seoService: SeoService,
               private listDataService: ListDataService,
               private userService: UsersService) {
@@ -33,7 +38,12 @@ export class ListHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listService.getList(this.username, this.slug).subscribe(data => {
+    this.listService.getList(this.username, this.slug).subscribe((data: ListModel) => {
+      const creationDate = new DateUtil(data[0].creation_date);
+      if (data[0].deadline) {
+        this.deadline = new Date(data[0].deadline);
+      }
+      this.formattedCreationDate = creationDate.format();
       this.header = data;
       this.listId = data[0].id;
       this.listData = {
@@ -58,6 +68,12 @@ export class ListHeaderComponent implements OnInit {
       };
       this.seoService.updateInfo(this.meta);
       return this.header;
-    });
+    }, (error => {
+      if (error.status === 404) {
+        this.router.navigateByUrl('/404', {
+          skipLocationChange: true
+        });
+      }
+    }));
   }
 }

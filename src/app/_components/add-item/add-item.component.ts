@@ -37,12 +37,12 @@ export class AddItemComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.listData = this.listDataService.listData.subscribe((data: any) => {
       this.id = data.id;
+      this.isOwner = data.isOwner;
       console.log(data)
     });
   }
 
   onSubmit(data) {
-
     data.list_id = this.id;
     this.listService.createListItem(data).subscribe(() => {
       this.listItemForm.reset();
