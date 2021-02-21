@@ -19,7 +19,5 @@ export class DeadlineComponent implements OnInit {
     const date = new DateUtil(this.deadline);
     this.formattedDeadline = date.format();
     this.hasDeadline = !(this.formattedDeadline === undefined || this.formattedDeadline.length === 0);
-
-    console.log('has deadline:', this.hasDeadline)
   }
 }
