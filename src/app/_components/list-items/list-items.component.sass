@@ -14,9 +14,15 @@ section
   position: relative
   border: variables.$silver 1px solid
   //max-width: 75ch
-  &__checkbox
+  transition: variables.$t-easeOutBack
+  &__checkbox i-feather
+    stroke: variables.$black
+  &__checkbox--disabled i-feather
+    stroke: variables.$disabled
   &__info
     max-width: 15ch
     margin: 0 1em
     @media (min-width: variables.$medium)
       max-width: 60ch
+input[type=checkbox]:checked ~ .list-item
+  box-shadow: variables.$shadow-inset

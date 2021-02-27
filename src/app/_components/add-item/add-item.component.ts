@@ -4,7 +4,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { ListsService } from "../../_services/lists.service";
 import { ListDataService } from "../../shared/list-data.service";
-// import { WebsocketService } from "../../_services/websocket.service";
+import { WebsocketService } from "../../_services/websocket.service";
+import { ListItemEvents } from "../../helper/list-item.events";
+
+// import { ListItemEvents } from "../../helper/list-item.events";
 
 @Component({
   selector: 'app-add-item',
@@ -22,7 +25,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     private listService: ListsService,
     private listDataService: ListDataService,
     private route: ActivatedRoute,
-    // private webSocketService: WebsocketService,
+    private webSocketService: WebsocketService,
   ) {
     this.listOwner = this.route.snapshot.params.username;
     this.listItemForm = this.formBuilder.group({
@@ -38,24 +41,20 @@ export class AddItemComponent implements OnInit, OnDestroy {
     this.listData = this.listDataService.listData.subscribe((data: any) => {
       this.id = data.id;
       this.isOwner = data.isOwner;
-      console.log(data)
     });
   }
-
   onSubmit(data) {
     data.list_id = this.id;
-    this.listService.createListItem(data).subscribe(() => {
+    this.listService.createListItem(data).subscribe((res) => {
       this.listItemForm.reset();
+      this.webSocketService.emit(ListItemEvents.ADD_ITEM, res);
     }, error => {
       console.error(error)
     });
   }
   ngOnDestroy(): void {
   }
-
   get item() {
     return this.listItemForm.get('item');
   }
-
-
 }

@@ -5,6 +5,8 @@ import { io, Socket } from 'socket.io-client';
 import { environment } from '../../environments/environment';
 import { Comment } from "../models/comment.model";
 import { CommentEvents } from "../helper/comment.events";
+import { ListItemEvents } from "../helper/list-item.events";
+import { ListItemModel } from "../models/list-item.model";
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +46,22 @@ export class WebsocketService {
   public onDeleteComment(): Observable<Comment> {
     return fromEvent(this.socket, `${CommentEvents.DELETE_COMMENT}`)
   }
-  emit(event: string, data: any) {
+/* --------- End Comment Events ------- */
+/* --------- List Events -------------- */
+  public onAddItem(): Observable<ListItemModel> {
+    return fromEvent(this.socket, `${ListItemEvents.ADD_ITEM}`);
+  }
+  public onUpdateItem(): Observable<ListItemModel> {
+    return fromEvent(this.socket, `${ListItemEvents.UPDATE_ITEM}`)
+  }
+  public onDeleteItem(): Observable<ListItemModel> {
+    return fromEvent(this.socket, `${ListItemEvents.DELETE_ITEM}`)
+  }
+  public onCompleteItem(): Observable<any> {
+    return fromEvent(this.socket, `${ListItemEvents.COMPLETE_ITEM}`)
+  }
+/* --------- End List Events ---------- */
+  emit(event: string | CommentEvents | ListItemEvents, data: any) {
     this.socket.emit(event, data);
   }
   disconnect(): void {

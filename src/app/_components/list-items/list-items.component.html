@@ -2,32 +2,32 @@
   <ng-container *ngFor="let item of items">
     <ng-container  *ngIf="isOwner else listItemDisabled">
       <div>
-        <input class="form__input--checkbox" id="item-{{item['id']}}" (change)="checked($event)" type="checkbox">
+        <input class="form__input--checkbox" id="item-{{item['id']}}" (change)="checked($event)" type="checkbox" [checked]="item['completed'] === 1">
         <label for="item-{{item['id']}}" class="list-item">
-          <ng-container *ngIf="!isChecked else checkedBox">
-              <i-feather name="square"></i-feather>
-          </ng-container>
-          <ng-template #checkedBox>
-            <i-feather name="check-square"></i-feather>
-          </ng-template>
+          <span>
+            <ng-container *ngIf="item['completed'] === 0 else checkedBox">
+                <i-feather name="square"></i-feather>
+            </ng-container>
+          </span>
           <span class="list-item__info">
             {{item["item"]}}
           </span>
           <app-deadline [deadline]="item['deadline']"></app-deadline>
         </label>
+        <button (click)="deleteListItem(item['id'])"><i-feather name="trash"></i-feather></button>
       </div>
     </ng-container>
 
 
     <ng-template #listItemDisabled>
       <div>
-        <input class="form__input--checkbox" id="item-{{item['id']}}" (change)="checked($event)" type="checkbox" disabled>
+        <input class="form__input--checkbox" id="item-{{item['id']}}" type="checkbox" disabled [checked]="item['completed'] === 1">
         <label for="item-{{item['id']}}" class="list-item">
-          <ng-container *ngIf="!isChecked else checkedBox">
-          <span class="list-item__checkbox">
-            <i-feather name="square"></i-feather>
+          <span class="list-item__checkbox--disabled">
+            <ng-container *ngIf="item['completed'] === 0 else checkedBox">
+                <i-feather name="square"></i-feather>
+            </ng-container>
           </span>
-          </ng-container>
           <span class="list-item__info">
             {{item["item"]}}
           </span>
