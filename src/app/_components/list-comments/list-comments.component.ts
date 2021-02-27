@@ -32,7 +32,6 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     this.websocketService.connect(`${this.username}-${this.slug}`);
     if (this.isBrowser) {
       this.websocketService.onCreateComment().subscribe(comment => {
-        console.log('Comment was created!')
         if (comment.listInfo === `${this.username}-${this.slug}`)
           this.comments.unshift(comment);
       });
@@ -48,7 +47,6 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.websocketService.disconnect();
     this.listData.unsubscribe();
     this.getComments.unsubscribe();
   }

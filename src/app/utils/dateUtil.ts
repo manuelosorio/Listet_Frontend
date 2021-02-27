@@ -7,7 +7,6 @@ export class DateUtil {
     "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
 
   format() {
-    console.log(this.date);
     if (!!this.date) {
       const date = new Date(this.date);
       const month = this.months[date.getMonth()];

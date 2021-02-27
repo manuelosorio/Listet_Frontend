@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ListsService} from '../../_services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MetaTagModel} from '../../models/metatag.model';
-import {SeoService} from '../../_services/seo.service';
-import {ListDataService} from '../../shared/list-data.service';
+import { MetaTagModel } from '../../models/metatag.model';
+import { SeoService } from '../../_services/seo.service';
+import { ListDataService } from '../../shared/list-data.service';
 import { UsersService } from "../../_services/users.service";
 import { DateUtil } from "../../utils/dateUtil";
 import { ListModel } from "../../models/list.model";
@@ -40,7 +40,7 @@ export class ListHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.listService.getList(this.username, this.slug).subscribe((data: ListModel) => {
       const creationDate = new DateUtil(data[0].creation_date);
-      if (data[0].deadline) {
+      if (!!data[0].deadline) {
         this.deadline = new Date(data[0].deadline);
       }
       this.formattedCreationDate = creationDate.format();
@@ -63,7 +63,7 @@ export class ListHeaderComponent implements OnInit {
         description: listDescription,
         title: 'Listet App - ' + data[0].name,
         openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
+        twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
         url: `https://listet.manuelosorio.me/l/${this.username}/${this.slug}`
       };
       this.seoService.updateInfo(this.meta);

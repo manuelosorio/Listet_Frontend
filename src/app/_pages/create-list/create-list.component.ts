@@ -41,9 +41,6 @@ export class CreateListComponent implements OnInit {
   }
 
   onSubmit(data) {
-
-    console.log(data);
-
     this.listService.createList(data).subscribe((res: Response) => {
       // const user = res.username;
       // const slug = res.slug;

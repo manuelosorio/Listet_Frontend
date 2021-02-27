@@ -3,7 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Observable, fromEvent, Subscriber } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from '../../environments/environment';
-import { Comment } from "../models/comment.model";
+import { CommentModel } from "../models/comment.model";
 import { CommentEvents } from "../helper/comment.events";
 import { ListItemEvents } from "../helper/list-item.events";
 import { ListItemModel } from "../models/list-item.model";
@@ -37,13 +37,14 @@ export class WebsocketService {
       });
     });
   }
-  public onCreateComment(): Observable<Comment> {
+/* --------- Comment Events ----------- */
+  public onCreateComment(): Observable<CommentModel> {
     return fromEvent(this.socket, `${CommentEvents.CREATE_COMMENT}`);
   }
-  public onUpdateComment(): Observable<Comment> {
+  public onUpdateComment(): Observable<CommentModel> {
     return fromEvent(this.socket, `${CommentEvents.UPDATE_COMMENT}`)
   }
-  public onDeleteComment(): Observable<Comment> {
+  public onDeleteComment(): Observable<CommentModel> {
     return fromEvent(this.socket, `${CommentEvents.DELETE_COMMENT}`)
   }
 /* --------- End Comment Events ------- */
@@ -65,6 +66,6 @@ export class WebsocketService {
     this.socket.emit(event, data);
   }
   disconnect(): void {
-    this.socket.disconnect();
+    this.socket.disconnect()
   }
 }
