@@ -25,12 +25,11 @@ export class WebsocketService {
       this.socket = io(environment.websocket, {
         withCredentials: true,
         path: '/socket-io',
-        transports: ["polling"],
-        forceNew: true,
       });
+      this.socket.emit('join', connectionData)
     }
   }
-  listen(event: string) {
+  listen(event: Partial<string | CommentEvents | ListItemEvents>) {
     return new Observable((subscriber: Subscriber<any>) => {
       this.socket.on(event, (data) => {
         subscriber.next(data);
@@ -66,6 +65,6 @@ export class WebsocketService {
     this.socket.emit(event, data);
   }
   disconnect(): void {
-    this.socket.disconnect()
+    this.socket.disconnect();
   }
 }
