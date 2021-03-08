@@ -1,4 +1,14 @@
+@use '~src/sass/variables'
 .comment
   padding: 1rem
   width: 85%
-  margin: 1rem auto
+  margin: 1rem 0
+  &__message
+    white-space: pre-wrap
+app-create-comment
+  width: 94%
+  max-width: 660px
+  display: flex
+  justify-self: center
+  @media (min-width: variables.$medium)
+    margin: initial

@@ -29,14 +29,15 @@ generator.on('done', () => {
   // sitemaps created
 });
 generator.on('error', (err) => {
-  console.log(err);
+  console.error(err);
 });
 // start the crawler
 generator.start();
 win.Object = Object;
 win.Math = Math;
-global.window = win;
-global.document = win.document;
+global['window'] = win;
+global['document'] = win.document;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();

@@ -26,7 +26,8 @@
   &__input
     background: vars.$bg
     width: 100%
-    padding: 0.75rem 0 0.75rem 1.15rem
+    //padding: 0.75rem 0 0.75rem 1.15rem
+    padding: 0.75rem 1.15rem
     border: 1px vars.$grey solid
     border-radius: 10px
     transition: vars.$t-easeOutBack
@@ -37,9 +38,10 @@
     &:focus, &:not(:placeholder-shown)
       ~ .form__label
         background: vars.$bg
-        top: -15%
+        top: -6px
         transform: translateY(0)
         font-size: .8rem
+        background: vars.$bg
     &:-webkit-autofill
       box-shadow: 0 0 0 1000px inset vars.$bg
       transition: background-color 200ms
@@ -47,15 +49,33 @@
     &::placeholder
       color: transparent
       opacity: 0
+    &--textarea
+      @extend .form__input
+      min-height: 100px
+      min-width: 100%
+      max-width: 404px
+      ~ .form__label
+        padding: 0 0.8rem
+      &:focus, &:not(:placeholder-shown)
+        ~ .form__label
+          left: .75rem
+      ~ .form__label
+        top: 1rem
+        left: 0.25rem
+        transform: none
+
     &--checkbox
       width: fit-content
       display: none
-      ~ label
+      ~ .form__label
         display: flex
         align-items: center
-        margin-left: 1rem
+        position: relative
         font-weight: vars.$f-weight--light
         color: vars.$grey
+        left: 0.5rem
+        flex-basis: 50%
+        flex-grow: 1
         span
           margin-left: 1rem
     &--validation
@@ -72,8 +92,9 @@
     top: 50%
     transform: translateY(-50%)
     left: .70rem
-    background: vars.$bg
+
     transition: vars.$t-easeOutBack
+    transition-property: transfrom, top
     padding: 0 .8rem
   &__row
     display: flex

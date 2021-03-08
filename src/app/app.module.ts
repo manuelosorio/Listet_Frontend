@@ -27,6 +27,7 @@ import { IconsModule } from './_modules/icons/icons.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Service
+import {ListDataService} from './shared/list-data.service';
 
 // Pages
 import { ForgotPasswordComponent } from './_pages/forgot-password/forgot-password.component';
@@ -38,6 +39,11 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
+import { CreateListComponent } from './_pages/create-list/create-list.component';
+import { CreateCommentComponent } from './_components/create-comment/create-comment.component';
+import { AddItemComponent } from './_components/add-item/add-item.component';
+import { DeadlineComponent } from "./_components/deadline/deadline.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +64,11 @@ import { VerifyAccountComponent } from './_components/verify-account/verify-acco
     BackButtonComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    CreateListComponent,
+    CreateCommentComponent,
+    AddItemComponent,
+    DeadlineComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -70,7 +80,8 @@ import { VerifyAccountComponent } from './_components/verify-account/verify-acco
     NgxMasonryModule,
     BrowserAnimationsModule
   ],
-  providers: [GuestGuard, AuthGuard],
+  providers: [GuestGuard, AuthGuard, ListDataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

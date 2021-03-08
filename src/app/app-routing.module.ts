@@ -18,22 +18,17 @@ import {LoginComponent} from './_pages/login/login.component';
 import {NotFoundComponent} from './_pages/not-found/not-found.component';
 import {RegisterComponent} from './_pages/register/register.component';
 import {ResetPasswordComponent} from './_pages/reset-password/reset-password.component';
+import {CreateListComponent} from './_pages/create-list/create-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'lists', component: ListComponent},
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: [{
-      author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
-      title: 'Listet App - Login',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/login'
-    }]},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   {path: 'users', component: UserComponent, canActivate: [GuestGuard]},
   {path: 'u/:username', component: HomeComponent },
   {path: 'l/:username/:slug', component: ListDetailsComponent },
+  {path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard]},
   {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard]},
   {path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard]},
   {path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard]},

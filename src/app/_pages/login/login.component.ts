@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 import {UserError} from '../../models/errors/user.error';
 import {MetaTagModel} from '../../models/metatag.model';
 import {SeoService} from '../../_services/seo.service';
 import {AlertService} from '../../_services/alert.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,16 @@ import {AlertService} from '../../_services/alert.service';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  loginForm;
+  loginForm: FormGroup;
   isChecked: boolean;
   errorMessage: string;
-  private meta: MetaTagModel;
+  private readonly meta: MetaTagModel;
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private seoService: SeoService,
+    private _route: ActivatedRoute,
   ) {
     this.loginForm = formBuilder.group({
       email: ['', [
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.isChecked = false;
     this.seoService.updateInfo(this.meta);
+    // console.log(this.route.snapshot.queryParams['returnUrl'])
   }
   onSubmit(data) {
     this.userService.loginUser(data);

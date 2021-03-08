@@ -1,4 +1,15 @@
-.l-container__medium
-  width: 60%
-  max-width: 900px
-  justify-content: center
+@use '~src/sass/variables'
+.l-container
+  display: flex
+  flex-direction: column
+  justify-content: left
+  width: 90%
+  max-width: 1200px
+  margin: 1rem auto
+  &__medium
+    width: 60%
+    max-width: 900px
+    justify-content: center
+
+app-list-items, app-list-comments
+  @extend .l-container

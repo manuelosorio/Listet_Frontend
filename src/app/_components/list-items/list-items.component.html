@@ -1,14 +1,46 @@
-<h3>List Items</h3>
-<ng-container *ngFor="let item of items">
-  <section>
-    <label for="{{item['id']}}" class="list-item">
-      <input type="checkbox" id="{{item['id']}}">
-      <div class="info">
-        <p><em >Item</em> {{item["item"]}}</p>
-        <p><em >Deadline:</em> {{item["deadline"]}}</p>
+<section>
+  <ng-container *ngFor="let item of items">
+    <ng-container  *ngIf="isOwner else listItemDisabled">
+      <div>
+        <input class="form__input--checkbox" id="item-{{item['id']}}" (change)="checked($event)" type="checkbox" [checked]="item['completed'] === 1">
+        <label for="item-{{item['id']}}" class="list-item">
+          <span>
+            <ng-container *ngIf="item['completed'] === 0 else checkedBox">
+                <i-feather name="square"></i-feather>
+            </ng-container>
+          </span>
+          <span class="list-item__info">
+            {{item["item"]}}
+          </span>
+          <app-deadline [deadline]="item['deadline']"></app-deadline>
+        </label>
+        <button (click)="deleteListItem(item['id'])"><i-feather name="trash"></i-feather></button>
       </div>
-    </label>
+    </ng-container>
 
-  </section>
-</ng-container>
 
+    <ng-template #listItemDisabled>
+      <div>
+        <input class="form__input--checkbox" id="item-{{item['id']}}" type="checkbox" disabled [checked]="item['completed'] === 1">
+        <label for="item-{{item['id']}}" class="list-item">
+          <span class="list-item__checkbox--disabled">
+            <ng-container *ngIf="item['completed'] === 0 else checkedBox">
+                <i-feather name="square"></i-feather>
+            </ng-container>
+          </span>
+          <span class="list-item__info">
+            {{item["item"]}}
+          </span>
+          <app-deadline [deadline]="item['deadline']"></app-deadline>
+        </label>
+      </div>
+    </ng-template>
+  </ng-container>
+</section>
+<app-add-item></app-add-item>
+
+<ng-template #checkedBox>
+  <span class="list-item__checkbox">
+    <i-feather name="check-square"></i-feather>
+  </span>
+</ng-template>
