@@ -6,7 +6,7 @@
         <app-deadline *ngIf="list['deadline']" class="deadline" [isComplete]="false" [deadline]="list['deadline']"></app-deadline>
       </div>
       <div class="l-row">
-        <a [routerLink]="['/u/' + list['owner_username']]">t
+        <a [routerLink]="['/u/' + list['owner_username']]">
           {{ list['owner_username'] }}
         </a>
 
