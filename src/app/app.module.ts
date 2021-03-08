@@ -39,7 +39,7 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
-import {CreateListComponent} from './_pages/create-list/create-list.component';
+import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { CreateCommentComponent } from './_components/create-comment/create-comment.component';
 import { AddItemComponent } from './_components/add-item/add-item.component';
 import { DeadlineComponent } from "./_components/deadline/deadline.component";

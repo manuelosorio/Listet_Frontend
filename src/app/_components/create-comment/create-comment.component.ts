@@ -43,7 +43,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-  this.listData = this.listDataService.listData.subscribe((results: any) => {
+    this.listData = this.listDataService.listData.subscribe((results: any) => {
       this.id = results.id;
     });
   }

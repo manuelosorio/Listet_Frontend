@@ -52,20 +52,7 @@ export class ListHeaderComponent implements OnInit {
         isOwner: this.isOwner
       };
       this.listDataService.setData(this.listData);
-      let listDescription;
-      if (data[0].description !== null) {
-        listDescription = data[0].description;
-      } else {
-        listDescription = 'Listet is a social todo list tool.';
-      }
-      this.meta = {
-        author: data[0].firstName + ' ' + data[0].lastName,
-        description: listDescription,
-        title: 'Listet App - ' + data[0].name,
-        openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-        twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-        url: `https://listet.manuelosorio.me/l/${this.username}/${this.slug}`
-      };
+      this.metaTags(data);
       this.seoService.updateInfo(this.meta);
       return this.header;
     }, (error => {
@@ -75,5 +62,21 @@ export class ListHeaderComponent implements OnInit {
         });
       }
     }));
+  }
+  private metaTags(data: ListModel) {
+    let listDescription;
+    if (data[0].description !== null) {
+      listDescription = data[0].description;
+    } else {
+      listDescription = 'Listet is a social todo list tool.';
+    }
+    this.meta = {
+      author: data[0].firstName + ' ' + data[0].lastName,
+      description: listDescription,
+      title: 'Listet App - ' + data[0].name,
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
+      url: `https://listet.manuelosorio.me/l/${this.username}/${this.slug}`
+    };
   }
 }

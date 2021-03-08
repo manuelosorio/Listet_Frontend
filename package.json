@@ -28,6 +28,7 @@
     "@angular/router": "~11.0.5",
     "@nguniversal/express-engine": "~11.0.1",
     "angular-feather": "^6.1.0",
+    "bufferutil": "^4.0.3",
     "express": "^4.15.2",
     "masonry-layout": "^4.2.2",
     "ngx-masonry": "^11.0.0",
@@ -36,6 +37,7 @@
     "sitemap-generator": "^8.5.1",
     "socket.io-client": "^3.0.5",
     "tslib": "^2.0.3",
+    "utf-8-validate": "^5.0.4",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

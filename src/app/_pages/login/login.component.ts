@@ -5,6 +5,7 @@ import {UserError} from '../../models/errors/user.error';
 import {MetaTagModel} from '../../models/metatag.model';
 import {SeoService} from '../../_services/seo.service';
 import {AlertService} from '../../_services/alert.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,13 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isChecked: boolean;
   errorMessage: string;
-  private meta: MetaTagModel;
+  private readonly meta: MetaTagModel;
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private seoService: SeoService,
+    private _route: ActivatedRoute,
   ) {
     this.loginForm = formBuilder.group({
       email: ['', [
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.isChecked = false;
     this.seoService.updateInfo(this.meta);
+    // console.log(this.route.snapshot.queryParams['returnUrl'])
   }
   onSubmit(data) {
     this.userService.loginUser(data);

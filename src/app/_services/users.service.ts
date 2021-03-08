@@ -55,7 +55,7 @@ export class UsersService {
       }, err => {
         if (err) {
           this.authenticationErrSubject.next({error: {message: err.error.message, code: err.status}});
-          console.log(err.error.message);
+          console.error(err.error.message);
         }
       }
     );
@@ -67,8 +67,8 @@ export class UsersService {
       (res: any) => {
         this.authenticatedSubject.next(true);
         this.usernameSubject.next(res.username);
-        console.log(res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
-          : this.alertService.success(res.message));
+        res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
+          : this.alertService.success(res.message);
         setTimeout(() => {
           this.router.navigate(['/']).then();
         }, 2000);
@@ -121,7 +121,7 @@ export class UsersService {
       this.authenticatedSubject.next(res.authenticated);
       this.usernameSubject.next(res.username);
     }, () => {
-      console.log('Oops, something went wrong getting the logged in status');
+      this.alertService.error('Oops, something went wrong getting the logged in status');
     });
   }
   isVerified() {
@@ -131,10 +131,10 @@ export class UsersService {
       this.verifiedSubject.next(res.verified);
       if (res.verified === false) {
         console.log(res.verified);
-        // this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
+        this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
       }
     }, () => {
-      console.log('Oops, something went wrong getting the verification status');
+      this.alertService.error('Oops, something went wrong getting the verification status');
     });
   }
   isLoggedIn() {
