@@ -6,6 +6,7 @@ import { ListDataService } from "../../shared/list-data.service";
 import { WebsocketService } from "../../_services/websocket.service";
 import { ListItemEvents } from "../../helper/list-item.events";
 import { ListItemModel } from "../../models/list-item.model";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-list-items',
@@ -28,6 +29,11 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   private username: any;
   private slug: any;
   isChecked: boolean;
+  private listData$: Subscription;
+  private getListItems$: Subscription;
+  private onCompleteItem$: Subscription;
+  private onDeleteItem$: Subscription;
+  private onAddItem$: Subscription;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -37,12 +43,11 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   ) {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
-    this.webSocketService.connect(`items-${this.username}-${this.slug}`);
-    this.listService.getListItems(this.username, this.slug).subscribe(data => {
+    this.getListItems$ = this.listService.getListItems(this.username, this.slug).subscribe(data => {
       return this.items = data;
     });
 
-    this.listDataService.listData.subscribe(data => {
+    this.listData$ = this.listDataService.listData.subscribe(data => {
       this.isOwner = data.isOwner;
     });
   }
@@ -50,6 +55,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     const targetId = event.target.id.replace('item-', '');
     const item = this.items.filter(item => item.id == targetId)[0];
     item.completed = event.target.checked ? 1 : 0;
+    console.table({ item })
     this.listService.completeListItem(item).subscribe(_res => {
       this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, item);
     }, error => {
@@ -59,7 +65,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   public deleteListItem(id) {
     this.listService.deleteListItem(id).subscribe(_res => {
-      this.deleteArrObject(id);
       this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
     }, error => {
       console.error(error)
@@ -73,21 +78,19 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     if (this.isBrowser) {
-      this.webSocketService.onCompleteItem().subscribe((res: ListItemModel | any) => {
+      this.onCompleteItem$ = this.webSocketService.listen(ListItemEvents.COMPLETE_ITEM).subscribe((res: ListItemModel | any) => {
         const item = this.items.filter(i => i.id == res.id)[0];
         item.completed = res.completed;
         console.log(res);
       }, error => {
         console.error(error);
       });
-      this.webSocketService.onAddItem().subscribe((res: ListItemModel | any) => {
-        console.log(res);
-        this.items.push(res)
-        console.log(res)
+      this.onAddItem$ = this.webSocketService.listen(ListItemEvents.ADD_ITEM).subscribe((item) => {
+        this.items.push(item);
       }, error => {
         console.error(error)
       });
-      this.webSocketService.onDeleteItem().subscribe((res: ListItemModel | any) => {
+      this.onDeleteItem$ = this.webSocketService.listen(ListItemEvents.DELETE_ITEM).subscribe((res: ListItemModel | any) => {
         this.deleteArrObject(res);
         console.log(this.items)
       }, error => {
@@ -96,6 +99,12 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-    this.webSocketService.disconnect();
+      this.getListItems$.unsubscribe();
+      this.listData$.unsubscribe();
+    if (this.isBrowser) {
+      this.onAddItem$.unsubscribe();
+      this.onCompleteItem$.unsubscribe();
+      this.onDeleteItem$.unsubscribe();
+    }
   }
 }

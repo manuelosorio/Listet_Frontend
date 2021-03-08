@@ -6,13 +6,27 @@ export class DateUtil {
   private months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
     "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
 
-  format() {
+  format(format ?: string) {
+
     if (!!this.date) {
       const date = new Date(this.date);
-      const month = this.months[date.getMonth()];
-      const day = date.getDate();
+      let day = '' + date.getDate();
       const year = date.getFullYear();
-      return month + " " + day + ", " + year;
+      switch (format) {
+        case "yyyy-mm-dd": {
+          let month = '' + date.getMonth();
+          if (month.length < 2)
+            month = '0' + month;
+          if (day.length < 2)
+            day = '0' + day;
+          return [year,month,day].join('-')
+        }
+        default: {
+          const month = this.months[date.getMonth()];
+          return month + " " + day + ", " + year;
+        }
+      }
+
     }
     return '';
   }
