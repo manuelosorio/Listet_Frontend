@@ -19,6 +19,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   public commentsEnabled: boolean;
   public comments: Array<object>;
   private listData: Subscription;
+  private onCreateComment$: Subscription;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -29,11 +30,10 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.listService.getListComments(this.username, this.slug);
-    this.websocketService.connect(`${this.username}-${this.slug}`);
     if (this.isBrowser) {
-      this.websocketService.onCreateComment().subscribe(comment => {
-        if (comment.listInfo === `${this.username}-${this.slug}`)
-          this.comments.unshift(comment);
+      this.onCreateComment$ = websocketService.onCreateComment().subscribe(comment => {
+        // console.log(comment);
+        this.comments.unshift(comment);
       });
     }
   }
@@ -49,5 +49,8 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.listData.unsubscribe();
     this.getComments.unsubscribe();
+    if (this.isBrowser) {
+      this.onCreateComment$.unsubscribe();
+    }
   }
 }
