@@ -1,0 +1,20 @@
+@use "~src/sass/variables"
+form
+  margin: 1rem 0
+  display: flex
+  flex-direction: column
+  background: variables.$bg
+  padding: 1em 2em
+  border-radius: 10px
+  border: 1px solid variables.$silver
+  box-shadow: variables.$shadow-inset
+.l-row
+  flex-direction: row
+.form__fieldset
+  width: initial
+  flex-basis: 100%
+  @media (min-width: variables.$medium)
+    flex-basis: 48%
+    + .form__fieldset
+      margin:
+        top: 0

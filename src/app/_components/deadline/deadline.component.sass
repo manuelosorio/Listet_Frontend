@@ -1,0 +1,32 @@
+@use "~src/sass/variables"
+small
+  background: variables.$primary
+  font-size: variables.$f-size--xx-small
+  font-weight: variables.$f-weight--light
+  padding: 0.15em 0.95em
+  border-radius: 0.5625em
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  span
+    display: flex
+    justify-content: center
+    align-items: center
+i-feather
+  margin:
+    right: .75rem
+  width: 0.95rem
+  display: inline-flex
+  svg
+    stroke-width: 2px
+    width: 100%
+    fill: variables.$black
+.danger
+  background: variables.$red
+.complete
+  background: variables.$green
+
+.danger, .complete
+  color: variables.$silver
+  i-feather svg
+    fill: variables.$silver

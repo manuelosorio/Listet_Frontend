@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsersService} from '../../_services/users.service';
 import {ActivatedRoute} from '@angular/router';
 import {MetaTagModel} from '../../models/metatag.model';
@@ -10,7 +10,7 @@ import {SeoService} from '../../_services/seo.service';
   styleUrls: ['./reset-password.component.sass']
 })
 export class ResetPasswordComponent implements OnInit {
-  resetPasswordForm;
+  resetPasswordForm: FormGroup;
   private token: string;
   private meta: MetaTagModel;
   constructor(
