@@ -18,6 +18,9 @@ export class UsersService {
   private verifiedSubject: Subject<boolean>;
   public verified: Observable<boolean>;
 
+  private usernameSubject: Subject<string>;
+  public username$: Observable<string>;
+
   private authenticationErrSubject: Subject<UserError>;
   public authenticationErr: Observable<UserError>;
   constructor(
@@ -31,6 +34,8 @@ export class UsersService {
     this.authenticationErr = this.authenticationErrSubject.asObservable();
     this.verifiedSubject = new Subject();
     this.verified = this.verifiedSubject.asObservable();
+    this.usernameSubject = new Subject<string>();
+    this.username$ = this.usernameSubject.asObservable();
     this.isAuth();
     this.isVerified();
   }
@@ -50,7 +55,7 @@ export class UsersService {
       }, err => {
         if (err) {
           this.authenticationErrSubject.next({error: {message: err.error.message, code: err.status}});
-          console.log(err.error.message);
+          console.error(err.error.message);
         }
       }
     );
@@ -61,8 +66,9 @@ export class UsersService {
     }).subscribe(
       (res: any) => {
         this.authenticatedSubject.next(true);
-        console.log(res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
-          : this.alertService.success(res.message));
+        this.usernameSubject.next(res.username);
+        res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
+          : this.alertService.success(res.message);
         setTimeout(() => {
           this.router.navigate(['/']).then();
         }, 2000);
@@ -111,9 +117,11 @@ export class UsersService {
     return this.http.get(environment.host + '/session', {
       withCredentials: true
     }).subscribe((res: any) => {
+
       this.authenticatedSubject.next(res.authenticated);
+      this.usernameSubject.next(res.username);
     }, () => {
-      console.log('Oops, something went wrong getting the logged in status');
+      this.alertService.error('Oops, something went wrong getting the logged in status');
     });
   }
   isVerified() {
@@ -123,10 +131,10 @@ export class UsersService {
       this.verifiedSubject.next(res.verified);
       if (res.verified === false) {
         console.log(res.verified);
-        // this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
+        this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
       }
     }, () => {
-      console.log('Oops, something went wrong getting the verification status');
+      this.alertService.error('Oops, something went wrong getting the verification status');
     });
   }
   isLoggedIn() {
