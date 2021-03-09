@@ -6,14 +6,16 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod --base-href /projects/listet/",
-    "test": "ng test",
+    "test": "snyk test && ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run todo-list:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build --prod && ng run todo-list:server:production",
     "prerender": "ng run todo-list:prerender",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "snyk:protect": "snyk protect",
+    "snyk:test": "snyk test"
   },
   "private": false,
   "dependencies": {
@@ -34,6 +36,7 @@
     "ngx-masonry": "^11.0.0",
     "rxjs": "~6.6.6",
     "sitemap-generator": "^8.5.1",
+    "snyk": "^1.478.0",
     "socket.io-client": "^3.0.5",
     "tslib": "^2.1.0",
     "utf-8-validate": "^5.0.4",
