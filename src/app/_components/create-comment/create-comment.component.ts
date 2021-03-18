@@ -54,7 +54,6 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
     data.list_id = this.id;
     data.listInfo = `${this.username}-${this.slug}`
     this.listService.createComment(data).subscribe(() => {
-      data.listInfo
       this.commentData = data;
       this.websocketService.emit(CommentEvents.CREATE_COMMENT, this.commentData);
       this.commentForm.reset();

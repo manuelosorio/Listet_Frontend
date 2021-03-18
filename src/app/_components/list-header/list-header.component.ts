@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ListsService} from '../../_services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -7,22 +7,24 @@ import { ListDataService } from '../../shared/list-data.service';
 import { UsersService } from "../../_services/users.service";
 import { DateUtil } from "../../utils/dateUtil";
 import { ListModel } from "../../models/list.model";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-list-header',
   templateUrl: './list-header.component.html',
   styleUrls: ['./list-header.component.sass']
 })
-export class ListHeaderComponent implements OnInit {
+export class ListHeaderComponent implements OnInit, OnDestroy {
   header;
-  private username: any;
-  private slug: any;
+  private readonly username: any;
+  private readonly slug: any;
   private meta: MetaTagModel;
   listId: string;
   listData;
   isOwner: boolean
   formattedCreationDate: string
   deadline: Date
+  private username$: Subscription
   constructor(private listService: ListsService,
               private route: ActivatedRoute,
               private router: Router,
@@ -32,7 +34,7 @@ export class ListHeaderComponent implements OnInit {
     userService.isAuth();
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
-    userService.username$.subscribe(res => {
+    this.username$ = userService.username$.subscribe(res => {
       this.isOwner = this.username === res;
     });
   }
@@ -59,7 +61,7 @@ export class ListHeaderComponent implements OnInit {
       if (error.status === 404) {
         this.router.navigateByUrl('/404', {
           skipLocationChange: true
-        });
+        }).then();
       }
     }));
   }
@@ -78,5 +80,8 @@ export class ListHeaderComponent implements OnInit {
       twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
       url: `https://listet.manuelosorio.me/l/${this.username}/${this.slug}`
     };
+  }
+  ngOnDestroy() {
+    this.username$.unsubscribe();
   }
 }

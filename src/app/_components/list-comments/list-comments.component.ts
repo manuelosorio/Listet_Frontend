@@ -32,7 +32,6 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     this.listService.getListComments(this.username, this.slug);
     if (this.isBrowser) {
       this.onCreateComment$ = websocketService.onCreateComment().subscribe(comment => {
-        // console.log(comment);
         this.comments.unshift(comment);
       });
     }

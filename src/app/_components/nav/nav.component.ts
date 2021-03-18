@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {UsersService} from '../../_services/users.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.sass']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
   authenticated: boolean;
-  router: Router;
+
+  private authenticated$: Subscription
   hideNavPaths = [
     '/login',
     '/register',
@@ -22,9 +24,9 @@ export class NavComponent implements OnInit {
   isActive = false;
   constructor(
     private userService: UsersService,
-    router: Router
+    private router: Router,
   ) {
-    this.userService.authenticated.subscribe(authenticated => {
+    this.authenticated$ = this.userService.authenticated.subscribe(authenticated => {
       this.authenticated = authenticated;
     });
     router.events.pipe(
@@ -51,5 +53,8 @@ export class NavComponent implements OnInit {
     this.isActive  = !this.isActive;
   }
   ngOnInit(): void {
+  }
+  ngOnDestroy() {
+    this.authenticated$.unsubscribe();
   }
 }

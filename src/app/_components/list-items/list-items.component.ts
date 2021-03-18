@@ -44,6 +44,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.getListItems$ = this.listService.getListItems(this.username, this.slug).subscribe(data => {
+      console.log(data);
       return this.items = data;
     });
 
@@ -74,7 +75,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.items = this.items.filter((item) => {
       return item.id != id;
     })
-
   }
   ngOnInit(): void {
     if (this.isBrowser) {

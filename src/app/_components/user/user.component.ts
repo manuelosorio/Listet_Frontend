@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.sass']
 })
-export class UserComponent implements OnInit {
-
+export class UserComponent implements OnInit, OnDestroy {
+  private getUsers$: Subscription;
   constructor(private userService: UsersService) {}
-  users: object;
+  public users: object;
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(data => {
+    this.getUsers$ = this.userService.getUsers().subscribe(data => {
       this.users = data;
       console.log(this.users);
     });
   }
-
+  ngOnDestroy() {
+    this.getUsers$.unsubscribe();
+  }
 }
