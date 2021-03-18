@@ -102,7 +102,7 @@ export class UsersService {
       this.router.navigate(['/login']).then();
     }, (err) => {
       if (err) {
-        console.error(err);
+        this.alertService.warning(`Token has expired or been deleted <a href="/forgot-password">create new token.</a>`, false);
       }
     });
   }

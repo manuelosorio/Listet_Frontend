@@ -2,17 +2,25 @@
 .alert
   background: variables.$grey
   color: variables.$black
-  padding: 0.5rem 1rem
-  //line-height: 0.25
+  padding: 0.125em 1em
   &--success
     background: variables.$green
     color: variables.$bg
   &--warning
     background: variables.$primary
     color: variables.$black
+    a
+      color: lighten(variables.$black, 15%)
+      &:hover
+        color: variables.$black
   &--error
     background: variables.$red
     color: variables.$bg
+  &--success, &--error
+    a
+      color: darken(variables.$bg, 10%)
+      &:hover
+        color: variables.$bg
   div
     display: flex
     flex-direction: row
@@ -23,3 +31,10 @@
     align-items: center
   i-feather
     cursor: pointer
+.icon__wrap
+  display: flex
+  justify-content: center
+  align-items: center
+a
+  //text-decoration: none
+  transition: color variables.$t-easeOutBack

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {AlertService} from '../../_services/alert.service';
-import {Subscription} from 'rxjs';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AlertService } from '../../_services/alert.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.sass']
+  styleUrls: ['./alert.component.sass'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AlertComponent implements OnInit {
   private subscription: Subscription;
