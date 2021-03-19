@@ -37,7 +37,7 @@
     "rxjs": "~6.6.6",
     "sitemap-generator": "^8.5.1",
     "snyk": "^1.478.0",
-    "socket.io-client": "^3.0.5",
+    "socket.io-client": "^3.1.2",
     "tslib": "^2.1.0",
     "utf-8-validate": "^5.0.4",
     "zone.js": "~0.11.3"
