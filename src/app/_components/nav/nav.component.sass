@@ -21,6 +21,8 @@
   &--logo
     display: block
     width: 200px
+    img
+      width: 100%
   &--links
     display: flex
     width: 100%
@@ -35,16 +37,18 @@
     overflow: hidden
     max-height: 0
     padding: 0
+    transition-property: padding, max-height
     //margin-top: 0.45rem
     &-item
       font-size: variables.$f-size--x-small
-      transition: variables.$t-easeOutBack
+      transition: color variables.$t-easeOutBack
       transition-delay: .6ms
       + .navigation--links-item
         margin-top: 8%
     &.is-active
       max-height: initial
-      padding: 2rem 0
+      padding: 2em 0
+      margin: 0
       //top: 1rem
     @media (min-width: variables.$medium)
       flex-direction: row
