@@ -1,12 +1,14 @@
 <ng-container *ngIf="hasDeadline">
   <ng-container *ngIf="isComplete else notComplete">
-    <em class="complete">Completed</em>
+    <small class="complete">
+      <em>Completed</em>
+    </small>
   </ng-container>
 
   <ng-template #notComplete>
     <small [class.danger]="isOverDue">
       <span><i-feather name="clock"></i-feather></span>
-      {{formattedDeadline}}
+      <em>{{formattedDeadline}}</em>
     </small>
   </ng-template>
 </ng-container>

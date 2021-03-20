@@ -19,5 +19,6 @@ export class DeadlineComponent implements OnInit {
     const date = new DateUtil(this.deadline);
     this.formattedDeadline = date.format();
     this.hasDeadline = !(this.formattedDeadline === undefined || this.formattedDeadline.length === 0);
+    this.isOverDue = this.hasDeadline ? date.getTime() <= new Date().getTime() : false;
   }
 }

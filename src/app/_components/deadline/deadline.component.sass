@@ -8,6 +8,7 @@ small
   display: inline-flex
   justify-content: center
   align-items: center
+  transition: 250ms ease
   span
     display: flex
     justify-content: center
@@ -24,9 +25,10 @@ i-feather
 .danger
   background: variables.$red
 .complete
+  padding: 0.5em 0.95em
   background: variables.$green
 
 .danger, .complete
-  color: variables.$silver
+  color: #101
   i-feather svg
-    fill: variables.$silver
+    fill: #101

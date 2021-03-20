@@ -11,7 +11,7 @@
           <span class="list-item__info">
             {{item["item"]}}
           </span>
-          <app-deadline [deadline]="item['deadline']"></app-deadline>
+          <app-deadline [deadline]="item['deadline']" [isComplete]="item['completed']"></app-deadline>
         </label>
         <ng-container *ngIf="isOwner">
           <button (click)="deleteListItem(item['id'])">

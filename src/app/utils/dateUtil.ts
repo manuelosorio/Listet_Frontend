@@ -1,5 +1,6 @@
 export class DateUtil {
   date: any;
+
   constructor(date: Date) {
     this.date = date;
   }
@@ -19,7 +20,7 @@ export class DateUtil {
             month = '0' + month;
           if (day.length < 2)
             day = '0' + day;
-          return [year,month,day].join('-')
+          return [year, month, day].join('-')
         }
         default: {
           const month = this.months[date.getMonth()];
@@ -30,8 +31,8 @@ export class DateUtil {
     }
     return '';
   }
-  difference() {
-
+  getTime(): number {
+    return new Date(this.date).getTime();
   }
 }
 // enum Months {
