@@ -6,15 +6,18 @@ import { DOCUMENT } from '@angular/common';
 })
 
 export class CanonicalService {
-
   constructor(@Inject(DOCUMENT) private dom) { }
-
   setCanonicalURL(url?: string) {
-    const canURL = url === undefined ? this.dom.URL : url;
-    const link: HTMLLinkElement = this.dom.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    this.dom.head.appendChild(link);
-    link.setAttribute('href', canURL);
+    let canonicalURL;
+    if (!(this.dom.URL.indexOf('localhost') >= 0 || this.dom.URL.indexOf('127.0.0.1') >= 0)) {
+      if (url === undefined) {
+        canonicalURL = url;
+      }
+      canonicalURL = this.dom.URL;
+      const link: HTMLLinkElement = this.dom.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.dom.head.appendChild(link);
+      link.setAttribute('href', canonicalURL);
+    }
   }
-
 }
