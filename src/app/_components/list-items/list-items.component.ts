@@ -44,7 +44,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.getListItems$ = this.listService.getListItems(this.username, this.slug).subscribe(data => {
-      console.log(data);
       return this.items = data;
     });
 
@@ -56,7 +55,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     const targetId = event.target.id.replace('item-', '');
     const item = this.items.filter(item => item.id == targetId)[0];
     item.completed = event.target.checked ? 1 : 0;
-    console.table({ item })
     this.listService.completeListItem(item).subscribe(_res => {
       this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, item);
     }, error => {
@@ -81,7 +79,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
       this.onCompleteItem$ = this.webSocketService.listen(ListItemEvents.COMPLETE_ITEM).subscribe((res: ListItemModel | any) => {
         const item = this.items.filter(i => i.id == res.id)[0];
         item.completed = res.completed;
-        console.log(res);
       }, error => {
         console.error(error);
       });
