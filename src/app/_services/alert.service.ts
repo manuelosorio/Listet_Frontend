@@ -19,7 +19,6 @@ export class AlertService {
         }
       }
     });
-
   }
 
   getAlert(): Observable<any> {

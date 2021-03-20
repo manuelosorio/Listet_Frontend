@@ -3,11 +3,12 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {UserError} from '../models/errors/user.error';
 import {AlertService} from './alert.service';
 
+// noinspection HtmlUnknownTarget
 @Injectable({
   providedIn: 'root'
 })
@@ -83,10 +84,11 @@ export class UsersService {
     this.http.post(environment.host + '/reset-password', value, {
       withCredentials: true
     }).subscribe(
-    (res: string) => {
-      console.log('response', res);
-      console.log('data', value);
-      this.router.navigate(['/login']).then();
+    (res: any) => {
+      this.alertService.success(res.message, true);
+      setTimeout(()=> {
+        this.router.navigate(['/login']).then();
+      }, 2500)
     }, (err) => {
       if (err) {
         console.error(err);
@@ -150,7 +152,7 @@ export class UsersService {
       }
     ).subscribe(res => {
       console.log(res);
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then();
     });
   }
 }
