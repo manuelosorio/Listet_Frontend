@@ -1,46 +1,25 @@
 <section>
   <ng-container *ngFor="let item of items">
-    <ng-container  *ngIf="isOwner else listItemDisabled">
+    <ng-container>
       <div>
-        <input class="form__input--checkbox" id="item-{{item['id']}}" (change)="checked($event)" type="checkbox" [checked]="item['completed'] === 1">
-        <label for="item-{{item['id']}}" class="list-item">
+        <input (change)="checked($event)" [checked]="item['completed'] === 1" [disabled]="!isOwner" class="form__input--checkbox"
+               id="item-{{item['id']}}" type="checkbox">
+        <label [class.list-item__checkbox--disabled]="!isOwner" class="list-item" for="item-{{item['id']}}">
           <span>
-            <ng-container *ngIf="item['completed'] === 0 else checkedBox">
-                <i-feather name="square"></i-feather>
-            </ng-container>
+                <i-feather [name]="item['completed'] === 0 ? 'square' : 'check-square'"></i-feather>
           </span>
           <span class="list-item__info">
             {{item["item"]}}
           </span>
           <app-deadline [deadline]="item['deadline']"></app-deadline>
         </label>
-        <button (click)="deleteListItem(item['id'])"><i-feather name="trash"></i-feather></button>
+        <ng-container *ngIf="isOwner">
+          <button (click)="deleteListItem(item['id'])">
+            <i-feather name="trash"></i-feather>
+          </button>
+        </ng-container>
       </div>
     </ng-container>
-
-
-    <ng-template #listItemDisabled>
-      <div>
-        <input class="form__input--checkbox" id="item-{{item['id']}}" type="checkbox" disabled [checked]="item['completed'] === 1">
-        <label for="item-{{item['id']}}" class="list-item">
-          <span class="list-item__checkbox--disabled">
-            <ng-container *ngIf="item['completed'] === 0 else checkedBox">
-                <i-feather name="square"></i-feather>
-            </ng-container>
-          </span>
-          <span class="list-item__info">
-            {{item["item"]}}
-          </span>
-          <app-deadline [deadline]="item['deadline']"></app-deadline>
-        </label>
-      </div>
-    </ng-template>
   </ng-container>
 </section>
 <app-add-item></app-add-item>
-
-<ng-template #checkedBox>
-  <span class="list-item__checkbox">
-    <i-feather name="check-square"></i-feather>
-  </span>
-</ng-template>
