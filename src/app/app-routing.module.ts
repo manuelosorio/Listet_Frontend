@@ -19,6 +19,7 @@ import {NotFoundComponent} from './_pages/not-found/not-found.component';
 import {RegisterComponent} from './_pages/register/register.component';
 import {ResetPasswordComponent} from './_pages/reset-password/reset-password.component';
 import {CreateListComponent} from './_pages/create-list/create-list.component';
+import { ProfileComponent } from "./_pages/profile/profile.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,7 +27,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   {path: 'users', component: UserComponent, canActivate: [GuestGuard]},
-  {path: 'u/:username', component: HomeComponent },
+  {path: 'u/:username', component: ProfileComponent },
   {path: 'l/:username/:slug', component: ListDetailsComponent },
   {path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard]},
   {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard]},

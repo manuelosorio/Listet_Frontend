@@ -7,7 +7,8 @@
 
   <ng-template #notComplete>
     <small [class.danger]="isOverDue">
-      <span><i-feather name="clock"></i-feather></span>
+      <span><i-feather *ngIf="!isOverDue else overdue" name="clock"></i-feather></span>
+      <ng-template #overdue><i-feather name="alert-circle"></i-feather></ng-template>
       <em>{{formattedDeadline}}</em>
     </small>
   </ng-template>

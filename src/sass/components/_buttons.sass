@@ -8,17 +8,18 @@
   transition: variables.$t-easeOutBack
   width: fit-content
   cursor: pointer
-  transition-property: box-shadow, color, transform
+  transition-property: background-color, box-shadow, color, transform
   &:focus
     outline: none
+  &:active
+    box-shadow: variables.$shadow-hover
+    transform: translateY(3px)
   &--primary
     background: variables.$primary
     box-shadow: variables.$shadow
     &:hover
       background: variables.$primary-darken
-      box-shadow: variables.$shadow-hover
       color: variables.$black-darken
-      transform: translateY(3px)
   &--go-back
     display: flex
     flex-direction: row
