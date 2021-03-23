@@ -1,8 +1,9 @@
 export class DateUtil {
-  date: any;
-
-  constructor(date: Date) {
+  private readonly date: any;
+  private readonly debugString?: string
+  constructor(date: Date | string, debugString?: string) {
     this.date = date;
+    this.debugString = debugString;
   }
   private months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
     "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
@@ -33,6 +34,50 @@ export class DateUtil {
   }
   getTime(): number {
     return new Date(this.date).getTime();
+  }
+  private difference() {
+    return Math.floor(new Date().getTime()/1000) - Math.floor(new Date(this.date).getTime()/1000);
+  }
+  getFormattedTimeDifference() {
+    const seconds = this.difference(),
+          minutes= Math.floor((seconds / (60))),
+          hours =  Math.floor((seconds / (3600))),
+          days = Math.floor((seconds / (86400))),
+          months = Math.floor((seconds / (2629743))),
+          years = Math.floor((seconds / (31556926)));
+    // console.table({
+    //   'message':        this.debugString,
+    //   'original-date':  this.date,
+    //   'seconds':        seconds,
+    //   'minutes':        minutes,
+    //   'hours':          hours,
+    //   'days':           days,
+    //   'months':         months,
+    //   'years':          years
+    // })
+    if (years > 1)
+      return `${years} years ago`
+    if (years == 1)
+      return '1 year ago';
+    if (months > 1)
+      return `${months} months ago`
+    if (months === 1)
+      return '1 month ago'
+    if (days > 1)
+      return `${days} days ago`
+    if (days === 1)
+      return '1 day ago'
+    if (hours > 1)
+      return `${hours} hours ago`
+    if (hours === 1)
+      return '1 hour ago'
+    if (minutes > 1)
+      return `${minutes} minutes ago`
+    if (minutes === 1)
+      return '1 minute ago'
+    if (seconds > 1)
+      return `${seconds} seconds ago`
+    return '1 second ago'
   }
 }
 // enum Months {

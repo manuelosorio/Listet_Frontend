@@ -1,12 +1,63 @@
 @use '~src/sass/variables'
 .comment
-  padding: 1rem
-  width: 85%
+  padding: 1.25rem
+  width: 100%
   margin: 1rem 0
+  @media (min-width: variables.$small)
+    max-width: fit-content
+  &__info
+    width: fit-content
+    margin: 0 0 1rem
+    flex-direction: column
+    align-items: flex-start
+    a
+      margin-right: 1.2rem
+    p
+      background-color: variables.$primary
+      margin: 1.2rem 0 0
+      padding: 0.15em 0.95em
+      border-radius: 0.5625em
+      font-size: 0.9rem
+    em
+      font-size: 0.9rem
+      font-weight: variables.$f-weight--light
+      position: relative
+      cursor: help
+      .tooltip
+        position: absolute
+        visibility: hidden
+        padding: 0.5em 1.125em
+        right: -50%
+        top: 50%
+        transform: translateY(-50%) translateX(50%)
+        background: variables.$primary
+        color: variables.$black
+        text-align: center
+        border-radius: 0.5625em
+        width: fit-content
+      &:hover
+        .tooltip
+          visibility: visible
+      &:after
+        content: ''
+        border-bottom: variables.$grey 3px dotted
+        position: absolute
+        top: 1.2em
+        right: 0
+        left: 0
+
+    @media (min-width: variables.$small)
+      flex-direction: row
+      justify-content: space-between
+      p, em
+        margin: 0
   &__message
     white-space: pre-wrap
+    max-width: 65ch
+    margin: 0
+
 app-create-comment
-  width: 94%
+  width: 100%
   max-width: 660px
   display: flex
   justify-self: center

@@ -1,17 +1,19 @@
 <section class="l-container">
-  <h3>Comments</h3>
+  <h3>Comments ({{count}})</h3>
   <div class="l-row">
       <app-create-comment class="app-create-comment"></app-create-comment>
   </div>
   <ng-container *ngIf="commentsEnabled else commentsDisabled">
-    <div class="l-row">
-      <div class="card comment" *ngFor="let comment of comments">
-        <p>Creation Date: {{ comment['creation_date'] }}</p>
-        <p>Comment By: {{ comment['firstName'] }} {{ comment['lastName'] }}</p>
-        <p>username: {{ comment['username'] }}</p>
-        <p class="comment__message">Comment Message: {{ comment['comment'] }}</p>
-      </div>
-    </div>
+      <article class="card comment" *ngFor="let comment of comments">
+        <div class="l-row comment__info">
+          <a routerLink="/u/{{ comment['username'] }}">{{ comment['username'] }}</a>
+          <em>
+            Created {{ comment['time_difference'] }}
+            <span class="tooltip">{{comment['formatted_creation_date']}}</span>
+          </em>
+        </div>
+        <p class="comment__message">{{ comment['comment'] }}</p>
+      </article>
   </ng-container>
 </section>
 <ng-template #commentsDisabled>
