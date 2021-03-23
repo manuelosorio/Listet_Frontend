@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
-import {Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMasonryComponent, NgxMasonryOptions } from 'ngx-masonry';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
@@ -19,15 +19,10 @@ export class ListComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
     private router: Router,
+    private route: ActivatedRoute,
     private seoService: SeoService) {
-    this.meta = {
-      author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
-      title: 'Listet App - All Lists',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/lists'
-    };
+    this.meta = this.route.snapshot.data[0];
+
   }
   lists: any = [];
   public masonryOptions: NgxMasonryOptions = {
@@ -42,6 +37,9 @@ export class ListComponent implements OnInit {
       this.lists = data;
       this.show(this.lists);
     });
+    if (this.pageType === 'User' ) {
+      this.meta.title += `${this.route.snapshot.params.username}'s Lists`;
+    }
     this.seoService.updateInfo(this.meta);
   }
   private show(listsObj: any) {

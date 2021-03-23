@@ -22,18 +22,45 @@ import {CreateListComponent} from './_pages/create-list/create-list.component';
 import { ProfileComponent } from "./_pages/profile/profile.component";
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'lists', component: ListComponent},
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-  {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
-  {path: 'users', component: UserComponent, canActivate: [GuestGuard]},
-  {path: 'u/:username', component: ProfileComponent },
-  {path: 'l/:username/:slug', component: ListDetailsComponent },
-  {path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard]},
-  {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard]},
-  {path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard]},
-  {path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard]},
-  {path: '**', component: NotFoundComponent },
+  {
+    path: '', component: HomeComponent, data: [{
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Home',
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
+      url: 'https://listet.manuelosorio.me/'
+    }]
+  },
+  {
+    path: 'lists', component: ListComponent, data: [{
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Lists',
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
+      url: 'https://listet.manuelosorio.me/lists'
+    }]
+  },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserComponent, canActivate: [GuestGuard] },
+  {
+    path: 'u/:username', component: ProfileComponent, data: [{
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - ',
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
+      url: 'https://listet.manuelosorio.me/'
+    }]
+  },
+  { path: 'l/:username/:slug', component: ListDetailsComponent },
+  { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
+  { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
+  { path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard] },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
