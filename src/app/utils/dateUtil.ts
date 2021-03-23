@@ -15,17 +15,22 @@ export class DateUtil {
       let day = '' + date.getDate();
       const year = date.getFullYear();
       switch (format) {
-        case "yyyy-mm-dd": {
+        case 'yyyy-mm-dd': {
           let month = '' + date.getMonth();
-          if (month.length < 2)
+          if (month.length < 2) {
             month = '0' + month;
-          if (day.length < 2)
+          }
+          if (day.length < 2) {
             day = '0' + day;
-          return [year, month, day].join('-')
+          }
+          return [year, month, day].join('-');
         }
+        // case 'mmm dd, yyyy' : {
+        //   return;
+        // }
         default: {
           const month = this.months[date.getMonth()];
-          return month + " " + day + ", " + year;
+          return `${month} ${day}, ${year}`;
         }
       }
 
@@ -36,15 +41,15 @@ export class DateUtil {
     return new Date(this.date).getTime();
   }
   private difference() {
-    return Math.floor(new Date().getTime()/1000) - Math.floor(new Date(this.date).getTime()/1000);
+    return Math.floor(new Date().getTime() / 1000) - Math.floor(new Date(this.date).getTime() / 1000);
   }
   getFormattedTimeDifference() {
-    const seconds = this.difference(),
-          minutes= Math.floor((seconds / (60))),
-          hours =  Math.floor((seconds / (3600))),
-          days = Math.floor((seconds / (86400))),
-          months = Math.floor((seconds / (2629743))),
-          years = Math.floor((seconds / (31556926)));
+    const seconds = this.difference();
+    const minutes = Math.floor((seconds / (60)));
+    const hours =  Math.floor((seconds / (3600)));
+    const days = Math.floor((seconds / (86400)));
+    const months = Math.floor((seconds / (2629743)));
+    const years = Math.floor((seconds / (31556926)));
     // console.table({
     //   'message':        this.debugString,
     //   'original-date':  this.date,
@@ -55,29 +60,18 @@ export class DateUtil {
     //   'months':         months,
     //   'years':          years
     // })
-    if (years > 1)
-      return `${years} years ago`
-    if (years == 1)
-      return '1 year ago';
-    if (months > 1)
-      return `${months} months ago`
-    if (months === 1)
-      return '1 month ago'
-    if (days > 1)
-      return `${days} days ago`
-    if (days === 1)
-      return '1 day ago'
-    if (hours > 1)
-      return `${hours} hours ago`
-    if (hours === 1)
-      return '1 hour ago'
-    if (minutes > 1)
-      return `${minutes} minutes ago`
-    if (minutes === 1)
-      return '1 minute ago'
-    if (seconds > 1)
-      return `${seconds} seconds ago`
-    return '1 second ago'
+    if (years > 1)     { return `${years} years ago`; }
+    if (years === 1)   { return '1 year ago'; }
+    if (months > 1)    { return `${months} months ago`; }
+    if (months === 1)  { return '1 month ago'; }
+    if (days > 1)      { return `${days} days ago`; }
+    if (days === 1)    { return '1 day ago'; }
+    if (hours > 1)     { return `${hours} hours ago`; }
+    if (hours === 1)   { return '1 hour ago'; }
+    if (minutes > 1)   { return `${minutes} minutes ago`; }
+    if (minutes === 1) { return '1 minute ago'; }
+    if (seconds > 1)   { return `${seconds} seconds ago`; }
+    return '1 second ago';
   }
 }
 // enum Months {

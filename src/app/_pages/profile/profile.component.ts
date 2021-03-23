@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +7,8 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  public user: string
+  public user: string;
+
   constructor(private route: ActivatedRoute) {
     this.user = route.snapshot.params.username;
   }

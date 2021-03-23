@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ListCommentsComponent } from './list-comments.component';
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { RouterTestingModule } from "@angular/router/testing";
-import { BackButtonComponent } from "../back-button/back-button.component";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BackButtonComponent } from '../back-button/back-button.component';
 
 describe('ListCommentsComponent', () => {
   let component: ListCommentsComponent;

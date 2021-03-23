@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { ListDataService } from '../../shared/list-data.service';
-import { UsersService } from "../../_services/users.service";
-import { DateUtil } from "../../utils/dateUtil";
-import { ListModel } from "../../models/list.model";
-import { Subscription } from "rxjs";
+import { UsersService } from '../../_services/users.service';
+import { DateUtil } from '../../utils/dateUtil';
+import { ListModel } from '../../models/list.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-header',
@@ -21,10 +21,10 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   private meta: MetaTagModel;
   listId: string;
   listData;
-  isOwner: boolean
-  formattedCreationDate: string
-  deadline: Date
-  private username$: Subscription
+  isOwner: boolean;
+  formattedCreationDate: string;
+  deadline: Date;
+  private username$: Subscription;
   constructor(private listService: ListsService,
               private route: ActivatedRoute,
               private router: Router,

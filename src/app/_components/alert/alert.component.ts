@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./alert.component.sass'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   message: any;
   constructor(private alertService: AlertService) { }

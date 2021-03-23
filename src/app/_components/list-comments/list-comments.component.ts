@@ -5,8 +5,8 @@ import {Subscription} from 'rxjs';
 import {WebsocketService} from '../../_services/websocket.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ListDataService } from '../../shared/list-data.service';
-import { DateUtil } from "../../utils/dateUtil";
-import { CommentModel } from "../../models/comment.model";
+import { DateUtil } from '../../utils/dateUtil';
+import { CommentModel } from '../../models/comment.model';
 
 @Component({
   selector: 'app-list-comments',
@@ -22,7 +22,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   public comments: Array<object>;
   private listData: Subscription;
   private onCreateComment$: Subscription;
-  public count: number
+  public count: number;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -37,7 +37,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       this.onCreateComment$ = websocketService.onCreateComment().subscribe((comment: CommentModel) => {
         this.count += 1;
         this.updateTimeDifference();
-        const creationDate = new DateUtil(new Date(), comment.comment)
+        const creationDate = new DateUtil(new Date(), comment.comment);
         comment.time_difference = creationDate.getFormattedTimeDifference();
         comment.formatted_creation_date = creationDate.format();
         this.comments.unshift(comment);
@@ -57,11 +57,11 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   }
   private updateTimeDifference() {
     this.comments.filter((comment: CommentModel) => {
-      const creationDate = new DateUtil(comment.creation_date, comment.comment)
+      const creationDate = new DateUtil(comment.creation_date, comment.comment);
       comment.time_difference = creationDate.getFormattedTimeDifference();
       comment.formatted_creation_date = creationDate.format();
       return comment;
-    })
+    });
   }
   ngOnDestroy(): void {
     this.listData.unsubscribe();

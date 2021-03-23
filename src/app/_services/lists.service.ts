@@ -46,17 +46,17 @@ export class ListsService {
   createListItem(data) {
     return this.http.post(environment.host + '/add-item', data, {
       withCredentials: true
-    })
+    });
   }
   completeListItem(data) {
     return this.http.put(environment.host + '/update-item-status', data, {
       withCredentials: true
-    })
+    });
   }
 
   deleteListItem(id) {
     return this.http.delete(environment.host + `/delete-item/${id}`, {
       withCredentials: true,
-    })
+    });
   }
 }

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {AlertService} from '../../_services/alert.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ListsService} from '../../_services/lists.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../../_services/alert.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ListsService } from '../../_services/lists.service';
+import { Router } from '@angular/router';
 
 export interface Response {
   message: string;
@@ -18,13 +18,14 @@ export class CreateListComponent implements OnInit {
   isPrivate: boolean;
   allowComments;
   private redirectURL;
-  errorMessage: string;
+
+  // errorMessage: string;
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private listService: ListsService,
     private router: Router
-    ) {
+  ) {
     this.createListForm = formBuilder.group({
       title: ['', [
         Validators.required
@@ -48,8 +49,8 @@ export class CreateListComponent implements OnInit {
       console.log(res.url);
       this.alertService.success(res.message);
       this.redirectURL = res.url;
-      setTimeout(() => {
-        this.redirect('/l/' + res.url);
+      setTimeout(async () => {
+        await this.redirect('/l/' + res.url);
       }, 500);
     }, error => {
       console.error(error);
@@ -57,16 +58,20 @@ export class CreateListComponent implements OnInit {
     }, () => {
     });
   }
+
   isPrivateChecked(event) {
     return this.isPrivate = event.target.checked;
   }
+
   allowCommentsChecked(event) {
     return this.allowComments = event.target.checked;
   }
+
   get title() {
     return this.createListForm.get('title');
   }
-  redirect(url) {
-    this.router.navigate([url]);
+
+  async redirect(url) {
+    await this.router.navigate([url]);
   }
 }

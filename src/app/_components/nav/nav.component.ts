@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {UsersService} from '../../_services/users.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import { Subscription } from "rxjs";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +12,7 @@ import { Subscription } from "rxjs";
 export class NavComponent implements OnInit, OnDestroy {
   authenticated: boolean;
 
-  private authenticated$: Subscription
+  private authenticated$: Subscription;
   hideNavPaths = [
     '/login',
     '/register',

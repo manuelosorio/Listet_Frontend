@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { DateUtil } from "../../utils/dateUtil";
+import { Component, Input, OnInit } from '@angular/core';
+import { DateUtil } from '../../utils/dateUtil';
 
 @Component({
   selector: 'app-deadline',
@@ -7,11 +7,11 @@ import { DateUtil } from "../../utils/dateUtil";
   styleUrls: ['./deadline.component.sass']
 })
 export class DeadlineComponent implements OnInit {
-  @Input() private deadline: Date
+  @Input() private deadline: Date;
   @Input() isComplete: boolean;
-  isOverDue: boolean = false
-  formattedDeadline: string
-  hasDeadline: boolean
+  isOverDue = false;
+  formattedDeadline: string;
+  hasDeadline: boolean;
 
   constructor() {
   }

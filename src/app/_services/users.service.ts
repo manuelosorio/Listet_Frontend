@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {Observable, Subject} from 'rxjs';
-import { map} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {UserError} from '../models/errors/user.error';
-import {AlertService} from './alert.service';
+import { environment } from '../../environments/environment';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { UserError } from '../models/errors/user.error';
+import { AlertService } from './alert.service';
 
 // noinspection HtmlUnknownTarget
 @Injectable({
@@ -24,6 +24,7 @@ export class UsersService {
 
   private authenticationErrSubject: Subject<UserError>;
   public authenticationErr: Observable<UserError>;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -50,17 +51,18 @@ export class UsersService {
       withCredentials: true
     })
       .subscribe(
-      (res) => {
-        console.log(res);
-        this.router.navigate(['/login']).then();
-      }, err => {
-        if (err) {
-          this.authenticationErrSubject.next({error: {message: err.error.message, code: err.status}});
-          console.error(err.error.message);
+        (res) => {
+          console.log(res);
+          this.router.navigate(['/login']).then();
+        }, err => {
+          if (err) {
+            this.authenticationErrSubject.next({ error: { message: err.error.message, code: err.status } });
+            console.error(err.error.message);
+          }
         }
-      }
-    );
+      );
   }
+
   loginUser(value) {
     this.http.post(environment.host + '/login', value, {
       withCredentials: true
@@ -69,45 +71,58 @@ export class UsersService {
         this.authenticatedSubject.next(true);
         this.usernameSubject.next(res.username);
         res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
-          : this.alertService.success(res.message);
+                                             : this.alertService.success(res.message);
         setTimeout(() => {
           this.router.navigate(['/']).then();
         }, 2000);
       }, (err) => {
         this.authenticatedSubject.next(false);
-        err.error ? this.authenticationErrSubject.next({error: {message: err.error.message, code: err.error.status}})
-          : this.authenticationErrSubject.next({error: {message: 'Unknown error has occurred!', code: 502}});
+        err.error ? this.authenticationErrSubject.next({
+                    error: {
+                      message: err.error.message,
+                      code: err.error.status
+                    }
+                  })
+                  : this.authenticationErrSubject.next({
+                    error: {
+                      message: 'Unknown error has occurred!',
+                      code: 502
+                    }
+                  });
       }
     );
   }
+
   requestPasswordReset(value) {
     this.http.post(environment.host + '/reset-password', value, {
       withCredentials: true
     }).subscribe(
-    (res: any) => {
-      this.alertService.success(res.message, true);
-      setTimeout(()=> {
-        this.router.navigate(['/login']).then();
-      }, 2500)
-    }, (err) => {
-      if (err) {
-        console.error(err);
-      }
-    });
+      (res: any) => {
+        this.alertService.success(res.message, true);
+        setTimeout(() => {
+          this.router.navigate(['/login']).then();
+        }, 2500);
+      }, (err) => {
+        if (err) {
+          console.error(err);
+        }
+      });
   }
+
   resetPassword(token, value) {
     this.http.put(environment.host + '/reset-password/' + token, value, {
       withCredentials: true
     }).subscribe(
-    (res: string) => {
-      console.log('response', res);
-      this.router.navigate(['/login']).then();
-    }, (err) => {
-      if (err) {
-        this.alertService.warning(`Token has expired or been deleted <a href="/forgot-password">create new token.</a>`, false);
-      }
-    });
+      (res: string) => {
+        console.log('response', res);
+        this.router.navigate(['/login']).then();
+      }, (err) => {
+        if (err) {
+          this.alertService.warning(`Token has expired or been deleted <a href="/forgot-password">create new token.</a>`, false);
+        }
+      });
   }
+
   logoutUser() {
     this.http.post(environment.host + '/logout', {}, {
       withCredentials: true
@@ -115,6 +130,7 @@ export class UsersService {
       this.authenticatedSubject.next(false);
     });
   }
+
   isAuth() {
     return this.http.get(environment.host + '/session', {
       withCredentials: true
@@ -126,6 +142,7 @@ export class UsersService {
       this.alertService.error('Oops, something went wrong getting the logged in status');
     });
   }
+
   isVerified() {
     return this.http.get(environment.host + '/session', {
       withCredentials: true
@@ -139,6 +156,7 @@ export class UsersService {
       this.alertService.error('Oops, something went wrong getting the verification status');
     });
   }
+
   isLoggedIn() {
     return this.http.get(environment.host + '/session', {
       withCredentials: true
@@ -146,9 +164,10 @@ export class UsersService {
       return res;
     }));
   }
+
   verifyAccount(token) {
     return this.http.get(environment.host + '/verify-account/' + token, {
-      withCredentials: true
+        withCredentials: true
       }
     ).subscribe(res => {
       console.log(res);

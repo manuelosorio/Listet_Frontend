@@ -1,12 +1,12 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from "@angular/common";
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
-import { ListDataService } from "../../shared/list-data.service";
-import { WebsocketService } from "../../_services/websocket.service";
-import { ListItemEvents } from "../../helper/list-item.events";
-import { ListItemModel } from "../../models/list-item.model";
-import { Subscription } from "rxjs";
+import { ListDataService } from '../../shared/list-data.service';
+import { WebsocketService } from '../../_services/websocket.service';
+import { ListItemEvents } from '../../helper/list-item.events';
+import { ListItemModel } from '../../models/list-item.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-items',
@@ -53,31 +53,31 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   checked(event) {
     const targetId = event.target.id.replace('item-', '');
-    const item = this.items.filter(item => item.id == targetId)[0];
-    item.completed = event.target.checked ? 1 : 0;
-    this.listService.completeListItem(item).subscribe(_res => {
-      this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, item);
+    const filterItem = this.items.filter(item => item.id === targetId)[0];
+    filterItem.completed = event.target.checked ? 1 : 0;
+    this.listService.completeListItem(filterItem).subscribe(() => {
+      this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, filterItem);
     }, error => {
-      console.error(error)
+      console.error(error);
     }, () => {
-    })
+    });
   }
   public deleteListItem(id) {
-    this.listService.deleteListItem(id).subscribe(_res => {
+    this.listService.deleteListItem(id).subscribe(() => {
       this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
     }, error => {
-      console.error(error)
-    })
+      console.error(error);
+    });
   }
   private deleteArrObject(id) {
     this.items = this.items.filter((item) => {
-      return item.id != id;
-    })
+      return item.id !== id;
+    });
   }
   ngOnInit(): void {
     if (this.isBrowser) {
       this.onCompleteItem$ = this.webSocketService.listen(ListItemEvents.COMPLETE_ITEM).subscribe((res: ListItemModel | any) => {
-        const item = this.items.filter(i => i.id == res.id)[0];
+        const item = this.items.filter(i => i.id === res.id)[0];
         item.completed = res.completed;
       }, error => {
         console.error(error);
@@ -85,20 +85,20 @@ export class ListItemsComponent implements OnInit, OnDestroy {
       this.onAddItem$ = this.webSocketService.listen(ListItemEvents.ADD_ITEM).subscribe((item) => {
         this.items.push(item);
       }, error => {
-        console.error(error)
+        console.error(error);
       });
       this.onDeleteItem$ = this.webSocketService.listen(ListItemEvents.DELETE_ITEM).subscribe((res: ListItemModel | any) => {
         this.deleteArrObject(res);
-        console.log(this.items)
+        console.log(this.items);
       }, error => {
         console.error(error);
-      })
+      });
     }
   }
   ngOnDestroy(): void {
       this.getListItems$.unsubscribe();
       this.listData$.unsubscribe();
-    if (this.isBrowser) {
+      if (this.isBrowser) {
       this.onAddItem$.unsubscribe();
       this.onCompleteItem$.unsubscribe();
       this.onDeleteItem$.unsubscribe();

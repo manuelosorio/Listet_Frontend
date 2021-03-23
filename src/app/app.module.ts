@@ -42,7 +42,7 @@ import { VerifyAccountComponent } from './_components/verify-account/verify-acco
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { CreateCommentComponent } from './_components/create-comment/create-comment.component';
 import { AddItemComponent } from './_components/add-item/add-item.component';
-import { DeadlineComponent } from "./_components/deadline/deadline.component";
+import { DeadlineComponent } from './_components/deadline/deadline.component';
 
 @NgModule({
   declarations: [

@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UsersService} from '../../_services/users.service';
-import {ActivatedRoute} from '@angular/router';
-import {MetaTagModel} from '../../models/metatag.model';
-import {SeoService} from '../../_services/seo.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsersService } from '../../_services/users.service';
+import { ActivatedRoute } from '@angular/router';
+import { MetaTagModel } from '../../models/metatag.model';
+import { SeoService } from '../../_services/seo.service';
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -12,7 +13,8 @@ import {SeoService} from '../../_services/seo.service';
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   private token: string;
-  private meta: MetaTagModel;
+  private readonly meta: MetaTagModel;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
@@ -39,9 +41,11 @@ export class ResetPasswordComponent implements OnInit {
     this.token = this.route.snapshot.params.token;
     this.seoService.updateInfo(this.meta);
   }
+
   get password() {
     return this.resetPasswordForm.get('password');
   }
+
   onSubmit(data) {
     this.userService.resetPassword(this.token, data);
   }

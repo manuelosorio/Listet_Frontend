@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ListsService } from './lists.service';
-import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ListsService', () => {
   let service: ListsService;

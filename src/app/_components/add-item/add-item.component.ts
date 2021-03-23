@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { ListsService } from "../../_services/lists.service";
-import { ListDataService } from "../../shared/list-data.service";
-import { WebsocketService } from "../../_services/websocket.service";
-import { ListItemEvents } from "../../helper/list-item.events";
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ListsService } from '../../_services/lists.service';
+import { ListDataService } from '../../shared/list-data.service';
+import { WebsocketService } from '../../_services/websocket.service';
+import { ListItemEvents } from '../../helper/list-item.events';
 
 @Component({
   selector: 'app-add-item',
@@ -20,6 +20,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
   private id: number;
   private readonly slug: string;
   private readonly username: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private listService: ListsService,
@@ -45,6 +46,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
       this.isOwner = data.isOwner;
     });
   }
+
   onSubmit(data) {
     data.list_id = this.id;
     data.listInfo = this.listOwner + '-' + this.slug;
@@ -52,11 +54,13 @@ export class AddItemComponent implements OnInit, OnDestroy {
       this.listItemForm.reset();
       this.webSocketService.emit(ListItemEvents.ADD_ITEM, res);
     }, error => {
-      console.error(error)
+      console.error(error);
     });
   }
+
   ngOnDestroy(): void {
   }
+
   get item() {
     return this.listItemForm.get('item');
   }

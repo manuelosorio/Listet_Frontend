@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {UsersService} from '../../_services/users.service';
-import {SeoService} from '../../_services/seo.service';
-import {MetaTagModel} from '../../models/metatag.model';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { UsersService } from '../../_services/users.service';
+import { SeoService } from '../../_services/seo.service';
+import { MetaTagModel } from '../../models/metatag.model';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,7 +11,8 @@ import {MetaTagModel} from '../../models/metatag.model';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm;
-  private meta: MetaTagModel;
+  private readonly meta: MetaTagModel;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
@@ -36,9 +37,11 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.seoService.updateInfo(this.meta);
   }
+
   get email() {
     return this.forgotPasswordForm.get('email');
   }
+
   onSubmit(data) {
     this.userService.requestPasswordReset(data);
   }

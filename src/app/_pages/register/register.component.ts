@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {UsersService} from '../../_services/users.service';
-import {UserError} from '../../models/errors/user.error';
-import {MetaTagModel} from '../../models/metatag.model';
-import {SeoService} from '../../_services/seo.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { UsersService } from '../../_services/users.service';
+import { UserError } from '../../models/errors/user.error';
+import { MetaTagModel } from '../../models/metatag.model';
+import { SeoService } from '../../_services/seo.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +13,8 @@ import {SeoService} from '../../_services/seo.service';
 export class RegisterComponent implements OnInit {
   registrationForm;
   errorMessage: string;
-  private meta: MetaTagModel;
+  private readonly meta: MetaTagModel;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
@@ -55,22 +56,27 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(data) {
     this.userService.createUser(data);
-    this.userService.authenticationErr.subscribe( (res: UserError) => {
+    this.userService.authenticationErr.subscribe((res: UserError) => {
       this.errorMessage = res.error.message;
     });
   }
+
   get username() {
     return this.registrationForm.get('username');
   }
+
   get password() {
     return this.registrationForm.get('password');
   }
+
   get email() {
     return this.registrationForm.get('email');
   }
+
   get firstName() {
     return this.registrationForm.get('firstName');
   }
+
   get lastName() {
     return this.registrationForm.get('lastName');
   }

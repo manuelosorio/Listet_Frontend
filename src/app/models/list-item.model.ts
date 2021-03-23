@@ -1,5 +1,5 @@
 export interface ListItemModel {
-  id: number
+  id: number;
   item: string;
   deadline: Date;
   completed: number;

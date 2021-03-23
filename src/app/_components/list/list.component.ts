@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMasonryComponent, NgxMasonryOptions } from 'ngx-masonry';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
-import { isPlatformBrowser } from "@angular/common";
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -13,7 +13,7 @@ import { isPlatformBrowser } from "@angular/common";
 export class ListComponent implements OnInit {
   private readonly meta: MetaTagModel;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  @Input() private pageType?: "Lists" | "Home" | "User";
+  @Input() private pageType?: 'Lists' | 'Home' | 'User';
   @Input() private profileUser?: string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -33,18 +33,18 @@ export class ListComponent implements OnInit {
 
   @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
   ngOnInit(): void {
-    this.listService.getLists().subscribe(data => {
+    this.listService.getLists().subscribe(async (data) => {
       this.lists = data;
-      this.show(this.lists);
+      await this.show(this.lists);
     });
     if (this.pageType === 'User' ) {
       this.meta.title += `${this.route.snapshot.params.username}'s Lists`;
     }
     this.seoService.updateInfo(this.meta);
   }
-  private show(listsObj: any) {
+  private async show(listsObj: any) {
     switch (this.pageType) {
-      case "Home": {
+      case 'Home': {
         for (const index in listsObj) {
           if (listsObj.hasOwnProperty(index) && !!this.lists[index].featured) {
             this.masonryLists.push(this.lists[index]);
@@ -56,16 +56,16 @@ export class ListComponent implements OnInit {
         }
         break;
       }
-      case "User": {
-        let listArr = this.lists.reduce((acc, list) => {
+      case 'User': {
+        const listArr = this.lists.reduce((acc, list) => {
           if (list.owner_username === this.profileUser) {
-            this.masonryLists.push(list)
-            acc.push(list)
+            this.masonryLists.push(list);
+            acc.push(list);
           }
           return acc;
         }, []);
         if (!listArr.length) {
-          this.router.navigateByUrl('404', { skipLocationChange: true })
+          await this.router.navigateByUrl('404', { skipLocationChange: true });
         } else {
           if (this.isBrowser) {
             this.masonry.reloadItems();
@@ -74,7 +74,7 @@ export class ListComponent implements OnInit {
         }
         break;
       }
-      case "Lists":
+      case 'Lists':
       default: {
         for (const index in listsObj) {
           if (listsObj.hasOwnProperty(index)) {

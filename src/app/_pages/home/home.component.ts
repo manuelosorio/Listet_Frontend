@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AppComponent} from '../../app.component';
-import {MetaTagModel} from '../../models/metatag.model';
-import {SeoService} from '../../_services/seo.service';
+import { AppComponent } from '../../app.component';
+import { MetaTagModel } from '../../models/metatag.model';
+import { SeoService } from '../../_services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,8 @@ import {SeoService} from '../../_services/seo.service';
 })
 export class HomeComponent implements OnInit {
   app: AppComponent;
-  private meta: MetaTagModel;
+  private readonly meta: MetaTagModel;
+
   constructor(private seoService: SeoService) {
     this.meta = {
       author: 'Manuel Osorio',

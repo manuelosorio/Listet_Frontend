@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
-import { CommentEvents } from "../../helper/comment.events";
-import { WebsocketService } from "../../_services/websocket.service";
+import { CommentEvents } from '../../helper/comment.events';
+import { WebsocketService } from '../../_services/websocket.service';
 
 @Component({
   selector: 'app-create-comment',
@@ -52,7 +52,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   }
   onSubmit(data) {
     data.list_id = this.id;
-    data.listInfo = `${this.username}-${this.slug}`
+    data.listInfo = `${this.username}-${this.slug}`;
     this.listService.createComment(data).subscribe(() => {
       this.commentData = data;
       this.websocketService.emit(CommentEvents.CREATE_COMMENT, this.commentData);

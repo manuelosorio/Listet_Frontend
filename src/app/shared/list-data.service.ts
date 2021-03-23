@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import { ListDataModel } from "../models/list-data.model";
+import { ListDataModel } from '../models/list-data.model';
 @Injectable({
   providedIn: 'root'
 })
