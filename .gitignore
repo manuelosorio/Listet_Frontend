@@ -47,3 +47,5 @@ Thumbs.db
 /src/app/_services/router.service.ts
 /src/app/_services/RouterHistory.model.ts
 /notes.md
+/ssl/*
+!/ssl/.gitkeep
