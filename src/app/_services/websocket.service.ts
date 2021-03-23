@@ -25,6 +25,7 @@ export class WebsocketService {
       this.socket = io(environment.websocket, {
         withCredentials: true,
         path: '/socket-io',
+        transports: ['polling'],
       });
       this.socket.emit('join', connectionData)
     }
