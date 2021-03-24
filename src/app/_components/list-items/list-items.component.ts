@@ -53,7 +53,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   checked(event) {
     const targetId = event.target.id.replace('item-', '');
-    const filterItem = this.items.filter(item => item.id === targetId)[0];
+    const filterItem = this.items.filter(item => item.id == targetId)[0];
     filterItem.completed = event.target.checked ? 1 : 0;
     this.listService.completeListItem(filterItem).subscribe(() => {
       this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, filterItem);
@@ -71,13 +71,13 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   private deleteArrObject(id) {
     this.items = this.items.filter((item) => {
-      return item.id !== id;
+      return item.id != id;
     });
   }
   ngOnInit(): void {
     if (this.isBrowser) {
       this.onCompleteItem$ = this.webSocketService.listen(ListItemEvents.COMPLETE_ITEM).subscribe((res: ListItemModel | any) => {
-        const item = this.items.filter(i => i.id === res.id)[0];
+        const item = this.items.filter(i => i.id == res.id)[0];
         item.completed = res.completed;
       }, error => {
         console.error(error);
