@@ -25,6 +25,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   formattedCreationDate: string;
   deadline: Date;
   private username$: Subscription;
+  private getList$: Subscription;
   constructor(private listService: ListsService,
               private route: ActivatedRoute,
               private router: Router,
@@ -40,7 +41,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.listService.getList(this.username, this.slug).subscribe((data: ListModel) => {
+    this.getList$ = this.listService.getList(this.username, this.slug).subscribe((data: ListModel) => {
       const creationDate = new DateUtil(data[0].creation_date);
       if (!!data[0].deadline) {
         this.deadline = new Date(data[0].deadline);
@@ -83,5 +84,6 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.username$.unsubscribe();
+    this.getList$.unsubscribe();
   }
 }

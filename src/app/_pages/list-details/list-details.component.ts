@@ -18,9 +18,11 @@ export class ListDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private webSocketService: WebsocketService
   ) {
-    this.username = this.route.snapshot.params.username;
-    this.slug = this.route.snapshot.params.slug;
-    this.webSocketService.connect(`${this.username}-${this.slug}`);
+    if (this.isBrowser) {
+      this.username = this.route.snapshot.params.username;
+      this.slug = this.route.snapshot.params.slug;
+      this.webSocketService.connect(`${this.username}-${this.slug}`);
+    }
   }
 
   ngOnInit(): void {

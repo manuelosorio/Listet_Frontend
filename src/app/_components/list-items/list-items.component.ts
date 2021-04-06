@@ -96,9 +96,9 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-      this.getListItems$.unsubscribe();
-      this.listData$.unsubscribe();
-      if (this.isBrowser) {
+    this.getListItems$.unsubscribe();
+    this.listData$.unsubscribe();
+    if (this.isBrowser) {
       this.onAddItem$.unsubscribe();
       this.onCompleteItem$.unsubscribe();
       this.onDeleteItem$.unsubscribe();
