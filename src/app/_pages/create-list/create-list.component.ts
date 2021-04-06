@@ -42,18 +42,15 @@ export class CreateListComponent implements OnInit {
   }
 
   onSubmit(data) {
-    this.listService.createList(data).subscribe((res: Response) => {
+    this.listService.createList(data).subscribe(async (res: Response) => {
       // const user = res.username;
       // const slug = res.slug;
       // this.router.navigate([`/list/${res.username}/${res.slug}`]);
-      console.log(res.url);
       this.alertService.success(res.message);
       this.redirectURL = res.url;
-      setTimeout(async () => {
-        await this.redirect('/l/' + res.url);
-      }, 500);
+      await this.redirect('/l/' + res.url);
     }, error => {
-      console.error(error);
+      console.error(error.statusText);
       this.alertService.error(`${error.statusText}, Error Code: ${error.status}`);
     }, () => {
     });
