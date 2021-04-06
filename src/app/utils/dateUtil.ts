@@ -1,12 +1,12 @@
 export class DateUtil {
   private readonly date: any;
-  private readonly debugString?: string
+  private readonly debugString?: string;
   constructor(date: Date | string, debugString?: string) {
     this.date = date;
     this.debugString = debugString;
   }
-  private months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
-    "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
+  private months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
+    'Jul.', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
 
   format(format ?: string) {
 

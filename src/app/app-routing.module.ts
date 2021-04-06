@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // Components
 import { ListComponent } from './_components/list/list.component';
@@ -13,7 +13,6 @@ import { AuthGuard } from './guards/auth.guard';
 // Pages
 import { HomeComponent } from './_pages/home/home.component';
 import { ForgotPasswordComponent } from './_pages/forgot-password/forgot-password.component';
-import { ListDetailsComponent } from './_pages/list-details/list-details.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { RegisterComponent } from './_pages/register/register.component';
@@ -55,7 +54,11 @@ const routes: Routes = [
       url: 'https://listet.manuelosorio.me/'
     }]
   },
-  { path: 'l/:username/:slug', component: ListDetailsComponent },
+  {
+    path: 'l/:username/:slug',
+    loadChildren: () => import('./_pages/list-details/list-details.module').then(m => m.ListDetailsModule),
+    // component: ListDetailsComponent,
+  },
   { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
@@ -65,8 +68,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledNonBlocking',
-    relativeLinkResolution: 'corrected'
+    initialNavigation: 'enabled',
+    relativeLinkResolution: 'corrected',
+    preloadingStrategy: PreloadAllModules
   })],
   exports: [RouterModule]
 })
