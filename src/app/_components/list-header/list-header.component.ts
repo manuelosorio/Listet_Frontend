@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ListsService} from '../../_services/lists.service';
+import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';

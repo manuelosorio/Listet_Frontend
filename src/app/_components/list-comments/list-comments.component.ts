@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import {ListsService} from '../../_services/lists.service';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {WebsocketService} from '../../_services/websocket.service';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { ListsService } from '../../_services/lists.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { WebsocketService } from '../../_services/websocket.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ListDataService } from '../../shared/list-data.service';
 import { DateUtil } from '../../utils/dateUtil';
