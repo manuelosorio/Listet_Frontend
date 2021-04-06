@@ -43,6 +43,7 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
+import { ListDetailsModule } from './_pages/list-details/list-details.module';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { CreateListComponent } from './_pages/create-list/create-list.component'
     ReactiveFormsModule,
     FormsModule,
     IconsModule,
+    ListDetailsModule,
     NgxMasonryModule,
     BrowserAnimationsModule
   ],
