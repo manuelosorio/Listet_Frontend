@@ -1,5 +1,5 @@
 <section class="l-container">
-  <h3>Comments ({{count}})</h3>
+  <h3 *ngIf='commentsEnabled'>Comments ({{count ? count : 0}})</h3>
   <div class="l-row">
       <app-create-comment class="app-create-comment"></app-create-comment>
   </div>
