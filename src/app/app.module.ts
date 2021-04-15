@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMasonryModule } from 'ngx-masonry';
@@ -31,7 +32,7 @@ import { IconsModule } from './_modules/icons/icons.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Service
-import {ListDataService} from './shared/list-data.service';
+import { ListDataService } from './shared/list-data.service';
 
 // Pages
 import { ForgotPasswordComponent } from './_pages/forgot-password/forgot-password.component';
@@ -80,7 +81,8 @@ import { ListDetailsModule } from './_pages/list-details/list-details.module';
     IconsModule,
     ListDetailsModule,
     NgxMasonryModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TransferHttpCacheModule
   ],
   providers: [GuestGuard, AuthGuard, ListDataService],
   bootstrap: [AppComponent]
