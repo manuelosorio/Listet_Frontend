@@ -18,15 +18,15 @@ export class ListsService {
     return this.http.get(environment.host + '/lists');
   }
 
-  getList(username, slug) {
-    return this.http.get(environment.host + `/list/${username}/${slug}`);
+  getList(slug) {
+    return this.http.get(environment.host + `/list/${slug}`);
   }
   getListItems(username, slug) {
-    return this.http.get(environment.host + `/list/${username}/${slug}/items`);
+    return this.http.get(environment.host + `/list/${slug}/items`);
   }
 
   getListComments(username, slug) {
-    return this.http.get(environment.host + `/list/${username}/${slug}/comments`).subscribe((data) => {
+    return this.http.get(environment.host + `/list/${slug}/comments`).subscribe((data) => {
       this.commentSubject$.next(data);
     });
   }

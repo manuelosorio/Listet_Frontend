@@ -33,15 +33,16 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
               private listDataService: ListDataService,
               private userService: UsersService) {
     userService.isAuth();
-    this.username = this.route.snapshot.params.username;
+    this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;
     this.username$ = userService.username$.subscribe(res => {
       this.isOwner = this.username === res;
+      console.log(res, this.isOwner);
     });
   }
 
   ngOnInit(): void {
-    this.getList$ = this.listService.getList(this.username, this.slug).subscribe((data: ListModel) => {
+    this.getList$ = this.listService.getList(this.slug).subscribe((data: ListModel) => {
       const creationDate = new DateUtil(data[0].creation_date);
       if (!!data[0].deadline) {
         this.deadline = new Date(data[0].deadline);
@@ -79,7 +80,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       title: 'Listet App - ' + data[0].name,
       openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
       twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: `https://listet.manuelosorio.me/l/${this.username}/${this.slug}`
+      url: `https://listet.manuelosorio.me/l/${this.slug}`
     };
   }
   ngOnDestroy() {

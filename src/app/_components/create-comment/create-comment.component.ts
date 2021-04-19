@@ -52,7 +52,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   }
   onSubmit(data) {
     data.list_id = this.id;
-    data.listInfo = `${this.username}-${this.slug}`;
+    data.listInfo = this.slug;
     this.listService.createComment(data).subscribe(() => {
       this.commentData = data;
       this.websocketService.emit(CommentEvents.CREATE_COMMENT, this.commentData);

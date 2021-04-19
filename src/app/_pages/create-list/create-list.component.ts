@@ -50,12 +50,10 @@ export class CreateListComponent implements OnInit {
       this.redirectURL = res.url;
       await this.redirect('/l/' + res.url);
     }, error => {
-      console.error(error.statusText);
-      this.alertService.error(`${error.statusText}, Error Code: ${error.status}`);
+      this.alertService.error(`Error: ${error.status} - ${error.error.message}`);
     }, () => {
     });
   }
-
   isPrivateChecked(event) {
     return this.isPrivate = event.target.checked;
   }

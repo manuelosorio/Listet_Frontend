@@ -55,7 +55,7 @@ const routes: Routes = [
     }]
   },
   {
-    path: 'l/:username/:slug',
+    path: 'l/:slug',
     loadChildren: () => import('./_pages/list-details/list-details.module').then(m => m.ListDetailsModule),
     // component: ListDetailsComponent,
   },

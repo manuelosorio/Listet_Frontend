@@ -21,7 +21,7 @@ export class ListDetailsComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.username = this.route.snapshot.params.username;
       this.slug = this.route.snapshot.params.slug;
-      this.webSocketService.connect(`${this.username}-${this.slug}`);
+      this.webSocketService.connect(`${this.slug}`);
     }
   }
 
