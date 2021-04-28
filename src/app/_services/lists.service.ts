@@ -59,4 +59,9 @@ export class ListsService {
       withCredentials: true,
     });
   }
+  deleteList(id) {
+    return this.http.delete(environment.host + `/delete-list/${id}`, {
+      withCredentials: true,
+    });
+  }
 }

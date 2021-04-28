@@ -4,6 +4,16 @@
     <a [routerLink]="['/u/' + head['owner_username']]">{{head["owner_username"]}}</a>
     <p>Created: {{formattedCreationDate}}</p>
     <app-deadline [deadline]="deadline" [isComplete]="false"></app-deadline>
+    <ng-container *ngIf='isOwner'>
+      <div class="">
+        <button>
+          <i-feather name="edit" (click)='edit()'></i-feather> Edit
+        </button>
+        <button (click)="delete()">
+          <i-feather name="trash"></i-feather> Delete
+        </button>
+      </div>
+    </ng-container>
     <p class="description">{{head["description"]}}</p>
   </section>
 </ng-container>
