@@ -59,6 +59,21 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
+
+
+
+  edit() {
+    console.log('edit');
+  }
+  delete() {
+    if (confirm('Are sure you want to delete this list?')){
+      this.listService.deleteList(this.listId).subscribe(res => {
+        console.log(res);
+      });
+    }
+  }
   ngOnInit(): void {
     this.getList$ = this.listService.getList(this.slug).subscribe((data: ListModel) => {
       const creationDate = new DateUtil(data[0].creation_date);
