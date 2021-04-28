@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -8,6 +8,9 @@ import { UsersService } from '../../_services/users.service';
 import { DateUtil } from '../../utils/dateUtil';
 import { ListModel } from '../../models/list.model';
 import { Subscription } from 'rxjs';
+import { WebsocketService } from '../../_services/websocket.service';
+import { AlertService } from '../../_services/alert.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-list-header',
@@ -24,23 +27,53 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   isOwner: boolean;
   formattedCreationDate: string;
   deadline: Date;
+  private onDelete$: Subscription;
   private username$: Subscription;
   private getList$: Subscription;
-  constructor(private listService: ListsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private seoService: SeoService,
-              private listDataService: ListDataService,
-              private userService: UsersService) {
+  private isBrowser: boolean = isPlatformBrowser(this.platformId);
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private listService: ListsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private seoService: SeoService,
+    private listDataService: ListDataService,
+    private userService: UsersService,
+    private websocketService: WebsocketService,
+    private alertService: AlertService
+  ) {
     userService.isAuth();
     this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;
     this.username$ = userService.username$.subscribe(res => {
       this.isOwner = this.username === res;
-      console.log(res, this.isOwner);
     });
+
+    if (this.isBrowser) {
+      this.onDelete$ = this.websocketService.onDeleteList().subscribe(() => {
+        this.alertService.warning('List has been deleted. Redirecting...', false);
+        setTimeout(() => {
+          return this.router.navigateByUrl('/lists');
+        }, 3000);
+      });
+    }
   }
 
+
+
+
+
+
+  edit() {
+    console.log('edit');
+  }
+  delete() {
+    if (confirm('Are sure you want to delete this list?')){
+      this.listService.deleteList(this.listId).subscribe(res => {
+        console.log(res);
+      });
+    }
+  }
   ngOnInit(): void {
     this.getList$ = this.listService.getList(this.slug).subscribe((data: ListModel) => {
       const creationDate = new DateUtil(data[0].creation_date);
@@ -86,5 +119,8 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.username$.unsubscribe();
     this.getList$.unsubscribe();
+    if (this.isBrowser) {
+      this.onDelete$.unsubscribe();
+    }
   }
 }
