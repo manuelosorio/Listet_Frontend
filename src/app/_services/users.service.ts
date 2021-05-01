@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserError } from '../models/errors/user.error';
@@ -13,13 +13,15 @@ import { AlertService } from './alert.service';
   providedIn: 'root'
 })
 export class UsersService {
-  private authenticatedSubject: Subject<boolean>;
-  public authenticated: Observable<boolean>;
+  private authenticated: boolean;
+  private authenticatedSubject: BehaviorSubject<boolean>;
+  public authenticated$: Observable<boolean>;
 
   private verifiedSubject: Subject<boolean>;
   public verified: Observable<boolean>;
 
-  private usernameSubject: Subject<string>;
+  private username: string;
+  private usernameSubject: BehaviorSubject<string>;
   public username$: Observable<string>;
 
   private authenticationErrSubject: Subject<UserError>;
@@ -30,13 +32,13 @@ export class UsersService {
     private router: Router,
     private alertService: AlertService
   ) {
-    this.authenticatedSubject = new Subject();
+    this.authenticatedSubject = new BehaviorSubject<boolean>(this.authenticated);
     this.authenticationErrSubject = new Subject();
-    this.authenticated = this.authenticatedSubject.asObservable();
+    this.authenticated$ = this.authenticatedSubject.asObservable();
     this.authenticationErr = this.authenticationErrSubject.asObservable();
     this.verifiedSubject = new Subject();
     this.verified = this.verifiedSubject.asObservable();
-    this.usernameSubject = new Subject<string>();
+    this.usernameSubject = new BehaviorSubject(this.username);
     this.username$ = this.usernameSubject.asObservable();
     this.isAuth();
     this.isVerified();
