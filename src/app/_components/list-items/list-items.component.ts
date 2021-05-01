@@ -22,9 +22,9 @@ import { Subscription } from 'rxjs';
  *
  */
 export class ListItemsComponent implements OnInit, OnDestroy {
-  lists: object;
-  items;
-  isOwner: boolean;
+  public lists: object;
+  public items;
+  public isOwner: boolean;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private username: any;
   private slug: any;
@@ -47,8 +47,9 @@ export class ListItemsComponent implements OnInit, OnDestroy {
       return this.items = data;
     });
 
-    this.listData$ = this.listDataService.listData.subscribe(data => {
-      this.isOwner = data.isOwner;
+    this.listData$ = this.listDataService.listData$.subscribe(data => {
+      this.isOwner = data[`isOwner`];
+      console.log(data);
     });
   }
   checked(event) {
@@ -63,11 +64,13 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     });
   }
   public deleteListItem(id) {
-    this.listService.deleteListItem(id).subscribe(() => {
-      this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
-    }, error => {
-      console.error(error);
-    });
+    if (confirm('Are you sure you want to delete this item?')) {
+      this.listService.deleteListItem(id).subscribe(() => {
+        this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
+      }, error => {
+        console.error(error);
+      });
+    }
   }
   private deleteArrObject(id) {
     this.items = this.items.filter((item) => {
@@ -89,7 +92,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
       });
       this.onDeleteItem$ = this.webSocketService.listen(ListItemEvents.DELETE_ITEM).subscribe((res: ListItemModel | any) => {
         this.deleteArrObject(res);
-        console.log(this.items);
       }, error => {
         console.error(error);
       });
