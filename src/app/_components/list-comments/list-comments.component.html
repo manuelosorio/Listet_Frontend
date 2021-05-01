@@ -12,6 +12,16 @@
             <span class="tooltip">{{comment['formatted_creation_date']}}</span>
           </em>
         </div>
+        <div>
+          <ng-container *ngIf="isListOwner || comment.is_owner">
+            <button *ngIf='comment.is_owner'>
+              <i-feather name="edit"></i-feather> Edit
+            </button>
+            <button (click)="delete(comment.id)">
+              <i-feather name="trash"></i-feather> Delete
+            </button>
+          </ng-container>
+        </div>
         <p class="comment__message">{{ comment['comment'] }}</p>
       </article>
   </ng-container>

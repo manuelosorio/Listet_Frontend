@@ -41,7 +41,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.listData = this.listDataService.listData.subscribe((data: any) => {
+    this.listData = this.listDataService.listData$.subscribe((data: any) => {
       this.id = data.id;
       this.isOwner = data.isOwner;
     });

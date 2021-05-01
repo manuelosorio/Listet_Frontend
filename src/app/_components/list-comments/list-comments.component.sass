@@ -27,14 +27,15 @@
         position: absolute
         visibility: hidden
         padding: 0.5em 1.125em
-        right: -50%
+        left: 50%
         top: 50%
-        transform: translateY(-50%) translateX(50%)
+        transform: translateY(-50%) translateX(-50%)
         background: variables.$primary
         color: variables.$black
         text-align: center
         border-radius: 0.5625em
         width: fit-content
+        min-width: 100%
       &:hover
         .tooltip
           visibility: visible

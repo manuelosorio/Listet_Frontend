@@ -31,7 +31,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   ) {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
-    this.listData = this.listDataService.listData.subscribe((data: any) => {
+    this.listData = this.listDataService.listData$.subscribe((data: any) => {
       this.commentsEnabled = data.allow_comments === 1;
     });
     this.commentForm = formBuilder.group({
@@ -43,7 +43,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.listData = this.listDataService.listData.subscribe((results: any) => {
+    this.listData = this.listDataService.listData$.subscribe((results: any) => {
       this.id = results.id;
     });
   }
