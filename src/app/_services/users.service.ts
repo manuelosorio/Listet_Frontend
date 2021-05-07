@@ -53,8 +53,7 @@ export class UsersService {
       withCredentials: true
     })
       .subscribe(
-        (res) => {
-          console.log(res);
+        () => {
           this.router.navigate(['/login']).then();
         }, err => {
           if (err) {
@@ -115,8 +114,7 @@ export class UsersService {
     this.http.put(environment.host + '/reset-password/' + token, value, {
       withCredentials: true
     }).subscribe(
-      (res: string) => {
-        console.log('response', res);
+      () => {
         this.router.navigate(['/login']).then();
       }, (err) => {
         if (err) {
@@ -151,7 +149,6 @@ export class UsersService {
     }).subscribe((res: any) => {
       this.verifiedSubject.next(res.verified);
       if (res.verified === false) {
-        console.log(res.verified);
         this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
       }
     }, () => {

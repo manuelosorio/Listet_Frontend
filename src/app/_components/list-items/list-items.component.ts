@@ -49,7 +49,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
 
     this.listData$ = this.listDataService.listData$.subscribe(data => {
       this.isOwner = data[`isOwner`];
-      console.log(data);
     });
   }
   checked(event) {

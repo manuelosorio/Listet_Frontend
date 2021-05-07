@@ -92,9 +92,10 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
 
   delete() {
     if (confirm('Are sure you want to delete this list?')){
-      this.listService.deleteList(this.listId).subscribe(res => {
-        console.log(res);
-      });
+      this.listService.deleteList(this.listId).subscribe(() => {
+      }, error => {
+        console.error(error);
+      } );
     }
   }
 

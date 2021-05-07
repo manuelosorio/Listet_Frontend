@@ -49,13 +49,11 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       });
       this.getComments = this.listService.comment$.subscribe(comments => {
         this.comments = comments;
-
         this.comments.filter(comment => {
           return this.isCommentOwner(comment);
         });
         this.updateTimeDifference();
         this.count = this.comments.length;
-        console.log(comments);
         return this.comments;
       });
 
@@ -78,9 +76,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   }
   public delete(id) {
     if (confirm('Are you sure you want to delete this comment?')) {
-      this.listService.deleteComment(id).subscribe(res => {
-        console.log(res);
-      });
+      this.listService.deleteComment(id).subscribe();
     }
   }
   private updateTimeDifference() {
