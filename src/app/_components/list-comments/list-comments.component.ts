@@ -96,10 +96,11 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     return comment;
   }
   ngOnDestroy(): void {
-    this.listData.unsubscribe();
-    this.getComments.unsubscribe();
     if (this.isBrowser) {
+      this.getComments.unsubscribe();
+      this.listData.unsubscribe();
       this.onCreateComment$.unsubscribe();
+      this.onDeleteComment$.unsubscribe();
     }
   }
 }
