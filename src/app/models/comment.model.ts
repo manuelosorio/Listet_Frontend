@@ -1,4 +1,5 @@
 export interface CommentModel {
+  id: number;
   comment: string;
   creation_date: Date;
   formatted_creation_date?: string;
@@ -8,4 +9,5 @@ export interface CommentModel {
   parent_id: number;
   username: string;
   listInfo: string;
+  is_owner: boolean;
 }

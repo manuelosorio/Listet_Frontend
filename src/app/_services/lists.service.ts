@@ -25,7 +25,7 @@ export class ListsService {
     return this.http.get(environment.host + `/list/${slug}/items`);
   }
 
-  getListComments(username, slug) {
+  getListComments(slug) {
     return this.http.get(environment.host + `/list/${slug}/comments`).subscribe((data) => {
       this.commentSubject$.next(data);
     });
@@ -53,9 +53,18 @@ export class ListsService {
       withCredentials: true
     });
   }
-
+  deleteList(id) {
+    return this.http.delete(environment.host + `/delete-list/${id}`, {
+      withCredentials: true,
+    });
+  }
   deleteListItem(id) {
     return this.http.delete(environment.host + `/delete-item/${id}`, {
+      withCredentials: true,
+    });
+  }
+  deleteComment(id) {
+    return this.http.delete(environment.host + `/delete-comment/${id}`, {
       withCredentials: true,
     });
   }

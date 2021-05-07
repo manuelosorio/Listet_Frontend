@@ -26,7 +26,7 @@ export class NavComponent implements OnInit, OnDestroy {
     private userService: UsersService,
     private router: Router,
   ) {
-    this.authenticated$ = this.userService.authenticated.subscribe(authenticated => {
+    this.authenticated$ = this.userService.authenticated$.subscribe(authenticated => {
       this.authenticated = authenticated;
     });
     router.events.pipe(

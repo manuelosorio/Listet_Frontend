@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ListDataModel } from '../models/list-data.model';
 @Injectable({
   providedIn: 'root'
 })
 export class ListDataService {
-  private listDataSubject: Subject<ListDataModel>;
-  listData: Observable<ListDataModel>;
+  private listData: any = [];
+  // public listDataSubject: Subject<ListDataModel[]>;
+  private listDataBehaviorSubject: BehaviorSubject<ListDataModel[]>;
+  public listData$: Observable<ListDataModel[]>;
   constructor() {
-    this.listDataSubject = new Subject<ListDataModel>();
-    this.listData = this.listDataSubject.asObservable();
+    // this.listDataSubject = new Subject<ListDataModel[]>();
+    this.listDataBehaviorSubject = new BehaviorSubject(this.listData);
+    this.listData$ = this.listDataBehaviorSubject.asObservable();
   }
-  setData(data: ListDataModel) {
-    this.listDataSubject.next(data);
+  setData(data: ListDataModel[]) {
+    this.listDataBehaviorSubject.next(data);
   }
 }

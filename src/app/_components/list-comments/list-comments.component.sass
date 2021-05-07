@@ -27,14 +27,16 @@
         position: absolute
         visibility: hidden
         padding: 0.5em 1.125em
-        right: -50%
+        margin-top: -0.25em
+        left: 50%
         top: 50%
-        transform: translateY(-50%) translateX(50%)
+        transform: translateY(-50%) translateX(-50%)
         background: variables.$primary
         color: variables.$black
         text-align: center
-        border-radius: 0.5625em
+        border-radius: .5625em .5625em 0 0
         width: fit-content
+        min-width: 100%
       &:hover
         .tooltip
           visibility: visible
@@ -64,3 +66,7 @@ app-create-comment
   justify-self: center
   @media (min-width: variables.$medium)
     margin: initial
+button
+  font-size: variables.$f-size--small
+i-feather
+  width: 1em

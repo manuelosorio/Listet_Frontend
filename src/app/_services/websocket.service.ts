@@ -7,6 +7,8 @@ import { CommentModel } from '../models/comment.model';
 import { CommentEvents } from '../helper/comment.events';
 import { ListItemEvents } from '../helper/list-item.events';
 import { ListItemModel } from '../models/list-item.model';
+import { ListEvents } from '../helper/list.events';
+import { ListModel } from '../models/list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +59,9 @@ export class WebsocketService {
   /* --------- End Comment Events ------- */
 
   /* --------- List Events -------------- */
+  public onDeleteList(): Observable<ListModel> {
+    return fromEvent(this.socket, `${ListEvents.DELETE_List}`);
+  }
   public onAddItem(): Observable<ListItemModel> {
     return fromEvent(this.socket, `${ListItemEvents.ADD_ITEM}`);
   }
