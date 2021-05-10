@@ -1,8 +1,10 @@
 <section class="l-container">
   <h3 *ngIf='commentsEnabled'>Comments ({{count ? count : 0}})</h3>
-  <div class="l-row">
-      <app-create-comment class="app-create-comment"></app-create-comment>
-  </div>
+    <div class="l-row">
+      <ng-container *ngIf='isAuth else commentAuth'>
+        <app-create-comment class="app-create-comment"></app-create-comment>
+      </ng-container>
+    </div>
   <ng-container *ngIf="commentsEnabled else commentsDisabled">
       <article class="card comment" *ngFor="let comment of comments">
         <div class="l-row comment__info">
@@ -30,4 +32,8 @@
   <div class="l-row">
     <p>This list doesn't have comments enabled</p>
   </div>
+</ng-template>
+
+<ng-template #commentAuth>
+  <p>You must be logged in to create comment. <a routerLink='/login'>Login to account.</a></p>
 </ng-template>

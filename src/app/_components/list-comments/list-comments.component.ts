@@ -26,6 +26,8 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   private onDeleteComment$: Subscription;
   public count: number;
   public isListOwner: boolean;
+  public isAuth: boolean;
+  private authenticated$: Subscription;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -42,6 +44,9 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
+    this.authenticated$ = this.userService.authenticated$.subscribe(res => {
+      this.isAuth = res;
+    });
     if (this.isBrowser) {
       this.listData = this.listDataService.listData$.subscribe((data: any) => {
         this.isListOwner = data.isOwner;
@@ -92,6 +97,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     return comment;
   }
   ngOnDestroy(): void {
+    this.authenticated$.unsubscribe();
     if (this.isBrowser) {
       this.getComments.unsubscribe();
       this.listData.unsubscribe();
