@@ -10,16 +10,17 @@ section
   background: #fff
   box-shadow: variables.$shadow
   border-radius: 0.6em
-  padding: 1rem
+  padding: 1rem 2rem 1rem 1rem
   position: relative
   border: variables.$silver 1px solid
-  //max-width: 75ch
   transition: variables.$t-easeOutBack
+  transform: rotate(0)
   &__checkbox i-feather
     stroke: variables.$black
   &__checkbox--disabled i-feather
     stroke: variables.$disabled
   &__info
+    min-width: 7ch
     max-width: 15ch
     margin: 0 1em
     @media (min-width: variables.$medium)
