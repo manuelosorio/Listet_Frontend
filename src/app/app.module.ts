@@ -45,6 +45,8 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ListDetailsModule } from './_pages/list-details/list-details.module';
+import { EditListItemComponent } from './_components/edit-list-item/edit-list-item.component';
+import { CancelAcceptButtonComponent } from './_components/cancel-accept-button/cancel-accept-button.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { ListDetailsModule } from './_pages/list-details/list-details.module';
     CreateListComponent,
     CreateCommentComponent,
     AddItemComponent,
-    DeadlineComponent
+    DeadlineComponent,
+    EditListItemComponent,
+    CancelAcceptButtonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

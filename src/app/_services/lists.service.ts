@@ -42,7 +42,6 @@ export class ListsService {
       withCredentials: true
     });
   }
-
   createListItem(data) {
     return this.http.post(environment.host + '/add-item', data, {
       withCredentials: true
@@ -52,6 +51,11 @@ export class ListsService {
     return this.http.put(environment.host + '/update-item-status', data, {
       withCredentials: true
     });
+  }
+  updateItem(data, id) {
+    return this.http.put(environment.host + '/update-item/' + id, data, {
+      withCredentials: true
+    })
   }
   deleteList(id) {
     return this.http.delete(environment.host + `/delete-list/${id}`, {

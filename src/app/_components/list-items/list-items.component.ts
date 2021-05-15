@@ -13,18 +13,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './list-items.component.html',
   styleUrls: ['./list-items.component.sass']
 })
-/**
- * todo:
- *  [x] Make the list-item into valid html
- *  [x] Add a checkbox function.
- *  [] Implement socket.io list item update event
- *  [X] Readonly view for non-owners.
- *
- */
+
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: object;
   public items;
   public isOwner: boolean;
+  public isEditing: boolean;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private username: any;
   private slug: any;
@@ -34,6 +28,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   private onCompleteItem$: Subscription;
   private onDeleteItem$: Subscription;
   private onAddItem$: Subscription;
+  private onUpdateItem$: Subscription;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -44,14 +39,17 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.getListItems$ = this.listService.getListItems(this.username, this.slug).subscribe(data => {
-      return this.items = data;
+      this.items = data;
+      this.items.filter(item => {
+        item.isEditing = false;
+      });
+      return this.items;
     });
-
     this.listData$ = this.listDataService.listData$.subscribe(data => {
       this.isOwner = data[`isOwner`];
     });
   }
-  checked(event) {
+  public checked(event) {
     const targetId = event.target.id.replace('item-', '');
     const filterItem = this.items.filter(item => item.id == targetId)[0];
     filterItem.completed = event.target.checked ? 1 : 0;
@@ -61,6 +59,9 @@ export class ListItemsComponent implements OnInit, OnDestroy {
       console.error(error);
     }, () => {
     });
+  }
+  public edit(item){
+    item.isEditing = true;
   }
   public deleteListItem(id) {
     if (confirm('Are you sure you want to delete this item?')) {
@@ -78,17 +79,27 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     if (this.isBrowser) {
-      this.onCompleteItem$ = this.webSocketService.listen(ListItemEvents.COMPLETE_ITEM).subscribe((res: ListItemModel | any) => {
+      this.onCompleteItem$ = this.webSocketService.onCompleteItem().subscribe((res: ListItemModel | any) => {
         const item = this.items.filter(i => i.id == res.id)[0];
         item.completed = res.completed;
       }, error => {
         console.error(error);
       });
-      this.onAddItem$ = this.webSocketService.listen(ListItemEvents.ADD_ITEM).subscribe((item) => {
+      this.onAddItem$ = this.webSocketService.onAddItem().subscribe((item) => {
+        item.isEditing = false;
         this.items.push(item);
       }, error => {
         console.error(error);
       });
+      this.onUpdateItem$ = this.webSocketService.onUpdateItem().subscribe((res: ListItemModel) => {
+        return this.items.filter(item => {
+          if (item.id == res.id) {
+            item.item = res.item;
+            item.deadline = res.deadline;
+            return item;
+          }
+        })
+      })
       this.onDeleteItem$ = this.webSocketService.listen(ListItemEvents.DELETE_ITEM).subscribe((res: ListItemModel | any) => {
         this.deleteArrObject(res);
       }, error => {
@@ -102,6 +113,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.onAddItem$.unsubscribe();
       this.onCompleteItem$.unsubscribe();
+      this.onUpdateItem$.unsubscribe();
       this.onDeleteItem$.unsubscribe();
     }
   }

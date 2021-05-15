@@ -1,0 +1,50 @@
+@use '~src/sass/layout'
+@use '~src/sass/variables'
+form
+  background: #fff
+  display: flex
+  justify-content: center
+  padding: 1rem
+  @media (min-width: variables.$medium)
+    padding: 1rem 0
+.edit-list
+  display: flex
+  flex-direction: column
+  width: 98%
+  justify-content: space-around
+  padding: 1rem
+  @media (min-width: variables.$medium)
+    flex-direction: row
+    padding: 0
+
+.form
+  &__input
+    background: #fff
+    &:focus, &:not(:placeholder-shown)
+      ~ .form__label
+        background: #fff
+  &__fieldset
+    width: 100%
+    @media (min-width: variables.$medium)
+      margin-top: 0
+      flex-basis: 45%
+      + .form__fieldset
+        flex-basis: 25%
+.buttons
+  display: flex
+  flex-direction: row
+  justify-content: center
+  margin-top: 1.35rem
+  app-cancel-accept-button + app-cancel-accept-button
+    margin-left: 1rem
+  @media (min-width: variables.$medium)
+    margin-top: 0
+    margin-left: 1rem
+
+\:host
+  width: 92%
+  margin: 1.35rem 0
+  input
+    font-size: variables.$f-size--xx-small
+  @media (min-width: variables.$medium)
+    width: 65%

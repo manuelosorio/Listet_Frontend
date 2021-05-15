@@ -62,12 +62,12 @@ export class WebsocketService {
   public onDeleteList(): Observable<ListModel> {
     return fromEvent(this.socket, `${ListEvents.DELETE_List}`);
   }
-  public onAddItem(): Observable<ListItemModel> {
+  public onAddItem(): Observable<Partial<ListItemModel & { isEditing: boolean }>> {
     return fromEvent(this.socket, `${ListItemEvents.ADD_ITEM}`);
   }
 
   public onUpdateItem(): Observable<ListItemModel> {
-    return fromEvent(this.socket, `${ListItemEvents.UPDATE_ITEM}`);
+    return fromEvent(this.socket, ListItemEvents.UPDATE_ITEM);
   }
 
   public onDeleteItem(): Observable<ListItemModel> {
