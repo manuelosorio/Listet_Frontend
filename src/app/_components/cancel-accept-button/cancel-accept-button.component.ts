@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./cancel-accept-button.component.sass']
 })
 export class CancelAcceptButtonComponent implements OnInit {
-  @Input() buttonType: 'default' | 'primary';
+  @Input() buttonStyle: 'default' | 'primary';
+  @Input() buttonType: 'button' | 'reset' | 'submit';
   @Input() icon: 'check' | 'x';
   @Input() message: string;
   constructor() { }

@@ -9,8 +9,8 @@
           <label class='form__label' for="deadline">Deadline (Optional)</label>
         </fieldset>
         <div class='buttons'>
-          <app-cancel-accept-button [buttonType]='"primary"' [icon]='"check"' message='Update Item' (click)='submit(listItemForm.value)' role='button'></app-cancel-accept-button>
-          <app-cancel-accept-button [buttonType]='"default"' [icon]='"x"' [message]='"Cancel"' (click)='cancel()' role='button'></app-cancel-accept-button>
+          <app-cancel-accept-button buttonStyle='primary' buttonType='submit' icon='check' message='Update Item' (click)='submit(listItemForm.value)' role='button'></app-cancel-accept-button>
+          <app-cancel-accept-button buttonStyle='default' buttonType='button' icon='x' message='Cancel' (click)='cancel()' role='button'></app-cancel-accept-button>
         </div>
       </div>
 </form>
