@@ -9,6 +9,7 @@ export class CancelAcceptButtonComponent implements OnInit {
   @Input() buttonStyle: 'default' | 'primary';
   @Input() buttonType: 'button' | 'reset' | 'submit';
   @Input() icon: 'check' | 'x';
+  @Input() disabled: boolean = false;
   @Input() message: string;
   constructor() { }
 

@@ -2,7 +2,6 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
-import { DateUtil } from '../../utils/dateUtil';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -18,7 +17,7 @@ export class EditListItemComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private listService: ListsService,
-    private listDataService: ListDataService
+    private _listDataService: ListDataService
   ) {
 
   }
@@ -47,6 +46,9 @@ export class EditListItemComponent implements OnInit {
       item: this.listItem.item,
       deadline: this.listItem.deadline != null ? formatDate(this.listItem.deadline,'YYYY-MM-dd', 'en') : ''
     });
+  }
+  get item() {
+    return this.listItemForm.get('item');
   }
 
 }
