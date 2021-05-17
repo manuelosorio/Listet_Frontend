@@ -47,6 +47,8 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ListDetailsModule } from './_pages/list-details/list-details.module';
+import { EditListComponent } from './_components/edit-list/edit-list.component';
+import { EditCommentComponent } from './_components/edit-comment/edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { ListDetailsModule } from './_pages/list-details/list-details.module';
     AddItemComponent,
     DeadlineComponent,
     EditListItemComponent,
-    ActionButtonComponent
+    ActionButtonComponent,
+    EditListComponent,
+    EditCommentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
