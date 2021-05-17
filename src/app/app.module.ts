@@ -21,6 +21,8 @@ import { CreateCommentComponent } from './_components/create-comment/create-comm
 import { AddItemComponent } from './_components/add-item/add-item.component';
 import { DeadlineComponent } from './_components/deadline/deadline.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
+import { EditListItemComponent } from './_components/edit-list-item/edit-list-item.component';
+import { ActionButtonComponent } from './_components/action-button/action-button.component';
 
 // Guards
 import { GuestGuard } from './guards/guest.guard';
@@ -45,8 +47,6 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ListDetailsModule } from './_pages/list-details/list-details.module';
-import { EditListItemComponent } from './_components/edit-list-item/edit-list-item.component';
-import { CancelAcceptButtonComponent } from './_components/cancel-accept-button/cancel-accept-button.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,7 @@ import { CancelAcceptButtonComponent } from './_components/cancel-accept-button/
     AddItemComponent,
     DeadlineComponent,
     EditListItemComponent,
-    CancelAcceptButtonComponent
+    ActionButtonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

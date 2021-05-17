@@ -9,13 +9,14 @@
           <label class='form__label' for="deadline">Deadline (Optional)</label>
         </fieldset>
         <div class='buttons'>
-          <app-cancel-accept-button buttonStyle='primary' buttonType='submit' icon='check' message='Update Item' (click)='!item.invalid ? submit(listItemForm.value) : ""' role='button' [disabled]='item.invalid'></app-cancel-accept-button>
-          <app-cancel-accept-button buttonStyle='default' buttonType='button' icon='x' message='Cancel' (click)='cancel()' role='button'></app-cancel-accept-button>
+          <app-action-button buttonStyle='primary' buttonType='submit'
+                             icon='check' message='Update Item'
+                             (click)='!item.invalid ? submit(listItemForm.value) : ""'
+                             role='button' [disabled]='item.invalid'>
+          </app-action-button>
+          <app-action-button buttonStyle='default' buttonType='button' icon='x'
+                             message='Cancel' (click)='cancel()' role='button'>
+          </app-action-button>
         </div>
       </div>
 </form>
-
-<!--&lt;!&ndash; Templates &ndash;&gt;-->
-<!--&lt;!&ndash; Submit Button &ndash;&gt;-->
-<!--<ng-template #submit><button class='btn btn&#45;&#45;primary form__btn'>Add Item</button></ng-template>-->
-<!--&lt;!&ndash; End Templates &ndash;&gt;-->
