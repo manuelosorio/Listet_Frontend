@@ -13,7 +13,6 @@ import { formatDate } from '@angular/common';
 export class EditListItemComponent implements OnInit {
   @Input() listItem;
   public listItemForm: FormGroup;
-  public isEdit: boolean
   constructor(
     private formBuilder: FormBuilder,
     private listService: ListsService,
@@ -26,14 +25,12 @@ export class EditListItemComponent implements OnInit {
   };
 
   submit(data) {
-    console.log(data);
     data.list_id = this.listItem.list_id;
-    this.listService.updateItem(data, this.listItem.id).subscribe(res => {
-      console.log(res);
+    this.listService.updateItem(data, this.listItem.id).subscribe(_res => {
+      this.listItem.isEditing = false;
     }, error => {
       console.error(error);
     })
-    this.listItem.isEditing = false;
   };
   ngOnInit(): void {
     this.listItemForm = this.formBuilder.group({

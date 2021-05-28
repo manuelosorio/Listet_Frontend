@@ -59,6 +59,9 @@ export class WebsocketService {
   /* --------- End Comment Events ------- */
 
   /* --------- List Events -------------- */
+  public onEditList(): Observable<ListModel> {
+    return fromEvent(this.socket, ListEvents.UPDATE_LIST);
+  }
   public onDeleteList(): Observable<ListModel> {
     return fromEvent(this.socket, `${ListEvents.DELETE_List}`);
   }

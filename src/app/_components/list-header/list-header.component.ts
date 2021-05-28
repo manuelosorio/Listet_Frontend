@@ -18,19 +18,21 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./list-header.component.sass']
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
-  header;
+  public header: [ListModel] | Partial<ListModel | ListModel[]>;
+  public listId: string;
+  public listData;
+  public isOwner: boolean;
+  public formattedCreationDate: string;
+  public deadline: Date;
   private readonly username: any;
   private readonly slug: any;
   private meta: MetaTagModel;
-  listId: string;
-  listData;
-  isOwner: boolean;
-  formattedCreationDate: string;
-  deadline: Date;
   private onDelete$: Subscription;
+  private onEdit$: Subscription;
   private username$: Subscription;
   private getList$: Subscription;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
+  private prevSlug: string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -48,7 +50,6 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     this.username$ = userService.username$.subscribe(res => {
       this.isOwner = this.username === res;
     });
-
     if (this.isBrowser) {
       this.onDelete$ = this.websocketService.onDeleteList().subscribe(() => {
         this.alertService.warning('List has been deleted. Redirecting...', false);
@@ -56,6 +57,10 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
           return this.router.navigateByUrl('/lists');
         }, 3000);
       });
+      this.onEdit$ = this.websocketService.onEditList().subscribe(res => {
+        this.prevSlug = this.header[0].slug;
+        this.editHeader(res);
+      })
     }
   }
 
@@ -67,6 +72,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       }
       this.formattedCreationDate = creationDate.format();
       this.header = data;
+      this.header[0].isEditing = false;
       this.listId = data[0].id;
       this.listData = {
         id: this.listId,
@@ -87,7 +93,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    console.log('edit');
+    this.header[0].isEditing = true;
   }
 
   delete() {
@@ -121,6 +127,34 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     this.getList$.unsubscribe();
     if (this.isBrowser) {
       this.onDelete$.unsubscribe();
+      this.onEdit$.unsubscribe();
     }
+  }
+
+  private editHeader(data: ListModel) {
+    if (!!data[0].deadline) {
+      this.deadline = data[0].deadline;
+    }
+    console.log('previous:', this.prevSlug);
+    (this.header as ListModel[]).filter(header => {
+      header.id = data[0].id;
+      header.name = data[0].name;
+      header.deadline = new DateUtil(data[0].deadline).format();
+      header.description = data[0].description;
+      header.is_private = data[0].isPrivate;
+      header.allow_comments = data[0].allowComments;
+      header.slug = data[0].slug;
+      header.isEditing = false;
+      return header;
+    });
+
+    this.listId = data[0].id;
+    this.listData = {
+      id: this.listId,
+      allow_comments: data[0].allow_comments,
+      isOwner: this.isOwner,
+    };
+    this.listDataService.setData(this.listData);
+    return this.header;
   }
 }

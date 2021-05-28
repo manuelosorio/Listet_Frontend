@@ -52,7 +52,12 @@ export class ListsService {
       withCredentials: true
     });
   }
-  updateItem(data, id) {
+  updateList(data, id: number) {
+    return this.http.put(environment.host + `/update-list/${id}`, data, {
+      withCredentials: true
+    })
+  }
+  updateItem(data, id: number) {
     return this.http.put(environment.host + '/update-item/' + id, data, {
       withCredentials: true
     })
