@@ -32,12 +32,14 @@ export class ListDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.isBrowser) {
       this.onListEdit$ = this.webSocketService.onEditList().subscribe((res) => {
-        this.alertService.success('Redirecting soon.');
-        setTimeout(() => {
-          this.router.navigateByUrl(`l/${res[0].slug}`).finally(() => {
-            location.reload();
-          });
-        }, 1000)
+        if (res.slug !== this.slug) {
+          this.alertService.success('Redirecting soon.');
+          setTimeout(() => {
+            this.router.navigateByUrl(`l/${res.slug}`).finally(() => {
+              location.reload();
+            });
+          }, 1000);
+        }
       })
     }
   }
