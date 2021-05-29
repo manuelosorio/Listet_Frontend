@@ -19,11 +19,11 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: [ListModel] | Partial<ListModel | ListModel[]>;
-  public listId: string;
+  public listId: number;
   public listData;
   public isOwner: boolean;
   public formattedCreationDate: string;
-  public deadline: Date;
+  public deadline: Date | string;
   private readonly username: any;
   private readonly slug: any;
   private meta: MetaTagModel;
