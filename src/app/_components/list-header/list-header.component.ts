@@ -132,26 +132,25 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   private editHeader(data: ListModel) {
-    if (!!data[0].deadline) {
-      this.deadline = data[0].deadline;
+    if (data.deadline) {
+      this.deadline = new Date(data.deadline);
     }
-    console.log('previous:', this.prevSlug);
-    (this.header as ListModel[]).filter(header => {
-      header.id = data[0].id;
-      header.name = data[0].name;
-      header.deadline = new DateUtil(data[0].deadline).format();
-      header.description = data[0].description;
-      header.is_private = data[0].isPrivate;
-      header.allow_comments = data[0].allowComments;
-      header.slug = data[0].slug;
-      header.isEditing = false;
-      return header;
+    (this.header as ListModel[]).filter((head: ListModel) => {
+      head.id = data.id;
+      head.name = data.name;
+      head.deadline = new DateUtil(data.deadline).format();
+      head.description = data.description;
+      head.is_private = data.is_private;
+      head.allow_comments = data.allow_comments;
+      head.slug = data.slug;
+      head.isEditing = false;
+      return head;
     });
 
-    this.listId = data[0].id;
+    this.listId = data.id;
     this.listData = {
       id: this.listId,
-      allow_comments: data[0].allow_comments,
+      allow_comments: data.allow_comments,
       isOwner: this.isOwner,
     };
     this.listDataService.setData(this.listData);
