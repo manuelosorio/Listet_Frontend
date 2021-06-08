@@ -15,18 +15,26 @@ export class ListsService {
     this.comment$ = this.commentSubject$.asObservable();
   }
   getLists() {
-    return this.http.get(environment.host + '/lists');
+    return this.http.get(environment.host + '/lists', {
+      withCredentials: true
+    });
   }
 
   getList(slug) {
-    return this.http.get(environment.host + `/list/${slug}`);
+    return this.http.get(environment.host + `/list/${slug}`, {
+      withCredentials: true
+    });
   }
   getListItems(username, slug) {
-    return this.http.get(environment.host + `/list/${slug}/items`);
+    return this.http.get(environment.host + `/list/${slug}/items`, {
+      withCredentials: true
+    });
   }
 
   getListComments(slug) {
-    return this.http.get(environment.host + `/list/${slug}/comments`).subscribe((data) => {
+    return this.http.get(environment.host + `/list/${slug}/comments`, {
+      withCredentials: true,
+    }).subscribe((data) => {
       this.commentSubject$.next(data);
     });
   }
@@ -59,6 +67,11 @@ export class ListsService {
   }
   updateItem(data, id: number) {
     return this.http.put(environment.host + '/update-item/' + id, data, {
+      withCredentials: true
+    })
+  }
+  updateComment(data, id: number) {
+    return this.http.put(environment.host + '/update-comment/' + id, data, {
       withCredentials: true
     })
   }
