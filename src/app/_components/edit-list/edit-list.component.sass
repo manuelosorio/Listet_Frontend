@@ -1,5 +1,6 @@
 @use '~src/sass/variables'
 .form
+  padding: 1rem
   &__input
     background: variables.$silver
     &:focus, &:not(:placeholder-shown)
@@ -10,17 +11,30 @@
   &__fieldset
     width: 100%
     @media (min-width: variables.$medium)
-      margin-top: 0
       flex-basis: 45%
       + .form__fieldset
         flex-basis: 25%
 .buttons
   display: flex
   flex-direction: row
-  justify-content: center
   margin-top: 1.35rem
   app-action-button + app-action-button
     margin-left: 1rem
   @media (min-width: variables.$medium)
     margin-top: 0
     margin-left: 1rem
+.options
+  position: relative
+  display: flex
+  justify-content: left
+  flex-direction: row
+  margin:
+    top: 1rem
+    bottom: 1rem
+  padding:
+    top: 1rem
+    bottom: 1rem
+  .form__fieldset
+    margin: 0
+    width: fit-content
+    flex-basis: initial
