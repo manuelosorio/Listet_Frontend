@@ -1,0 +1,34 @@
+@use '~src/sass/variables'
+form
+  padding: 1.75em 1.75em
+  border: 1px variables.$silver solid
+  border-radius: 10px
+  width: 100%
+  max-width: 660px
+  justify-content: left
+  margin: 1.75rem 0
+.form__fieldset--row
+  width: 100%
+  padding: 0
+  + .form__fieldset--row
+    margin: 1.5rem 0 0
+fieldset
+  position: relative
+  border: none
+  width: 100%
+textarea
+  background: transparent
+  min-height: 100px
+  width: 100%
+  resize: none
+  border: 1px variables.$black solid
+  border-radius: 10px
+  outline: 0
+  padding: 0.75em
+  &:focus
+    border-width: 2px
+.buttons
+  display: flex
+  margin-top: 1rem
+  app-action-button + app-action-button
+    margin-left: 1rem

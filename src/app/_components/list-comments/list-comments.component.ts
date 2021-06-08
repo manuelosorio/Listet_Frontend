@@ -3,7 +3,7 @@ import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
-import { isPlatformBrowser } from '@angular/common';
+import { formatDate, isPlatformBrowser } from '@angular/common';
 import { ListDataService } from '../../shared/list-data.service';
 import { DateUtil } from '../../utils/dateUtil';
 import { CommentModel } from '../../models/comment.model';
@@ -24,6 +24,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   private listData: Subscription;
   private onCreateComment$: Subscription;
   private onDeleteComment$: Subscription;
+  private onEditComment$: Subscription;
   public count: number;
   public isListOwner: boolean;
   public isAuth: boolean;
@@ -77,7 +78,19 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
           return comment.id != id as unknown as CommentModel['id'];
         });
       });
+      this.onEditComment$ = this.websocketService.onUpdateComment().subscribe((res: CommentModel) => {
+        this.comments.filter(comment => {
+          if (comment.id == res.id) {
+            comment.comment = res.comment;
+            comment.date_updated = res.date_updated;
+            this.updateTimeDifference();
+          }
+        })
+      })
     }
+  }
+  public edit(comment) {
+    comment.isEditing = true;
   }
   public delete(id) {
     if (confirm('Are you sure you want to delete this comment?')) {
@@ -86,9 +99,16 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   }
   private updateTimeDifference() {
     this.comments.filter((comment: CommentModel) => {
+      if (comment.date_updated) {
+        const dateUpdated = new DateUtil(comment.date_updated, comment.comment);
+        comment.time_difference = dateUpdated.getFormattedTimeDifference();
+        comment.formatted_creation_date = formatDate(comment.creation_date, 'MMME d, YYYY', 'en');
+        comment.formatted_creation_date = dateUpdated.format();
+        return comment;
+      }
       const creationDate = new DateUtil(comment.creation_date, comment.comment);
       comment.time_difference = creationDate.getFormattedTimeDifference();
-      comment.formatted_creation_date = creationDate.format();
+      comment.formatted_creation_date = formatDate(comment.creation_date, 'MMM d, YYYY', 'en');
       return comment;
     });
   }
@@ -103,6 +123,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       this.listData.unsubscribe();
       this.onCreateComment$.unsubscribe();
       this.onDeleteComment$.unsubscribe();
+      this.onEditComment$.unsubscribe();
     }
   }
 }
