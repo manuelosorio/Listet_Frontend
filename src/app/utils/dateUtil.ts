@@ -12,6 +12,7 @@ export class DateUtil {
 
     if (!!this.date) {
       const date = new Date(this.date);
+      date.setUTCDate(date.getUTCDate() + 1);
       let day = '' + date.getDate();
       const year = date.getFullYear();
       switch (format) {

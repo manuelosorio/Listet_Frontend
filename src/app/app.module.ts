@@ -21,6 +21,8 @@ import { CreateCommentComponent } from './_components/create-comment/create-comm
 import { AddItemComponent } from './_components/add-item/add-item.component';
 import { DeadlineComponent } from './_components/deadline/deadline.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
+import { EditListItemComponent } from './_components/edit-list-item/edit-list-item.component';
+import { ActionButtonComponent } from './_components/action-button/action-button.component';
 
 // Guards
 import { GuestGuard } from './guards/guest.guard';
@@ -45,6 +47,8 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ListDetailsModule } from './_pages/list-details/list-details.module';
+import { EditListComponent } from './_components/edit-list/edit-list.component';
+import { EditCommentComponent } from './_components/edit-comment/edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +74,11 @@ import { ListDetailsModule } from './_pages/list-details/list-details.module';
     CreateListComponent,
     CreateCommentComponent,
     AddItemComponent,
-    DeadlineComponent
+    DeadlineComponent,
+    EditListItemComponent,
+    ActionButtonComponent,
+    EditListComponent,
+    EditCommentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

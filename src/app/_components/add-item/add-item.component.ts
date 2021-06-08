@@ -49,7 +49,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
 
   onSubmit(data) {
     data.list_id = this.id;
-    data.listInfo = this.slug;
+    data.slug = this.slug;
     this.listService.createListItem(data).subscribe((res) => {
       this.listItemForm.reset();
       this.webSocketService.emit(ListItemEvents.ADD_ITEM, res);

@@ -1,7 +1,7 @@
 <section>
   <ng-container *ngFor="let item of items">
     <ng-container>
-      <div>
+      <div *ngIf='item.isEditing === false else editItem'>
         <input (change)="checked($event)" [checked]="item['completed'] === 1" [disabled]="!isOwner"
                class="form__input--checkbox" id="item-{{item['id']}}" type="checkbox">
         <label [class.list-item__checkbox--disabled]="!isOwner" class="list-item" for="item-{{item['id']}}">
@@ -16,7 +16,7 @@
             <button class="more">
               <i-feather name="more-vertical"></i-feather>
               <span class="more__options card">
-                <button>
+                <button (click)='edit(item)'>
                   <i-feather name="edit"></i-feather> Edit
                 </button>
                 <button (click)="deleteListItem(item['id'])">
@@ -28,6 +28,9 @@
         </label>
       </div>
     </ng-container>
+    <ng-template #editItem>
+      <app-edit-list-item [listItem]='item'></app-edit-list-item>
+    </ng-template>
   </ng-container>
 </section>
 <app-add-item></app-add-item>

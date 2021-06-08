@@ -6,26 +6,33 @@
       </ng-container>
     </div>
   <ng-container *ngIf="commentsEnabled else commentsDisabled">
-      <article class="card comment" *ngFor="let comment of comments">
-        <div class="l-row comment__info">
-          <a routerLink="/u/{{ comment['username'] }}">{{ comment['username'] }}</a>
-          <em>
-            Created {{ comment['time_difference'] }}
-            <span class="tooltip">{{comment['formatted_creation_date']}}</span>
-          </em>
-        </div>
-        <div>
-          <ng-container *ngIf="isListOwner || comment.is_owner">
-            <button *ngIf='comment.is_owner'>
-              <i-feather name="edit"></i-feather> Edit
-            </button>
-            <button (click)="delete(comment.id)">
-              <i-feather name="trash"></i-feather> Delete
-            </button>
-          </ng-container>
-        </div>
-        <p class="comment__message">{{ comment['comment'] }}</p>
+    <ng-container *ngFor="let comment of comments">
+      <article class="card comment" *ngIf='!comment.isEditing else isEditing'>
+          <div class="l-row comment__info">
+            <a routerLink="/u/{{ comment['username'] }}">{{ comment['username'] }}</a>
+            <em>
+              <span *ngIf='comment.date_updated else created'>Updated</span>
+              <ng-template #created>Created</ng-template>
+               {{ comment['time_difference'] }}
+              <span class="tooltip">{{comment['formatted_creation_date']}}</span>
+            </em>
+          </div>
+          <div>
+            <ng-container *ngIf="isListOwner || comment.is_owner">
+              <button *ngIf='comment.is_owner' (click)='edit(comment)'>
+                <i-feather name="edit"></i-feather> Edit
+              </button>
+              <button (click)="delete(comment.id)">
+                <i-feather name="trash"></i-feather> Delete
+              </button>
+            </ng-container>
+          </div>
+          <p class="comment__message">{{ comment['comment'] }}</p>
       </article>
+      <ng-template #isEditing>
+        <app-edit-comment [commentModel]='comment'></app-edit-comment>
+      </ng-template>
+    </ng-container>
   </ng-container>
 </section>
 <ng-template #commentsDisabled>

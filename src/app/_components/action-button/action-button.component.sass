@@ -1,0 +1,25 @@
+@use "~src/sass/variables"
+.btn
+  display: flex
+  justify-content: center
+  align-items: center
+  box-shadow: variables.$shadow
+  border-radius: 14px
+  transition: variables.$t-easeOutBack
+  padding: 0.65em
+  span
+    margin-left: 0.75em
+    transform: scale(0)
+    display: none
+  &:hover
+    span
+      display: inline
+      opacity: 1
+      transform: scale(1)
+  &:active
+    box-shadow: variables.$shadow-hover
+  &--default
+    background: variables.$silver
+    border: 1px solid #E0E0E0
+    &:hover
+      background: darken(variables.$silver, 5%)

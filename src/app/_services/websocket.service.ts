@@ -43,46 +43,48 @@ export class WebsocketService {
     });
   }
 
-  /* --------- Comment Events ----------- */
-  public onCreateComment(): Observable<CommentModel> {
-    return fromEvent(this.socket, `${CommentEvents.CREATE_COMMENT}`);
-  }
-
-  public onUpdateComment(): Observable<CommentModel> {
-    return fromEvent(this.socket, `${CommentEvents.UPDATE_COMMENT}`);
-  }
-
-  public onDeleteComment(): Observable<CommentModel> {
-    return fromEvent(this.socket, `${CommentEvents.DELETE_COMMENT}`);
-  }
-
-  /* --------- End Comment Events ------- */
-
   /* --------- List Events -------------- */
-  public onDeleteList(): Observable<ListModel> {
-    return fromEvent(this.socket, `${ListEvents.DELETE_List}`);
+  public onEditList(): Observable<ListModel> {
+    return fromEvent(this.socket, ListEvents.UPDATE_LIST);
   }
-  public onAddItem(): Observable<ListItemModel> {
-    return fromEvent(this.socket, `${ListItemEvents.ADD_ITEM}`);
+  public onDeleteList(): Observable<ListModel> {
+    return fromEvent(this.socket, `${ListEvents.DELETE_LIST}`);
+  }
+  /* --------- End List Events ---------- */
+  /* --------- List Items Events -------------- */
+  public onAddItem(): Observable<Partial<ListItemModel & { isEditing: boolean }>> {
+    return fromEvent(this.socket, ListItemEvents.ADD_ITEM);
   }
 
   public onUpdateItem(): Observable<ListItemModel> {
-    return fromEvent(this.socket, `${ListItemEvents.UPDATE_ITEM}`);
+    return fromEvent(this.socket, ListItemEvents.UPDATE_ITEM);
   }
 
   public onDeleteItem(): Observable<ListItemModel> {
-    return fromEvent(this.socket, `${ListItemEvents.DELETE_ITEM}`);
+    return fromEvent(this.socket, ListItemEvents.DELETE_ITEM);
   }
 
   public onCompleteItem(): Observable<any> {
-    return fromEvent(this.socket, `${ListItemEvents.COMPLETE_ITEM}`);
+    return fromEvent(this.socket, ListItemEvents.COMPLETE_ITEM);
+  }
+  /* --------- End List Items Events ---------- */
+
+  /* --------- Comment Events ----------- */
+  public onCreateComment(): Observable<CommentModel> {
+    return fromEvent(this.socket, CommentEvents.CREATE_COMMENT);
   }
 
-  /* --------- End List Events ---------- */
+  public onUpdateComment(): Observable<CommentModel> {
+    return fromEvent(this.socket, CommentEvents.UPDATE_COMMENT);
+  }
+
+  public onDeleteComment(): Observable<CommentModel> {
+    return fromEvent(this.socket, CommentEvents.DELETE_COMMENT);
+  }
+  /* --------- End Comment Events ------- */
   emit(event: string | CommentEvents | ListItemEvents, data: any) {
     this.socket.emit(event, data);
   }
-
   disconnect(): void {
     this.socket.disconnect();
   }

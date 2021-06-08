@@ -1,0 +1,42 @@
+<form [formGroup]='editListForm' class='form form--no-shadow'>
+  <fieldset class='form__fieldset'>
+    <!-- Title -->
+    <input type='text' formControlName='title' id='title' class='form__input' placeholder="Title">
+    <label for='title' class='form__label'>Title</label>
+  </fieldset>
+  <!-- Deadline -->
+  <fieldset class='form__fieldset'>
+    <input type='date' formControlName='deadline' id='deadline' class='form__input' pattern="\d{4}-\d{2}-\d{2}">
+    <label for='deadline' class='form__label'>Deadline (Optional)</label>
+  </fieldset>
+  <!-- Description -->
+  <fieldset class='form__fieldset'>
+    <textarea type='text' formControlName='description' id='description' class='form__input--textarea' placeholder="Description"></textarea>
+    <label for='description' class='form__label'>Description (Optional)</label>
+  </fieldset>
+  <div class="options">
+    <!-- Private List -->
+    <fieldset class='form__fieldset'>
+      <input type='checkbox' checked='checked' value='is_private' id='is_private' formControlName='is_private' class='form__input--checkbox' (change)='isPrivateChecked($event)'>
+      <label class="form__label" for='is_private'>
+        <ng-container *ngIf='isPrivate === true else iconDefault'><i-feather name='check-square'></i-feather></ng-container>
+        <span>Private List</span></label>
+    </fieldset>
+    <!-- Allow Comments -->
+    <fieldset class='form__fieldset'>
+      <input type='checkbox' value='allow_comments' id='allow_comments' formControlName='allow_comments' class='form__input--checkbox' (change)='allowCommentsChecked($event)'>
+      <label class="form__label" for='allow_comments'>
+        <ng-container *ngIf='allowComments === true else iconDefault'><i-feather name='check-square'></i-feather></ng-container>
+        <span>Allow Comments</span></label>
+    </fieldset>
+  </div>
+  <div class='buttons l-row--justify-left'>
+    <app-action-button buttonType='submit' buttonStyle='primary' icon='check' (click)='onSubmit(editListForm.value)'></app-action-button>
+    <app-action-button buttonType='submit' buttonStyle='default' icon='x' (click)='cancel()'></app-action-button>
+  </div>
+</form>
+
+<!-- Templates -->
+<!-- Check Box -->
+<ng-template #iconDefault><i-feather name='square'></i-feather></ng-template>
+<!-- End Templates -->

@@ -15,18 +15,26 @@ export class ListsService {
     this.comment$ = this.commentSubject$.asObservable();
   }
   getLists() {
-    return this.http.get(environment.host + '/lists');
+    return this.http.get(environment.host + '/lists', {
+      withCredentials: true
+    });
   }
 
   getList(slug) {
-    return this.http.get(environment.host + `/list/${slug}`);
+    return this.http.get(environment.host + `/list/${slug}`, {
+      withCredentials: true
+    });
   }
   getListItems(username, slug) {
-    return this.http.get(environment.host + `/list/${slug}/items`);
+    return this.http.get(environment.host + `/list/${slug}/items`, {
+      withCredentials: true
+    });
   }
 
   getListComments(slug) {
-    return this.http.get(environment.host + `/list/${slug}/comments`).subscribe((data) => {
+    return this.http.get(environment.host + `/list/${slug}/comments`, {
+      withCredentials: true,
+    }).subscribe((data) => {
       this.commentSubject$.next(data);
     });
   }
@@ -42,7 +50,6 @@ export class ListsService {
       withCredentials: true
     });
   }
-
   createListItem(data) {
     return this.http.post(environment.host + '/add-item', data, {
       withCredentials: true
@@ -52,6 +59,21 @@ export class ListsService {
     return this.http.put(environment.host + '/update-item-status', data, {
       withCredentials: true
     });
+  }
+  updateList(data, id: number) {
+    return this.http.put(environment.host + `/update-list/${id}`, data, {
+      withCredentials: true
+    })
+  }
+  updateItem(data, id: number) {
+    return this.http.put(environment.host + '/update-item/' + id, data, {
+      withCredentials: true
+    })
+  }
+  updateComment(data, id: number) {
+    return this.http.put(environment.host + '/update-comment/' + id, data, {
+      withCredentials: true
+    })
   }
   deleteList(id) {
     return this.http.delete(environment.host + `/delete-list/${id}`, {

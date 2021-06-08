@@ -70,7 +70,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled',
     relativeLinkResolution: 'corrected',
-    preloadingStrategy: PreloadAllModules
+    preloadingStrategy: PreloadAllModules,
+    onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule]
 })
