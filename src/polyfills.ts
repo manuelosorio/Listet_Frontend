@@ -72,7 +72,7 @@
 // import 'core-js/es/reflect'; // Used in JIT - remove if you use only AOT
 
 // import './zone-flags';
-import 'zone.js/dist/zone';  // Included with Angular CLI.
+import 'zone.js';  // Included with Angular CLI.
 
 
 /***************************************************************************************************
