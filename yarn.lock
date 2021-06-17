@@ -7512,13 +7512,6 @@ nested-error-stacks@^2.0.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
-ngx-masonry@^11.0.0:
-  version "11.0.2"
-  resolved "https://registry.yarnpkg.com/ngx-masonry/-/ngx-masonry-11.0.2.tgz#f61b7991ed8621ca5e2a8542c3443ccf437b45fe"
-  integrity sha512-7PH/J2jcsJfPr0IzT4q5KCHcvSMUJSjlD9pOe5W9qSfnyZdLRzPXDYGg3NjQwM6Zb7nETW6aiTS7uOhHfPe7SQ==
-  dependencies:
-    tslib "^2.0.0"
-
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -10137,9 +10130,9 @@ snyk-try-require@^2.0.0:
     lru-cache "^5.1.1"
 
 snyk@^1.493.0:
-  version "1.628.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.628.0.tgz#b49889380232760832e87364d9cdc56f0309d8b5"
-  integrity sha512-vPg4Q1z/gqCgJZGv6V6Q/Jb9wBlqHt55/KBNtrjv9vOhMquM/tBtFpw2G0l8O4enR7VRxuQhiQ5MCkILIr6Oyw==
+  version "1.634.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.634.0.tgz#4bfd898bfcdc54a4706313129beaf43acdff1237"
+  integrity sha512-8e45mjApX09tOR97e9EO9/yNJRe+E6vY+od9eGXMyR+eeLiluAv8XgwikdnX5wxNkZgkQAQCVv1nukdj8hrTgA==
   dependencies:
     "@open-policy-agent/opa-wasm" "^1.2.0"
     "@snyk/cli-interface" "2.11.0"

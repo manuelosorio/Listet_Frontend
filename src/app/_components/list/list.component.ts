@@ -1,10 +1,11 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxMasonryComponent, NgxMasonryOptions } from 'ngx-masonry';
+import { NgxMasonryAnimations, NgxMasonryComponent, NgxMasonryOptions } from '../../shared/ngx-masonry/ngx-masonry-api';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { isPlatformBrowser } from '@angular/common';
+import { AnimationFactory } from '@angular/animations';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -12,6 +13,8 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ListComponent implements OnInit {
   private readonly meta: MetaTagModel;
+  private anime: NgxMasonryAnimations;
+  private anime2: AnimationFactory;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   @Input() private pageType?: 'Lists' | 'Home' | 'User';
   @Input() private profileUser?: string;
@@ -22,7 +25,6 @@ export class ListComponent implements OnInit {
     private route: ActivatedRoute,
     private seoService: SeoService) {
     this.meta = this.route.snapshot.data[0];
-
   }
   lists: any = [];
   public masonryOptions: NgxMasonryOptions = {

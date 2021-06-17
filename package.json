@@ -37,7 +37,6 @@
     "core-js": "^3.9.1",
     "express": "^4.15.2",
     "masonry-layout": "^4.2.2",
-    "ngx-masonry": "^11.0.0",
     "rxjs": "~6.6.6",
     "sitemap-generator": "^8.5.1",
     "snyk": "^1.493.0",

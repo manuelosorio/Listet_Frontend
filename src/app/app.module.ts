@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMasonryModule } from 'ngx-masonry';
+import { NgxMasonryModule } from './shared/ngx-masonry/ngx-masonry.module';
 
 
 // Components
