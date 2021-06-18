@@ -66,12 +66,12 @@ export class ListsService {
     })
   }
   updateItem(data, id: number) {
-    return this.http.put(environment.host + '/update-item/' + id, data, {
+    return this.http.put(environment.host +   `/update-item/${id}`, data, {
       withCredentials: true
     })
   }
   updateComment(data, id: number) {
-    return this.http.put(environment.host + '/update-comment/' + id, data, {
+    return this.http.put(environment.host + `/update-comment/${id}`, data, {
       withCredentials: true
     })
   }
@@ -80,7 +80,7 @@ export class ListsService {
       withCredentials: true,
     });
   }
-  deleteListItem(id) {
+  deleteListItem(id: number) {
     return this.http.delete(environment.host + `/delete-item/${id}`, {
       withCredentials: true,
     });
