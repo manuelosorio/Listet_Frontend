@@ -9,11 +9,10 @@
     <ul class="navigation--links" [class.is-active]="isActive">
       <li class="navigation--links-item"><a routerLink="/">Home</a></li>
       <li class="navigation--links-item"><a routerLink="/lists">All Lists</a></li>
-      <li class="navigation--links-item"><a routerLink="/users">All Users</a></li>
       <ng-container *ngIf="authenticated === true else navDefault">
-<!--        <li class="navigation--links-item">-->
-<!--          <a routerLink="">Your Lists</a>-->
-<!--        </li>-->
+        <li class="navigation--links-item">
+          <a routerLink="your-lists">Your Lists</a>
+        </li>
         <li class="navigation--links-item">
           <a class="btn btn--primary" routerLink="/create-list">Create List</a>
         </li>

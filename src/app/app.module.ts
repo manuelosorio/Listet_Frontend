@@ -49,6 +49,7 @@ import { CreateListComponent } from './_pages/create-list/create-list.component'
 import { ListDetailsModule } from './_pages/list-details/list-details.module';
 import { EditListComponent } from './_components/edit-list/edit-list.component';
 import { EditCommentComponent } from './_components/edit-comment/edit-comment.component';
+import { YourListComponent } from './_pages/your-list/your-list.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { EditCommentComponent } from './_components/edit-comment/edit-comment.co
     EditListItemComponent,
     ActionButtonComponent,
     EditListComponent,
-    EditCommentComponent
+    EditCommentComponent,
+    YourListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

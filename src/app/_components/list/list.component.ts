@@ -13,10 +13,8 @@ import { AnimationFactory } from '@angular/animations';
 })
 export class ListComponent implements OnInit {
   private readonly meta: MetaTagModel;
-  private anime: NgxMasonryAnimations;
-  private anime2: AnimationFactory;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  @Input() private pageType?: 'Lists' | 'Home' | 'User';
+  @Input() private pageType?: 'Lists' | 'Home' | 'User' | 'AuthedUser';
   @Input() private profileUser?: string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -35,10 +33,18 @@ export class ListComponent implements OnInit {
 
   @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
   ngOnInit(): void {
-    this.listService.getLists().subscribe(async (data) => {
-      this.lists = data;
-      await this.show(this.lists);
-    });
+    if (this.pageType !== 'AuthedUser') {
+      this.listService.getLists().subscribe(async (data) => {
+        this.lists = data;
+        await this.show(this.lists);
+      });
+    }
+    if (this.pageType === 'AuthedUser') {
+      this.listService.getAuthUserLists().subscribe(async (data) => {
+        this.lists = data;
+        await this.show(this.lists);
+      });
+    }
     if (this.pageType === 'User' ) {
       this.meta.title += `${this.route.snapshot.params.username}'s Lists`;
     }
@@ -76,6 +82,7 @@ export class ListComponent implements OnInit {
         }
         break;
       }
+      case 'AuthedUser':
       case 'Lists':
       default: {
         for (const index in listsObj) {

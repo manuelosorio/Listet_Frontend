@@ -19,6 +19,7 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
+import { YourListComponent } from './_pages/your-list/your-list.component';
 
 const routes: Routes = [
   {
@@ -41,9 +42,20 @@ const routes: Routes = [
       url: 'https://listet.manuelosorio.me/lists'
     }]
   },
+  {
+    path: 'your-lists', component: YourListComponent, data: [{
+      author: 'Manuel Osorio',
+      description: 'Listet is a social todo list tool.',
+      title: 'Listet App - Lists',
+      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
+      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
+      url: 'https://listet.manuelosorio.me/lists'
+    }],
+    canActivate: [GuestGuard]
+  },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UserComponent, canActivate: [GuestGuard] },
+  // { path: 'users', component: UserComponent, canActivate: [GuestGuard] },
   {
     path: 'u/:username', component: ProfileComponent, data: [{
       author: 'Manuel Osorio',

@@ -19,12 +19,17 @@ export class ListsService {
       withCredentials: true
     });
   }
-
+  getAuthUserLists() {
+    return this.http.get(environment.host + '/your-lists', {
+      withCredentials: true
+    });
+  }
   getList(slug) {
     return this.http.get(environment.host + `/list/${slug}`, {
       withCredentials: true
     });
   }
+
   getListItems(username, slug) {
     return this.http.get(environment.host + `/list/${slug}/items`, {
       withCredentials: true
