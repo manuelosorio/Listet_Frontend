@@ -140,7 +140,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       head.name = data.name;
       head.deadline = new DateUtil(data.deadline).format();
       head.description = data.description;
-      head.is_private = data.is_private;
+      head.visibility = data.visibility;
       head.allow_comments = data.allow_comments;
       head.slug = data.slug;
       head.isEditing = false;
