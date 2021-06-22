@@ -84,7 +84,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       this.seoService.updateInfo(this.meta);
       return this.header;
     }, (error => {
-      if (error.status === 404) {
+      if (error.status === 404 || error.status === 403) {
         this.router.navigateByUrl('/404', {
           skipLocationChange: true
         }).then();
