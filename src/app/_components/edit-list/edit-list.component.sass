@@ -41,9 +41,26 @@
 #visibility
   flex-direction: row
   justify-content: left
+  flex-wrap: wrap
+  padding: 0.5rem 0
   div
+    margin-right: 1rem
+    padding: 0.75rem 0
     span
       margin-left: 2rem
-    + div
-      margin-left: 1rem
-
+  label
+    padding: 0
+    left: 0
+.allow-comments
+  justify-content: left
+  flex-direction: row
+  margin-top: 2rem
+  padding-left: 0
+  height: fit-content
+  label
+    padding: 0
+    left: 0
+.form__fieldset--row
+  width: 100%
+  + .form__fieldset--row
+    margin: 0.5rem 0 0
