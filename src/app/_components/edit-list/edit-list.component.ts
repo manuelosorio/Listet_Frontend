@@ -6,18 +6,19 @@ import { AlertService } from '../../_services/alert.service';
 import { Response } from '../../_pages/create-list/create-list.component';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { ListVisibility } from '../../helper/list-visibility';
 
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
   styleUrls: ['./edit-list.component.sass']
 })
-export class EditListComponent implements OnInit {
+export class EditListComponent implements OnInit{
   @Input() list: ListModel;
   public editListForm: FormGroup;
-  public isPrivate: boolean;
+  public visibility: number;
+  public visibilityOptions: ListVisibility[];
   public allowComments: boolean;
-
 
   constructor(
     private alertService: AlertService,
@@ -31,22 +32,21 @@ export class EditListComponent implements OnInit {
       ]],
       description: [''],
       deadline: [''],
-      is_private: [false],
+      visibility: [ListVisibility.public, Validators.required],
       allow_comments: [true],
     });
-    console.log(this.list)
+    this.visibilityOptions = [ListVisibility.private, ListVisibility.unlisted, ListVisibility.public]
   }
 
   ngOnInit(): void {
-    console.log(this.list)
     this.editListForm.setValue({
       title: this.list.name,
       description: this.list.description,
       deadline: this.list.deadline != null ? formatDate(this.list.deadline,'YYYY-MM-dd', 'en') : '',
-      is_private: !!this.list.is_private,
+      visibility: this.visibilityOptions[this.list.visibility],
       allow_comments: !!this.list.allow_comments
     })
-    this.isPrivate = !!this.list.is_private;
+    this.visibility = this.list.visibility;
     this.allowComments = !!this.list.allow_comments;
   }
   cancel() {
@@ -62,9 +62,9 @@ export class EditListComponent implements OnInit {
     }, () => {
     });
   }
-  isPrivateChecked(event) {
+  visibilityChecked(event) {
     console.log(event.target.checked)
-    return this.isPrivate = event.target.checked;
+    return this.visibility = event.target.checked;
   }
 
   allowCommentsChecked(event) {
@@ -74,5 +74,7 @@ export class EditListComponent implements OnInit {
   get title() {
     return this.editListForm.get('title');
   }
-
+  get visibilityValidation() {
+    return this.editListForm.get('visibility')
+  }
 }

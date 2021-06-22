@@ -21,14 +21,24 @@
       <label for='description' class='form__label'>Description (Optional)</label>
     </fieldset>
     <div class="l-row">
-      <!-- Description -->
-      <fieldset class='form__fieldset l-column'>
-        <input type='checkbox' checked='checked' value='is_private' id='is_private' formControlName='is_private' class='form__input--checkbox' (change)='isPrivateChecked($event)'>
-        <!-- Private List -->
-        <label class="form__label" for='is_private'>
-          <ng-container *ngIf='isPrivate === true else iconDefault'><i-feather name='check-square'></i-feather></ng-container>
-          <span>Private List</span></label>
+      <!-- List Visibility -->
+      <fieldset class='form__fieldset--row' id='visibility'>
+        <legend>List Visibility</legend>
+        <div>
+          <input type='radio' [value]='visibilityOptions[0]' id='private' formControlName='visibility' class='form__input--radio'>
+
+          <label class="form__label" for='private'><i class='form__radio'>&nbsp;</i><span>Private</span></label>
+        </div>
+        <div>
+          <input type='radio' [value]='visibilityOptions[1]' id='unlisted' formControlName='visibility' class='form__input--radio'>
+          <label class="form__label" for='unlisted'><i class='form__radio'>&nbsp;</i><span>Unlisted</span></label>
+        </div>
+        <div>
+          <input type='radio' [value]='visibilityOptions[2]' id='public' formControlName='visibility' class='form__input--radio'>
+          <label class="form__label" for='public'><i class='form__radio'>&nbsp;</i><span>Public</span></label>
+        </div>
       </fieldset>
+      <!-- End List Visibility -->
       <!-- Allow Comments -->
       <fieldset class='form__fieldset l-column'>
         <input type='checkbox' value='allow_comments' id='allow_comments' formControlName='allow_comments' class='form__input--checkbox' (change)='allowCommentsChecked($event)'>

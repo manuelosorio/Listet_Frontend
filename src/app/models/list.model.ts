@@ -6,7 +6,7 @@ export interface ListModel {
   creation_date: Date;
   is_complete: number;
   deadline: string | null;
-  is_private: number;
+  visibility: number;
   allow_comments: number;
   firstName: string;
   lastName: string;

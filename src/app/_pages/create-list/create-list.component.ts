@@ -3,6 +3,7 @@ import { AlertService } from '../../_services/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { Router } from '@angular/router';
+import { ListVisibility } from '../../helper/list-visibility';
 
 export interface Response {
   message: string;
@@ -11,12 +12,13 @@ export interface Response {
 
 @Component({
   selector: 'app-create-list',
-  templateUrl: './create-list.component.html'
+  templateUrl: './create-list.component.html',
+  styleUrls: ['./create-list.component.sass']
 })
 export class CreateListComponent implements OnInit {
-  createListForm: FormGroup;
-  isPrivate: boolean;
-  allowComments;
+  public createListForm: FormGroup;
+  public allowComments;
+  public visibilityOptions: ListVisibility[];
   private redirectURL;
 
   // errorMessage: string;
@@ -32,13 +34,14 @@ export class CreateListComponent implements OnInit {
       ]],
       description: [''],
       deadline: [''],
-      is_private: [''],
+      visibility: [ListVisibility.public],
       allow_comments: [true],
     });
   }
 
   ngOnInit(): void {
     this.allowComments = true;
+    this.visibilityOptions = [ListVisibility.private, ListVisibility.unlisted, ListVisibility.public]
   }
 
   onSubmit(data) {
@@ -54,9 +57,6 @@ export class CreateListComponent implements OnInit {
     }, () => {
     });
   }
-  isPrivateChecked(event) {
-    return this.isPrivate = event.target.checked;
-  }
 
   allowCommentsChecked(event) {
     return this.allowComments = event.target.checked;
@@ -65,8 +65,11 @@ export class CreateListComponent implements OnInit {
   get title() {
     return this.createListForm.get('title');
   }
-
+  get visibility() {
+    return this.createListForm.get('visibility')
+  }
   async redirect(url) {
     await this.router.navigate([url]);
   }
+
 }
