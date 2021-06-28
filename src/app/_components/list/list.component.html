@@ -1,6 +1,6 @@
 <section>
   <ngx-masonry [options]="masonryOptions" [ordered]="true" class="lists-container">
-    <div ngxMasonryItem class="masonry-item" *ngFor="let list of masonryLists">
+    <div ngxMasonryItem [ready]='true' class="masonry-item" *ngFor="let list of masonryLists">
       <a  class="list card" [routerLink]="[ '/l/' + list['slug']]">
         <div class="l-row">
           <h3 class="card__title">{{list['name']}}</h3>
