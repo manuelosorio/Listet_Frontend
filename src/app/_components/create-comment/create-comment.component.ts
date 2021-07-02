@@ -12,9 +12,10 @@ import { WebsocketService } from '../../_services/websocket.service';
   styleUrls: ['./create-comment.component.sass']
 })
 export class CreateCommentComponent implements OnInit, OnDestroy {
-  listData;
-  commentForm: FormGroup;
-  commentData;
+  public listData;
+  public commentForm: FormGroup;
+  public commentData;
+public commentCharacterCount: number
 
   private id;
   public commentsEnabled: boolean;
@@ -38,6 +39,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
       comment: ['', [
         Validators.required,
         Validators.minLength(20)
+
       ]]
     });
   }
@@ -48,7 +50,9 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
     });
   }
   get comment() {
-    return this.commentForm.get('comment');
+    const comment = this.commentForm.get('comment');
+    this.commentCharacterCount = comment.value.trim().length;
+    return comment;
   }
   onSubmit(data) {
     data.list_id = this.id;

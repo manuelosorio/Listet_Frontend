@@ -1,0 +1,36 @@
+@use "~src/sass/variables"
+@use "~src/sass/utils/size" as *
+svg
+  +size(100%)
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  overflow: visible
+  circle
+    stroke-width: 4px
+    fill: none
+    transition: variables.$t-linear
+    &.circle-bg
+      stroke: variables.$disabled
+    &.circle-fg
+      stroke: variables.$red
+      &__success
+        stroke: variables.$green
+\:host
+  position: relative
+  +size(55px)
+small
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  color: darken(variables.$red, 5%)
+
+i-feather
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  stroke: darken(variables.$green, 5%)
+  stroke-width: 3px
