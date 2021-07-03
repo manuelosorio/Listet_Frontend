@@ -14,10 +14,8 @@ export class CharacterCounterComponent implements OnInit {
     this.characterCount = value;
     const r = 27.5;
     const circleLength = 2*Math.PI*r;
-    this.grey = circleLength - this.colored > 0 ? circleLength - this.colored : 0;
-    this.colored = value > 0 ? (circleLength * value)/20: 1;
-
-    console.log("Character Counter Thing: ", this.colored)
+    this.coloredArea = value > 0 ? (circleLength * value)/this.minimumCount : 1;
+    this.greyedArea = circleLength - this.coloredArea > 0 ? circleLength - this.coloredArea : 0;
     console.log(value)
   }
   constructor() { }
