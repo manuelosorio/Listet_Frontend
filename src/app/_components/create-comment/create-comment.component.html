@@ -6,7 +6,7 @@
     </fieldset>
     <div class="form__fieldset--row" style="flex-direction: row; align-items: center">
       <button *ngIf="comment.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Comment</button>
-      <app-character-counter [minimumCount]='20' [characterCounter]='commentCharacterCount'></app-character-counter>
+      <app-character-counter [minimumCharacters]='20' [characterCounter]='commentCharacterCount'></app-character-counter>
     </div>
   </form>
 </ng-container>

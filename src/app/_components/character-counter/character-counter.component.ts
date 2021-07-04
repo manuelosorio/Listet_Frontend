@@ -7,16 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CharacterCounterComponent implements OnInit {
   public characterCount: number;
-  public coloredArea: number
-  public greyedArea: number
+  public coloredArea: number;
+  public greyedArea: number;
   public radius: number;
-  @Input() minimumCount: number
+  @Input() minimumCharacters: number;
   @Input() set characterCounter(value: number) {
     this.characterCount = value;
     const circleLength = 2*Math.PI*this.radius;
-    this.coloredArea = value > 0 ? (circleLength * value)/this.minimumCount : 1;
+    this.coloredArea = value > 0 ? (circleLength * value)/this.minimumCharacters : 1;
     this.greyedArea = circleLength - this.coloredArea > 0 ? circleLength - this.coloredArea : 0;
-    console.log(value)
   }
   constructor() {
     this.radius = 27.5;
