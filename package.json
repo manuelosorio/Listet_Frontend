@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "~12.0.4",
     "@angular/platform-server": "~12.0.4",
     "@angular/router": "~12.0.4",
-    "@nguniversal/express-engine": "~12.0.1",
+    "@nguniversal/express-engine": "~12.0.2",
     "angular-feather": "^6.1.0",
     "bufferutil": "^4.0.3",
     "classlist.js": "^1.1.20150312",
