@@ -1,10 +1,36 @@
-<svg>
-  <circle [attr.r]='radius' cx='50%' cy='50%' class='circle-bg'></circle>
-  <circle [attr.r]='radius' cx='50%' cy='50%' [class]='characterCount > 0 && characterCount < 20 ? "circle-fg" : characterCount > 19 ? "circle-fg__success" : "circle-bg"' [ngStyle]="{ 'stroke-dasharray': [coloredArea, greyedArea] }"></circle>
-</svg>
-<small *ngIf='characterCount < 20 else check'>
-  {{ characterCount }}/{{ minimumCharacters }}
-</small>
-<ng-template #check>
-  <i-feather name='check' class='check-mark'></i-feather>
+<ng-container *ngIf='minimumCharacters !== undefined else maximumCharacterCounter'>
+  <svg>
+    <circle [attr.r]='radius' cx='50%' cy='50%' class='circle-bg'></circle>
+    <circle [attr.r]='radius' cx='50%' cy='50%' [class]='characterCount > 0 && characterCount < minimumCharacters ? "circle-fg" : characterCount >= minimumCharacters ? "circle-fg__success" : "circle-bg"' [ngStyle]="{ 'stroke-dasharray': [coloredArea, greyedArea] }"></circle>
+    <ng-container *ngIf='maximumCharacters !== undefined'>
+      <circle [attr.r]='radius2' cx='50%' cy='50%' [class]='maxCharacterCount === 0 ? "" :maxCharacterCount >= maximumCharacters - 20 || maxCharacterCount < minimumCharacters ? "circle-fg": maxCharacterCount < maximumCharacters ? "circle-fg__success" : "circle-bg"' [ngStyle]="{ 'stroke-dasharray' : [coloredArea2, greyedArea2] }">
+      </circle>
+    </ng-container>
+  </svg>
+  <small>
+    <ng-container *ngIf='characterCount < minimumCharacters else status'>
+      {{ characterCount }}/{{ minimumCharacters }}
+    </ng-container>
+  </small>
+</ng-container>
+<ng-template #maximumCharacterCounter>
+  <svg>
+    <circle [attr.r]='radius' cx='50%' cy='50%' class='circle-bg'></circle>
+    <circle [attr.r]='radius2' cx='50%' cy='50%' [class]='maxCharacterCount == 0 ? "circle-bg" : maxCharacterCount > maximumCharacters - 20 ? "circle-fg" : maxCharacterCount < maximumCharacters ? "circle-fg__success": "circle-bg"' [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"></circle>
+  </svg>
+  <small>
+    <ng-container *ngIf=' maxCharacterCount < maximumCharacters - 20 else remainingCharacters'>
+      <i-feather name='check' class='check-mark'></i-feather>
+    </ng-container>
+  </small>
 </ng-template>
+<ng-template #status>
+  <ng-container *ngIf='maximumCharacters === undefined || maxCharacterCount < maximumCharacters - 20 else remainingCharacters'>
+    <i-feather name='check' class='check-mark'></i-feather>
+  </ng-container>
+</ng-template>
+<ng-template #remainingCharacters>
+  {{maximumCharacters - maxCharacterCount}}
+</ng-template>
+
+
