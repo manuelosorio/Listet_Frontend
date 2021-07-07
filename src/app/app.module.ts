@@ -50,6 +50,7 @@ import { ListDetailsModule } from './_pages/list-details/list-details.module';
 import { EditListComponent } from './_components/edit-list/edit-list.component';
 import { EditCommentComponent } from './_components/edit-comment/edit-comment.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
+import { CharacterCounterComponent } from './_components/character-counter/character-counter.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { YourListComponent } from './_pages/your-list/your-list.component';
     ActionButtonComponent,
     EditListComponent,
     EditCommentComponent,
-    YourListComponent
+    YourListComponent,
+    CharacterCounterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

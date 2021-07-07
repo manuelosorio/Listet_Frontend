@@ -4,8 +4,11 @@
       <textarea formControlName="comment" name="comment" id="comment" placeholder="Write a comment..." class="form__input--textarea"></textarea>
       <label for="comment" class="form__label">Create Comment</label>
     </fieldset>
-    <div class="form__fieldset--row" style="align-items: flex-start">
+    <div class="form__fieldset--row" style="flex-direction: row; align-items: center">
       <button *ngIf="comment.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Comment</button>
+      <app-character-counter [minimumCharacters]='20' [maximumCharacters]='500'
+                             [minCharacterCounter]='commentCharacterCount'
+                             [maxCharacterCounter]='commentCharacterCount'></app-character-counter>
     </div>
   </form>
 </ng-container>
