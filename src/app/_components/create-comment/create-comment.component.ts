@@ -38,8 +38,8 @@ public commentCharacterCount: number
     this.commentForm = formBuilder.group({
       comment: ['', [
         Validators.required,
-        Validators.minLength(20)
-
+        Validators.minLength(20),
+        Validators.maxLength(500)
       ]]
     });
   }
