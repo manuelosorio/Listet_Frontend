@@ -3,14 +3,21 @@
     <textarea formControlName="comment" name="comment" id="comment" placeholder="Write a comment..." class="form__input--textarea" [value]='commentModel.comment'></textarea>
     <label for="comment" class="form__label">Edit Comment</label>
   </fieldset>
-  <div class="buttons">
-    <app-action-button buttonStyle='primary' buttonType='submit'
-                       icon='check' message='Update Item'
-                       (click)='!comment.invalid ? submit(commentForm.value) : ""'
-                       role='button' [disabled]='comment.invalid'>
-    </app-action-button>
-    <app-action-button buttonStyle='default' buttonType='button' icon='x'
-                       message='Cancel' (click)='cancel()' role='button'>
-    </app-action-button>
+  <div class="form__fieldset--row" style="flex-direction: row; align-items: center">
+    <div class="buttons">
+      <app-action-button buttonStyle='primary' buttonType='submit'
+                         icon='check' message='Update Item'
+                         (click)='!comment.invalid ? submit(commentForm.value) : ""'
+                         role='button' [disabled]='comment.invalid'>
+      </app-action-button>
+      <app-action-button buttonStyle='default' buttonType='button' icon='x'
+                         message='Cancel' (click)='cancel()' role='button'>
+      </app-action-button>
+    </div>
+      <app-character-counter [minimumCharacters]='20'
+                             [maximumCharacters]='500'
+                             [minCharacterCounter]='commentCharacterCount'
+                             [maxCharacterCounter]='commentCharacterCount'>
+      </app-character-counter>
   </div>
 </form>

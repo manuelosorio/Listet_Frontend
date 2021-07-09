@@ -11,16 +11,19 @@ import { ListsService } from '../../_services/lists.service';
 export class EditCommentComponent implements OnInit {
   @Input() commentModel: CommentModel;
   public commentForm: FormGroup;
+  public commentCharacterCount: number;
   constructor(
     private formBuilder: FormBuilder,
     private listService: ListsService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.commentForm = this.formBuilder.group({
       comment: ['', [
         Validators.required,
-        Validators.minLength(20)
+        Validators.minLength(20),
+        Validators.maxLength(500)
       ]]
     });
     this.commentForm.setValue({
@@ -39,6 +42,8 @@ export class EditCommentComponent implements OnInit {
     });
   }
   get comment() {
-    return this.commentForm.get('comment');
+    const comment = this.commentForm.get('comment');
+    this.commentCharacterCount = comment.value.length ?? 0;
+    return comment;
   }
 }

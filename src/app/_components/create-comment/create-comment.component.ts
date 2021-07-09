@@ -15,7 +15,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;
   public commentForm: FormGroup;
   public commentData;
-public commentCharacterCount: number
+  public commentCharacterCount: number
 
   private id;
   public commentsEnabled: boolean;
@@ -61,6 +61,7 @@ public commentCharacterCount: number
       this.commentData = data;
       this.websocketService.emit(CommentEvents.CREATE_COMMENT, this.commentData);
       this.commentForm.reset();
+      this.commentCharacterCount = 0;
     }, error => {
       console.error(error);
     });

@@ -63,7 +63,6 @@ export class EditListComponent implements OnInit{
     });
   }
   visibilityChecked(event) {
-    console.log(event.target.checked)
     return this.visibility = event.target.checked;
   }
 
