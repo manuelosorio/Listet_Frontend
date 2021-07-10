@@ -7,8 +7,6 @@ import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
 import { ActivatedRoute } from '@angular/router';
 
-// import { ActivatedRoute } from '@angular/router';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
