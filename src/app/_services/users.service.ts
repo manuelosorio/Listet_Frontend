@@ -64,7 +64,7 @@ export class UsersService {
       );
   }
 
-  loginUser(value) {
+  loginUser(value, returnURL) {
     this.http.post(environment.host + '/login', value, {
       withCredentials: true
     }).subscribe(
@@ -74,22 +74,21 @@ export class UsersService {
         res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
                                              : this.alertService.success(res.message);
         setTimeout(() => {
-          this.router.navigate(['/']).then();
-        }, 2000);
+          this.router.navigate([returnURL ?? '/']).then();
+        }, 1000);
       }, (err) => {
         this.authenticatedSubject.next(false);
         err.error ? this.authenticationErrSubject.next({
-                    error: {
-                      message: err.error.message,
-                      code: err.error.status
-                    }
-                  })
-                  : this.authenticationErrSubject.next({
-                    error: {
-                      message: 'Unknown error has occurred!',
-                      code: 502
-                    }
-                  });
+          error: {
+            message: err.error.message,
+            code: err.error.status
+          }
+        }) : this.authenticationErrSubject.next({
+          error: {
+            message: 'Unknown error has occurred!',
+            code: 502
+          }
+        });
       }
     );
   }
@@ -101,7 +100,9 @@ export class UsersService {
       (res: any) => {
         this.alertService.success(res.message, true);
         setTimeout(() => {
-          this.router.navigate(['/login']).then();
+          this.router.navigate(['/login']).then(() => {
+            this.isVerified();
+          });
         }, 2500);
       }, (err) => {
         if (err) {

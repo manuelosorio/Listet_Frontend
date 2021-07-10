@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {UsersService} from '../../_services/users.service';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs/operators';
+import { UsersService } from '../../_services/users.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 })
 export class NavComponent implements OnInit, OnDestroy {
   authenticated: boolean;
-
   private authenticated$: Subscription;
   hideNavPaths = [
     '/login',
@@ -24,7 +23,7 @@ export class NavComponent implements OnInit, OnDestroy {
   isActive = false;
   constructor(
     private userService: UsersService,
-    private router: Router,
+    private router: Router
   ) {
     this.authenticated$ = this.userService.authenticated$.subscribe(authenticated => {
       this.authenticated = authenticated;
@@ -41,6 +40,11 @@ export class NavComponent implements OnInit, OnDestroy {
         }
       });
   }
+  login() {
+    this.router.navigate(["/login"], {
+      queryParams: { returnUrl: this.router.routerState.snapshot.url }
+    }).then();
+  }
   logout() {
     this.userService.logoutUser();
     // TODO: Find a proper way to
@@ -53,6 +57,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.isActive  = !this.isActive;
   }
   ngOnInit(): void {
+
   }
   ngOnDestroy() {
     this.authenticated$.unsubscribe();

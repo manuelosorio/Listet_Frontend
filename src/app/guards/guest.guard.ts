@@ -18,7 +18,7 @@ export class GuestGuard implements CanActivate {
       take(1),
       map((res: any) => {
         if (!res.authenticated) {
-          this.router.navigate(['/login']).then(() => {
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } }).then(() => {
             window.location.reload();
           });
           return false;
