@@ -5,6 +5,7 @@ import { UserError } from '../../models/errors/user.error';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
+import { ActivatedRoute } from '@angular/router';
 
 // import { ActivatedRoute } from '@angular/router';
 
@@ -18,13 +19,14 @@ export class LoginComponent implements OnInit {
   isChecked: boolean;
   errorMessage: string;
   private readonly meta: MetaTagModel;
+  private returnUrl: string;
 
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private seoService: SeoService,
-    // private route: ActivatedRoute,
+    private route: ActivatedRoute,
   ) {
     this.loginForm = formBuilder.group({
       email: ['', [
@@ -47,12 +49,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.isChecked = false;
-    this.seoService.updateInfo(this.meta);
-    // console.log(this.route.snapshot.queryParams.returnUrl);
+    this.seoService.updateInfo(this.meta)
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl;
   }
 
   onSubmit(data) {
-    this.userService.loginUser(data);
+    this.userService.loginUser(data, this.returnUrl);
     this.userService.authenticationErr.subscribe((res: UserError) => {
       this.errorMessage = res.error.message;
       this.alertService.error(this.errorMessage);

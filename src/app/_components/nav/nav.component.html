@@ -25,7 +25,7 @@
 
 <ng-template #navDefault>
   <li class="navigation--links-item">
-    <a class="btn btn--primary" routerLink="/login">Log In</a>
+    <button class="btn btn--primary" (click)='login()' >Log In</button>
   </li>
   <li class="navigation--links-item"><a routerLink="/register">Register</a></li>
 </ng-template>
