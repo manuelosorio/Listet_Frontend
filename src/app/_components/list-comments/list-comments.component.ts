@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
 import { formatDate, isPlatformBrowser } from '@angular/common';
@@ -29,15 +29,18 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   public isListOwner: boolean;
   public isAuth: boolean;
   private authenticated$: Subscription;
+  public returnUrl: string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
     private listDataService: ListDataService,
     private route: ActivatedRoute,
+    private router: Router,
     private websocketService: WebsocketService,
     private userService: UsersService
   ) {
     this.slug = this.route.snapshot.params.slug;
+    this.returnUrl = this.router.routerState.snapshot.url;
     this.listService.getListComments(this.slug);
 
     this.userService.username$.subscribe(res => {

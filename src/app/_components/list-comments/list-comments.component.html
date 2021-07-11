@@ -1,4 +1,4 @@
-<section class="l-container">
+<section class="l-container" id='comments'>
   <h3 *ngIf='commentsEnabled'>Comments ({{count ? count : 0}})</h3>
     <div class="l-row">
       <ng-container *ngIf='isAuth else commentAuth'>
@@ -40,7 +40,10 @@
     <p>This list doesn't have comments enabled</p>
   </div>
 </ng-template>
-
 <ng-template #commentAuth>
-  <p>You must be logged in to create comment. <a routerLink='/login'>Login to account.</a></p>
+  <p>You must be logged in to create comment.
+    <a routerLink='/login' [queryParams]="{ returnUrl: this.returnUrl }">
+      Login to account.
+    </a>
+  </p>
 </ng-template>
