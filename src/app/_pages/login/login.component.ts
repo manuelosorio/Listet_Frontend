@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
       this.alertService.error(this.errorMessage);
     });
     this.verify();
-
   }
 
   verify() {

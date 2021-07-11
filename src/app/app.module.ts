@@ -10,19 +10,14 @@ import { NgxMasonryModule } from './shared/ngx-masonry/ngx-masonry.module';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components/alert/alert.component';
 import { BackButtonComponent } from './_components/back-button/back-button.component';
+import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { FooterComponent } from './_components/footer/footer.component';
 import { ListComponent } from './_components/list/list.component';
-import { ListCommentsComponent } from './_components/list-comments/list-comments.component';
-import { ListItemsComponent } from './_components/list-items/list-items.component';
-import { ListHeaderComponent } from './_components/list-header/list-header.component';
 import { NavComponent } from './_components/nav/nav.component';
 import { UserComponent } from './_components/user/user.component';
-import { CreateCommentComponent } from './_components/create-comment/create-comment.component';
-import { AddItemComponent } from './_components/add-item/add-item.component';
-import { DeadlineComponent } from './_components/deadline/deadline.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
-import { EditListItemComponent } from './_components/edit-list-item/edit-list-item.component';
-import { ActionButtonComponent } from './_components/action-button/action-button.component';
+import { YourListComponent } from './_pages/your-list/your-list.component';
+
 
 // Guards
 import { GuestGuard } from './guards/guest.guard';
@@ -30,8 +25,11 @@ import { AuthGuard } from './guards/auth.guard';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
-import { IconsModule } from './_modules/icons/icons.module';
+import { ActionButtonModule } from './shared/action-button/action-button.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CharacterCounterModule } from './shared/character-counter/character-counter.module';
+import { IconsModule } from './_modules/icons/icons.module';
+import { DeadlineModule } from './shared/deadline/deadline.module';
 
 // Service
 import { ListDataService } from './shared/list-data.service';
@@ -39,19 +37,13 @@ import { ListDataService } from './shared/list-data.service';
 // Pages
 import { ForgotPasswordComponent } from './_pages/forgot-password/forgot-password.component';
 import { HomeComponent } from './_pages/home/home.component';
-import { ListDetailsComponent } from './_pages/list-details/list-details.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
-import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ListDetailsModule } from './_pages/list-details/list-details.module';
-import { EditListComponent } from './_components/edit-list/edit-list.component';
-import { EditCommentComponent } from './_components/edit-comment/edit-comment.component';
-import { YourListComponent } from './_pages/your-list/your-list.component';
-import { CharacterCounterComponent } from './_components/character-counter/character-counter.component';
-import { RouterStateSnapshot } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -65,37 +57,27 @@ import { RouterStateSnapshot } from '@angular/router';
     RegisterComponent,
     FooterComponent,
     LoginComponent,
-    ListDetailsComponent,
-    ListHeaderComponent,
-    ListCommentsComponent,
-    ListItemsComponent,
     NotFoundComponent,
     BackButtonComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
     VerifyAccountComponent,
     CreateListComponent,
-    CreateCommentComponent,
-    AddItemComponent,
-    DeadlineComponent,
-    EditListItemComponent,
-    ActionButtonComponent,
-    EditListComponent,
-    EditCommentComponent,
-    YourListComponent,
-    CharacterCounterComponent
+    YourListComponent
   ],
   imports: [
+    ActionButtonModule,
+    CharacterCounterModule,
+    DeadlineModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     IconsModule,
-    ListDetailsModule,
     NgxMasonryModule,
     BrowserAnimationsModule,
-    TransferHttpCacheModule
+    TransferHttpCacheModule,
   ],
   providers: [GuestGuard, AuthGuard, ListDataService],
   bootstrap: [AppComponent]
