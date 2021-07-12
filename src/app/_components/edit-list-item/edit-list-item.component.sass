@@ -5,7 +5,7 @@ form
   display: flex
   justify-content: center
   padding: 1rem
-  @media (min-width: variables.$medium)
+  @media (min-width: variables.$breakpoint-medium)
     padding: 1rem 0
 .edit-list
   display: flex
@@ -13,7 +13,7 @@ form
   width: 98%
   justify-content: space-around
   padding: 1rem
-  @media (min-width: variables.$medium)
+  @media (min-width: variables.$breakpoint-medium)
     flex-direction: row
     padding: 0
 
@@ -25,7 +25,7 @@ form
         background: #fff
   &__fieldset
     width: 100%
-    @media (min-width: variables.$medium)
+    @media (min-width: variables.$breakpoint-medium)
       margin-top: 0
       flex-basis: 45%
       + .form__fieldset
@@ -37,7 +37,7 @@ form
   margin-top: 1.35rem
   app-action-button + app-action-button
     margin-left: 1rem
-  @media (min-width: variables.$medium)
+  @media (min-width: variables.$breakpoint-medium)
     margin-top: 0
     margin-left: 1rem
 
@@ -46,5 +46,5 @@ form
   margin: 1.35rem 0
   input
     font-size: variables.$f-size--xx-small
-  @media (min-width: variables.$medium)
+  @media (min-width: variables.$breakpoint-medium)
     width: 65%
