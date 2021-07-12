@@ -42,8 +42,6 @@ import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
-import { ListDetailsModule } from './_pages/list-details/list-details.module';
-
 
 @NgModule({
   declarations: [
