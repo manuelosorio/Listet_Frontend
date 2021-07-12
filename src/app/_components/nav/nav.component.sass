@@ -1,4 +1,5 @@
-@use "../../../sass/variables"
+@use "~src/sass/variables"
+@use "~src/sass/utils/breakpoint/breakpoint" as *
 .navigation
   display: flex
   padding: 1rem 0
@@ -50,6 +51,25 @@
       padding: 2em 0
       margin: 0
       //top: 1rem
+    &__user
+      position: absolute
+      top: 3.5rem
+      right: -0.25rem
+      padding: 1rem
+      width: 14rem
+      margin: 1rem
+      text-align: center
+      list-style: none
+      box-shadow: variables.$shadow
+      border: 1px solid variables.$silver
+      border-radius: 10px
+      background: variables.$bg
+      z-index: 40
+      +breakpoint(variables.$breakpoint-medium)
+        top: 5.5rem
+        //right: -1.75rem
+      li
+        margin: 1em 0
     @media (min-width: variables.$breakpoint-medium)
       flex-direction: row
       top: initial

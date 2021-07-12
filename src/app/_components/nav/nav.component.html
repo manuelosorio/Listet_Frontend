@@ -4,6 +4,17 @@
     <ng-container *ngIf="this.loginPath === false">
       <button class="navigation--menu" (click)="toggleActive()"><i-feather name="menu" [class.is-active]='isActive' ></i-feather><span class="menu--text">Menu</span></button>
     </ng-container>
+    <ng-container *ngIf="authenticated">
+      <div class='visibility--flex visibility--none__md' style='margin: 0 4%'>
+        <feather-icon name='user-circle'></feather-icon>
+        <ul class="navigation--links__user">
+          Hello {{this.username}}
+          <li><a>profile</a></li>
+          <li><a>Settings</a></li>
+          <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </ng-container>
   </div>
   <ng-container *ngIf="this.loginPath === false">
     <ul class="navigation--links" [class.is-active]="isActive">
@@ -16,10 +27,19 @@
         <li class="navigation--links-item">
           <a class="btn btn--primary" routerLink="/create-list">Create List</a>
         </li>
-        <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
-<!--        <li class="navigation--links-item"><i-feather name="User"></i-feather></li>-->
       </ng-container>
     </ul>
+    <ng-container *ngIf="authenticated">
+      <div class='visibility--none visibility--flex__md'>
+        <feather-icon name='user-circle'></feather-icon>
+        <ul class="navigation--links__user">
+          Hello {{this.username}}
+          <li><a>profile</a></li>
+          <li><a>Settings</a></li>
+          <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </ng-container>
   </ng-container>
 </nav>
 
