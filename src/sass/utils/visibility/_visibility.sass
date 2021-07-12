@@ -4,15 +4,17 @@
 
 
 @each $property in $display
-  +breakpoint(variables.$breakpoint-x-small)
-    .visibility--#{$property}__xs
-      display: $property
-  +breakpoint(variables.$breakpoint-small)
-    .visibility--#{$property}__sm
-      display: $property
-  +breakpoint(variables.$breakpoint-medium)
-    .visibility--#{$property}__md
-      display: $property
-  +breakpoint(variables.$breakpoint-large)
-    .visibility--#{$property}__lg
-      display: $property
+  .visibility--#{ $property }
+    display: #{ $property }
+    +breakpoint(variables.$breakpoint-x-small)
+      &__xs
+        display: #{ $property } !important
+    +breakpoint(variables.$breakpoint-small)
+      &__sm
+        display: #{ $property } !important
+    +breakpoint(variables.$breakpoint-medium)
+      &__md
+        display: #{ $property } !important
+    +breakpoint(variables.$breakpoint-large)
+      &__lg
+        display: #{ $property } !important
