@@ -9,7 +9,7 @@
         <feather-icon name='user-circle'></feather-icon>
         <ul class="navigation--links__user">
           Hello {{this.username}}
-          <li tabindex='0'><a>profile</a></li>
+          <li tabindex='0'><a [routerLink]='"/u/" + username'>profile</a></li>
           <li tabindex='0'><a>Settings</a></li>
           <li class="navigation--links-item" tabindex='0'><a (click)="logout()">Logout</a></li>
         </ul>
@@ -33,7 +33,7 @@
       <div class='visibility--none visibility--flex__md user-nav-wrapper' tabindex='0'>
         <feather-icon name='user-circle'></feather-icon>
         <ul class="navigation--links__user">
-          <li tabindex='0'><a>profile</a></li>
+          <li tabindex='0'><a [routerLink]='"/u/" + username'>profile</a></li>
           <li tabindex='0'><a>Settings</a></li>
           <li class="navigation--links-item" tabindex='0'><a (click)="logout()">Logout</a></li>
         </ul>
