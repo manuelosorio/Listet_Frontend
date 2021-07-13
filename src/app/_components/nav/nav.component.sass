@@ -53,6 +53,7 @@
       margin: 0
       //top: 1rem
     &__user
+      display: none
       position: absolute
       top: 3.5rem
       right: -0.25rem
@@ -95,3 +96,7 @@
 .menu--text
   margin-left: 0.75rem
 
+.user-nav-wrapper
+  &:focus, &:focus-within
+    .navigation--links__user
+      display: block
