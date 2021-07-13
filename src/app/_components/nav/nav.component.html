@@ -5,13 +5,13 @@
       <button class="navigation--menu" (click)="toggleActive()"><i-feather name="menu" [class.is-active]='isActive' ></i-feather><span class="menu--text">Menu</span></button>
     </ng-container>
     <ng-container *ngIf="authenticated">
-      <div class='visibility--flex visibility--none__md' style='margin: 0 4%'>
+      <div class='visibility--flex visibility--none__md user-nav-wrapper' tabindex='0'>
         <feather-icon name='user-circle'></feather-icon>
         <ul class="navigation--links__user">
           Hello {{this.username}}
-          <li><a>profile</a></li>
-          <li><a>Settings</a></li>
-          <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
+          <li tabindex='0'><a>profile</a></li>
+          <li tabindex='0'><a>Settings</a></li>
+          <li class="navigation--links-item" tabindex='0'><a (click)="logout()">Logout</a></li>
         </ul>
       </div>
     </ng-container>
@@ -30,13 +30,12 @@
       </ng-container>
     </ul>
     <ng-container *ngIf="authenticated">
-      <div class='visibility--none visibility--flex__md'>
+      <div class='visibility--none visibility--flex__md user-nav-wrapper' tabindex='0'>
         <feather-icon name='user-circle'></feather-icon>
         <ul class="navigation--links__user">
-          Hello {{this.username}}
-          <li><a>profile</a></li>
-          <li><a>Settings</a></li>
-          <li class="navigation--links-item"><a (click)="logout()">Logout</a></li>
+          <li tabindex='0'><a>profile</a></li>
+          <li tabindex='0'><a>Settings</a></li>
+          <li class="navigation--links-item" tabindex='0'><a (click)="logout()">Logout</a></li>
         </ul>
       </div>
     </ng-container>
