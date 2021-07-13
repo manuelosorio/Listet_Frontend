@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // Components
 import { ListComponent } from './_components/list/list.component';
-import { UserComponent } from './_components/user/user.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 
 // Guards
@@ -73,6 +72,8 @@ const routes: Routes = [
     // component: ListDetailsComponent,
   },
   { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard] },
+  { path: 'settings', canActivate: [GuestGuard],
+    loadChildren: () => import('./_pages/settings/settings.module').then(m => m.SettingsModule)},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
   { path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard] },
