@@ -20,6 +20,7 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
+import { SettingsComponent } from './_pages/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -59,7 +60,6 @@ const routes: Routes = [
   {
     path: 'u/:username', component: ProfileComponent, data: [{
       author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
       title: 'Listet App - ',
       openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
       twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
@@ -72,6 +72,8 @@ const routes: Routes = [
     // component: ListDetailsComponent,
   },
   { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard] },
+  { path: 'settings', canActivate: [GuestGuard],
+    loadChildren: () => import('./_pages/settings/settings.module').then(m => m.SettingsModule)},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
   { path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard] },
