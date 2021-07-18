@@ -53,13 +53,13 @@
       margin: 0
       //top: 1rem
     &__user
-      display: none
+      display: block
       position: absolute
-      top: 3.5rem
+      top: 1.75rem
       right: -0.25rem
       padding: 1rem
       width: 14rem
-      margin: 1rem
+      //margin: 1rem
       text-align: center
       list-style: none
       box-shadow: variables.$shadow
@@ -68,7 +68,7 @@
       background: variables.$bg
       z-index: 40
       +breakpoint(variables.$breakpoint-medium)
-        top: 5.5rem
+        top: 2.25rem
         //right: -1.75rem
       li
         margin: 1em 0
@@ -97,6 +97,23 @@
   margin-left: 0.75rem
 
 .user-nav-wrapper
-  &:focus, &:focus-within
-    .navigation--links__user
-      display: block
+  position: relative
+  &__sub-container
+    position: absolute
+    display: block
+    visibility: hidden
+    opacity: 0
+    padding: 1rem
+    height: 100px
+    width: 150px
+    right: 0
+  &:hover, &:focus, &:focus-within
+    .user-nav-wrapper__sub-container
+      visibility: visible
+      opacity: 1
+.user-nav-wrapper .user-nav-wrapper__sub-container:hover
+  visibility: visible
+  opacity: 1
+feather-icon[name*="user-circle"]
+  cursor: pointer
+
