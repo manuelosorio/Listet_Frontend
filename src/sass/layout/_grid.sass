@@ -1,0 +1,20 @@
+@use "src/sass/variables"
+@use "src/sass/utils/breakpoint/breakpoint" as bp
+
+$breakpoints: ("xs", "sm", "md", "lg")
+@each $size in $breakpoints
+  .l-
+    &column
+      order: variables.$columns + 1
+      max-width: 98%
+      flex-basis: 98%
+      margin-bottom: 15px
+      +bp.breakpoint($size)
+        @for $i from 1 through variables.$columns
+          &-#{$size}
+            &-#{$i}
+              max-width: unquote((variables.$grid-width * $i) - variables.$gutter + (variables.$gutter-space * $i) + '%')
+              flex-basis: unquote((variables.$grid-width * $i) - variables.$gutter + (variables.$gutter-space * $i) + '%')
+              margin: 0
+            &-order-#{$i}
+              order: $i
