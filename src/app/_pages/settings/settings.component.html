@@ -1,1 +1,14 @@
-<h1>settings works!</h1>
+<div class='l-container__1200--row'>
+  <aside class='l-column-xs-3 l-column-md-2'>
+    <nav>
+      <ul>
+        <li><a [routerLink]="['/settings']">Profile</a></li>
+        <li><a [routerLink]="['change-password']">Password</a></li>
+        <li><a [routerLink]="['delete-account']">Delete Account</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <div class='card l-column-xs-9 l-column-md-8'>
+    <router-outlet></router-outlet>
+  </div>
+</div>
