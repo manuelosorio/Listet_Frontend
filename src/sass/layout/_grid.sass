@@ -2,13 +2,13 @@
 @use "src/sass/utils/breakpoint/breakpoint" as bp
 
 $breakpoints: ("xs", "sm", "md", "lg")
+[class^="l-column"]
+  order: variables.$columns + 1
+  max-width: 98%
+  flex-basis: 98%
+  margin-bottom: 15px
 @each $size in $breakpoints
-  .l-
-    &column
-      order: variables.$columns + 1
-      max-width: 98%
-      flex-basis: 98%
-      margin-bottom: 15px
+  .l-column
       +bp.breakpoint($size)
         @for $i from 1 through variables.$columns
           &-#{$size}
