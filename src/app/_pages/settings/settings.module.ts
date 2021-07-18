@@ -9,7 +9,12 @@ import { SettingsPasswordComponent } from '../../_components/settings-password/s
 const routes: Routes = [
   {
     path: '',
-    component: SettingsComponent
+    component: SettingsComponent,
+    children: [
+      { path: '', component: SettingsProfileComponent },
+      { path: 'change-password', component: SettingsPasswordComponent },
+      { path: 'delete-account', component: SettingsDeleteAccountComponent },
+    ]
   },
 ];
 
