@@ -42,7 +42,6 @@ import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
-import { SettingsComponent } from './_pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -62,8 +61,7 @@ import { SettingsComponent } from './_pages/settings/settings.component';
     ForgotPasswordComponent,
     VerifyAccountComponent,
     CreateListComponent,
-    YourListComponent,
-    SettingsComponent
+    YourListComponent
   ],
   imports: [
     ActionButtonModule,
