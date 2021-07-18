@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // Components
 import { ListComponent } from './_components/list/list.component';
-import { UserComponent } from './_components/user/user.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 
 // Guards
@@ -20,7 +19,6 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
-import { SettingsComponent } from './_pages/settings/settings.component';
 
 const routes: Routes = [
   {
