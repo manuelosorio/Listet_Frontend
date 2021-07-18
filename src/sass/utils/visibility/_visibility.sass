@@ -1,20 +1,20 @@
 @use "~src/sass/variables"
-@use "../breakpoint/breakpoint" as *
+@use "~src/sass/utils/breakpoint/breakpoint" as bp
 @use "./display" as *
 
 
 @each $property in $display
   .visibility--#{ $property }
     display: #{ $property }
-    +breakpoint(variables.$breakpoint-x-small)
+    +bp.breakpoint("xs")
       &__xs
         display: #{ $property } !important
-    +breakpoint(variables.$breakpoint-small)
+    +bp.breakpoint("sm")
       &__sm
         display: #{ $property } !important
-    +breakpoint(variables.$breakpoint-medium)
+    +bp.breakpoint("md")
       &__md
         display: #{ $property } !important
-    +breakpoint(variables.$breakpoint-large)
+    +bp.breakpoint("lg")
       &__lg
         display: #{ $property } !important
