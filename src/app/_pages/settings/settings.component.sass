@@ -1,2 +1,15 @@
+@use "~src/sass/variables"
+@use "~src/sass/utils/breakpoint/breakpoint" as *
 aside
   text-align: right
+nav li
+  font-size: variables.$f-size--x-small
+  font-weight: variables.$f-weight--regular
+  +breakpoint("md")
+    font-size: variables.$f-size--medium
+.is-active
+  color: variables.$black
+  font-weight: variables.$f-weight--medium
+ul
+  margin: 0
+  padding: 0
