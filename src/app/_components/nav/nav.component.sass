@@ -55,7 +55,7 @@
     &__user
       display: block
       position: absolute
-      top: 1.75rem
+      top: 2.5rem
       right: -0.25rem
       padding: 1rem
       width: 14rem
@@ -67,11 +67,15 @@
       border-radius: 10px
       background: variables.$bg
       z-index: 40
-      +breakpoint(variables.$breakpoint-medium)
-        top: 2.25rem
+      +breakpoint("md")
+        top: 3.25rem
         //right: -1.75rem
       li
         margin: 1em 0
+        &:first-child
+          margin-top: 0
+        &:last-child
+          margin-bottom: 0
     @media (min-width: variables.$breakpoint-medium)
       flex-direction: row
       top: initial

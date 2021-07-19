@@ -47,7 +47,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     userService.isAuth();
     this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;
-    this.username$ = userService.username$.subscribe(res => {
+    this.username$ = userService.userInfo$.subscribe(res => {
       this.isOwner = this.username === res;
     });
     if (this.isBrowser) {

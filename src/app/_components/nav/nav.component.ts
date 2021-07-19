@@ -23,6 +23,7 @@ export class NavComponent implements OnInit, OnDestroy {
   loginPath: boolean;
   isActive = false;
   public username: string;
+  public fullName: string
   public userCircle;
   constructor(
     private userService: UsersService,
@@ -31,8 +32,12 @@ export class NavComponent implements OnInit, OnDestroy {
     this.authenticated$ = this.userService.authenticated$.subscribe(authenticated => {
       this.authenticated = authenticated;
     });
-    this.userService.username$.subscribe(res => {
-      this.username = res;
+    this.userService.userInfo$.subscribe(res => {
+      console.log('User Info:', res)
+      try {
+        this.username = res.username;
+        this.fullName = `${res.firstName} ${res.lastName}`
+      } catch (e) {}
     });
     this.userCircle = UserCircle;
     router.events.pipe(

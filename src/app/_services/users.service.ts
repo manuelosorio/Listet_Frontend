@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserError } from '../models/errors/user.error';
 import { AlertService } from './alert.service';
+import { UserModel } from '../models/user.model';
 
 // noinspection HtmlUnknownTarget
 @Injectable({
@@ -20,9 +21,9 @@ export class UsersService {
   private verifiedSubject: Subject<boolean>;
   public verified: Observable<boolean>;
 
-  private username: string;
-  private usernameSubject: BehaviorSubject<string>;
-  public username$: Observable<string>;
+  private userInfo: UserModel;
+  private userInfoSubject: BehaviorSubject<UserModel>;
+  public userInfo$: Observable<UserModel>;
 
   private authenticationErrSubject: Subject<UserError>;
   public authenticationErr: Observable<UserError>;
@@ -38,8 +39,8 @@ export class UsersService {
     this.authenticationErr = this.authenticationErrSubject.asObservable();
     this.verifiedSubject = new Subject();
     this.verified = this.verifiedSubject.asObservable();
-    this.usernameSubject = new BehaviorSubject(this.username);
-    this.username$ = this.usernameSubject.asObservable();
+    this.userInfoSubject = new BehaviorSubject(this.userInfo);
+    this.userInfo$ = this.userInfoSubject.asObservable();
     this.isAuth();
     this.isVerified();
   }
@@ -70,9 +71,19 @@ export class UsersService {
     }).subscribe(
       (res: any) => {
         this.authenticatedSubject.next(true);
-        this.usernameSubject.next(res.username);
+        this.userInfoSubject.next({
+          email: res.email,
+          firstName: res.firstName,
+          lastName: res.lastName,
+          username: res.username
+        });
+
+
         res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
                                              : this.alertService.success(res.message);
+        if (!res.verified) {
+          this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
+        }
         setTimeout(() => {
           this.router.navigate([returnURL ?? '/']).then();
         }, 1000);
@@ -138,7 +149,13 @@ export class UsersService {
     }).subscribe((res: any) => {
 
       this.authenticatedSubject.next(res.authenticated);
-      this.usernameSubject.next(res.username);
+      this.userInfoSubject.next({
+        email: res.email,
+        firstName: res.firstName,
+        lastName: res.lastName,
+        username: res.username
+      });
+
     }, () => {
       this.alertService.error('Oops, something went wrong getting the logged in status');
     });
