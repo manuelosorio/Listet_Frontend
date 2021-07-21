@@ -44,7 +44,9 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     this.listService.getListComments(this.slug);
 
     this.userService.userInfo$.subscribe(res => {
-      this.username = res.username;
+      try {
+        this.username = res.username
+      } catch (e) {}
     });
   }
   ngOnInit(): void {
