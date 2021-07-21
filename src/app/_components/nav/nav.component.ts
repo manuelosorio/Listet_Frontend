@@ -33,7 +33,6 @@ export class NavComponent implements OnInit, OnDestroy {
       this.authenticated = authenticated;
     });
     this.userService.userInfo$.subscribe(res => {
-      console.log('User Info:', res)
       try {
         this.username = res.username;
         this.fullName = `${res.firstName} ${res.lastName}`
