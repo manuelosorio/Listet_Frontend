@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
 import { AlertService } from '../../_services/alert.service';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-list-header',
@@ -116,9 +117,9 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       author: data[0].firstName + ' ' + data[0].lastName,
       description: listDescription,
       title: 'Listet App - ' + data[0].name,
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: `https://listet.manuelosorio.me/l/${this.slug}`
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/l/${this.slug}`
     };
   }
 

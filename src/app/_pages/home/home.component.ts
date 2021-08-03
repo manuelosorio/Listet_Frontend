@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,9 @@ export class HomeComponent implements OnInit {
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Home',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/`
     };
   }
 

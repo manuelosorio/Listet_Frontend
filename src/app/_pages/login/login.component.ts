@@ -6,6 +6,7 @@ import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -39,9 +40,9 @@ export class LoginComponent implements OnInit {
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Login',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/login/'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/login/`
     };
   }
 
