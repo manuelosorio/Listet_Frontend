@@ -4,6 +4,7 @@ import { UsersService } from '../../_services/users.service';
 import { UserError } from '../../models/errors/user.error';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -44,9 +45,9 @@ export class RegisterComponent implements OnInit {
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Register Account',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/register/'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/register/`
     };
   }
 

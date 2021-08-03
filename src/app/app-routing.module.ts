@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -26,9 +27,9 @@ const routes: Routes = [
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Home',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/`
     }]
   },
   {
@@ -36,9 +37,9 @@ const routes: Routes = [
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Lists',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/lists'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/lists`
     }]
   },
   {
@@ -46,9 +47,9 @@ const routes: Routes = [
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',
       title: 'Listet App - Lists',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/lists'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/lists`
     }],
     canActivate: [GuestGuard]
   },
@@ -59,9 +60,9 @@ const routes: Routes = [
     path: 'u/:username', component: ProfileComponent, data: [{
       author: 'Manuel Osorio',
       title: 'Listet App - ',
-      openGraphImage: 'https://listet.manuelosorio.me/assets/images/listet-open-graph.jpg',
-      twitterImage: 'https://listet.manuelosorio.me/assets/images/listet-twitter.jpg',
-      url: 'https://listet.manuelosorio.me/'
+      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+      url: `${environment.url}/`
     }]
   },
   {
