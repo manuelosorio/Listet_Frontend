@@ -9,7 +9,6 @@ import { UserError } from '../models/errors/user.error';
 import { AlertService } from './alert.service';
 import { UserModel } from '../models/user.model';
 
-// noinspection HtmlUnknownTarget
 @Injectable({
   providedIn: 'root'
 })
