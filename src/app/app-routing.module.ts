@@ -20,6 +20,7 @@ import { CreateListComponent } from './_pages/create-list/create-list.component'
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
 import { environment } from '../environments/environment';
+import { VerifiedGuard } from './guards/verified.guard';
 
 const routes: Routes = [
   {
@@ -51,11 +52,10 @@ const routes: Routes = [
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
       url: `${environment.url}/lists`
     }],
-    canActivate: [GuestGuard]
+    canActivate: [GuestGuard],
   },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  // { path: 'users', component: UserComponent, canActivate: [GuestGuard] },
   {
     path: 'u/:username', component: ProfileComponent, data: [{
       author: 'Manuel Osorio',
@@ -70,7 +70,7 @@ const routes: Routes = [
     loadChildren: () => import('./_pages/list-details/list-details.module').then(m => m.ListDetailsModule),
     // component: ListDetailsComponent,
   },
-  { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard] },
+  { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard, VerifiedGuard] },
   { path: 'settings', canActivate: [GuestGuard],
     loadChildren: () => import('./_pages/settings/settings.module').then(m => m.SettingsModule)},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },

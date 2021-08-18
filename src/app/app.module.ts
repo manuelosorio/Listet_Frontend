@@ -42,6 +42,7 @@ import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
+import { VerifiedGuard } from './guards/verified.guard';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
     BrowserAnimationsModule,
     TransferHttpCacheModule,
   ],
-  providers: [GuestGuard, AuthGuard, ListDataService],
+  providers: [GuestGuard, VerifiedGuard, AuthGuard, ListDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
