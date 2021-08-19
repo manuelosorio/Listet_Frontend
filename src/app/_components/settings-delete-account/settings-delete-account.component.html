@@ -1,1 +1,11 @@
-<p>settings-delete-account works!</p>
+<h1>Account Deletion</h1>
+<form [formGroup]='formGroup'>
+  <fieldset class='form__fieldset'>
+    <input name='password' formControlName='password' class='form__input' id='password'>
+    <label for='password' class='form__label'>password</label>
+  </fieldset>
+  <div class='l-row'>
+    <button class='btn btn--disabled l-column-md-6' disabled>Delete Account<feather-icon name='info' title='Account Deletion Coming Soon'></feather-icon></button>
+    <button class='btn btn--primary l-column-md-6' (click)='deactivateAccount(formGroup.value)'>Deactivate Account</button>
+  </div>
+</form>

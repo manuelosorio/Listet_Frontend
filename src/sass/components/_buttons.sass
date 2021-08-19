@@ -15,6 +15,7 @@
     box-shadow: variables.$shadow-hover
     transform: translateY(3px)
   &--primary
+    @extend .btn
     background: variables.$primary
     box-shadow: variables.$shadow
     &:hover
@@ -28,10 +29,13 @@
     span
       padding: 1em
   &--disabled
+    @extend .btn
     background: variables.$disabled
-    border: solid 1 px variables.$disabled
+    border: solid 1px variables.$disabled
     cursor: not-allowed
     color: variables.$disabled-text
     &:hover
       background: variables.$disabled
       box-shadow: inherit
+    &:active
+      transform: none
