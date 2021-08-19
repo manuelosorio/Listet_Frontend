@@ -5,9 +5,10 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UserError } from '../models/errors/user.error';
+import { ErrorResponse } from '../models/response/errors/error.response';
 import { AlertService } from './alert.service';
 import { UserModel } from '../models/user.model';
+import { EndpointResponse } from '../models/response/endpoint.response';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class UsersService {
   private userInfoSubject: BehaviorSubject<UserModel>;
   public userInfo$: Observable<UserModel>;
 
-  private authenticationErrSubject: Subject<UserError>;
-  public authenticationErr: Observable<UserError>;
+  private authenticationErrSubject: Subject<ErrorResponse>;
+  public authenticationErr: Observable<ErrorResponse>;
 
   constructor(
     private http: HttpClient,
@@ -129,7 +130,7 @@ export class UsersService {
         this.router.navigate(['/login']).then();
       }, (err) => {
         if (err) {
-          this.alertService.warning(`Token has expired or been deleted <a href="/forgot-password">create new token.</a>`, false);
+          this.alertService.warning(`Token has expired or been deleted <a href=${environment.url}/forgot-password>create new token.</a>`, false);
         }
       });
   }
@@ -188,6 +189,33 @@ export class UsersService {
     ).subscribe(res => {
       console.log(res);
       this.router.navigate(['/']).then();
+    });
+  }
+
+  changePassword(data) {
+    return this.http.put(`${environment.host}/update-password`, data, {
+      withCredentials: true
+    });
+  }
+  updateAccountInfo(data) {
+    return this.http.put(`${environment.host}/update-account-info`, data, {
+      withCredentials: true
+    });
+  }
+  deactivateAccount(data) {
+    return this.http.put(environment.host + "/deactivate-account", data, {
+      withCredentials: true
+    }).subscribe((res: EndpointResponse) => {
+
+      !!res.status ? this.alertService.warning(res.message) : this.alertService.success(res.message);
+    }, (error: ErrorResponse) => {
+      console.error(error);
+      this.alertService.error(error.error.message);
+    });
+  }
+  reactivateAccount() {
+    return this.http.put(`${environment.host}/reactivate-account`, null, {
+      withCredentials: true
     });
   }
 }
