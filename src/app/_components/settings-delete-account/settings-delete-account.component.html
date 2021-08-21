@@ -1,11 +1,13 @@
-<h1>Account Deletion</h1>
+<div style='max-width: 90%; margin: 0 auto;'>
+  <h1>Account Deletion</h1>
+</div>
 <form [formGroup]='formGroup'>
-  <fieldset class='form__fieldset'>
+  <fieldset class='form__fieldset form__fieldset--row'>
     <input name='password' formControlName='password' class='form__input' id='password'>
     <label for='password' class='form__label'>password</label>
   </fieldset>
-  <div class='l-row'>
+  <fieldset class='form__fieldset form__fieldset--row'>
     <button class='btn btn--disabled l-column-md-6' disabled>Delete Account<feather-icon name='info' title='Account Deletion Coming Soon'></feather-icon></button>
     <button class='btn btn--primary l-column-md-6' (click)='deactivateAccount(formGroup.value)'>Deactivate Account</button>
-  </div>
+  </fieldset>
 </form>
