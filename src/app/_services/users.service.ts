@@ -200,6 +200,12 @@ export class UsersService {
   updateAccountInfo(data) {
     return this.http.put(`${environment.host}/update-account-info`, data, {
       withCredentials: true
+    }).subscribe((res: EndpointResponse) => {
+      this.alertService.success(res.message)
+      this.userInfoSubject.next(data);
+    }, (error: ErrorResponse) => {
+      console.error(error);
+      this.alertService.error(error.error.message)
     });
   }
   deactivateAccount(data) {
