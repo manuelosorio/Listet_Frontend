@@ -1,1 +1,22 @@
-<p>settings-profile works!</p>
+<div style='max-width: 90%; margin: 0 auto;'>
+  <h1>Profile Information</h1>
+</div>
+<form [formGroup]='profileForm' (ngSubmit)='submit(profileForm.value)'>
+    <fieldset class='form__fieldset form__fieldset--row'>
+      <div class='form__column'>
+        <input class='form__input' type='text' formControlName='firstName' id='firstName'>
+        <label class='form__label' for='firstName'>First Name</label>
+      </div>
+      <div class='form__column'>
+        <input class='form__input' type='text' formControlName='lastName' id='lastName'>
+        <label class='form__label' for='lastName'>Last Name</label>
+      </div>
+    </fieldset>
+    <fieldset class='form__fieldset form__fieldset--row' id='email'>
+      <input class='form__input' type='email' formControlName='email'>
+      <label class='form__label' for='email'>Email</label>
+    </fieldset>
+    <div class='form__row'>
+      <button class='btn--primary'><i-feather name='save'></i-feather><span style='margin-left: 1rem'>Save Changes</span></button>
+    </div>
+</form>
