@@ -1,3 +1,5 @@
+@use "src/sass/variables"
+@import "grid"
 .l-
   &container
     &__1200
@@ -6,6 +8,9 @@
       margin: auto
       max-width: 1200px
       width: 90%
+      &--row
+        @extend .l-container__1200
+        flex-direction: row
     &__form
       display: flex
       flex-direction: column

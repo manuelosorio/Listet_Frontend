@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // Components
 import { ListComponent } from './_components/list/list.component';
-import { UserComponent } from './_components/user/user.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 
 // Guards
@@ -21,6 +20,7 @@ import { CreateListComponent } from './_pages/create-list/create-list.component'
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
 import { environment } from '../environments/environment';
+import { VerifiedGuard } from './guards/verified.guard';
 
 const routes: Routes = [
   {
@@ -52,15 +52,13 @@ const routes: Routes = [
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
       url: `${environment.url}/lists`
     }],
-    canActivate: [GuestGuard]
+    canActivate: [GuestGuard],
   },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  // { path: 'users', component: UserComponent, canActivate: [GuestGuard] },
   {
     path: 'u/:username', component: ProfileComponent, data: [{
       author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
       title: 'Listet App - ',
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
@@ -72,7 +70,9 @@ const routes: Routes = [
     loadChildren: () => import('./_pages/list-details/list-details.module').then(m => m.ListDetailsModule),
     // component: ListDetailsComponent,
   },
-  { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard] },
+  { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard, VerifiedGuard] },
+  { path: 'settings', canActivate: [GuestGuard],
+    loadChildren: () => import('./_pages/settings/settings.module').then(m => m.SettingsModule)},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
   { path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard] },

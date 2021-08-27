@@ -3,11 +3,11 @@ import { UsersService } from '../../_services/users.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-
+import { UserCircle } from '../../shared/other-icons';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.sass']
+  styleUrls: ['./nav.component.sass'],
 })
 export class NavComponent implements OnInit, OnDestroy {
   authenticated: boolean;
@@ -19,8 +19,12 @@ export class NavComponent implements OnInit, OnDestroy {
     '/reset-password',
     '/reset-password/**'
   ].toString().split(',');
+
   loginPath: boolean;
   isActive = false;
+  public username: string;
+  public fullName: string
+  public userCircle;
   constructor(
     private userService: UsersService,
     private router: Router
@@ -28,6 +32,13 @@ export class NavComponent implements OnInit, OnDestroy {
     this.authenticated$ = this.userService.authenticated$.subscribe(authenticated => {
       this.authenticated = authenticated;
     });
+    this.userService.userInfo$.subscribe(res => {
+      try {
+        this.username = res.username;
+        this.fullName = `${res.firstName} ${res.lastName}`
+      } catch (e) {}
+    });
+    this.userCircle = UserCircle;
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
       ).subscribe((event: NavigationEnd) => {

@@ -5,10 +5,11 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UserError } from '../models/errors/user.error';
+import { ErrorResponse } from '../models/response/errors/error.response';
 import { AlertService } from './alert.service';
+import { UserModel } from '../models/user.model';
+import { EndpointResponse } from '../models/response/endpoint.response';
 
-// noinspection HtmlUnknownTarget
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +21,12 @@ export class UsersService {
   private verifiedSubject: Subject<boolean>;
   public verified: Observable<boolean>;
 
-  private username: string;
-  private usernameSubject: BehaviorSubject<string>;
-  public username$: Observable<string>;
+  private userInfo: UserModel;
+  private userInfoSubject: BehaviorSubject<UserModel>;
+  public userInfo$: Observable<UserModel>;
 
-  private authenticationErrSubject: Subject<UserError>;
-  public authenticationErr: Observable<UserError>;
+  private authenticationErrSubject: Subject<ErrorResponse>;
+  public authenticationErr: Observable<ErrorResponse>;
 
   constructor(
     private http: HttpClient,
@@ -38,8 +39,8 @@ export class UsersService {
     this.authenticationErr = this.authenticationErrSubject.asObservable();
     this.verifiedSubject = new Subject();
     this.verified = this.verifiedSubject.asObservable();
-    this.usernameSubject = new BehaviorSubject(this.username);
-    this.username$ = this.usernameSubject.asObservable();
+    this.userInfoSubject = new BehaviorSubject(this.userInfo);
+    this.userInfo$ = this.userInfoSubject.asObservable();
     this.isAuth();
     this.isVerified();
   }
@@ -70,9 +71,19 @@ export class UsersService {
     }).subscribe(
       (res: any) => {
         this.authenticatedSubject.next(true);
-        this.usernameSubject.next(res.username);
+        this.userInfoSubject.next({
+          email: res.email,
+          firstName: res.firstName,
+          lastName: res.lastName,
+          username: res.username
+        });
+
+
         res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
                                              : this.alertService.success(res.message);
+        if (!res.verified) {
+          this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
+        }
         setTimeout(() => {
           this.router.navigate([returnURL ?? '/']).then();
         }, 1000);
@@ -119,7 +130,7 @@ export class UsersService {
         this.router.navigate(['/login']).then();
       }, (err) => {
         if (err) {
-          this.alertService.warning(`Token has expired or been deleted <a href="/forgot-password">create new token.</a>`, false);
+          this.alertService.warning(`Token has expired or been deleted <a href=${environment.url}/forgot-password>create new token.</a>`, false);
         }
       });
   }
@@ -138,7 +149,13 @@ export class UsersService {
     }).subscribe((res: any) => {
 
       this.authenticatedSubject.next(res.authenticated);
-      this.usernameSubject.next(res.username);
+      this.userInfoSubject.next({
+        email: res.email,
+        firstName: res.firstName,
+        lastName: res.lastName,
+        username: res.username
+      });
+
     }, () => {
       this.alertService.error('Oops, something went wrong getting the logged in status');
     });
@@ -172,6 +189,39 @@ export class UsersService {
     ).subscribe(res => {
       console.log(res);
       this.router.navigate(['/']).then();
+    });
+  }
+
+  changePassword(data) {
+    return this.http.put(`${environment.host}/update-password`, data, {
+      withCredentials: true
+    });
+  }
+  updateAccountInfo(data) {
+    return this.http.put(`${environment.host}/update-account-info`, data, {
+      withCredentials: true
+    }).subscribe((res: EndpointResponse) => {
+      this.alertService.success(res.message)
+      this.userInfoSubject.next(data);
+    }, (error: ErrorResponse) => {
+      console.error(error);
+      this.alertService.error(error.error.message)
+    });
+  }
+  deactivateAccount(data) {
+    return this.http.put(environment.host + "/deactivate-account", data, {
+      withCredentials: true
+    }).subscribe((res: EndpointResponse) => {
+
+      !!res.status ? this.alertService.warning(res.message) : this.alertService.success(res.message);
+    }, (error: ErrorResponse) => {
+      console.error(error);
+      this.alertService.error(error.error.message);
+    });
+  }
+  reactivateAccount() {
+    return this.http.put(`${environment.host}/reactivate-account`, null, {
+      withCredentials: true
     });
   }
 }

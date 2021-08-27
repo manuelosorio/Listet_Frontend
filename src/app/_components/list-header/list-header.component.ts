@@ -48,8 +48,10 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     userService.isAuth();
     this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;
-    this.username$ = userService.username$.subscribe(res => {
-      this.isOwner = this.username === res;
+    this.username$ = userService.userInfo$.subscribe(res => {
+      try {
+        this.isOwner = this.username === res.username;
+      } catch (e){}
     });
     if (this.isBrowser) {
       this.onDelete$ = this.websocketService.onDeleteList().subscribe(() => {

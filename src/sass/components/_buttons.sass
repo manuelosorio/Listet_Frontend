@@ -1,7 +1,7 @@
 @use '../variables'
 .btn
   border-radius: 2rem
-  display: block
+  display: flex
   padding: 0.65em 2em
   text-align: center
   color: variables.$black
@@ -9,12 +9,15 @@
   width: fit-content
   cursor: pointer
   transition-property: background-color, box-shadow, color, transform
+  align-items: center
+  justify-content: center
   &:focus
     outline: none
   &:active
     box-shadow: variables.$shadow-hover
     transform: translateY(3px)
   &--primary
+    @extend .btn
     background: variables.$primary
     box-shadow: variables.$shadow
     &:hover
@@ -28,10 +31,13 @@
     span
       padding: 1em
   &--disabled
+    @extend .btn
     background: variables.$disabled
-    border: solid 1 px variables.$disabled
+    border: solid 1px variables.$disabled
     cursor: not-allowed
     color: variables.$disabled-text
     &:hover
       background: variables.$disabled
       box-shadow: inherit
+    &:active
+      transform: none

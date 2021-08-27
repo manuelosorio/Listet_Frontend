@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
-import { UserError } from '../../models/errors/user.error';
+import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(data) {
     this.userService.loginUser(data, this.returnUrl);
-    this.userService.authenticationErr.subscribe((res: UserError) => {
+    this.userService.authenticationErr.subscribe((res: ErrorResponse) => {
       this.errorMessage = res.error.message;
       this.alertService.error(this.errorMessage);
     });
