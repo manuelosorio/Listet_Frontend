@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings-delete-account',
@@ -18,11 +18,19 @@ export class SettingsDeleteAccountComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder
   ) {
     this.formGroup = this.formBuilder.group({
-      password: []
+      password: ['',
+        [
+          Validators.required
+        ]
+      ]
     });
   }
 
   ngOnInit(): void {
+  }
+
+  get password() {
+    return this.formGroup.get('password');
   }
 
   deactivateAccount(password) {
