@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,9 +14,25 @@ export class SettingsProfileComponent implements OnInit, OnDestroy {
   constructor(private userService: UsersService,
               private formBuilder: FormBuilder) {
     this.profileForm = this.formBuilder.group({
-      email: [],
-      firstName: [],
-      lastName: [],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+      firstName: [
+        '',
+        [
+          Validators.required
+        ]
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required
+        ]
+      ],
     });
   }
 
