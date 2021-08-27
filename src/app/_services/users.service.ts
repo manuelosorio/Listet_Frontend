@@ -195,10 +195,6 @@ export class UsersService {
   changePassword(data) {
     return this.http.put(`${environment.host}/update-password`, data, {
       withCredentials: true
-    }).subscribe((res: EndpointResponse) => {
-      this.alertService.success(res.message)
-    }, (error: ErrorResponse) => {
-      this.alertService.error(error.error.message)
     });
   }
   updateAccountInfo(data) {
