@@ -42,7 +42,7 @@ export class EditListComponent implements OnInit{
     this.editListForm.setValue({
       title: this.list.name,
       description: this.list.description,
-      deadline: this.list.deadline != null ? formatDate(this.list.deadline,'YYYY-MM-dd', 'en') : '',
+      deadline: this.list.deadline ? formatDate(this.list.deadline,'YYYY-MM-dd', 'en') : '',
       visibility: this.visibilityOptions[this.list.visibility],
       allow_comments: !!this.list.allow_comments
     })

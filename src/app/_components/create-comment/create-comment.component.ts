@@ -51,7 +51,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   }
   get comment() {
     const comment = this.commentForm.get('comment');
-    this.commentCharacterCount = comment.value.trim().length ?? 0;
+    this.commentCharacterCount = comment.value ? comment.value.trim().length : 0;
     return comment;
   }
   onSubmit(data) {
