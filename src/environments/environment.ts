@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:3000',
-  url: 'http://localhost:4200'
+  host: process.env.HOST,
+  url: process.env.URL,
+  websocket: process.env.WEBSOCKET
 };
 
 /*

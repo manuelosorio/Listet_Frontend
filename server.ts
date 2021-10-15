@@ -3,6 +3,9 @@ import 'zone.js/node';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join } from 'path';
+import * as dotenv from 'dotenv';
+
+
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
@@ -15,11 +18,11 @@ const path = require('path');
 
 const template = fs.readFileSync(path.join('dist/browser', 'index.html')).toString();
 const win = domino.createWindow(template);
+dotenv.config();
 const SitemapGenerator = require('sitemap-generator');
-
 // create generator
-const generator = SitemapGenerator(environment.url, {
-  stripQuerystring: false,
+const generator = SitemapGenerator(process.env.URL, {
+  stripQuerystring: true,
   lastMod: true,
   filepath: './dist/browser/assets/sitemap.xml'
 });
@@ -63,10 +66,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = environment.production ? '1' : '0';
   server.get('*', (req, res) => {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
-
   server.set('port', process.env.PORT || 4000);
   server.listen(server.get('port'), () => {
     console.log(`Node Express server listening on port ${server.get('port')}`);
   });
-
 export * from './src/main.server';
