@@ -86,14 +86,14 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "todo-list:build",
-            "customWebpackConfig": {
-              "path": "webpack-dev.config.js"
-            }
+            "browserTarget": "todo-list:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "todo-list:build:production"
+              "browserTarget": "todo-list:build:production",
+              "customWebpackConfig": {
+                "path": "webpack-prod.config.js"
+              }
             }
           }
         },
