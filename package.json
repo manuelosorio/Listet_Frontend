@@ -42,7 +42,7 @@
     "snyk": "^1.681.0",
     "socket.io-client": "^3.0.5",
     "tslib": "^2.3.1",
-    "utf-8-validate": "^5.0.4",
+    "utf-8-validate": "^5.0.6",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.11.4"
   },
