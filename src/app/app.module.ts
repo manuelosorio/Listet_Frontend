@@ -43,6 +43,7 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { VerifiedGuard } from './guards/verified.guard';
+import { SearchComponent } from './_components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { VerifiedGuard } from './guards/verified.guard';
     ForgotPasswordComponent,
     VerifyAccountComponent,
     CreateListComponent,
-    YourListComponent
+    YourListComponent,
+    SearchComponent
   ],
   imports: [
     ActionButtonModule,

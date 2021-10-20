@@ -1,0 +1,7 @@
+<form class="search__form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+    <fieldset class="form__fieldset search">
+        <input type="text" class="search__input" placeholder="Search for User or List" formControlName="search" name="search" id="search">
+        <label class="search__label" for="search">Search for a list or user</label>
+      <button type="submit" class="btn--primary search__btn"><i-feather name="search"></i-feather></button>
+    </fieldset>
+</form>
