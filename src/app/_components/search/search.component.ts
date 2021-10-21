@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { filter } from "rxjs/operators";
+import { SearchService } from "../../_services/search.service";
 
 @Component({
   selector: 'app-search',
@@ -24,7 +25,8 @@ export class SearchComponent implements OnInit {
   ];
   public hideSearch: boolean;
   constructor(public router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private searchService: SearchService) {
     this.searchForm = this.formBuilder.group({
       search: ['', [
         Validators.minLength(1)
@@ -53,5 +55,11 @@ export class SearchComponent implements OnInit {
   }
   onSubmit(query) {
     console.log(query)
+    this.searchService.listSearch(query).subscribe(res => {
+      console.log(res);
+    });
+    this.searchService.userSearch(query).subscribe(res => {
+      console.log(res);
+    });
   }
 }
