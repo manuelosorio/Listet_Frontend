@@ -1,0 +1,13 @@
+<section class="l-container__1200">
+  <h1>
+    Search Results
+  </h1>
+  <h2>Users</h2>
+  <ng-container *ngFor="let user of userResult">
+    <div>
+      user: <em>{{user.firstName}}</em>
+    </div>
+  </ng-container>
+  <h2>Lists</h2>
+  <app-list pageType="SearchResults"></app-list>
+</section>

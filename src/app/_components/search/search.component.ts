@@ -2,7 +2,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { filter } from "rxjs/operators";
-import { SearchService } from "../../_services/search.service";
 
 @Component({
   selector: 'app-search',
@@ -25,13 +24,12 @@ export class SearchComponent implements OnInit {
   ];
   public hideSearch: boolean;
   constructor(public router: Router,
-              private formBuilder: FormBuilder,
-              private searchService: SearchService) {
+              private formBuilder: FormBuilder) {
     this.searchForm = this.formBuilder.group({
       search: ['', [
         Validators.minLength(1)
       ]]
-    })
+    });
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       for (const path of this.hidePaths) {
         if (event.urlAfterRedirects.indexOf(path) === 0) {
@@ -54,12 +52,6 @@ export class SearchComponent implements OnInit {
     return this.searchForm.get('search');
   }
   onSubmit(query) {
-    console.log(query)
-    this.searchService.listSearch(query).subscribe(res => {
-      console.log(res);
-    });
-    this.searchService.userSearch(query).subscribe(res => {
-      console.log(res);
-    });
+    this.router.navigate(['/search', query]).then();
   }
 }

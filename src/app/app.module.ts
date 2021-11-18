@@ -44,6 +44,8 @@ import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { VerifiedGuard } from './guards/verified.guard';
 import { SearchComponent } from './_components/search/search.component';
+import { SearchResultsComponent } from './_pages/search-results/search-results.component';
+import { SearchDataService } from "./shared/search-data.service";
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { SearchComponent } from './_components/search/search.component';
     VerifyAccountComponent,
     CreateListComponent,
     YourListComponent,
-    SearchComponent
+    SearchComponent,
+    SearchResultsComponent
   ],
   imports: [
     ActionButtonModule,
@@ -80,7 +83,7 @@ import { SearchComponent } from './_components/search/search.component';
     BrowserAnimationsModule,
     TransferHttpCacheModule,
   ],
-  providers: [GuestGuard, VerifiedGuard, AuthGuard, ListDataService],
+  providers: [GuestGuard, VerifiedGuard, AuthGuard, ListDataService, SearchDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
