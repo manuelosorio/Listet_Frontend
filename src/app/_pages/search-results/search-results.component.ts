@@ -12,12 +12,14 @@ import { SearchDataService } from "../../shared/search-data.service";
   styleUrls: ['./search-results.component.sass']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  private listSearch$: Subscription
-  private userSearch$: Subscription
-  public currentRoute: string
-  public listResult
-  public userResult: any
-  public lists
+  private listSearch$: Subscription;
+  private userSearch$: Subscription;
+  public currentRoute: string;
+  public listResult;
+  public userResult;
+  public listResultAmount;
+  public userResultAmount;
+  public lists;
   constructor(
     private searchService: SearchService,
     private route: ActivatedRoute,
@@ -32,10 +34,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private getSearchResults(query): void {
     this.listSearch$ = this.searchService.listSearch(query).subscribe((res: ListModel[]) => {
       this.listResult = res;
+      this.listResultAmount = this.listResult.length;
       this.searchData.setListData(this.listResult).then();
     });
     this.userSearch$ = this.searchService.userSearch(query).subscribe(res => {
       this.userResult = res;
+      this.userResultAmount = this.userResult.length;
     });
   }
   ngOnInit(): void {

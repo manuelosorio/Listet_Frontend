@@ -2,12 +2,18 @@
   <h1>
     Search Results
   </h1>
-  <h2>Users</h2>
+  <div class="l-row--justify-left">
+    <h2>Users</h2>
+    <small>{{ userResultAmount }} {{ userResultAmount !== 1 ? 'results' : 'result' }}</small>
+  </div>
   <ng-container *ngFor="let user of userResult">
     <div>
-      user: <em>{{user.firstName}}</em>
+      user: <em>{{ user.firstName }}</em>
     </div>
   </ng-container>
-  <h2>Lists</h2>
+  <div class="l-row--justify-left">
+    <h2>Lists</h2>
+    <small>{{ listResultAmount }} {{ listResultAmount !== 1 ? 'results' : 'result' }}</small>
+  </div>
   <app-list pageType="SearchResults"></app-list>
 </section>
