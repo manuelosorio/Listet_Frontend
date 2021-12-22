@@ -8,6 +8,7 @@ import { SeoService } from '../../_services/seo.service';
 import { isPlatformBrowser } from '@angular/common';
 import { SearchDataService } from "../../shared/search-data.service";
 import { ListModel } from "../../models/list.model";
+import { DateUtil } from "../../utils/dateUtil";
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -19,7 +20,13 @@ export class ListComponent implements OnInit, OnDestroy {
   private listSearchData$: Subscription;
   @Input() private pageType?: 'Lists' | 'Home' | 'User' | 'AuthedUser' | 'SearchResults';
   @Input() private profileUser?: string;
-
+  private errorMessage: String;
+  private lists: ListModel[];
+  public masonryOptions: NgxMasonryOptions = {
+    gutter: 20,
+    animations: {},
+  };
+  public masonryLists = [];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -31,18 +38,12 @@ export class ListComponent implements OnInit, OnDestroy {
   ) {
     this.meta = this.route.snapshot.data[0];
   }
-  lists: any = [];
-  public masonryOptions: NgxMasonryOptions = {
-    gutter: 20,
-    animations: {},
-  };
-  masonryLists = [];
 
   @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
   async ngOnInit(): Promise<void> {
     switch (this.pageType) {
       case "AuthedUser": {
-        this.listService.getAuthUserLists().subscribe(async (data) => {
+        this.listService.getAuthUserLists().subscribe(async (data: ListModel[]) => {
           this.lists = data;
           await this.show(this.lists);
         });
@@ -57,14 +58,14 @@ export class ListComponent implements OnInit, OnDestroy {
       }
       case 'User': {
         this.meta.title += `${this.route.snapshot.params.username}'s Lists`;
-        this.listService.getLists().subscribe(async (data) => {
+        this.listService.getLists().subscribe(async (data: ListModel[]) => {
           this.lists = data;
           await this.show(this.lists);
         });
         break;
       }
       default: {
-        this.listService.getLists().subscribe(async (data) => {
+        this.listService.getLists().subscribe(async (data: ListModel[]) => {
           this.lists = data;
           await this.show(this.lists);
         });
@@ -81,6 +82,7 @@ export class ListComponent implements OnInit, OnDestroy {
           }
           this.reloadMasonry();
         }
+        await this.parseLists(this.lists);
         break;
       }
       case 'User': {
@@ -97,18 +99,31 @@ export class ListComponent implements OnInit, OnDestroy {
         this.reloadMasonry();
         break;
       }
-      case 'SearchResults': {
-        this.masonryLists.length = 0;
-        for (const index in listsObj) {
-          if (listsObj.hasOwnProperty(index)) {
-            this.masonryLists.push(this.lists[index]);
-            this.reloadMasonry();
-          }
-        }
-        break;
-      }
-      case 'AuthedUser':
-      case 'Lists':
+      // case 'SearchResults': {
+      //   this.masonryLists.length = 0;
+      //   for (const index in listsObj) {
+      //     if (listsObj.hasOwnProperty(index)) {
+      //       this.masonryLists.push(this.lists[index]);
+      //       this.reloadMasonry();
+      //     }
+      //   }
+      //   await this.parseLists(this.lists);
+      //   break;
+      // }
+      // case 'AuthedUser': {
+      //   {
+      //     for (const index in listsObj) {
+      //       if (listsObj.hasOwnProperty(index)) {
+      //         this.masonryLists.push(this.lists[index]);
+      //         this.reloadMasonry();
+      //       }
+      //     }
+      //     this.parseLists(this.lists).catch(err => {
+      //       this.errorMessage = err.message;
+      //     })
+      //     break;
+      //   }
+      // }
       default: {
         for (const index in listsObj) {
           if (listsObj.hasOwnProperty(index)) {
@@ -116,14 +131,16 @@ export class ListComponent implements OnInit, OnDestroy {
             this.reloadMasonry();
           }
         }
+        this.parseLists(this.lists).catch(err => {
+          this.errorMessage = err.message
+          console.error(this.errorMessage)
+        })
       }
     }
   }
-  private iterator: number = 0;
   private reloadMasonry() {
     if (this.isBrowser) {
       if (this.masonry) {
-        console.log(this.iterator++)
         this.masonry.reloadItems();
         this.masonry.layout();
       }
@@ -134,5 +151,15 @@ export class ListComponent implements OnInit, OnDestroy {
       this.listSearchData$.unsubscribe();
     } catch (e) {
     }
+  }
+
+  async parseLists(lists): Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      if (!lists)
+        return reject({ message: 'No Lists found' });
+      return resolve(lists.filter((list: ListModel) => {
+        list.creation_date = new DateUtil(list.creation_date).format();
+      }))
+    });
   }
 }
