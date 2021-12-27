@@ -20,4 +20,4 @@ Backend Repo: [manuelosorio/Listet_Backend: NodeJS Backend for Listet (github.co
 - [x] User Creation
 - [x] User Verification
 - [x] Forgot/Reset Password
-- [ ] Search for lists and users
+- [x] Search for lists and users

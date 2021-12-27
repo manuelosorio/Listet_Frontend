@@ -3,7 +3,7 @@ export interface ListModel {
   slug: string;
   name: string;
   description: string;
-  creation_date: Date;
+  creation_date: Date | string;
   is_complete: number;
   deadline: string | null;
   visibility: number;
@@ -11,5 +11,6 @@ export interface ListModel {
   firstName: string;
   lastName: string;
   owner_username: string;
-  isEditing?: boolean
+  isEditing?: boolean;
+  featured?: boolean;
 }

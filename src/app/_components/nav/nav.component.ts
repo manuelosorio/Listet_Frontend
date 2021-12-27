@@ -10,18 +10,18 @@ import { UserCircle } from '../../shared/other-icons';
   styleUrls: ['./nav.component.sass'],
 })
 export class NavComponent implements OnInit, OnDestroy {
-  authenticated: boolean;
+  public authenticated: boolean;
   private authenticated$: Subscription;
-  hideNavPaths = [
+  private hideNavPaths = [
     '/login',
     '/register',
     '/forgot-password',
     '/reset-password',
     '/reset-password/**'
-  ].toString().split(',');
+  ];
 
-  loginPath: boolean;
-  isActive = false;
+  public loginPath: boolean;
+  public isActive = false;
   public username: string;
   public fullName: string
   public userCircle;

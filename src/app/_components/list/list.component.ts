@@ -1,54 +1,77 @@
-import { Component, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { ListsService } from '../../_services/lists.service';
+import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxMasonryAnimations, NgxMasonryComponent, NgxMasonryOptions } from '../../shared/ngx-masonry/ngx-masonry-api';
+import { Subscription } from "rxjs";
+import { NgxMasonryComponent, NgxMasonryOptions } from '../../shared/ngx-masonry/ngx-masonry-api';
+import { ListsService } from '../../_services/lists.service';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { isPlatformBrowser } from '@angular/common';
-import { AnimationFactory } from '@angular/animations';
+import { SearchDataService } from "../../shared/search-data.service";
+import { ListModel } from "../../models/list.model";
+import { DateUtil } from "../../utils/dateUtil";
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   private readonly meta: MetaTagModel;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  @Input() private pageType?: 'Lists' | 'Home' | 'User' | 'AuthedUser';
+  private listSearchData$: Subscription;
+  @Input() public pageType?: 'Lists' | 'Home' | 'User' | 'AuthedUser' | 'SearchResults';
   @Input() private profileUser?: string;
+  private errorMessage: String;
+  private lists: ListModel[];
+  public masonryOptions: NgxMasonryOptions = {
+    gutter: 20,
+    animations: {},
+  };
+  public masonryLists = [];
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
     private router: Router,
     private route: ActivatedRoute,
-    private seoService: SeoService) {
+    private seoService: SeoService,
+    private searchData: SearchDataService
+  ) {
     this.meta = this.route.snapshot.data[0];
   }
-  lists: any = [];
-  public masonryOptions: NgxMasonryOptions = {
-    gutter: 20,
-    animations: {},
-  };
-  masonryLists = [];
 
   @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
-  ngOnInit(): void {
-    if (this.pageType !== 'AuthedUser') {
-      this.listService.getLists().subscribe(async (data) => {
-        this.lists = data;
-        await this.show(this.lists);
-      });
+  async ngOnInit(): Promise<void> {
+    switch (this.pageType) {
+      case "AuthedUser": {
+        this.listService.getAuthUserLists().subscribe(async (data: ListModel[]) => {
+          this.lists = data;
+          await this.show(this.lists);
+        });
+        break;
+      }
+      case "SearchResults": {
+        this.listSearchData$ = this.searchData.listResults$.subscribe(async (res: ListModel[]) => {
+          this.lists = res;
+          await this.show(this.lists);
+        });
+        break;
+      }
+      case 'User': {
+        this.meta.title += `${this.route.snapshot.params.username}'s Lists`;
+        this.listService.getLists().subscribe(async (data: ListModel[]) => {
+          this.lists = data;
+          await this.show(this.lists);
+        });
+        break;
+      }
+      default: {
+        this.listService.getLists().subscribe(async (data: ListModel[]) => {
+          this.lists = data;
+          await this.show(this.lists);
+        });
+      }
     }
-    if (this.pageType === 'AuthedUser') {
-      this.listService.getAuthUserLists().subscribe(async (data) => {
-        this.lists = data;
-        await this.show(this.lists);
-      });
-    }
-    if (this.pageType === 'User' ) {
-      this.meta.title += `${this.route.snapshot.params.username}'s Lists`;
-    }
-    this.seoService.updateInfo(this.meta);
+    this.meta ? this.seoService.updateInfo(this.meta) : '';
   }
   private async show(listsObj: any) {
     switch (this.pageType) {
@@ -56,12 +79,10 @@ export class ListComponent implements OnInit {
         for (const index in listsObj) {
           if (listsObj.hasOwnProperty(index) && !!this.lists[index].featured) {
             this.masonryLists.push(this.lists[index]);
-            if (this.isBrowser) {
-              this.masonry.reloadItems();
-              this.masonry.layout();
-            }
           }
+          this.reloadMasonry();
         }
+        await this.parseLists(this.lists);
         break;
       }
       case 'User': {
@@ -73,28 +94,72 @@ export class ListComponent implements OnInit {
           return acc;
         }, []);
         if (!listArr.length) {
-          await this.router.navigateByUrl('404', { skipLocationChange: true });
-        } else {
-          if (this.isBrowser) {
-            this.masonry.reloadItems();
-            this.masonry.layout();
-          }
+          return await this.router.navigateByUrl('404', { skipLocationChange: true });
         }
+        this.reloadMasonry();
         break;
       }
-      case 'AuthedUser':
-      case 'Lists':
+      // case 'SearchResults': {
+      //   this.masonryLists.length = 0;
+      //   for (const index in listsObj) {
+      //     if (listsObj.hasOwnProperty(index)) {
+      //       this.masonryLists.push(this.lists[index]);
+      //       this.reloadMasonry();
+      //     }
+      //   }
+      //   await this.parseLists(this.lists);
+      //   break;
+      // }
+      // case 'AuthedUser': {
+      //   {
+      //     for (const index in listsObj) {
+      //       if (listsObj.hasOwnProperty(index)) {
+      //         this.masonryLists.push(this.lists[index]);
+      //         this.reloadMasonry();
+      //       }
+      //     }
+      //     this.parseLists(this.lists).catch(err => {
+      //       this.errorMessage = err.message;
+      //     })
+      //     break;
+      //   }
+      // }
       default: {
         for (const index in listsObj) {
           if (listsObj.hasOwnProperty(index)) {
             this.masonryLists.push(this.lists[index]);
-            if (this.isBrowser) {
-              this.masonry.reloadItems();
-              this.masonry.layout();
-            }
+            this.reloadMasonry();
           }
         }
+        this.parseLists(this.lists).catch(err => {
+          this.errorMessage = err.message
+          console.error(this.errorMessage)
+        })
       }
     }
+  }
+  private reloadMasonry() {
+    if (this.isBrowser) {
+      if (this.masonry) {
+        this.masonry.reloadItems();
+        this.masonry.layout();
+      }
+    }
+  }
+  ngOnDestroy() {
+    try {
+      this.listSearchData$.unsubscribe();
+    } catch (e) {
+    }
+  }
+
+  async parseLists(lists): Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      if (!lists)
+        return reject({ message: 'No Lists found' });
+      return resolve(lists.filter((list: ListModel) => {
+        list.creation_date = new DateUtil(list.creation_date).format();
+      }))
+    });
   }
 }
