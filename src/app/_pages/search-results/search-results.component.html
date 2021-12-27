@@ -6,11 +6,13 @@
     <h2>Users</h2>
     <small>{{ userResultAmount }} {{ userResultAmount !== 1 ? 'results' : 'result' }}</small>
   </div>
-  <ng-container *ngFor="let user of userResult">
-    <div>
-      user: <em>{{ user.firstName }}</em>
-    </div>
-  </ng-container>
+  <div class="l-row--justify-left">
+    <ng-container *ngFor="let user of userResult">
+      <app-user-card [user]="user" class="card l-column-sm-6 l-column-md-4" routerLink="/u/{{ user.username }}"></app-user-card>
+    </ng-container>
+  </div>
+</section>
+<section class="l-container__1200">
   <div class="l-row--justify-left">
     <h2>Lists</h2>
     <small>{{ listResultAmount }} {{ listResultAmount !== 1 ? 'results' : 'result' }}</small>

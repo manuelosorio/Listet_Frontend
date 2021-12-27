@@ -18,7 +18,7 @@ export class ListComponent implements OnInit, OnDestroy {
   private readonly meta: MetaTagModel;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private listSearchData$: Subscription;
-  @Input() private pageType?: 'Lists' | 'Home' | 'User' | 'AuthedUser' | 'SearchResults';
+  @Input() public pageType?: 'Lists' | 'Home' | 'User' | 'AuthedUser' | 'SearchResults';
   @Input() private profileUser?: string;
   private errorMessage: String;
   private lists: ListModel[];
