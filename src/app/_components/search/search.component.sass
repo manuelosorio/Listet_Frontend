@@ -1,0 +1,39 @@
+@use "~src/sass/variables"
+@use "~src/sass/utils/breakpoint/breakpoint" as bp
+@use "~src/sass/components/form"
+.search
+  display: flex
+  flex-direction: row
+  box-shadow: variables.$shadow
+  border-radius: 10px
+  &__form
+    @extend .form--no-shadow
+    padding: 0 2rem 1rem
+    border: none
+    width: 100%
+    +bp.breakpoint('md')
+      width: 60%
+    +bp.breakpoint('lg')
+      width: 45%
+  &__input
+    @extend .form__input
+    border: none
+    padding: 1.65rem 1.55rem .65rem
+    &:focus, &:active, &:hover
+      border: none
+    &:focus, &:not(:placeholder-shown)
+      ~ .search__label
+        top: 6px
+  &__label
+    @extend .form__label
+    background: none !important
+
+  &__btn
+    border-radius: 0 10px 10px 0
+    box-shadow: none
+    padding: 0.65em 1em
+    &:hover
+      background: darken(variables.$primary, 8%)
+    &:active
+      box-shadow: variables.$shadow-inset
+      transform: none

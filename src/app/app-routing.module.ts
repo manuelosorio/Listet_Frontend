@@ -21,6 +21,7 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
 import { environment } from '../environments/environment';
 import { VerifiedGuard } from './guards/verified.guard';
+import { SearchResultsComponent } from "./_pages/search-results/search-results.component";
 
 const routes: Routes = [
   {
@@ -76,6 +77,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
   { path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard] },
+  { path: 'search/:query', component: SearchResultsComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
