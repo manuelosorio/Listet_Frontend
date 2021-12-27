@@ -46,6 +46,7 @@ import { VerifiedGuard } from './guards/verified.guard';
 import { SearchComponent } from './_components/search/search.component';
 import { SearchResultsComponent } from './_pages/search-results/search-results.component';
 import { SearchDataService } from "./shared/search-data.service";
+import { UserCardComponent } from "./_components/user-card/user-card.component";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { SearchDataService } from "./shared/search-data.service";
     CreateListComponent,
     YourListComponent,
     SearchComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    UserCardComponent
   ],
   imports: [
     ActionButtonModule,
