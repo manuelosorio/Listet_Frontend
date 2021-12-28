@@ -9,33 +9,32 @@ import * as dotenv from 'dotenv';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
-import { existsSync } from 'fs';
-import {environment} from './src/environments/environment';
+import { existsSync, readFileSync } from 'fs';
+import { environment } from './src/environments/environment';
 
 const domino = require('domino');
-const fs = require('fs');
 const path = require('path');
 
-const template = fs.readFileSync(path.join('dist/browser', 'index.html')).toString();
+const template = readFileSync(path.join('dist/browser', 'index.html')).toString();
 const win = domino.createWindow(template);
 dotenv.config();
-const SitemapGenerator = require('sitemap-generator');
+// const SitemapGenerator = require('sitemap-generator');
 // create generator
-const generator = SitemapGenerator(process.env.URL, {
-  stripQuerystring: true,
-  lastMod: true,
-  filepath: './dist/browser/assets/sitemap.xml'
-});
-
-// register event listeners
-generator.on('done', () => {
-  // sitemaps created
-});
-generator.on('error', (err) => {
-  console.error(err);
-});
-// start the crawler
-generator.start();
+// const generator = SitemapGenerator(process.env.URL, {
+//   stripQuerystring: true,
+//   lastMod: true,
+//   filepath: './dist/browser/assets/sitemap.xml'
+// });
+//
+// // register event listeners
+// generator.on('done', () => {
+//   // sitemaps created
+// });
+// generator.on('error', (err) => {
+//   console.error(err);
+// });
+// // start the crawler
+// generator.start();
 win.Object = Object;
 win.Math = Math;
 global['window'] = win;
@@ -49,7 +48,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = environment.production ? '1' : '0';
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
-    bootstrap: AppServerModule,
+    bootstrap: AppServerModule
   }));
 
   server.set('view engine', 'html');
