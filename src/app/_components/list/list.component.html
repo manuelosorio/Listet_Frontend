@@ -1,4 +1,3 @@
-{{pageType}}
 <ngx-masonry [options]="masonryOptions" [ordered]="true" [class]="pageType ? '' : 'lists-container'">
   <div ngxMasonryItem [ready]='true' class="masonry-item" *ngFor="let list of masonryLists">
     <a  class="list card" [routerLink]="[ '/l/' + list['slug']]">

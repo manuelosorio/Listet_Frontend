@@ -99,17 +99,17 @@ export class ListComponent implements OnInit, OnDestroy {
         this.reloadMasonry();
         break;
       }
-      // case 'SearchResults': {
-      //   this.masonryLists.length = 0;
-      //   for (const index in listsObj) {
-      //     if (listsObj.hasOwnProperty(index)) {
-      //       this.masonryLists.push(this.lists[index]);
-      //       this.reloadMasonry();
-      //     }
-      //   }
-      //   await this.parseLists(this.lists);
-      //   break;
-      // }
+      case 'SearchResults': {
+        this.masonryLists.length = 0;
+        for (const index in listsObj) {
+          if (listsObj.hasOwnProperty(index)) {
+            this.masonryLists.push(this.lists[index]);
+            this.reloadMasonry();
+          }
+        }
+        await this.parseLists(this.lists);
+        break;
+      }
       // case 'AuthedUser': {
       //   {
       //     for (const index in listsObj) {
