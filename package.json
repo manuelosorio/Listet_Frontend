@@ -34,7 +34,7 @@
     "angular-feather": "^6.1.0",
     "bufferutil": "^4.0.5",
     "core-js": "^3.19.3",
-    "express": "^4.15.2",
+    "express": "^4.17.2",
     "masonry-layout": "^4.2.2",
     "rxjs": "~6.6.6",
     "sitemap-generator": "^8.5.1",
