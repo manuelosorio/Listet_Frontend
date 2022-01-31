@@ -1,6 +1,6 @@
 {
-  "name": "todo-list",
-  "version": "0.0.0",
+  "name": "listet-frontend",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
