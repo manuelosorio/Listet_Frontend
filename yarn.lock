@@ -2170,10 +2170,10 @@ ajv@^8.0.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-angular-feather@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/angular-feather/-/angular-feather-6.1.0.tgz#a0ee5e75d174a1add68f00d42c9184193884f531"
-  integrity sha512-4flEhLXhmlpmDmEAY+mem8X25VIGEsFt8rv0vYHY8wXH2bs+gehN0KfLYDJfvusO3F+PlOf1Q59nuem0JcRgkA==
+angular-feather@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/angular-feather/-/angular-feather-6.3.0.tgz#255d7da51969aa73b4757980e25af99d925b753d"
+  integrity sha512-nkFwCw/nJBkmcVLNJLCA6JWiXOi5BpJuQtDktGSmZ3azJAyBbEyUniKyBoVzhSs13nsSbCB/9hXwdQR6eJCL3g==
   dependencies:
     tslib "^2.0.0"
 
