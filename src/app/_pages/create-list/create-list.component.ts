@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { Router } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
+import { ListModel } from '../../models/list.model';
 
 export interface Response {
   message: string;
@@ -17,7 +18,7 @@ export interface Response {
 })
 export class CreateListComponent implements OnInit {
   public createListForm: FormGroup;
-  public allowComments;
+  public allowComments: boolean;
   public visibilityOptions: ListVisibility[];
   private redirectURL;
 
@@ -41,34 +42,30 @@ export class CreateListComponent implements OnInit {
 
   ngOnInit(): void {
     this.allowComments = true;
-    this.visibilityOptions = [ListVisibility.private, ListVisibility.unlisted, ListVisibility.public]
+    this.visibilityOptions = [ListVisibility.private, ListVisibility.unlisted, ListVisibility.public];
   }
 
-  onSubmit(data) {
+  onSubmit(data: ListModel): void {
     this.listService.createList(data).subscribe(async (res: Response) => {
-      // const user = res.username;
-      // const slug = res.slug;
-      // this.router.navigate([`/list/${res.username}/${res.slug}`]);
       this.alertService.success(res.message);
       this.redirectURL = res.url;
-      await this.redirect('/l/' + res.url);
+      await this.router.navigate([`/l/${res.url}`]);
     }, error => {
       this.alertService.error(`Error: ${error.status} - ${error.error.message}`);
-    }, () => {
     });
   }
 
-  allowCommentsChecked(event) {
+  allowCommentsChecked(event: Event | any): any {
     return this.allowComments = event.target.checked;
   }
 
-  get title() {
+  get title(): AbstractControl {
     return this.createListForm.get('title');
   }
-  get visibility() {
-    return this.createListForm.get('visibility')
+  get visibility(): AbstractControl {
+    return this.createListForm.get('visibility');
   }
-  async redirect(url) {
+  async redirect(url: string): Promise<void> {
     await this.router.navigate([url]);
   }
 
