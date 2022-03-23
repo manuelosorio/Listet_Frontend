@@ -16,7 +16,7 @@
 <ng-template #maximumCharacterCounter>
   <svg>
     <circle [attr.r]='radius' cx='50%' cy='50%' class='circle-bg'></circle>
-    <circle [attr.r]='radius2' cx='50%' cy='50%' [class]='maxCharacterCount == 0 ? "circle-bg" : maxCharacterCount > maximumCharacters - 20 ? "circle-fg" : maxCharacterCount < maximumCharacters ? "circle-fg__success": "circle-bg"' [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"></circle>
+    <circle [attr.r]='radius2' cx='50%' cy='50%' [class]='maxCharacterCount === 0 ? "circle-bg" : maxCharacterCount > maximumCharacters - 20 ? "circle-fg" : maxCharacterCount < maximumCharacters ? "circle-fg__success": "circle-bg"' [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"></circle>
   </svg>
   <small>
     <ng-container *ngIf=' maxCharacterCount < maximumCharacters - 20 else remainingCharacters'>

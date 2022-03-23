@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Input, ViewEncapsulation } from "@angular/core";
 import { UserModel } from "../../models/user.model";
 
 @Component({
@@ -7,12 +7,8 @@ import { UserModel } from "../../models/user.model";
   styleUrls: ['./user-card.component.sass'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class UserCardComponent implements OnInit, OnDestroy {
+export class UserCardComponent {
   constructor() {
   }
   @Input() user: UserModel;
-  ngOnInit() {
-  }
-  ngOnDestroy() {
-  }
 }

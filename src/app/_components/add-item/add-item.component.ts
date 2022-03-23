@@ -1,18 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { WebsocketService } from '../../_services/websocket.service';
 import { ListItemEvents } from '../../helper/list-item.events';
+import { ListItemModel } from '../../models/list-item.model';
 
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.sass']
 })
-export class AddItemComponent implements OnInit, OnDestroy {
+export class AddItemComponent implements OnInit {
   listItemForm: FormGroup;
   isOwner: boolean;
   private listData: Subscription;
@@ -47,7 +48,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit(data) {
+  onSubmit(data: ListItemModel): void {
     data.list_id = this.id;
     data.slug = this.slug;
     this.listService.createListItem(data).subscribe((res) => {
@@ -58,10 +59,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-  }
-
-  get item() {
+  get item(): AbstractControl {
     return this.listItemForm.get('item');
   }
 }

@@ -1,17 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings-delete-account',
   templateUrl: './settings-delete-account.component.html',
   styleUrls: ['./settings-delete-account.component.sass']
 })
-export class SettingsDeleteAccountComponent implements OnInit, OnDestroy {
-  private deactivateAccount$: Subscription
-  public formGroup: FormGroup
+export class SettingsDeleteAccountComponent {
+  private deactivateAccount$: Subscription;
+  public formGroup: FormGroup;
+
   constructor(
     private userService: UsersService,
     private httpClient: HttpClient,
@@ -26,17 +27,11 @@ export class SettingsDeleteAccountComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-  }
-
-  get password() {
+  get password(): AbstractControl {
     return this.formGroup.get('password');
   }
 
-  deactivateAccount(password) {
-    console.log(password)
+  deactivateAccount(password: string): void {
     this.deactivateAccount$ = this.userService.deactivateAccount(password);
-  }
-  ngOnDestroy() {
   }
 }

@@ -3,7 +3,7 @@
 </div>
 <form [formGroup]='formGroup'>
   <fieldset class='form__fieldset form__fieldset--row'>
-    <input name='password' placeholder='password' formControlName='password' class='form__input' id='password'>
+    <input name='password' type="password" placeholder='password' formControlName='password' class='form__input' id='password'>
     <label for='password' class='form__label'>password</label>
     <i-feather class="form__input--validation valid" *ngIf="password.valid" name='check'></i-feather>
     <ng-container *ngIf="password.invalid && password.touched">

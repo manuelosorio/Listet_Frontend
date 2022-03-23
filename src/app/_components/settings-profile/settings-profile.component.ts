@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './settings-profile.component.html',
   styleUrls: ['./settings-profile.component.sass']
 })
-export class SettingsProfileComponent implements OnInit, OnDestroy {
-  public profileForm: FormGroup
+export class SettingsProfileComponent implements OnInit {
+  public profileForm: FormGroup;
   private updateAccountInfo$: Subscription;
   constructor(private userService: UsersService,
               private formBuilder: FormBuilder) {
@@ -38,7 +38,6 @@ export class SettingsProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userService.userInfo$.subscribe(res => {
-      console.log(res);
       this.profileForm.setValue({
         email: res.email,
         firstName: res.firstName,
@@ -46,18 +45,17 @@ export class SettingsProfileComponent implements OnInit, OnDestroy {
       });
     });
   }
-  submit(data) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  submit(data: any): void {
     this.updateAccountInfo$ = this.userService.updateAccountInfo(data);
   }
-  ngOnDestroy(): void {
-  }
-  get firstName() {
+  get firstName(): AbstractControl {
     return this.profileForm.get('firstName');
   }
-  get lastName() {
+  get lastName(): AbstractControl {
     return this.profileForm.get('lastName');
   }
-  get email() {
+  get email(): AbstractControl {
     return this.profileForm.get('email');
   }
 }

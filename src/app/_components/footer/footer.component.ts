@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.sass']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   constructor() { }
   currentYear: number = new Date().getFullYear();
-  ngOnInit(): void {
-  }
+
 
 }

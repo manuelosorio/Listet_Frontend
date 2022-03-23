@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { UserCircle } from '../../shared/other-icons';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.sass'],
 })
-export class NavComponent implements OnInit, OnDestroy {
+export class NavComponent implements OnDestroy {
   public authenticated: boolean;
   private authenticated$: Subscription;
   private hideNavPaths = [
@@ -67,9 +67,7 @@ export class NavComponent implements OnInit, OnDestroy {
   toggleActive() {
     this.isActive  = !this.isActive;
   }
-  ngOnInit(): void {
 
-  }
   ngOnDestroy() {
     this.authenticated$.unsubscribe();
   }
