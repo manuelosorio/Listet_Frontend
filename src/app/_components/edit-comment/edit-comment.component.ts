@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentModel } from '../../models/comment.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 
 @Component({
@@ -28,20 +28,21 @@ export class EditCommentComponent implements OnInit {
     });
     this.commentForm.setValue({
       comment: this.commentModel.comment
-    })
-  }
-  cancel() {
-    this.commentModel.isEditing = false;
-  }
-  submit(data) {
-    data.list_id = this.commentModel.list_id;
-    this.listService.updateComment(data, this.commentModel.id).subscribe(_res => {
-      this.commentModel.isEditing = false;
-    }, error => {
-      console.error(error);
     });
   }
-  get comment() {
+  cancel(): void {
+    this.commentModel.isEditing = false;
+  }
+  submit(data: CommentModel): void {
+    data.list_id = this.commentModel.list_id;
+    this.listService.updateComment(data, this.commentModel.id).subscribe(() => {
+        this.commentModel.isEditing = false;
+      },
+      error => {
+        console.error(error);
+      });
+  }
+  get comment(): AbstractControl {
     const comment = this.commentForm.get('comment');
     this.commentCharacterCount = comment.value.length ?? 0;
     return comment;

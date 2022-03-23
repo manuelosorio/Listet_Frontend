@@ -24,6 +24,7 @@ import { NgxMasonryOptions } from './ngx-masonry-options';
 import { NgxMasonryDirective } from './ngx-masonry.directive';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[ngx-masonry], ngx-masonry',
   template: '<ng-content></ng-content>',
   styles: [

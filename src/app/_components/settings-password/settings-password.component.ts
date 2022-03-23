@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { EndpointResponse } from '../../models/response/endpoint.response';
@@ -10,7 +10,7 @@ import { AlertService } from '../../_services/alert.service';
   templateUrl: './settings-password.component.html',
   styleUrls: ['./settings-password.component.sass']
 })
-export class SettingsPasswordComponent implements OnInit {
+export class SettingsPasswordComponent {
   public passwordForm: FormGroup
   constructor(private userService: UsersService,
               private alertService: AlertService,
@@ -40,8 +40,6 @@ export class SettingsPasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
   private checkPassword: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
     const newPassword = group.get('newPassword');
     const confirmPassword = group.get('confirmPassword');

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DateUtil } from '../../utils/dateUtil';
 
 @Component({
@@ -6,7 +6,7 @@ import { DateUtil } from '../../utils/dateUtil';
   templateUrl: './deadline.component.html',
   styleUrls: ['./deadline.component.sass']
 })
-export class DeadlineComponent implements OnInit, OnChanges {
+export class DeadlineComponent implements OnChanges {
   @Input()
     get deadline() {
       return this._deadline;
@@ -31,7 +31,5 @@ export class DeadlineComponent implements OnInit, OnChanges {
       this.hasDeadline = !(this.formattedDeadline === undefined || this.formattedDeadline.length === 0);
       this.isOverDue = this.hasDeadline ? date.getTime() <= new Date().getTime() : false;
     }
-  }
-  ngOnInit(): void {
   }
 }

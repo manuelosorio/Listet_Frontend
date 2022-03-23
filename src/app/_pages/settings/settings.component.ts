@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-settings',
@@ -6,11 +6,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./settings.component.sass'],
   encapsulation: ViewEncapsulation.None
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -1,6 +1,6 @@
 <ng-container *ngFor="let head of header">
   <section class="l-container">
-    <div *ngIf='head["isEditing"] == false else editList'>
+    <div *ngIf='head["isEditing"] === false else editList'>
       <p>{{ head.name }}</p>
       <a [routerLink]="['/u/' + head.owner_username]">{{ head.owner_username }}</a>
       <p>Created: {{formattedCreationDate}}</p>

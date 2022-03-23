@@ -11,6 +11,7 @@ import { NgxMasonryComponent } from './ngx-masonry.component';
 import { NgxMasonryAnimations } from './ngx-masonry-options';
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[ngxMasonryItem], ngxMasonryItem'
 })
 export class NgxMasonryDirective implements OnInit, OnDestroy, AfterViewInit {

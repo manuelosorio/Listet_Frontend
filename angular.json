@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "todo-list": {
+    "listet": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -86,11 +86,11 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "todo-list:build"
+            "browserTarget": "listet:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "todo-list:build:production",
+              "browserTarget": "listet:build:production",
               "customWebpackConfig": {
                 "path": "webpack-prod.config.js"
               }
@@ -100,7 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "todo-list:build"
+            "browserTarget": "listet:build"
           }
         },
         "test": {
@@ -125,11 +125,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "todo-list:serve"
+            "devServerTarget": "listet:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "todo-list:serve:production"
+              "devServerTarget": "listet:serve:production"
             }
           }
         },
@@ -163,24 +163,24 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "todo-list:build",
-            "serverTarget": "todo-list:server",
+            "browserTarget": "listet:build",
+            "serverTarget": "listet:server",
             "ssl": true,
             "sslKey": "./ssl/server.key",
             "sslCert": "./ssl/server.crt"
           },
           "configurations": {
             "production": {
-              "browserTarget": "todo-list:build:production",
-              "serverTarget": "todo-list:server:production"
+              "browserTarget": "listet:build:production",
+              "serverTarget": "listet:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "todo-list:build:production",
-            "serverTarget": "todo-list:server:production",
+            "browserTarget": "listet:build:production",
+            "serverTarget": "listet:server:production",
             "routes": [
               "/"
             ]
@@ -188,8 +188,21 @@
           "configurations": {
             "production": {}
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
-    }},
-  "defaultProject": "todo-list"
+    }
+  },
+  "defaultProject": "listet",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

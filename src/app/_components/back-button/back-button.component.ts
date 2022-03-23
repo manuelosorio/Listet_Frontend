@@ -8,9 +8,9 @@ import {Component} from '@angular/core';
 export class BackButtonComponent {
   constructor() {
   }
-  onNgInit() {
+  onNgInit(): void {
   }
-  back() {
+  back(): void {
     history.go(-1);
   }
 }

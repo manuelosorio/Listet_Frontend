@@ -29,10 +29,10 @@ export class AlertComponent implements OnInit, OnDestroy {
       this.message = alert;
     });
   }
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  closeFlashMessage() {
+  closeFlashMessage(): void {
     this.alertService.clear();
   }
 }
