@@ -19,7 +19,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./list-header.component.sass']
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
-  public header: [ListModel] | Partial<ListModel | ListModel[]>;
+  public header: Array<ListModel>;
   public listId: number;
   public listData;
   public isOwner: boolean;
@@ -68,7 +68,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getList$ = this.listService.getList(this.slug).subscribe((data: ListModel) => {
+    this.getList$ = this.listService.getList(this.slug).subscribe((data: Array<ListModel>) => {
       const creationDate = new DateUtil(data[0].creation_date);
       if (!!data[0].deadline) {
         this.deadline = new Date(data[0].deadline);
@@ -108,7 +108,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private metaTags(data: ListModel) {
+  private metaTags(data: Array<ListModel>) {
     let listDescription;
     if (data[0].description !== null) {
       listDescription = data[0].description;

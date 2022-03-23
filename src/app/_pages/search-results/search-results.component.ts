@@ -1,4 +1,4 @@
- import { Component, OnDestroy, OnInit } from '@angular/core';
+ import { Component } from '@angular/core';
 import { SearchService } from "../../_services/search.service";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -11,7 +11,7 @@ import { SearchDataService } from "../../shared/search-data.service";
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.sass']
 })
-export class SearchResultsComponent implements OnInit, OnDestroy {
+export class SearchResultsComponent {
   private listSearch$: Subscription;
   private userSearch$: Subscription;
   public currentRoute: string;
@@ -41,11 +41,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.userResult = res;
       this.userResultAmount = this.userResult.length;
     });
-  }
-  ngOnInit(): void {
-  }
-  ngOnDestroy(): void {
-
   }
 
 }

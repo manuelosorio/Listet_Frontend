@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { filter } from "rxjs/operators";
@@ -8,7 +8,7 @@ import { filter } from "rxjs/operators";
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.sass']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   public searchForm: FormGroup;
   public windowWidth: number
 
@@ -42,8 +42,6 @@ export class SearchComponent implements OnInit {
     this.windowWidth = window.innerWidth;
   }
 
-  ngOnInit(): void {
-  }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
     this.windowWidth = window.innerWidth;

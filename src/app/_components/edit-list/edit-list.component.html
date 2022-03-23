@@ -41,7 +41,7 @@
   <!-- End List Visibility -->
 
   <div class='buttons l-row--justify-left'>
-    <app-action-button buttonType='submit' buttonStyle='primary' icon='check' (click)='onSubmit(editListForm.value)'></app-action-button>
+    <app-action-button buttonType='submit' buttonStyle='primary' icon='check' (click)='onSubmit({data : editListForm.value})'></app-action-button>
     <app-action-button buttonType='submit' buttonStyle='default' icon='x' (click)='cancel()'></app-action-button>
   </div>
 </form>

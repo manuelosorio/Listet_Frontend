@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { CommentEvents } from '../../helper/comment.events';
 import { WebsocketService } from '../../_services/websocket.service';
+import { CommentModel } from '../../models/comment.model';
 
 @Component({
   selector: 'app-create-comment',
@@ -15,13 +16,14 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;
   public commentForm: FormGroup;
   public commentData;
-  public commentCharacterCount: number
+  public commentCharacterCount: number;
 
   private id;
   public commentsEnabled: boolean;
   private readonly username: string;
   private readonly slug: string;
   constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: object,
     private formBuilder: FormBuilder,
     private listService: ListsService,
@@ -49,12 +51,12 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
       this.id = results.id;
     });
   }
-  get comment() {
+  get comment(): AbstractControl {
     const comment = this.commentForm.get('comment');
     this.commentCharacterCount = comment.value ? comment.value.trim().length : 0;
     return comment;
   }
-  onSubmit(data) {
+  onSubmit(data: CommentModel): void {
     data.list_id = this.id;
     data.listInfo = this.slug;
     this.listService.createComment(data).subscribe(() => {
