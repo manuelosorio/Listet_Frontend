@@ -3057,20 +3057,6 @@
     "@types/mime" "^1"
     "@types/node" "*"
 
-"@types/simplecrawler@*":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@types/simplecrawler/-/simplecrawler-1.1.2.tgz#48a50b22d5d4bf48b05a62959a7d3538cdef800c"
-  integrity sha512-aI/zWVs9EkUpe5+UIQU4DXhhb9+Me0bU+t/1EnOgP+2J8KgL6G0b3DHjlVkjzDM0TuKJqzlIlCRWDCF5+QPloQ==
-  dependencies:
-    "@types/node" "*"
-
-"@types/sitemap-generator@^8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@types/sitemap-generator/-/sitemap-generator-8.5.1.tgz#4273e85cf6af5aeca17dece77179dc26ee17f1d5"
-  integrity sha512-HfURixF6Evh113LygaexvaYmuX/K6kQosJbm77TBZLgkh/nq0yKHpmZgE4Vah8KAhJ3I40giFwQ2dKV7J7hwCw==
-  dependencies:
-    "@types/simplecrawler" "*"
-
 "@types/sockjs@^0.3.33":
   version "0.3.33"
   resolved "https://registry.yarnpkg.com/@types/sockjs/-/sockjs-0.3.33.tgz#570d3a0b99ac995360e3136fd6045113b1bd236f"
@@ -4544,11 +4530,10 @@ core-js@3.20.3:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.3.tgz#c710d0a676e684522f3db4ee84e5e18a9d11d69a"
   integrity sha512-vVl8j8ph6tRS3B8qir40H7yw7voy17xL0piAjlbBUsH7WIfzoedL/ZOr1OV9FyZQLWXsayOJyV4tnRyXR85/ag==
 
-core-js@^3.19.3:
-  version "3.20.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.1.tgz#eb1598047b7813572f1dc24b7c6a95528c99eef3"
-  integrity sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==
-
+core-js@^3.21.1:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
+  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
 
 core-util-is@1.0.2:
   version "1.0.2"
