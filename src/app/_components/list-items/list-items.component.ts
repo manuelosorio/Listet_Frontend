@@ -41,7 +41,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.getListItems$ = this.listService.getListItems(this.username, this.slug).subscribe(data => {
       this.items = data;
       this.items.filter(item => {
-        item.isEditing = false;
+        return item.isEditing = false;
       });
       return this.items;
     });

@@ -107,8 +107,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       if (comment.date_updated) {
         const dateUpdated = new DateUtil(comment.date_updated, comment.comment);
         comment.time_difference = dateUpdated.getFormattedTimeDifference();
-        comment.formatted_creation_date = formatDate(comment.creation_date, 'MMME d, YYYY', 'en');
-        comment.formatted_creation_date = dateUpdated.format();
+        comment.formatted_creation_date = formatDate(comment.creation_date, 'MMM d, YYYY', 'en');
         return comment;
       }
       const creationDate = new DateUtil(comment.creation_date, comment.comment);

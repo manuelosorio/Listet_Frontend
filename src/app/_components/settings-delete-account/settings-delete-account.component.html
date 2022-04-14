@@ -9,12 +9,12 @@
     <ng-container *ngIf="password.invalid && password.touched">
       <i-feather class="form__input--validation invalid" name='x'></i-feather>
       <div class="error__message">
-        Last Name is required.
+        Password is required.
       </div>
     </ng-container>
   </fieldset>
   <fieldset class='form__fieldset form__fieldset--row'>
-    <button class='btn btn--disabled l-column-md-6' disabled>Delete Account<feather-icon name='info' title='Account Deletion Coming Soon'></feather-icon></button>
+    <button class='btn l-column-md-6' [class.btn--primary__ghost]='formGroup.valid' [class.btn--disabled__ghost]='formGroup.invalid' [disabled]='formGroup.invalid' (click)="deleteAccount(formGroup.value)">Delete Account</button>
     <button class='btn l-column-md-6' [class.btn--primary]='formGroup.valid' [class.btn--disabled]='formGroup.invalid' [disabled]='formGroup.invalid' (click)='deactivateAccount(formGroup.value)'>Deactivate Account</button>
   </fieldset>
 </form>

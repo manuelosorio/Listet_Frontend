@@ -54,6 +54,8 @@ export class NavComponent implements OnDestroy {
   login() {
     this.router.navigate(["/login"], {
       queryParams: { returnUrl: this.router.routerState.snapshot.url }
+    }).catch(e => {
+      console.error(e.message)
     }).then();
   }
   logout() {
