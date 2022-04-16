@@ -212,16 +212,40 @@ export class UsersService {
     return this.http.put(environment.host + "/deactivate-account", data, {
       withCredentials: true
     }).subscribe((res: EndpointResponse) => {
-
-      !!res.status ? this.alertService.warning(res.message) : this.alertService.success(res.message);
+      if (!!res.status ) {
+        return this.alertService.warning(res.message);
+      }
+      this.router.navigate(['/']).then(()=> {
+        location.reload()
+      });
+      return this.alertService.success(res.message);
     }, (error: ErrorResponse) => {
       console.error(error);
       this.alertService.error(error.error.message);
     });
   }
-  reactivateAccount() {
-    return this.http.put(`${environment.host}/reactivate-account`, null, {
+  reactivateAccount(data) {
+    return this.http.put(`${environment.host}/reactivate-account`, data, {
       withCredentials: true
+    });
+
+  }
+
+  deleteAccount(data) {
+    return this.http.delete(environment.host + "/delete-account", {
+      withCredentials: true,
+      body: data
+    }).subscribe((res: EndpointResponse) => {
+      if (!!res.status ) {
+        return this.alertService.warning(res.message);
+      }
+      this.router.navigate(['/']).then(()=> {
+        location.reload()
+      });
+      return this.alertService.success(res.message, true);
+    }, (error: ErrorResponse) => {
+      console.error(error);
+      this.alertService.error(error.error.message);
     });
   }
 }

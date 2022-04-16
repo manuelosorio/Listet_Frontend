@@ -20,6 +20,13 @@
     @extend .btn
     background: variables.$primary
     box-shadow: variables.$shadow
+    &__ghost
+      @extend .btn
+      background: variables.$bg
+      border: 2px solid variables.$primary
+      &:hover
+        background: variables.$primary
+        border: 2px solid variables.$primary-darken
     &:hover
       background: variables.$primary-darken
       color: variables.$black-darken
@@ -41,3 +48,9 @@
       box-shadow: inherit
     &:active
       transform: none
+    &__ghost
+      @extend .btn
+      border: solid 2px variables.$disabled
+      cursor: not-allowed
+      &:hover
+        border: solid 2px variables.$disabled

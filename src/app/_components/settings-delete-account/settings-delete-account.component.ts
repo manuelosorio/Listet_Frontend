@@ -11,6 +11,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class SettingsDeleteAccountComponent {
   private deactivateAccount$: Subscription;
+  private deleteAccount$: Subscription;
   public formGroup: FormGroup;
 
   constructor(
@@ -33,5 +34,8 @@ export class SettingsDeleteAccountComponent {
 
   deactivateAccount(password: string): void {
     this.deactivateAccount$ = this.userService.deactivateAccount(password);
+  }
+  deleteAccount(password: string): void {
+    this.deleteAccount$ = this.userService.deleteAccount(password);
   }
 }
