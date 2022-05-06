@@ -33,7 +33,7 @@
     "@nguniversal/express-engine": "~13.0.2",
     "angular-feather": "^6.3.0",
     "bufferutil": "^4.0.5",
-    "core-js": "^3.21.1",
+    "core-js": "^3.22.0",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "masonry-layout": "^4.2.2",
