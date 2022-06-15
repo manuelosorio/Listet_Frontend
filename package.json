@@ -31,7 +31,6 @@
     "@angular/platform-server": "~13.2.4",
     "@angular/router": "~13.2.4",
     "@nguniversal/express-engine": "~13.0.2",
-    "angular-feather": "^6.3.0",
     "bufferutil": "^4.0.5",
     "core-js": "^3.21.1",
     "express": "^4.17.3",
