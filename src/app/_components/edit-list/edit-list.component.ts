@@ -8,8 +8,9 @@ import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
 
-interface OnSubmitParams<Data extends ListModel | {prevSlug: string}> {
+interface OnSubmitParams<Data extends ListModel> {
   data?: Data;
+  prevSlug: string;
 }
 
 @Component({
@@ -57,10 +58,9 @@ export class EditListComponent implements OnInit{
     this.list.isEditing = false;
   }
   onSubmit(data: OnSubmitParams<any>): void {
-    data.data.prevSlug = this.route.snapshot.params.slug;
-    // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
-    this.listService.updateList(data, this.list.id).subscribe(async (_res: Response) => {
-      // this.alertService.success(res.message);
+    data.prevSlug = this.route.snapshot.params.slug;
+    this.listService.updateList(data, this.list.id).subscribe(async (res: Response) => {
+      this.alertService.success(res.message);
       this.list.isEditing = false;
     }, error => {
       this.alertService.error(`Error: ${error.status} - ${error.error.message}`);
