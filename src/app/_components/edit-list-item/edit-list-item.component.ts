@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { formatDate } from '@angular/common';
@@ -13,9 +13,9 @@ import { ListItemModel } from '../../models/list-item.model';
 })
 export class EditListItemComponent implements OnInit {
   @Input() listItem;
-  public listItemForm: FormGroup;
+  public listItemForm: UntypedFormGroup;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private listService: ListsService,
     private _listDataService: ListDataService
   ) {

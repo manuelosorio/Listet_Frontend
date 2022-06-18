@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { EndpointResponse } from '../../models/response/endpoint.response';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { AlertService } from '../../_services/alert.service';
@@ -11,10 +11,10 @@ import { AlertService } from '../../_services/alert.service';
   styleUrls: ['./settings-password.component.sass']
 })
 export class SettingsPasswordComponent {
-  public passwordForm: FormGroup
+  public passwordForm: UntypedFormGroup
   constructor(private userService: UsersService,
               private alertService: AlertService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: UntypedFormBuilder) {
     this.passwordForm = this.formBuilder.group({
       newPassword: [
         '',

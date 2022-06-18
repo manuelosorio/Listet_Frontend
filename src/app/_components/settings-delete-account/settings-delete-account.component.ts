@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings-delete-account',
@@ -12,12 +12,12 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class SettingsDeleteAccountComponent {
   private deactivateAccount$: Subscription;
   private deleteAccount$: Subscription;
-  public formGroup: FormGroup;
+  public formGroup: UntypedFormGroup;
 
   constructor(
     private userService: UsersService,
     private httpClient: HttpClient,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.formGroup = this.formBuilder.group({
       password: ['',

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ListModel } from '../../models/list.model';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { AlertService } from '../../_services/alert.service';
 import { Response } from '../../_pages/create-list/create-list.component';
@@ -19,14 +19,14 @@ interface OnSubmitParams<Data extends ListModel | {prevSlug: string}> {
 })
 export class EditListComponent implements OnInit{
   @Input() list: ListModel;
-  public editListForm: FormGroup;
+  public editListForm: UntypedFormGroup;
   public visibility: number;
   public visibilityOptions: ListVisibility[];
   public allowComments: boolean;
 
   constructor(
     private alertService: AlertService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private listService: ListsService,
     private route: ActivatedRoute
   ) {

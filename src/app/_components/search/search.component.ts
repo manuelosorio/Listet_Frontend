@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { filter } from "rxjs/operators";
 
 @Component({
@@ -9,7 +9,7 @@ import { filter } from "rxjs/operators";
   styleUrls: ['./search.component.sass']
 })
 export class SearchComponent {
-  public searchForm: FormGroup;
+  public searchForm: UntypedFormGroup;
   public windowWidth: number
 
   private hidePaths = [
@@ -24,7 +24,7 @@ export class SearchComponent {
   ];
   public hideSearch: boolean;
   constructor(public router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: UntypedFormBuilder) {
     this.searchForm = this.formBuilder.group({
       search: ['', [
         Validators.minLength(1)

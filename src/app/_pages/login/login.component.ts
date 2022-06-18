@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   isChecked: boolean;
   errorMessage: string;
   private readonly meta: MetaTagModel;
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UsersService,
     private seoService: SeoService,
     private route: ActivatedRoute,

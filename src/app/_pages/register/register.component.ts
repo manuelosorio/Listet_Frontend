@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   private readonly meta: MetaTagModel;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UsersService,
     private seoService: SeoService
   ) {

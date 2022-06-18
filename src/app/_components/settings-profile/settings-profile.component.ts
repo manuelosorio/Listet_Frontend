@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,10 +9,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./settings-profile.component.sass']
 })
 export class SettingsProfileComponent implements OnInit {
-  public profileForm: FormGroup;
+  public profileForm: UntypedFormGroup;
   private updateAccountInfo$: Subscription;
   constructor(private userService: UsersService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: UntypedFormBuilder) {
     this.profileForm = this.formBuilder.group({
       email: [
         '',

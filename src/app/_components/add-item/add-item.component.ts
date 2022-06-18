@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
@@ -14,7 +14,7 @@ import { ListItemModel } from '../../models/list-item.model';
   styleUrls: ['./add-item.component.sass']
 })
 export class AddItemComponent implements OnInit {
-  listItemForm: FormGroup;
+  listItemForm: UntypedFormGroup;
   isOwner: boolean;
   private listData: Subscription;
   private readonly listOwner: string;
@@ -23,7 +23,7 @@ export class AddItemComponent implements OnInit {
   private readonly username: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private listService: ListsService,
     private listDataService: ListDataService,
     private route: ActivatedRoute,
