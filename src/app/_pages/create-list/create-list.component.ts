@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { Router } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
@@ -17,7 +17,7 @@ export interface Response {
   styleUrls: ['./create-list.component.sass']
 })
 export class CreateListComponent implements OnInit {
-  public createListForm: FormGroup;
+  public createListForm: UntypedFormGroup;
   public allowComments: boolean;
   public visibilityOptions: ListVisibility[];
   private redirectURL;
@@ -25,7 +25,7 @@ export class CreateListComponent implements OnInit {
   // errorMessage: string;
   constructor(
     private alertService: AlertService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private listService: ListsService,
     private router: Router
   ) {

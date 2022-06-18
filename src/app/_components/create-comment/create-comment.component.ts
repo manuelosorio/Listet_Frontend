@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
@@ -14,7 +14,7 @@ import { CommentModel } from '../../models/comment.model';
 })
 export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;
-  public commentForm: FormGroup;
+  public commentForm: UntypedFormGroup;
   public commentData;
   public commentCharacterCount: number;
 
@@ -25,7 +25,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: object,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private listService: ListsService,
     private listDataService: ListDataService,
     private route: ActivatedRoute,

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentModel } from '../../models/comment.model';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { ListsService } from '../../_services/lists.service';
 })
 export class EditCommentComponent implements OnInit {
   @Input() commentModel: CommentModel;
-  public commentForm: FormGroup;
+  public commentForm: UntypedFormGroup;
   public commentCharacterCount: number;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private listService: ListsService
   ) {
   }

@@ -83,7 +83,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled',
+    initialNavigation: 'enabledBlocking',
     relativeLinkResolution: 'corrected',
     preloadingStrategy: PreloadAllModules,
     onSameUrlNavigation: 'reload'

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
@@ -17,7 +17,7 @@ describe('RegisterComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        FormBuilder,
+        UntypedFormBuilder,
         ReactiveFormsModule
       ]
     })
