@@ -30,7 +30,6 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   private meta: MetaTagModel;
   private onDelete$: Subscription;
   private onEdit$: Subscription;
-  private username$: Subscription;
   private getList$: Subscription;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private prevSlug: string;
@@ -48,11 +47,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     userService.isAuth();
     this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;
-    this.username$ = userService.userInfo$.subscribe(res => {
-      try {
-        this.isOwner = this.username === res.username;
-      } catch (e){}
-    });
+
     if (this.isBrowser) {
       this.onDelete$ = this.websocketService.onDeleteList().subscribe(() => {
         this.alertService.warning('List has been deleted. Redirecting...', false);
@@ -77,10 +72,12 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       this.header = data;
       this.header[0].isEditing = false;
       this.listId = data[0].id;
+      this.isOwner = data[0].is_owner;
+      console.log(data, this.isOwner);
       this.listData = {
         id: this.listId,
         allow_comments: data[0].allow_comments,
-        isOwner: this.isOwner
+        isOwner: this.isOwner,
       };
       this.listDataService.setData(this.listData);
       this.metaTags(data);
@@ -126,7 +123,6 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.username$.unsubscribe();
     this.getList$.unsubscribe();
     if (this.isBrowser) {
       this.onDelete$.unsubscribe();

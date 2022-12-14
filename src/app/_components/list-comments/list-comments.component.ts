@@ -60,9 +60,6 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       });
       this.getComments = this.listService.comment$.subscribe(comments => {
         this.comments = comments;
-        this.comments.filter(comment => {
-          return this.isCommentOwner(comment);
-        });
         this.updateTimeDifference();
         this.count = this.comments.length;
         return this.comments;
@@ -71,7 +68,6 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       this.onCreateComment$ = this.websocketService.onCreateComment().subscribe((comment: CommentModel) => {
         this.count += 1;
         this.updateTimeDifference();
-        this.isCommentOwner(comment);
         const creationDate = new DateUtil(new Date(), comment.comment);
         comment.time_difference = creationDate.getFormattedTimeDifference();
         comment.formatted_creation_date = creationDate.format();
@@ -116,10 +112,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       return comment;
     });
   }
-  private isCommentOwner(comment: CommentModel) {
-    comment.is_owner = comment.username === this.username;
-    return comment;
-  }
+
   ngOnDestroy(): void {
     this.authenticated$.unsubscribe();
     if (this.isBrowser) {

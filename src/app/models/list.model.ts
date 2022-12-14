@@ -11,6 +11,9 @@ export interface ListModel {
   firstName: string;
   lastName: string;
   owner_username: string;
+  is_owner: boolean;
   isEditing?: boolean;
   featured?: boolean;
+  cached?: boolean,
+  data?: ListModel[]
 }
