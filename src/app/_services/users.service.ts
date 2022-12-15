@@ -79,7 +79,7 @@ export class UsersService {
         });
 
 
-        res && res.firstName && res.lastName ? this.alertService.success(`Welcome ${res.firstName} ${res.lastName}`)
+        res && res.firstName && res.lastName ? this.alertService.success(`Welcome back, ${res.firstName} ${res.lastName}`)
                                              : this.alertService.success(res.message);
         if (!res.verified) {
           this.alertService.warning('In order to use this site your account must be verified. Check your inbox or spam folder.', true);
@@ -186,9 +186,11 @@ export class UsersService {
     return this.http.get(environment.host + '/verify-account/' + token, {
         withCredentials: true
       }
-    ).subscribe(res => {
+    ).subscribe((res) => {
       console.log(res);
       this.router.navigate(['/']).then();
+    }, (err) => {
+      console.error(err)
     });
   }
 
