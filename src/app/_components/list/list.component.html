@@ -11,8 +11,8 @@
         </a>
         <em>Created: {{ list['creation_date'] }} </em>
       </div>
-      <div class="l-row">
-        <p *ngIf="list['description']" class="card__description">{{ list['description'] }}</p>
+      <div *ngIf="list['description']" class="l-row">
+        <p class="card__description">{{ list['description'] }}</p>
       </div>
     </a>
   </div>
