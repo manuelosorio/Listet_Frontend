@@ -186,8 +186,7 @@ export class UsersService {
     return this.http.get(environment.host + '/verify-account/' + token, {
         withCredentials: true
       }
-    ).subscribe((res) => {
-      console.log(res);
+    ).subscribe((_res) => {
       this.router.navigate(['/']).then();
     }, (err) => {
       console.error(err)
