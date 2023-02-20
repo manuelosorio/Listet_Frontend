@@ -51,16 +51,6 @@ export class DateUtil {
     const days = Math.floor((seconds / (86400)));
     const months = Math.floor((seconds / (2629743)));
     const years = Math.floor((seconds / (31556926)));
-    // console.table({
-    //   'message':        this.debugString,
-    //   'original-date':  this.date,
-    //   'seconds':        seconds,
-    //   'minutes':        minutes,
-    //   'hours':          hours,
-    //   'days':           days,
-    //   'months':         months,
-    //   'years':          years
-    // })
     if (years > 1)     { return `${years} years ago`; }
     if (years === 1)   { return '1 year ago'; }
     if (months > 1)    { return `${months} months ago`; }

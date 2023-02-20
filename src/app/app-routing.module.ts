@@ -84,10 +84,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabledBlocking',
-    relativeLinkResolution: 'corrected',
     preloadingStrategy: PreloadAllModules,
     onSameUrlNavigation: 'reload'
-  })],
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
