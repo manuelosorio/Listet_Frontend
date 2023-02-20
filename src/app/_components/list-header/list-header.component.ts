@@ -73,7 +73,6 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       this.header[0].isEditing = false;
       this.listId = data[0].id;
       this.isOwner = data[0].is_owner;
-      console.log(data, this.isOwner);
       this.listData = {
         id: this.listId,
         allow_comments: data[0].allow_comments,
