@@ -79,6 +79,16 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "customWebpackConfig": {
+                "path": "./webpack-dev.config.js"
+              },
+              "optimization": false,
+              "namedChunks": true,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": ""
@@ -136,9 +146,6 @@
         "server": {
           "builder": "@angular-builders/custom-webpack:server",
           "options": {
-            "customWebpackConfig": {
-              "path": "webpack-prod.config.js"
-            },
             "outputPath": "dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
@@ -147,6 +154,9 @@
           },
           "configurations": {
             "production": {
+              "customWebpackConfig": {
+                "path": "webpack-prod.config.js"
+              },
               "outputHashing": "media",
               "fileReplacements": [
                 {
@@ -156,6 +166,11 @@
               ],
               "sourceMap": false,
               "optimization": true
+            },
+            "development": {
+              "customWebpackConfig": {
+                "path": "webpack-dev.config.js"
+              }
             }
           },
           "defaultConfiguration": ""
@@ -173,6 +188,10 @@
             "production": {
               "browserTarget": "listet:build:production",
               "serverTarget": "listet:server:production"
+            },
+            "development": {
+              "browserTarget": "listet:build:development",
+              "serverTarget": "listet:server:development"
             }
           }
         },
