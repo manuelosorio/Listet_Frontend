@@ -51,7 +51,7 @@ export class CreateListComponent implements OnInit {
       this.redirectURL = res.url;
       await this.router.navigate([`/l/${res.url}`]);
     }, error => {
-      this.alertService.error(`Error: ${error.status} - ${error.error.message}`);
+      this.alertService.error(`Error: ${error.status} - ${error.error.message}`, null, 5000, true);
     });
   }
 

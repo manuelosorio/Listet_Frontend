@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -16,7 +22,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-list-header',
   templateUrl: './list-header.component.html',
-  styleUrls: ['./list-header.component.sass']
+  styleUrls: ['./list-header.component.sass'],
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: Array<ListModel>;
@@ -50,7 +56,12 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
 
     if (this.isBrowser) {
       this.onDelete$ = this.websocketService.onDeleteList().subscribe(() => {
-        this.alertService.warning('List has been deleted. Redirecting...', false);
+        this.alertService.warning(
+          'List has been deleted. Redirecting...',
+          null,
+          2900,
+          true
+        );
         setTimeout(() => {
           return this.router.navigateByUrl('/lists');
         }, 3000);
@@ -58,37 +69,42 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       this.onEdit$ = this.websocketService.onEditList().subscribe(res => {
         this.prevSlug = this.header[0].slug;
         this.editHeader(res);
-      })
+      });
     }
   }
 
   ngOnInit(): void {
-    this.getList$ = this.listService.getList(this.slug).subscribe((data: Array<ListModel>) => {
-      const creationDate = new DateUtil(data[0].creation_date);
-      if (!!data[0].deadline) {
-        this.deadline = new Date(data[0].deadline);
+    this.getList$ = this.listService.getList(this.slug).subscribe(
+      (data: Array<ListModel>) => {
+        const creationDate = new DateUtil(data[0].creation_date);
+        if (!!data[0].deadline) {
+          this.deadline = new Date(data[0].deadline);
+        }
+        this.formattedCreationDate = creationDate.format();
+        this.header = data;
+        this.header[0].isEditing = false;
+        this.listId = data[0].id;
+        this.isOwner = data[0].is_owner;
+        this.listData = {
+          id: this.listId,
+          allow_comments: data[0].allow_comments,
+          isOwner: this.isOwner,
+        };
+        this.listDataService.setData(this.listData);
+        this.metaTags(data);
+        this.seoService.updateInfo(this.meta);
+        return this.header;
+      },
+      error => {
+        if (error.status === 404 || error.status === 403) {
+          this.router
+            .navigateByUrl('/404', {
+              skipLocationChange: true,
+            })
+            .then();
+        }
       }
-      this.formattedCreationDate = creationDate.format();
-      this.header = data;
-      this.header[0].isEditing = false;
-      this.listId = data[0].id;
-      this.isOwner = data[0].is_owner;
-      this.listData = {
-        id: this.listId,
-        allow_comments: data[0].allow_comments,
-        isOwner: this.isOwner,
-      };
-      this.listDataService.setData(this.listData);
-      this.metaTags(data);
-      this.seoService.updateInfo(this.meta);
-      return this.header;
-    }, (error => {
-      if (error.status === 404 || error.status === 403) {
-        this.router.navigateByUrl('/404', {
-          skipLocationChange: true
-        }).then();
-      }
-    }));
+    );
   }
 
   edit() {
@@ -96,11 +112,13 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    if (confirm('Are sure you want to delete this list?')){
-      this.listService.deleteList(this.listId).subscribe(() => {
-      }, error => {
-        console.error(error);
-      } );
+    if (confirm('Are sure you want to delete this list?')) {
+      this.listService.deleteList(this.listId).subscribe(
+        () => {},
+        error => {
+          console.error(error);
+        }
+      );
     }
   }
 
@@ -117,7 +135,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
       title: 'Listet App - ' + data[0].name,
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/l/${this.slug}`
+      url: `${environment.url}/l/${this.slug}`,
     };
   }
 
