@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMasonryModule } from './shared/ngx-masonry/ngx-masonry.module';
 
-
 // Components
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components/alert/alert.component';
@@ -17,7 +16,6 @@ import { NavComponent } from './_components/nav/nav.component';
 import { UserComponent } from './_components/user/user.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
-
 
 // Guards
 import { GuestGuard } from './guards/guest.guard';
@@ -45,13 +43,12 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
 import { VerifiedGuard } from './guards/verified.guard';
 import { SearchComponent } from './_components/search/search.component';
 import { SearchResultsComponent } from './_pages/search-results/search-results.component';
-import { SearchDataService } from "./shared/search-data.service";
-import { UserCardComponent } from "./_components/user-card/user-card.component";
+import { SearchDataService } from './shared/search-data.service';
+import { UserCardComponent } from './_components/user-card/user-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent,
     UserComponent,
     ListComponent,
     ProfileComponent,
@@ -69,10 +66,12 @@ import { UserCardComponent } from "./_components/user-card/user-card.component";
     YourListComponent,
     SearchComponent,
     SearchResultsComponent,
-    UserCardComponent
+    UserCardComponent,
   ],
   imports: [
     ActionButtonModule,
+    AlertComponent,
+    BrowserAnimationsModule,
     CharacterCounterModule,
     DeadlineModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -85,8 +84,13 @@ import { UserCardComponent } from "./_components/user-card/user-card.component";
     BrowserAnimationsModule,
     TransferHttpCacheModule,
   ],
-  providers: [GuestGuard, VerifiedGuard, AuthGuard, ListDataService, SearchDataService],
-  bootstrap: [AppComponent]
+  providers: [
+    GuestGuard,
+    VerifiedGuard,
+    AuthGuard,
+    ListDataService,
+    SearchDataService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
