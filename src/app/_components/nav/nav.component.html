@@ -1,22 +1,24 @@
 <nav class="navigation">
   <div class="navigation--row">
     <a routerLink="/" class="navigation--logo"><img src="assets/images/logo.svg" alt="Listet"></a>
-    <ng-container *ngIf="this.loginPath === false">
-      <button class="navigation--menu" (click)="toggleActive()"><i-feather name="menu" [class.is-active]='isActive' ></i-feather><span class="menu--text">Menu</span></button>
-    </ng-container>
-    <ng-container *ngIf="authenticated">
-      <div class='visibility--flex visibility--none__md user-nav-wrapper' tabindex='0'>
-        <feather-icon name='user-circle'></feather-icon>
-        <div class='user-nav-wrapper__sub-container'>
-          <ul class="navigation--links__user">
-            <li><strong>{{ this.fullName }}</strong></li>
-            <li class="navigation--links-item" tabindex='0'><a [routerLink]='"/u/" + username'>Profile</a></li>
-            <li class="navigation--links-item" tabindex='0'><a routerLink='/settings/'>Settings</a></li>
-            <li class="navigation--links-item" tabindex='0'><a (click)="logout()">Logout</a></li>
-          </ul>
+    <div class="visibility--flex">
+      <ng-container *ngIf="this.loginPath === false">
+        <button class="navigation--menu" (click)="toggleActive()"><i-feather name="menu" [class.is-active]='isActive' ></i-feather><span class="menu--text">Menu</span></button>
+      </ng-container>
+      <ng-container *ngIf="authenticated">
+        <div class='visibility--flex visibility--none__md user-nav-wrapper' tabindex='0'>
+          <feather-icon name='user-circle'></feather-icon>
+          <div class='user-nav-wrapper__sub-container'>
+            <ul class="navigation--links__user">
+              <li><strong>{{ this.fullName }}</strong></li>
+              <li class="navigation--links-item" tabindex='0'><a [routerLink]='"/u/" + username'>Profile</a></li>
+              <li class="navigation--links-item" tabindex='0'><a routerLink='/settings/'>Settings</a></li>
+              <li class="navigation--links-item" tabindex='0'><a (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
   <ng-container *ngIf="this.loginPath === false">
     <ul class="navigation--links" [class.is-active]="isActive">
