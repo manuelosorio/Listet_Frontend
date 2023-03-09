@@ -1,8 +1,44 @@
 @use '../../../sass/variables'
+@keyframes slideInRight
+  from
+    transform: translateX(120%)
+  to
+    transform: translateX(0)
+@keyframes slideOutRight
+  from
+    transform: translateX(0)
+  to
+    transform: translateX(120%)
 .alert
+  transform: translateX(120%)
+  display: flex
+  flex-direction: row
+  width: 98%
   background: variables.$grey
-  color: variables.$black
-  padding: 0.125em 1em
+  color: variables.$bg
+  padding: 0.25rem 0.75rem
+  position: fixed
+  bottom: 9.25rem
+  right: 10px
+  max-width: 300px
+  z-index: 100
+  border: 1px solid darken(variables.$grey, 5%)
+  border-radius: 0.25rem
+  font-size: variables.$f-size--xx-small
+  line-height: 1.2
+  box-shadow: variables.$shadow
+  &.slideInRight, &.slideOutRight
+    animation-fill-mode: forwards
+  &.slideInRight
+    animation:
+      name: slideInRight
+      duration: variables.$t-timing
+      timing-function: variables.$t-easeOutBack-style
+  &.slideOutRight
+    animation:
+      name: slideOutRight
+      duration: variables.$t-timing
+      timing-function: variables.$t-easeOutBack-style
   &--success
     background: variables.$green
     color: variables.$bg
@@ -21,20 +57,21 @@
       color: darken(variables.$bg, 10%)
       &:hover
         color: variables.$bg
-  div
+  &__message
     display: flex
-    flex-direction: row
-    width: 98%
-    max-width: 1400px
-    margin: auto
-    justify-content: space-between
-    align-items: center
+    flex-direction: column
   i-feather
     cursor: pointer
+  &__close
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    margin-left: 1rem
+    width: fit-content
 .icon__wrap
   display: flex
   justify-content: center
   align-items: center
 a
-  //text-decoration: none
   transition: color variables.$t-easeOutBack

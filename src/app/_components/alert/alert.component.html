@@ -1,8 +1,17 @@
-<div *ngIf="message" [ngClass]="message.cssClass">
-  <div>
-    <p [innerHTML]="message.text"></p>
-    <span class="icon__wrap">
-      <i-feather name="X-Circle" (click)="closeFlashMessage()"></i-feather>
-    </span>
+<ng-container *ngIf="(alert$ | async) as alert">
+  <div class="alert" [ngClass]="this.cssClasses[alert.type] + ' ' + animationClass">
+    <div class="alert__message">
+      <p>{{alert.message}}</p>
+      <ng-container *ngIf="alert.link">
+        <a [routerLink]="alert.link.url" class="alert__link">
+          {{alert.link.text}}
+        </a>
+      </ng-container>
+    </div>
+    <div class="alert__close" (click)="clear()">
+      <span class="icon__wrap">
+        <i-feather name="X-Circle"></i-feather>
+      </span>
+    </div>
   </div>
-</div>
+</ng-container>
