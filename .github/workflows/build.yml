@@ -1,0 +1,28 @@
+name: Build & Deploy Angular
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - uses: actions/cache@v3
+        with:
+          path: ~/.yarn-cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: yarn install
+      - name: Env
+        run: |
+          touch prod.env
+          echo HOST="${{ secrets.CLIENT_HOST }}" >> prod.env
+          echo URL="${{ secrets.CLIENT_URL }}" >> prod.env
+          echo WEBSOCKET="${{ secrets.CLIENT_WEBSOCKET }}" >> prod.env
+      - name: Build Angular SSR
+        run: yarn build:ssr
