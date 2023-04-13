@@ -1,7 +1,14 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
 import { Observable } from 'rxjs';
-import { NgClass, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
 import { IconsModule } from '../../_modules/icons/icons.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterLink } from '@angular/router';
@@ -17,38 +24,47 @@ import { map } from 'rxjs/operators';
   standalone: true,
 })
 export class AlertComponent implements OnInit, OnDestroy {
-  private currentAlert: Alert;
-  animationClass: string;
-  public alert$: Observable<Alert>;
-  cssClasses: Record<string, string>;
-  constructor(private alertService: AlertService) {}
+  private currentAlert?: Alert | null;
+  animationClass: string = '';
+  public alert$?: Observable<Alert | any>;
+  cssClasses: Record<string, string> = {};
+  private readonly isBrowser: boolean;
+  constructor(
+    private alertService: AlertService,
+    @Inject(PLATFORM_ID) platformId: string
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
-    this.alert$ = this.alertService.getAlert().pipe(
-      map(alert => {
-        if (!alert) {
-          return;
-        }
-        if (this.currentAlert && alert === this.currentAlert) {
-          this.currentAlert = alert;
-          this.animationClass = '';
-          setTimeout(() => {
+    if (this.isBrowser) {
+      // TODO: display multiple toast via a queueing system
+      this.alert$ = this.alertService.getAlert().pipe(
+        map((alert: Alert) => {
+          if (!alert) {
+            return;
+          }
+          if (this.currentAlert && alert === this.currentAlert) {
+            this.currentAlert = alert;
+            this.animationClass = '';
+            setTimeout(() => {
+              this.animationClass = 'slideInRight';
+            }, 600);
+          } else {
+            this.currentAlert = alert;
+            this.cssClasses = this.alertService.getCssClass();
             this.animationClass = 'slideInRight';
-          }, 600);
-        } else {
-          this.currentAlert = alert;
-          this.cssClasses = this.alertService.getCssClass();
-          this.animationClass = 'slideInRight';
-        }
-        if (alert.timeout) {
-          setTimeout(() => {
-            this.clear();
-          }, alert.timeout);
-        }
+          }
+          if (alert.timeout) {
+            setTimeout(() => {
+              this.clear();
+            }, alert.timeout);
+          }
 
-        return alert;
-      })
-    );
+          return alert;
+        })
+      );
+    }
   }
 
   clear(): void {
