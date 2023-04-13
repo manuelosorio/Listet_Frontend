@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:no-host": "ng serve --disable-host-check",
-    "start:ssl": "ng serve --disable-host-check --ssl true --ssl-cert ./ssl/server.crt --ssl-key ./ssl/server.key",
+    "start:no-host": "ng serve --host 127.0.0.1 --public-host localhost",
+    "start:ssl": "ng serve --host 127.0.0.1 --public-host listet.local --ssl true --ssl-cert ./ssl/server.crt --ssl-key ./ssl/server.key",
     "build": "ng build",
     "build:prod": "ng build --configuration production --base-href /projects/listet/",
     "test": "snyk test && ng test",
@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "^15.1.5",
     "@angular/platform-server": "^15.1.5",
     "@angular/router": "^15.1.5",
-    "@nguniversal/express-engine": "^15.1.0",
+    "@nguniversal/express-engine": "^15.2.0",
     "@snyk/protect": "^1.1105.0",
     "angular-feather": "^6.5.0",
     "bufferutil": "^4.0.6",
@@ -38,7 +38,7 @@
     "express": "^4.18.1",
     "helmet": "^5.1.0",
     "masonry-layout": "^4.2.2",
-    "rxjs": "~6.6.6",
+    "rxjs": "~7.5.0",
     "socket.io-client": "^3.0.5",
     "tslib": "^2.3.1",
     "utf-8-validate": "^5.0.9",
@@ -59,10 +59,10 @@
     "@types/dotenv-webpack": "^7.0.3",
     "@types/express": "^4.17.11",
     "@types/jasminewd2": "~2.0.8",
-    "@types/node": "^17.0.21",
+    "@types/node": "^16.18.23",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.3",
     "dotenv-webpack": "^7.1.0",
     "eslint": "^8.28.0",
     "jasmine-core": "~3.6.0",
@@ -75,6 +75,6 @@
     "protractor": "~7.0.0",
     "socket.io": "^3.1.2",
     "ts-node": "~8.3.0",
-    "typescript": "~4.8.4"
+    "typescript": "~4.9.5"
   }
 }

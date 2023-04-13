@@ -29,7 +29,8 @@
               "ngx-masonry",
               "masonry-layout",
               "socket.io-client",
-              "socket.io-parser"
+              "socket.io-parser",
+              "ev-emitter/ev-emitter"
             ],
             "assets": [
               "src/favicon.ico",
