@@ -3,12 +3,11 @@ import { NgModule } from '@angular/core';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMasonryModule } from './shared/ngx-masonry/ngx-masonry.module';
+import { NgxMasonryModule } from './shared/ngx-masonry/ngx-masonry-api';
 
 // Components
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components/alert/alert.component';
-import { BackButtonComponent } from './_components/back-button/back-button.component';
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { FooterComponent } from './_components/footer/footer.component';
 import { ListComponent } from './_components/list/list.component';
@@ -18,8 +17,6 @@ import { VerifyAccountComponent } from './_components/verify-account/verify-acco
 import { YourListComponent } from './_pages/your-list/your-list.component';
 
 // Guards
-import { GuestGuard } from './guards/guest.guard';
-import { AuthGuard } from './guards/auth.guard';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -29,8 +26,10 @@ import { CharacterCounterModule } from './shared/character-counter/character-cou
 import { IconsModule } from './_modules/icons/icons.module';
 import { DeadlineModule } from './shared/deadline/deadline.module';
 
-// Service
+// Services
 import { ListDataService } from './shared/list-data.service';
+import { SearchDataService } from './shared/search-data.service';
+import { UsersService } from './_services/users.service';
 
 // Pages
 import { ForgotPasswordComponent } from './_pages/forgot-password/forgot-password.component';
@@ -40,15 +39,15 @@ import { NotFoundComponent } from './_pages/not-found/not-found.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { RegisterComponent } from './_pages/register/register.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
-import { VerifiedGuard } from './guards/verified.guard';
 import { SearchComponent } from './_components/search/search.component';
 import { SearchResultsComponent } from './_pages/search-results/search-results.component';
-import { SearchDataService } from './shared/search-data.service';
 import { UserCardComponent } from './_components/user-card/user-card.component';
+import { BackButtonComponent } from './_components/back-button/back-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // AlertComponent,
     UserComponent,
     ListComponent,
     ProfileComponent,
@@ -58,7 +57,6 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
     FooterComponent,
     LoginComponent,
     NotFoundComponent,
-    BackButtonComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
     VerifyAccountComponent,
@@ -71,6 +69,7 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
   imports: [
     ActionButtonModule,
     AlertComponent,
+    BackButtonComponent,
     BrowserAnimationsModule,
     CharacterCounterModule,
     DeadlineModule,
@@ -85,11 +84,9 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
     TransferHttpCacheModule,
   ],
   providers: [
-    GuestGuard,
-    VerifiedGuard,
-    AuthGuard,
     ListDataService,
     SearchDataService,
+    UsersService,
   ],
   bootstrap: [AppComponent],
 })

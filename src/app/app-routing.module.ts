@@ -21,73 +21,113 @@ import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
 import { environment } from '../environments/environment';
 import { VerifiedGuard } from './guards/verified.guard';
-import { SearchResultsComponent } from "./_pages/search-results/search-results.component";
+import { SearchResultsComponent } from './_pages/search-results/search-results.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, data: [{
-      author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
-      title: 'Listet App - Home',
-      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
-      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/`
-    }]
+    path: '',
+    component: HomeComponent,
+    data: [
+      {
+        author: 'Manuel Osorio',
+        description: 'Listet is a social todo list tool.',
+        title: 'Listet App - Home',
+        openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+        twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+        url: `${environment.url}/`,
+      },
+    ],
   },
   {
-    path: 'lists', component: ListComponent, data: [{
-      author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
-      title: 'Listet App - Lists',
-      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
-      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/lists`
-    }]
+    path: 'lists',
+    component: ListComponent,
+    data: [
+      {
+        author: 'Manuel Osorio',
+        description: 'Listet is a social todo list tool.',
+        title: 'Listet App - Lists',
+        openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+        twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+        url: `${environment.url}/lists`,
+      },
+    ],
   },
   {
-    path: 'your-lists', component: YourListComponent, data: [{
-      author: 'Manuel Osorio',
-      description: 'Listet is a social todo list tool.',
-      title: 'Listet App - Lists',
-      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
-      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/lists`
-    }],
-    canActivate: [GuestGuard],
+    path: 'your-lists',
+    component: YourListComponent,
+    data: [
+      {
+        author: 'Manuel Osorio',
+        description: 'Listet is a social todo list tool.',
+        title: 'Listet App - Lists',
+        openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+        twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+        url: `${environment.url}/lists`,
+      },
+    ],
+    /*canActivate: [GuestGuard],*/
   },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, /*canActivate: [AuthGuard] */},
+  { path: 'register', component: RegisterComponent, /*canActivate: [AuthGuard]*/ },
   {
-    path: 'u/:username', component: ProfileComponent, data: [{
-      author: 'Manuel Osorio',
-      title: 'Listet App - ',
-      openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
-      twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/`
-    }]
+    path: 'u/:username',
+    component: ProfileComponent,
+    data: [
+      {
+        author: 'Manuel Osorio',
+        title: 'Listet App - ',
+        openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
+        twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
+        url: `${environment.url}/`,
+      },
+    ],
   },
   {
     path: 'l/:slug',
-    loadChildren: () => import('./_pages/list-details/list-details.module').then(m => m.ListDetailsModule),
+    loadChildren: () =>
+      import('./_pages/list-details/list-details.module').then(
+        m => m.ListDetailsModule
+      ),
     // component: ListDetailsComponent,
   },
-  { path: 'create-list', component: CreateListComponent, canActivate: [GuestGuard, VerifiedGuard] },
-  { path: 'settings', canActivate: [GuestGuard],
-    loadChildren: () => import('./_pages/settings/settings.module').then(m => m.SettingsModule)},
-  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
-  { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [AuthGuard] },
-  { path: 'verify-account/:token', component: VerifyAccountComponent, canActivate: [AuthGuard] },
+  {
+    path: 'create-list',
+    component: CreateListComponent,
+    canActivate: [GuestGuard, VerifiedGuard]
+  },
+  {
+    path: 'settings',
+    canActivate: [GuestGuard],
+    loadChildren: () =>
+      import('./_pages/settings/settings.module').then(m => m.SettingsModule),
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'reset-password/:token',
+    component: ResetPasswordComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'verify-account/:token',
+    component: VerifyAccountComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'search/:query', component: SearchResultsComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking',
-    preloadingStrategy: PreloadAllModules,
-    onSameUrlNavigation: 'reload'
-})],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+      preloadingStrategy: PreloadAllModules,
+      onSameUrlNavigation: 'reload',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

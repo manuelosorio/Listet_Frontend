@@ -1,28 +1,33 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { UsersService } from '../_services/users.service';
-import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GuestGuard implements CanActivate {
-  constructor(private router: Router, private userService: UsersService) {
-  }
+export const GuestGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  const userService = inject(UsersService);
+  const router = inject(Router);
 
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.userService.isLoggedIn().pipe(filter(auth => auth != null),
-      take(1),
-      map((res: any) => {
-        if (!res.authenticated) {
-          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } }).then(() => {
-            window.location.reload();
+  return inject(UsersService).isLoggedIn().pipe(
+    filter(auth => auth != null),
+    take(1),
+    map((res: any) => {
+      if (!res.authenticated) {
+        router
+          .navigate(['/login'], { queryParams: { returnUrl: state.url } })
+          .then(() => {
+            // window.location.reload();
           });
-          return false;
-        }
-        return true;
-      }));
-  }
-}
+        return false;
+      }
+      return true;
+    })
+  );
+};
