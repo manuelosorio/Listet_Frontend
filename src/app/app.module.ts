@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMasonryModule } from './shared/ngx-masonry/ngx-masonry-api';
 
 // Components
 import { AppComponent } from './app.component';
@@ -43,6 +42,7 @@ import { SearchComponent } from './_components/search/search.component';
 import { SearchResultsComponent } from './_pages/search-results/search-results.component';
 import { UserCardComponent } from './_components/user-card/user-card.component';
 import { BackButtonComponent } from './_components/back-button/back-button.component';
+import { MasonryDirective } from './_directives/masonry.directive';
 
 @NgModule({
   declarations: [
@@ -65,29 +65,25 @@ import { BackButtonComponent } from './_components/back-button/back-button.compo
     SearchComponent,
     SearchResultsComponent,
     UserCardComponent,
+    MasonryDirective,
   ],
   imports: [
+    TransferHttpCacheModule,
+    BrowserModule.withServerTransition({ appId: 'ListetApp' }),
     ActionButtonModule,
     AlertComponent,
     BackButtonComponent,
     BrowserAnimationsModule,
     CharacterCounterModule,
     DeadlineModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     IconsModule,
-    NgxMasonryModule,
-    BrowserAnimationsModule,
-    TransferHttpCacheModule,
   ],
-  providers: [
-    ListDataService,
-    SearchDataService,
-    UsersService,
-  ],
+  exports: [MasonryDirective],
+  providers: [ListDataService, SearchDataService, UsersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

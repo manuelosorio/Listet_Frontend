@@ -1,5 +1,5 @@
 export interface ListDataModel {
   id: number;
-  allow_comment: boolean;
+  allow_comments: boolean;
   isOwner: boolean;
 }
