@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -68,16 +67,15 @@ import { MasonryDirective } from './_directives/masonry.directive';
     MasonryDirective,
   ],
   imports: [
-    TransferHttpCacheModule,
     BrowserModule.withServerTransition({ appId: 'ListetApp' }),
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     ActionButtonModule,
     AlertComponent,
     BackButtonComponent,
-    BrowserAnimationsModule,
     CharacterCounterModule,
     DeadlineModule,
-    AppRoutingModule,
-    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     IconsModule,

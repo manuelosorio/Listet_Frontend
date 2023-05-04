@@ -149,9 +149,7 @@
           "options": {
             "outputPath": "dist/server",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",
-            "sourceMap": true,
-            "optimization": false
+            "tsConfig": "tsconfig.server.json"
           },
           "configurations": {
             "production": {
@@ -171,7 +169,9 @@
             "development": {
               "customWebpackConfig": {
                 "path": "webpack-dev.config.js"
-              }
+              },
+              "sourceMap": true,
+              "optimization": false
             }
           },
           "defaultConfiguration": ""

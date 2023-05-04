@@ -6,8 +6,9 @@ import { ListComponent } from './_components/list/list.component';
 import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
 
 // Guards
-import { GuestGuard } from './guards/guest.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { GuestGuard } from './guards/guest.guard';
+import { VerifiedGuard } from './guards/verified.guard';
 
 // Pages
 import { HomeComponent } from './_pages/home/home.component';
@@ -19,9 +20,9 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
 import { CreateListComponent } from './_pages/create-list/create-list.component';
 import { ProfileComponent } from './_pages/profile/profile.component';
 import { YourListComponent } from './_pages/your-list/your-list.component';
-import { environment } from '../environments/environment';
-import { VerifiedGuard } from './guards/verified.guard';
 import { SearchResultsComponent } from './_pages/search-results/search-results.component';
+
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -65,10 +66,10 @@ const routes: Routes = [
         url: `${environment.url}/lists`,
       },
     ],
-    /*canActivate: [GuestGuard],*/
+    canActivate: [GuestGuard],
   },
-  { path: 'login', component: LoginComponent, /*canActivate: [AuthGuard] */},
-  { path: 'register', component: RegisterComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   {
     path: 'u/:username',
     component: ProfileComponent,
@@ -93,7 +94,7 @@ const routes: Routes = [
   {
     path: 'create-list',
     component: CreateListComponent,
-    canActivate: [GuestGuard, VerifiedGuard]
+    canActivate: [GuestGuard, VerifiedGuard],
   },
   {
     path: 'settings',
