@@ -22,7 +22,7 @@ export const AuthGuard: CanActivateFn = (
     map((res: any) => {
       if (res.authenticated) {
         router.navigate(['/']).then(() => {
-          // window.location.reload();
+          window.location.reload();
         });
         return false;
       } else {

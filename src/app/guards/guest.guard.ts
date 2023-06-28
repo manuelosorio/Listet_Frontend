@@ -15,7 +15,7 @@ export const GuestGuard: CanActivateFn = (
   const userService = inject(UsersService);
   const router = inject(Router);
 
-  return inject(UsersService).isLoggedIn().pipe(
+  return userService.isLoggedIn().pipe(
     filter(auth => auth != null),
     take(1),
     map((res: any) => {
