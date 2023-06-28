@@ -11,6 +11,10 @@ export class ActionButtonComponent {
   @Input() icon: 'check' | 'x';
   @Input() disabled: boolean = false;
   @Input() message: string;
-  constructor() { }
-
+  constructor() {
+    this.buttonStyle = 'default';
+    this.buttonType = 'button';
+    this.icon = 'check';
+    this.message = '';
+  }
 }
