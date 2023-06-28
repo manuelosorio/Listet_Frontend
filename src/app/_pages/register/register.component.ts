@@ -9,11 +9,11 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-signup',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent implements OnInit {
   registrationForm;
-  errorMessage: string;
+  errorMessage?: string;
   private readonly meta: MetaTagModel;
 
   constructor(
@@ -22,24 +22,33 @@ export class RegisterComponent implements OnInit {
     private seoService: SeoService
   ) {
     this.registrationForm = formBuilder.group({
-      firstName: ['', [
-        Validators.required
-      ]],
-      lastName: ['', [
-        Validators.required
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/)
-      ]],
-      username: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/i),
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/)
-      ]]
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/),
+        ],
+      ],
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/i
+          ),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/
+          ),
+        ],
+      ],
     });
     this.meta = {
       author: 'Manuel Osorio',
@@ -47,7 +56,7 @@ export class RegisterComponent implements OnInit {
       title: 'Listet App - Register Account',
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/register/`
+      url: `${environment.url}/register/`,
     };
   }
 
@@ -55,7 +64,7 @@ export class RegisterComponent implements OnInit {
     this.seoService.updateInfo(this.meta);
   }
 
-  onSubmit(data) {
+  onSubmit(data: unknown) {
     this.userService.createUser(data);
     this.userService.authenticationErr.subscribe((res: ErrorResponse) => {
       this.errorMessage = res.error.message;
@@ -81,6 +90,4 @@ export class RegisterComponent implements OnInit {
   get lastName() {
     return this.registrationForm.get('lastName');
   }
-
-
 }

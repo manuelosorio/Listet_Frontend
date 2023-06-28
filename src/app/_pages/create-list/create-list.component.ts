@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { Router } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
@@ -14,13 +19,13 @@ export interface Response {
 @Component({
   selector: 'app-create-list',
   templateUrl: './create-list.component.html',
-  styleUrls: ['./create-list.component.sass']
+  styleUrls: ['./create-list.component.sass'],
 })
 export class CreateListComponent implements OnInit {
   public createListForm: UntypedFormGroup;
-  public allowComments: boolean;
-  public visibilityOptions: ListVisibility[];
-  private redirectURL;
+  public allowComments!: boolean;
+  public visibilityOptions!: ListVisibility[];
+  private redirectURL!: string;
 
   // errorMessage: string;
   constructor(
@@ -30,9 +35,7 @@ export class CreateListComponent implements OnInit {
     private router: Router
   ) {
     this.createListForm = formBuilder.group({
-      title: ['', [
-        Validators.required
-      ]],
+      title: ['', [Validators.required]],
       description: [''],
       deadline: [''],
       visibility: [ListVisibility.public],
@@ -42,31 +45,43 @@ export class CreateListComponent implements OnInit {
 
   ngOnInit(): void {
     this.allowComments = true;
-    this.visibilityOptions = [ListVisibility.private, ListVisibility.unlisted, ListVisibility.public];
+    this.visibilityOptions = [
+      ListVisibility.private,
+      ListVisibility.unlisted,
+      ListVisibility.public,
+    ];
   }
 
   onSubmit(data: ListModel): void {
-    this.listService.createList(data).subscribe(async (res: Response) => {
-      this.alertService.success(res.message);
-      this.redirectURL = res.url;
-      await this.router.navigate([`/l/${res.url}`]);
-    }, error => {
-      this.alertService.error(`Error: ${error.status} - ${error.error.message}`, null, 5000, true);
+    this.listService.createList(data).subscribe({
+      next: async (response: unknown) => {
+        const res = response as Response;
+        this.alertService.success(res.message);
+        this.redirectURL = res.url;
+        await this.router.navigate([`/l/${res.url}`]);
+      },
+      error: error => {
+        this.alertService.error(
+          `Error: ${error.status} - ${error.error.message}`,
+          null,
+          5000,
+          true
+        );
+      },
     });
   }
 
   allowCommentsChecked(event: Event | any): any {
-    return this.allowComments = event.target.checked;
+    return (this.allowComments = event.target.checked);
   }
 
   get title(): AbstractControl {
-    return this.createListForm.get('title');
+    return <AbstractControl<any, string>>this.createListForm.get('title');
   }
   get visibility(): AbstractControl {
-    return this.createListForm.get('visibility');
+    return <AbstractControl<any, string>>this.createListForm.get('visibility');
   }
   async redirect(url: string): Promise<void> {
     await this.router.navigate([url]);
   }
-
 }

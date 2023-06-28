@@ -8,9 +8,9 @@
         <input type="text" autocomplete="given-name" formControlName="firstName" name="first-name" class='form__input' id="first-name" placeholder="e.g. Joe">
         <label for="first-name" class='form__label'>First Name</label>
         <!--   If First Name is Valid   -->
-        <i-feather class="form__input--validation valid" *ngIf="firstName.valid" name='check'></i-feather>
+        <i-feather class="form__input--validation valid" *ngIf="firstName?.valid" name='check'></i-feather>
         <!--   If First Name is Invalid   -->
-        <ng-container *ngIf="firstName.invalid && firstName.touched">
+        <ng-container *ngIf="firstName?.invalid && firstName?.touched">
           <i-feather class="form__input--validation invalid" name='x'></i-feather>
           <div class="error__message">
             First Name is required.
@@ -24,9 +24,9 @@
         <input type="text" formControlName="lastName" class='form__input' autocomplete="family-name" id="last-name" placeholder="Last Name">
         <label for="last-name" class='form__label'>Last Name</label>
         <!--   If Last Name is Valid   -->
-        <i-feather class="form__input--validation valid" *ngIf="lastName.valid" name='check'></i-feather>
+        <i-feather class="form__input--validation valid" *ngIf="lastName?.valid" name='check'></i-feather>
         <!--   If Last Name is Invalid   -->
-        <ng-container *ngIf="lastName.invalid && lastName.touched">
+        <ng-container *ngIf="lastName?.invalid && lastName?.touched">
           <i-feather class="form__input--validation invalid" name='x'></i-feather>
           <div class="error__message">
             Last Name is required.
@@ -41,14 +41,14 @@
       <input type="text" formControlName="username" class='form__input' autocomplete="username" id="username" placeholder="Username">
       <label for="username" class='form__label'>Username</label>
       <!--   If Username is Valid   -->
-      <i-feather class="form__input--validation valid" *ngIf="username.valid" name='check'></i-feather>
+      <i-feather class="form__input--validation valid" *ngIf="username?.valid" name='check'></i-feather>
       <!--   If Username is Invalid   -->
-      <ng-container *ngIf="username.invalid && username.touched">
+      <ng-container *ngIf="username?.invalid && username?.touched">
         <i-feather class="form__input--validation invalid" name='x'></i-feather>
-        <div class="error__message" *ngIf="username.errors.required">
+        <div class="error__message" *ngIf="username?.errors?.required">
           Username is required.
         </div>
-        <div class="error__message" *ngIf="username.errors.pattern">
+        <div class="error__message" *ngIf="username?.errors?.pattern">
           Username is invalid
         </div>
       </ng-container>
@@ -60,9 +60,9 @@
       <input type="email" formControlName="email" class='form__input' autocomplete="email" id="email" placeholder="Email">
       <label for="email" class='form__label'>Email</label>
       <!--   If Email is Valid   -->
-      <i-feather class="form__input--validation valid" *ngIf="email.valid" name='check'></i-feather>
+      <i-feather class="form__input--validation valid" *ngIf="email?.valid" name='check'></i-feather>
       <!--   If Email is Invalid   -->
-      <ng-container *ngIf="email.invalid && email.touched">
+      <ng-container *ngIf="email?.invalid && email?.touched">
         <i-feather class="form__input--validation invalid" name='x'></i-feather>
         <div class="error__message">
           Valid Email is required.
@@ -76,9 +76,9 @@
       <input type="password" formControlName="password" class='form__input' id="password" placeholder="Password">
       <label for="password" class='form__label' >Password</label>
       <!--   If Password is Valid   -->
-      <i-feather class="form__input--validation valid" *ngIf="password.valid" name='check'></i-feather>
+      <i-feather class="form__input--validation valid" *ngIf="password?.valid" name='check'></i-feather>
       <!--   If Password is Invalid   -->
-      <ng-container *ngIf="password.invalid && password.touched">
+      <ng-container *ngIf="password?.invalid && password?.touched">
         <i-feather class="form__input--validation invalid" name='x'></i-feather>
         <div class="error__message">
           Valid Password is required.

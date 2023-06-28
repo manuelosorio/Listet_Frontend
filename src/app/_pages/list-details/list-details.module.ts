@@ -14,13 +14,12 @@ import { ActionButtonModule } from '../../shared/action-button/action-button.mod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateCommentComponent } from '../../_components/create-comment/create-comment.component';
 import { CharacterCounterModule } from '../../shared/character-counter/character-counter.module';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListDetailsComponent
+    component: ListDetailsComponent,
   },
 ];
 
@@ -42,14 +41,10 @@ const routes: Routes = [
     IconsModule,
     DeadlineModule,
     ActionButtonModule,
-    HttpClientModule,
     CharacterCounterModule,
     ReactiveFormsModule,
     FormsModule,
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule],
 })
-export class ListDetailsModule {
-}
+export class ListDetailsModule {}

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -11,30 +15,26 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent implements OnInit {
   loginForm: UntypedFormGroup;
-  isChecked: boolean;
-  errorMessage: string;
+  isChecked!: boolean;
+  errorMessage: string = '';
   private readonly meta: MetaTagModel;
-  private returnUrl: string;
+  private returnUrl: string = '';
 
   constructor(
     private alertService: AlertService,
     private formBuilder: UntypedFormBuilder,
     private userService: UsersService,
     private seoService: SeoService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.loginForm = formBuilder.group({
-      email: ['', [
-        Validators.required
-      ]],
-      password: ['', [
-        Validators.required
-      ]],
-      remember: [false]
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      remember: [false],
     });
     this.meta = {
       author: 'Manuel Osorio',
@@ -42,17 +42,17 @@ export class LoginComponent implements OnInit {
       title: 'Listet App - Login',
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/login/`
+      url: `${environment.url}/login/`,
     };
   }
 
   ngOnInit(): void {
     this.isChecked = false;
-    this.seoService.updateInfo(this.meta)
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl;
+    this.seoService.updateInfo(this.meta);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
-  onSubmit(data) {
+  onSubmit(data: unknown) {
     this.userService.loginUser(data, this.returnUrl);
     this.userService.authenticationErr.subscribe((res: ErrorResponse) => {
       this.errorMessage = res.error.message;
@@ -65,8 +65,8 @@ export class LoginComponent implements OnInit {
     this.userService.isVerified();
   }
 
-  checked(event) {
-    return this.isChecked = event.target.checked;
+  checked(event: Event | any) {
+    return (this.isChecked = event.target.checked);
   }
 
   get email() {

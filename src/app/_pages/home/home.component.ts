@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '../../app.component';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
@@ -7,10 +6,9 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
-  app: AppComponent;
   private readonly meta: MetaTagModel;
 
   constructor(private seoService: SeoService) {
@@ -20,12 +18,11 @@ export class HomeComponent implements OnInit {
       title: 'Listet App - Home',
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/`
+      url: `${environment.url}/`,
     };
   }
 
   ngOnInit(): void {
     this.seoService.updateInfo(this.meta);
   }
-
 }
