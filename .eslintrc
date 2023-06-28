@@ -1,7 +1,10 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "projects/**/*",
+    "dist/**/*",
+    "node_modules/**/*",
+    "**/*.js"
   ],
   "overrides": [
     {
@@ -35,7 +38,8 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "dot-notation": "off"
       }
     },
     {
