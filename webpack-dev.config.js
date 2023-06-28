@@ -6,12 +6,5 @@ config({
 });
 
 module.exports = {
-  plugins: [
-    new EnvironmentPlugin([
-      'HOST',
-      'URL',
-      'WEBSOCKET',
-      'NODE_TLS_REJECT_UNAUTHORIZED',
-    ]),
-  ],
+  plugins: [new EnvironmentPlugin(['HOST', 'URL', 'WEBSOCKET'])],
 };
