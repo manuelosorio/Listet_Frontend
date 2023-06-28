@@ -42,11 +42,11 @@ import { SearchResultsComponent } from './_pages/search-results/search-results.c
 import { UserCardComponent } from './_components/user-card/user-card.component';
 import { BackButtonComponent } from './_components/back-button/back-button.component';
 import { MasonryDirective } from './_directives/masonry.directive';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // AlertComponent,
     UserComponent,
     ListComponent,
     ProfileComponent,
@@ -67,9 +67,9 @@ import { MasonryDirective } from './_directives/masonry.directive';
     MasonryDirective,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ListetApp' }),
     AppRoutingModule,
     HttpClientModule,
+    BrowserModule.withServerTransition({ appId: 'ListetApp' }),
     BrowserAnimationsModule,
     ActionButtonModule,
     AlertComponent,
@@ -79,6 +79,7 @@ import { MasonryDirective } from './_directives/masonry.directive';
     ReactiveFormsModule,
     FormsModule,
     IconsModule,
+    NgOptimizedImage,
   ],
   exports: [MasonryDirective],
   providers: [ListDataService, SearchDataService, UsersService],

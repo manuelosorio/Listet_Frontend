@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CanonicalService } from './shared/canonical.service';
 import { UsersService } from './_services/users.service';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -16,7 +15,7 @@ export class AppComponent implements OnInit {
     private userService: UsersService
   ) {}
   ngOnInit() {
-    this.userService.isAuth();
+    this.userService.isAuth().subscribe();
     this.canonicalService.setCanonicalURL(`${environment.url}`);
   }
 }
