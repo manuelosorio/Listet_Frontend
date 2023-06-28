@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { ListModel } from "../models/list.model";
-import { UserModel } from "../models/user.model";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ListModel } from '../models/list.model';
+import { UserModel } from '../models/user.model';
 export class SearchDataService {
   @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
   })
-  private listSearchData: ListModel[];
+  private listSearchData!: ListModel[];
   private listResultsBehaviorSubject: BehaviorSubject<ListModel[]>;
   public listResults$: Observable<ListModel[]>;
 
-  private userSearchData: UserModel[];
+  private userSearchData!: UserModel[];
   private userResultsBehaviorSubject: BehaviorSubject<UserModel[]>;
   public userResults$: Observable<UserModel[]>;
 
@@ -22,8 +22,7 @@ export class SearchDataService {
     this.userResults$ = this.userResultsBehaviorSubject.asObservable();
   }
   async setListData(results: ListModel[]) {
-      this.listResultsBehaviorSubject.next(results);
-
+    this.listResultsBehaviorSubject.next(results);
   }
 
   setUserData(results: UserModel[]) {
