@@ -1,5 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
+import { APP_ID, NgModule } from '@angular/core';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,7 +77,7 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
     BrowserAnimationsModule,
     CharacterCounterModule,
     DeadlineModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -85,6 +88,8 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
     TransferHttpCacheModule,
   ],
   providers: [
+    { provide: APP_ID, useValue: 'listet-server-app' },
+    provideClientHydration(),
     GuestGuard,
     VerifiedGuard,
     AuthGuard,

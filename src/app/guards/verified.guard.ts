@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { UsersService } from '../_services/users.service';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -14,7 +8,7 @@ import { AlertService } from '../_services/alert.service';
 @Injectable({
   providedIn: 'root',
 })
-export class VerifiedGuard implements CanActivate {
+export class VerifiedGuard  {
   constructor(
     private router: Router,
     private userService: UsersService,
