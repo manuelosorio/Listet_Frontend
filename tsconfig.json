@@ -11,6 +11,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
+    "types": [
+      "node",
+      "jest"
+    ],
     "lib": [
       "es2020",
       "es2018",
@@ -30,6 +34,9 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "types" : ["node"]
+    "types" : [
+      "jest",
+      "node"
+    ]
   }
 }

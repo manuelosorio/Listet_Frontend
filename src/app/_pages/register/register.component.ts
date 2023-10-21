@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -9,10 +13,10 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-signup',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent implements OnInit {
-  registrationForm;
+  registrationForm: UntypedFormGroup;
   errorMessage: string;
   private readonly meta: MetaTagModel;
 
@@ -22,24 +26,33 @@ export class RegisterComponent implements OnInit {
     private seoService: SeoService
   ) {
     this.registrationForm = formBuilder.group({
-      firstName: ['', [
-        Validators.required
-      ]],
-      lastName: ['', [
-        Validators.required
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/)
-      ]],
-      username: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/i),
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/)
-      ]]
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/),
+        ],
+      ],
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/i
+          ),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/
+          ),
+        ],
+      ],
     });
     this.meta = {
       author: 'Manuel Osorio',
@@ -47,7 +60,7 @@ export class RegisterComponent implements OnInit {
       title: 'Listet App - Register Account',
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/register/`
+      url: `${environment.url}/register/`,
     };
   }
 
@@ -81,6 +94,4 @@ export class RegisterComponent implements OnInit {
   get lastName() {
     return this.registrationForm.get('lastName');
   }
-
-
 }
