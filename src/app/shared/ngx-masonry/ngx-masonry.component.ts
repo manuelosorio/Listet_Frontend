@@ -24,16 +24,17 @@ import { NgxMasonryOptions } from './ngx-masonry-options';
 import { NgxMasonryDirective } from './ngx-masonry.directive';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[ngx-masonry], ngx-masonry',
-  template: '<ng-content></ng-content>',
-  styles: [
-    `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[ngx-masonry], ngx-masonry',
+    template: '<ng-content></ng-content>',
+    styles: [
+        `
 		:host {
 			display: flex;
 		}
 	`
-  ]
+    ],
+    standalone: true
 })
 export class NgxMasonryComponent implements OnInit, OnChanges, OnDestroy {
   constructor(@Inject(PLATFORM_ID) private platformId: any, private _element: ElementRef) {}

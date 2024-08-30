@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { SeoService } from '../../_services/seo.service';
 import { MetaTagModel } from '../../models/metatag.model';
 import { environment } from '../../../environments/environment';
+import { NgIf } from '@angular/common';
+import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.sass']
+    selector: 'app-forgot-password',
+    templateUrl: './forgot-password.component.html',
+    styleUrls: ['./forgot-password.component.sass'],
+    standalone: true,
+    imports: [BackButtonComponent, ReactiveFormsModule, NgIf]
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm;

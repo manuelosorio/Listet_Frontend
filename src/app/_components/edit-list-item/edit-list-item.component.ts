@@ -1,15 +1,18 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { formatDate } from '@angular/common';
 import { ListItemModel } from '../../models/list-item.model';
+import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 
 @Component({
-  selector: 'app-edit-list-item',
-  templateUrl: './edit-list-item.component.html',
-  styleUrls: ['./edit-list-item.component.sass'],
-  encapsulation: ViewEncapsulation.Emulated
+    selector: 'app-edit-list-item',
+    templateUrl: './edit-list-item.component.html',
+    styleUrls: ['./edit-list-item.component.sass'],
+    encapsulation: ViewEncapsulation.Emulated,
+    standalone: true,
+    imports: [ReactiveFormsModule, ActionButtonComponent]
 })
 export class EditListItemComponent implements OnInit {
   @Input() listItem;

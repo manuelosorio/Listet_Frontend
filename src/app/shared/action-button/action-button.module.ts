@@ -6,15 +6,13 @@ import { IconsModule } from '../../_modules/icons/icons.module';
 
 
 @NgModule({
-  declarations: [
-    ActionButtonComponent
-  ],
-  imports: [
-    CommonModule,
-    IconsModule
-  ],
-  exports: [
-    ActionButtonComponent
-  ]
+    imports: [
+        CommonModule,
+        IconsModule,
+        ActionButtonComponent
+    ],
+    exports: [
+        ActionButtonComponent
+    ]
 })
 export class ActionButtonModule { }

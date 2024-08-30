@@ -11,15 +11,15 @@ describe('UserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserComponent ],
-      imports: [
+    imports: [
         HttpClientTestingModule,
-        RouterTestingModule
-      ],
-      providers: [
+        RouterTestingModule,
+        UserComponent
+    ],
+    providers: [
         UntypedFormBuilder
-      ]
-    })
+    ]
+})
     .compileComponents();
   }));
 

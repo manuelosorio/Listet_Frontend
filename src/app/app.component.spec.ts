@@ -16,22 +16,20 @@ describe('AppComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule,
-          AlertComponent,
-          HttpClientTestingModule,
-          IconsModule,
-          FormsModule,
-          CommonModule,
-        ],
-        declarations: [
-          AppComponent,
-          NavComponent,
-          SearchComponent,
-          FooterComponent,
-          RegisterComponent,
-        ],
-      }).compileComponents();
+    imports: [
+        RouterTestingModule,
+        AlertComponent,
+        HttpClientTestingModule,
+        IconsModule,
+        FormsModule,
+        CommonModule,
+        NavComponent,
+        SearchComponent,
+        FooterComponent,
+        RegisterComponent,
+    ],
+    declarations: [AppComponent],
+}).compileComponents();
     })
   );
 

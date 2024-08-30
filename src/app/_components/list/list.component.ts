@@ -1,18 +1,23 @@
 import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from "rxjs";
 import { NgxMasonryComponent, NgxMasonryOptions } from '../../shared/ngx-masonry/ngx-masonry-api';
 import { ListsService } from '../../_services/lists.service';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { SearchDataService } from "../../shared/search-data.service";
 import { ListModel } from "../../models/list.model";
 import { DateUtil } from "../../utils/dateUtil";
+import { DeadlineComponent } from '../../shared/deadline/deadline.component';
+import { NgxMasonryDirective } from '../../shared/ngx-masonry/ngx-masonry.directive';
+import { NgxMasonryComponent as NgxMasonryComponent_1 } from '../../shared/ngx-masonry/ngx-masonry.component';
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.sass']
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.sass'],
+    standalone: true,
+    imports: [NgxMasonryComponent_1, NgFor, NgxMasonryDirective, RouterLink, NgIf, DeadlineComponent]
 })
 export class ListComponent implements OnInit, OnDestroy {
   private readonly meta: MetaTagModel;

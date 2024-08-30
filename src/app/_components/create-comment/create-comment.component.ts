@@ -1,16 +1,20 @@
 import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { CommentEvents } from '../../helper/comment.events';
 import { WebsocketService } from '../../_services/websocket.service';
 import { CommentModel } from '../../models/comment.model';
+import { CharacterCounterComponent } from '../../shared/character-counter/character-counter.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-create-comment',
-  templateUrl: './create-comment.component.html',
-  styleUrls: ['./create-comment.component.sass']
+    selector: 'app-create-comment',
+    templateUrl: './create-comment.component.html',
+    styleUrls: ['./create-comment.component.sass'],
+    standalone: true,
+    imports: [NgIf, ReactiveFormsModule, CharacterCounterComponent]
 })
 export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;

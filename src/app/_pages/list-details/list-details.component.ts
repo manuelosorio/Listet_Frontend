@@ -4,11 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AlertService } from '../../_services/alert.service';
+import { ListCommentsComponent } from '../../_components/list-comments/list-comments.component';
+import { ListItemsComponent } from '../../_components/list-items/list-items.component';
+import { ListHeaderComponent } from '../../_components/list-header/list-header.component';
 
 @Component({
-  selector: 'app-list-details',
-  templateUrl: './list-details.component.html',
-  styleUrls: ['./list-details.component.sass']
+    selector: 'app-list-details',
+    templateUrl: './list-details.component.html',
+    styleUrls: ['./list-details.component.sass'],
+    standalone: true,
+    imports: [ListHeaderComponent, ListItemsComponent, ListCommentsComponent]
 })
 export class ListDetailsComponent implements OnInit, OnDestroy {
   username: string;

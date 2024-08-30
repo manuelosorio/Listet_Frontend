@@ -26,19 +26,19 @@ describe('RegisterComponent', () => {
         updateInfo: jest.fn(),
       } as unknown) as jest.Mocked<SeoService>;
       TestBed.configureTestingModule({
-        declarations: [RegisterComponent, BackButtonComponent],
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule,
-          IconsModule,
-          ReactiveFormsModule,
-        ],
-        providers: [
-          UntypedFormBuilder,
-          { provide: UsersService, useValue: usersService },
-          { provide: SeoService, useValue: seoService },
-        ],
-      }).compileComponents();
+    imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        IconsModule,
+        ReactiveFormsModule,
+        RegisterComponent, BackButtonComponent,
+    ],
+    providers: [
+        UntypedFormBuilder,
+        { provide: UsersService, useValue: usersService },
+        { provide: SeoService, useValue: seoService },
+    ],
+}).compileComponents();
     })
   );
   beforeEach(() => {

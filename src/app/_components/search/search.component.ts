@@ -1,12 +1,16 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { filter } from "rxjs/operators";
+import { FeatherModule } from 'angular-feather';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.sass']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.sass'],
+    standalone: true,
+    imports: [NgIf, ReactiveFormsModule, FeatherModule]
 })
 export class SearchComponent {
   public searchForm: UntypedFormGroup;

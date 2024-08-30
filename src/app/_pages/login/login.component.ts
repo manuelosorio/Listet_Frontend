@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { FeatherModule } from 'angular-feather';
+import { NgIf } from '@angular/common';
+import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.sass'],
+    standalone: true,
+    imports: [BackButtonComponent, ReactiveFormsModule, NgIf, FeatherModule, RouterLink]
 })
 export class LoginComponent implements OnInit {
   loginForm: UntypedFormGroup;

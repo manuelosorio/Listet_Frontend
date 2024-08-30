@@ -1,13 +1,21 @@
 import { Component, OnDestroy } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { UserCircle } from '../../shared/other-icons';
+import { FeatherModule } from 'angular-feather';
+import { NgIf } from '@angular/common';
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.sass'],
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.sass'],
+    standalone: true,
+    imports: [
+        RouterLink,
+        NgIf,
+        FeatherModule,
+    ],
 })
 export class NavComponent implements OnDestroy {
   public authenticated: boolean;

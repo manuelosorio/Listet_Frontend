@@ -3,11 +3,15 @@ import { AppComponent } from '../../app.component';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
+import { RouterLink } from '@angular/router';
+import { ListComponent } from '../../_components/list/list.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.sass'],
+    standalone: true,
+    imports: [ListComponent, RouterLink]
 })
 export class HomeComponent implements OnInit {
   app: AppComponent;

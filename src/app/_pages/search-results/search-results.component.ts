@@ -1,15 +1,20 @@
  import { Component } from '@angular/core';
 import { SearchService } from "../../_services/search.service";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from "@angular/router";
 import { Subscription } from "rxjs";
 import { ListModel } from "../../models/list.model";
 import { filter } from "rxjs/operators";
 import { SearchDataService } from "../../shared/search-data.service";
+import { ListComponent } from '../../_components/list/list.component';
+import { UserCardComponent } from '../../_components/user-card/user-card.component';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-search-results',
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.sass']
+    selector: 'app-search-results',
+    templateUrl: './search-results.component.html',
+    styleUrls: ['./search-results.component.sass'],
+    standalone: true,
+    imports: [NgFor, UserCardComponent, RouterLink, ListComponent]
 })
 export class SearchResultsComponent {
   private listSearch$: Subscription;

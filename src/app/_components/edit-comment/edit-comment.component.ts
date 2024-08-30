@@ -1,12 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentModel } from '../../models/comment.model';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
+import { CharacterCounterComponent } from '../../shared/character-counter/character-counter.component';
+import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 
 @Component({
-  selector: 'app-edit-comment',
-  templateUrl: './edit-comment.component.html',
-  styleUrls: ['./edit-comment.component.sass']
+    selector: 'app-edit-comment',
+    templateUrl: './edit-comment.component.html',
+    styleUrls: ['./edit-comment.component.sass'],
+    standalone: true,
+    imports: [ReactiveFormsModule, ActionButtonComponent, CharacterCounterComponent]
 })
 export class EditCommentComponent implements OnInit {
   @Input() commentModel: CommentModel;
