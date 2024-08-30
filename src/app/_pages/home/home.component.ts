@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
+import { ListComponent } from '../../_components/list/list.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
+  imports: [ListComponent, RouterLink],
+  standalone: true,
 })
 export class HomeComponent implements OnInit {
   private readonly meta: MetaTagModel;

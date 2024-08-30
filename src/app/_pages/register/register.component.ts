@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { BackButtonComponent } from '../../_components/back-button/back-button.component';
+import { IconsModule } from '../../_modules/icons/icons.module';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass'],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    BackButtonComponent,
+    IconsModule,
+  ],
+  standalone: true,
 })
 export class RegisterComponent implements OnInit {
   registrationForm;

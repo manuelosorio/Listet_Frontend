@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-verify-account',
-  templateUrl: './verify-account.component.html',
-  styleUrls: ['./verify-account.component.sass']
+    selector: 'app-verify-account',
+    templateUrl: './verify-account.component.html',
+    styleUrls: ['./verify-account.component.sass'],
+    standalone: true
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
   private token;

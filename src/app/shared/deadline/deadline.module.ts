@@ -6,15 +6,13 @@ import { IconsModule } from '../../_modules/icons/icons.module';
 
 
 @NgModule({
-  declarations: [
-    DeadlineComponent
-  ],
-  imports: [
-    CommonModule,
-    IconsModule
-  ],
-  exports: [
-    DeadlineComponent
-  ]
+    imports: [
+        CommonModule,
+        IconsModule,
+        DeadlineComponent
+    ],
+    exports: [
+        DeadlineComponent
+    ]
 })
 export class DeadlineModule { }

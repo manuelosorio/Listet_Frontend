@@ -6,13 +6,13 @@ import { IconsModule } from '../../_modules/icons/icons.module';
 
 
 @NgModule({
-  declarations: [CharacterCounterComponent],
-  imports: [
-    CommonModule,
-    IconsModule
-  ],
-  exports: [
-    CharacterCounterComponent
-  ]
+    imports: [
+        CommonModule,
+        IconsModule,
+        CharacterCounterComponent
+    ],
+    exports: [
+        CharacterCounterComponent
+    ]
 })
 export class CharacterCounterModule { }

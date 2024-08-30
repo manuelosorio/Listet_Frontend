@@ -6,7 +6,7 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { ListDataService } from '../../shared/list-data.service';
@@ -16,13 +16,18 @@ import { ListModel } from '../../models/list.model';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
 import { AlertService } from '../../_services/alert.service';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { EditListComponent } from '../edit-list/edit-list.component';
+import { FeatherModule } from 'angular-feather';
+import { DeadlineComponent } from '../../shared/deadline/deadline.component';
 
 @Component({
-  selector: 'app-list-header',
-  templateUrl: './list-header.component.html',
-  styleUrls: ['./list-header.component.sass'],
+    selector: 'app-list-header',
+    templateUrl: './list-header.component.html',
+    styleUrls: ['./list-header.component.sass'],
+    standalone: true,
+    imports: [NgFor, NgIf, RouterLink, DeadlineComponent, FeatherModule, EditListComponent]
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: Array<ListModel>;

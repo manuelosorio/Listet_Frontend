@@ -14,12 +14,13 @@ describe('ListDetailsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListDetailsComponent, ListItemsComponent, ListCommentsComponent, ListHeaderComponent, FeatherComponent ],
-      imports: [
+    declarations: [FeatherComponent],
+    imports: [
         HttpClientTestingModule,
-        RouterTestingModule
-      ]
-    })
+        RouterTestingModule,
+        ListDetailsComponent, ListItemsComponent, ListCommentsComponent, ListHeaderComponent
+    ]
+})
     .compileComponents();
   }));
 

@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
@@ -7,11 +7,17 @@ import { WebsocketService } from '../../_services/websocket.service';
 import { ListItemEvents } from '../../helper/list-item.events';
 import { ListItemModel } from '../../models/list-item.model';
 import { Subscription } from 'rxjs';
+import { AddItemComponent } from '../add-item/add-item.component';
+import { EditListItemComponent } from '../edit-list-item/edit-list-item.component';
+import { DeadlineComponent } from '../../shared/deadline/deadline.component';
+import { FeatherModule } from 'angular-feather';
 
 @Component({
-  selector: 'app-list-items',
-  templateUrl: './list-items.component.html',
-  styleUrls: ['./list-items.component.sass']
+    selector: 'app-list-items',
+    templateUrl: './list-items.component.html',
+    styleUrls: ['./list-items.component.sass'],
+    standalone: true,
+    imports: [NgFor, NgIf, FeatherModule, DeadlineComponent, EditListItemComponent, AddItemComponent]
 })
 
 export class ListItemsComponent implements OnInit, OnDestroy {

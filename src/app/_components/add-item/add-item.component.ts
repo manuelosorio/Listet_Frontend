@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { WebsocketService } from '../../_services/websocket.service';
 import { ListItemEvents } from '../../helper/list-item.events';
 import { ListItemModel } from '../../models/list-item.model';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-add-item',
-  templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.sass']
+    selector: 'app-add-item',
+    templateUrl: './add-item.component.html',
+    styleUrls: ['./add-item.component.sass'],
+    standalone: true,
+    imports: [NgIf, ReactiveFormsModule]
 })
 export class AddItemComponent implements OnInit {
   listItemForm: UntypedFormGroup;

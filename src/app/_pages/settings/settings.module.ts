@@ -21,19 +21,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    SettingsComponent,
-    SettingsDeleteAccountComponent,
-    SettingsPasswordComponent,
-    SettingsProfileComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    FormsModule,
-    IconsModule,
-  ],
-  exports: [RouterModule],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        FormsModule,
+        IconsModule,
+        SettingsComponent,
+        SettingsDeleteAccountComponent,
+        SettingsPasswordComponent,
+        SettingsProfileComponent
+    ],
+    exports: [RouterModule]
 })
 export class SettingsModule {}

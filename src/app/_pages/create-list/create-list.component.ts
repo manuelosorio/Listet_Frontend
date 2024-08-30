@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -10,6 +11,8 @@ import { ListsService } from '../../_services/lists.service';
 import { Router } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
 import { ListModel } from '../../models/list.model';
+import { IconsModule } from '../../_modules/icons/icons.module';
+import { NgIf } from '@angular/common';
 
 export interface Response {
   message: string;
@@ -20,6 +23,8 @@ export interface Response {
   selector: 'app-create-list',
   templateUrl: './create-list.component.html',
   styleUrls: ['./create-list.component.sass'],
+  imports: [ReactiveFormsModule, IconsModule, NgIf],
+  standalone: true,
 })
 export class CreateListComponent implements OnInit {
   public createListForm: UntypedFormGroup;

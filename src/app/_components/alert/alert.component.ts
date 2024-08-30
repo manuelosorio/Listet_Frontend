@@ -42,7 +42,7 @@ export class AlertComponent implements OnInit, OnDestroy {
       this.alert$ = this.alertService.getAlert().pipe(
         map((alert: Alert) => {
           if (!alert) {
-            return;
+            return alert;
           }
           if (this.currentAlert && alert === this.currentAlert) {
             this.currentAlert = alert;

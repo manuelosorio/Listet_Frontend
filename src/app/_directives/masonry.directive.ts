@@ -11,7 +11,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
-  selector: '[appMasonry]',
+    selector: '[appMasonry]',
+    standalone: true
 })
 export class MasonryDirective
   implements AfterViewInit, AfterViewChecked, OnDestroy {

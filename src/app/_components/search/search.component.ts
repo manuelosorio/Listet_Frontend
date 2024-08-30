@@ -1,16 +1,25 @@
 import { Component, HostListener } from '@angular/core';
-import { NavigationEnd, Router } from "@angular/router";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { filter } from "rxjs/operators";
+import { NavigationEnd, Router } from '@angular/router';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { filter } from 'rxjs/operators';
+import { IconsModule } from '../../_modules/icons/icons.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.sass']
+  styleUrls: ['./search.component.sass'],
+  imports: [ReactiveFormsModule, IconsModule, CommonModule],
+  standalone: true,
 })
 export class SearchComponent {
   public searchForm: UntypedFormGroup;
-  public windowWidth: number
+  public windowWidth: number;
 
   private hidePaths = [
     '/create-list',
@@ -20,25 +29,24 @@ export class SearchComponent {
     '/reset-password',
     '/reset-password/**',
     '/settings',
-    '/settings/**'
+    '/settings/**',
   ];
   public hideSearch: boolean;
-  constructor(public router: Router,
-              private formBuilder: UntypedFormBuilder) {
+  constructor(public router: Router, private formBuilder: UntypedFormBuilder) {
     this.searchForm = this.formBuilder.group({
-      search: ['', [
-        Validators.minLength(1)
-      ]]
+      search: ['', [Validators.minLength(1)]],
     });
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-      for (const path of this.hidePaths) {
-        if (event.urlAfterRedirects.indexOf(path) === 0) {
-          this.hideSearch = true;
-          break;
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        for (const path of this.hidePaths) {
+          if (event.urlAfterRedirects.indexOf(path) === 0) {
+            this.hideSearch = true;
+            break;
+          }
+          this.hideSearch = false;
         }
-        this.hideSearch = false;
-      }
-    })
+      });
     this.windowWidth = window.innerWidth;
   }
 

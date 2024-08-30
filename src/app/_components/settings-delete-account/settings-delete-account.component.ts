@@ -2,17 +2,16 @@ import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {
-  AbstractControl,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FeatherModule } from 'angular-feather';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-settings-delete-account',
-  templateUrl: './settings-delete-account.component.html',
-  styleUrls: ['./settings-delete-account.component.sass'],
+    selector: 'app-settings-delete-account',
+    templateUrl: './settings-delete-account.component.html',
+    styleUrls: ['./settings-delete-account.component.sass'],
+    standalone: true,
+    imports: [ReactiveFormsModule, NgIf, FeatherModule]
 })
 export class SettingsDeleteAccountComponent {
   private deactivateAccount$!: Subscription;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -11,11 +12,21 @@ import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { BackButtonComponent } from '../../_components/back-button/back-button.component';
+import { IconsModule } from '../../_modules/icons/icons.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
+  imports: [
+    BackButtonComponent,
+    ReactiveFormsModule,
+    IconsModule,
+    CommonModule,
+  ],
+  standalone: true,
 })
 export class LoginComponent implements OnInit {
   loginForm: UntypedFormGroup;

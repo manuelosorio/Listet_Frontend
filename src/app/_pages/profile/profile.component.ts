@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ListComponent } from '../../_components/list/list.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.sass'],
+  imports: [ListComponent],
+  standalone: true,
 })
 export class ProfileComponent {
   public user: string;

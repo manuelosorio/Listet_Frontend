@@ -24,27 +24,25 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AddItemComponent,
-    CreateCommentComponent,
-    EditListItemComponent,
-    EditListComponent,
-    EditCommentComponent,
-    ListDetailsComponent,
-    ListHeaderComponent,
-    ListCommentsComponent,
-    ListItemsComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    IconsModule,
-    DeadlineModule,
-    ActionButtonModule,
-    CharacterCounterModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
-  exports: [RouterModule],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        IconsModule,
+        DeadlineModule,
+        ActionButtonModule,
+        CharacterCounterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AddItemComponent,
+        CreateCommentComponent,
+        EditListItemComponent,
+        EditListComponent,
+        EditCommentComponent,
+        ListDetailsComponent,
+        ListHeaderComponent,
+        ListCommentsComponent,
+        ListItemsComponent
+    ],
+    exports: [RouterModule]
 })
 export class ListDetailsModule {}

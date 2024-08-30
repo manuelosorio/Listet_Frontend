@@ -7,7 +7,7 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
 import { MetaTagModel } from '../../models/metatag.model';
@@ -17,10 +17,14 @@ import { ListModel } from '../../models/list.model';
 import { DateUtil } from '../../utils/dateUtil';
 import { MasonryDirective } from '../../_directives/masonry.directive';
 import { AlertService } from '../../_services/alert.service';
+import { DeadlineComponent } from '../../shared/deadline/deadline.component';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass'],
+  imports: [DeadlineComponent, RouterLink, MasonryDirective, CommonModule],
+  standalone: true,
 })
 export class ListComponent implements OnInit, OnDestroy {
   private readonly meta: MetaTagModel;

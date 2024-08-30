@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import {
-  AbstractControl,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { FeatherModule } from 'angular-feather';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-settings-profile',
-  templateUrl: './settings-profile.component.html',
-  styleUrls: ['./settings-profile.component.sass'],
+    selector: 'app-settings-profile',
+    templateUrl: './settings-profile.component.html',
+    styleUrls: ['./settings-profile.component.sass'],
+    standalone: true,
+    imports: [ReactiveFormsModule, NgIf, FeatherModule]
 })
 export class SettingsProfileComponent implements OnInit, OnDestroy {
   public profileForm: UntypedFormGroup;

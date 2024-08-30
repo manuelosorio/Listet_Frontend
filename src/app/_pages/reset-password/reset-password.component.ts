@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -9,11 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
+import { BackButtonComponent } from '../../_components/back-button/back-button.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.sass'],
+  imports: [BackButtonComponent, ReactiveFormsModule, NgIf],
+  standalone: true,
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: UntypedFormGroup;
