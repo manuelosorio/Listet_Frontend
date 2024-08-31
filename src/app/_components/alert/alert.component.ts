@@ -8,9 +8,8 @@ import {
 } from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
 import { Observable } from 'rxjs';
-import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, isPlatformBrowser, NgClass, NgIf } from '@angular/common';
 import { IconsModule } from '../../_modules/icons/icons.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterLink } from '@angular/router';
 import { Alert } from '../../models/alerts.model';
 import { map } from 'rxjs/operators';
@@ -20,7 +19,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.sass'],
   encapsulation: ViewEncapsulation.ShadowDom,
-  imports: [BrowserAnimationsModule, IconsModule, NgIf, NgClass, RouterLink],
+  imports: [IconsModule, NgIf, NgClass, RouterLink, AsyncPipe],
   standalone: true,
 })
 export class AlertComponent implements OnInit, OnDestroy {
