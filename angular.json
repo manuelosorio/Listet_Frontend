@@ -95,11 +95,11 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "listet:build"
+            "buildTarget": "listet:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "listet:build:production",
+              "buildTarget": "listet:build:production",
               "customWebpackConfig": {
                 "path": "webpack-prod.config.js"
               }
@@ -171,7 +171,7 @@
         "serve-ssr": {
           "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "options": {
-            "browserTarget": "listet:build",
+            "buildTarget": "listet:build",
             "serverTarget": "listet:server",
             "ssl": true,
             "sslKey": "./ssl/server.key",
@@ -179,11 +179,11 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "listet:build:production",
+              "buildTarget": "listet:build:production",
               "serverTarget": "listet:server:production"
             },
             "development": {
-              "browserTarget": "listet:build:development",
+              "buildTarget": "listet:build:development",
               "serverTarget": "listet:server:development"
             }
           }
