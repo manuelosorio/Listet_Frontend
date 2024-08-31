@@ -23,11 +23,18 @@ import { FeatherModule } from 'angular-feather';
 import { DeadlineComponent } from '../../shared/deadline/deadline.component';
 
 @Component({
-    selector: 'app-list-header',
-    templateUrl: './list-header.component.html',
-    styleUrls: ['./list-header.component.sass'],
-    standalone: true,
-    imports: [NgFor, NgIf, RouterLink, DeadlineComponent, FeatherModule, EditListComponent]
+  selector: 'app-list-header',
+  templateUrl: './list-header.component.html',
+  styleUrls: ['./list-header.component.sass'],
+  standalone: true,
+  imports: [
+    NgFor,
+    NgIf,
+    RouterLink,
+    DeadlineComponent,
+    FeatherModule,
+    EditListComponent,
+  ],
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: Array<ListModel>;

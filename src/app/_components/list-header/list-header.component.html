@@ -1,13 +1,15 @@
 <ng-container *ngFor="let head of header">
   <section class="l-container">
-    <div *ngIf='head["isEditing"] === false else editList'>
+    <div *ngIf="head['isEditing'] === false; else editList">
       <p>{{ head.name }}</p>
-      <a [routerLink]="['/u/' + head.owner_username]">{{ head.owner_username }}</a>
-      <p>Created: {{formattedCreationDate}}</p>
+      <a [routerLink]="['/u/' + head.owner_username]">{{
+        head.owner_username
+      }}</a>
+      <p>Created: {{ formattedCreationDate }}</p>
       <app-deadline [deadline]="deadline" [isComplete]="false"></app-deadline>
-      <ng-container *ngIf='isOwner'>
+      <ng-container *ngIf="isOwner">
         <div class="">
-          <button (click)='edit()'>
+          <button (click)="edit()">
             <i-feather name="edit"></i-feather> Edit
           </button>
           <button (click)="delete()">
@@ -18,9 +20,7 @@
       <p class="description">{{ head.description }}</p>
     </div>
   </section>
-<ng-template #editList>
-  <app-edit-list [list]=head></app-edit-list>
-</ng-template>
+  <ng-template #editList>
+    <app-edit-list [list]="head"></app-edit-list>
+  </ng-template>
 </ng-container>
-
-

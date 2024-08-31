@@ -10,13 +10,8 @@ describe('ListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        ListComponent
-    ]
-})
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule, ListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

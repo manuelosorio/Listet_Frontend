@@ -1,7 +1,23 @@
-<form class="search__form" [formGroup]="searchForm" (ngSubmit)="onSubmit(search.value)" *ngIf="!hideSearch">
-    <fieldset class="form__fieldset search">
-        <input type="text" class="search__input" placeholder="Search for User or List" formControlName="search" name="search" id="search" >
-        <label class="search__label" for="search">Search <span *ngIf="windowWidth>360">for a list or user</span></label>
-      <button type="submit" class="btn--primary search__btn" aria-label="search"><i-feather name="search"></i-feather></button>
-    </fieldset>
+<form
+  class="search__form"
+  [formGroup]="searchForm"
+  (ngSubmit)="onSubmit(search.value)"
+  *ngIf="!hideSearch"
+>
+  <fieldset class="form__fieldset search">
+    <input
+      type="text"
+      class="search__input"
+      placeholder="Search for User or List"
+      formControlName="search"
+      name="search"
+      id="search"
+    />
+    <label class="search__label" for="search"
+      >Search <span *ngIf="windowWidth > 360">for a list or user</span></label
+    >
+    <button type="submit" class="btn--primary search__btn" aria-label="search">
+      <i-feather name="search"></i-feather>
+    </button>
+  </fieldset>
 </form>

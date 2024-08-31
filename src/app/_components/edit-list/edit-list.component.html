@@ -1,52 +1,117 @@
-<form [formGroup]='editListForm' class='form form--no-shadow'>
-  <fieldset class='form__fieldset'>
+<form [formGroup]="editListForm" class="form form--no-shadow">
+  <fieldset class="form__fieldset">
     <!-- Title -->
-    <input type='text' formControlName='title' id='title' class='form__input' placeholder="Title">
-    <label for='title' class='form__label'>Title</label>
+    <input
+      type="text"
+      formControlName="title"
+      id="title"
+      class="form__input"
+      placeholder="Title"
+    />
+    <label for="title" class="form__label">Title</label>
   </fieldset>
   <!-- Deadline -->
-  <fieldset class='form__fieldset'>
-    <input type='date' formControlName='deadline' id='deadline' class='form__input' pattern="\d{4}-\d{2}-\d{2}">
-    <label for='deadline' class='form__label'>Deadline (Optional)</label>
+  <fieldset class="form__fieldset">
+    <input
+      type="date"
+      formControlName="deadline"
+      id="deadline"
+      class="form__input"
+      pattern="\d{4}-\d{2}-\d{2}"
+    />
+    <label for="deadline" class="form__label">Deadline (Optional)</label>
   </fieldset>
   <!-- Description -->
-  <fieldset class='form__fieldset'>
-    <textarea type='text' formControlName='description' id='description' class='form__input--textarea' placeholder="Description"></textarea>
-    <label for='description' class='form__label'>Description (Optional)</label>
+  <fieldset class="form__fieldset">
+    <textarea
+      type="text"
+      formControlName="description"
+      id="description"
+      class="form__input--textarea"
+      placeholder="Description"
+    ></textarea>
+    <label for="description" class="form__label">Description (Optional)</label>
   </fieldset>
   <!-- Allow Comments -->
-  <fieldset class='form__fieldset--row allow-comments'>
-    <input type='checkbox' value='allow_comments' id='allow_comments' formControlName='allow_comments' class='form__input--checkbox' (change)='allowCommentsChecked($event)'>
-    <label class="form__label" for='allow_comments'>
-      <ng-container *ngIf='allowComments else iconDefault'><i-feather name='check-square'></i-feather></ng-container>
-      <span>Allow Comments</span></label>
+  <fieldset class="form__fieldset--row allow-comments">
+    <input
+      type="checkbox"
+      value="allow_comments"
+      id="allow_comments"
+      formControlName="allow_comments"
+      class="form__input--checkbox"
+      (change)="allowCommentsChecked($event)"
+    />
+    <label class="form__label" for="allow_comments">
+      <ng-container *ngIf="allowComments; else iconDefault"
+        ><i-feather name="check-square"></i-feather
+      ></ng-container>
+      <span>Allow Comments</span></label
+    >
   </fieldset>
   <!-- End Allow Comments -->
   <!-- List Visibility -->
-  <fieldset class='form__fieldset--row' id='visibility'>
+  <fieldset class="form__fieldset--row" id="visibility">
     <legend>List Visibility</legend>
     <div>
-      <input type='radio' [value]='visibilityOptions[0]' id='private' [checked]='visibility === visibilityOptions[0]' formControlName='visibility' class='form__input--radio'>
-      <label class="form__label" for='private'><i class='form__radio'>&nbsp;</i><span>Private</span></label>
+      <input
+        type="radio"
+        [value]="visibilityOptions[0]"
+        id="private"
+        [checked]="visibility === visibilityOptions[0]"
+        formControlName="visibility"
+        class="form__input--radio"
+      />
+      <label class="form__label" for="private"
+        ><i class="form__radio">&nbsp;</i><span>Private</span></label
+      >
     </div>
     <div>
-      <input type='radio' [value]='visibilityOptions[1]' id='unlisted' [checked]='visibility === visibilityOptions[1]' formControlName='visibility' class='form__input--radio'>
-      <label class="form__label" for='unlisted'><i class='form__radio'>&nbsp;</i><span>Unlisted</span></label>
+      <input
+        type="radio"
+        [value]="visibilityOptions[1]"
+        id="unlisted"
+        [checked]="visibility === visibilityOptions[1]"
+        formControlName="visibility"
+        class="form__input--radio"
+      />
+      <label class="form__label" for="unlisted"
+        ><i class="form__radio">&nbsp;</i><span>Unlisted</span></label
+      >
     </div>
     <div>
-      <input type='radio' [value]='visibilityOptions[2]' id='public' [checked]='visibility === visibilityOptions[2]' formControlName='visibility' class='form__input--radio'>
-      <label class="form__label" for='public'><i class='form__radio'>&nbsp;</i><span>Public</span></label>
+      <input
+        type="radio"
+        [value]="visibilityOptions[2]"
+        id="public"
+        [checked]="visibility === visibilityOptions[2]"
+        formControlName="visibility"
+        class="form__input--radio"
+      />
+      <label class="form__label" for="public"
+        ><i class="form__radio">&nbsp;</i><span>Public</span></label
+      >
     </div>
   </fieldset>
   <!-- End List Visibility -->
 
-  <div class='buttons l-row--justify-left'>
-    <app-action-button buttonType='submit' buttonStyle='primary' icon='check' (click)='onSubmit(editListForm.value)'></app-action-button>
-    <app-action-button buttonType='submit' buttonStyle='default' icon='x' (click)='cancel()'></app-action-button>
+  <div class="buttons l-row--justify-left">
+    <app-action-button
+      buttonType="submit"
+      buttonStyle="primary"
+      icon="check"
+      (click)="onSubmit(editListForm.value)"
+    ></app-action-button>
+    <app-action-button
+      buttonType="submit"
+      buttonStyle="default"
+      icon="x"
+      (click)="cancel()"
+    ></app-action-button>
   </div>
 </form>
 
 <!-- Templates -->
 <!-- Check Box -->
-<ng-template #iconDefault><i-feather name='square'></i-feather></ng-template>
+<ng-template #iconDefault><i-feather name="square"></i-feather></ng-template>
 <!-- End Templates -->

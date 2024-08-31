@@ -11,14 +11,13 @@ describe('ListCommentsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [BackButtonComponent],
-    imports: [
+      declarations: [BackButtonComponent],
+      imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        ListCommentsComponent
-    ]
-})
-    .compileComponents();
+        ListCommentsComponent,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

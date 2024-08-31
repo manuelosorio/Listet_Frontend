@@ -25,8 +25,7 @@ jobs:
           echo URL="${{ secrets.CLIENT_URL }}" >> prod.env
           echo WEBSOCKET="${{ secrets.CLIENT_WEBSOCKET }}" >> prod.env
       - name: Build Angular SSR
-        run:
-          yarn build:ssr
+        run: yarn build:ssr
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:

@@ -3,16 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CharacterCounterComponent } from './character-counter.component';
 import { IconsModule } from '../../_modules/icons/icons.module';
 
-
-
 @NgModule({
-    imports: [
-        CommonModule,
-        IconsModule,
-        CharacterCounterComponent
-    ],
-    exports: [
-        CharacterCounterComponent
-    ]
+  imports: [CommonModule, IconsModule, CharacterCounterComponent],
+  exports: [CharacterCounterComponent],
 })
-export class CharacterCounterModule { }
+export class CharacterCounterModule {}

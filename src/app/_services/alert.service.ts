@@ -37,9 +37,9 @@ export class AlertService {
   }
 
   /**
-   * Creates success alert toast. 
-   * @deprecated There will be a more rebust method available in a future version. 
-  */
+   * Creates success alert toast.
+   * @deprecated There will be a more rebust method available in a future version.
+   */
   success(
     message: string,
     link?: {
@@ -61,9 +61,9 @@ export class AlertService {
   }
 
   /**
-   * Creates warning alert toast. 
-   * @deprecated There will be a more rebust method available in a future version. 
-  */
+   * Creates warning alert toast.
+   * @deprecated There will be a more rebust method available in a future version.
+   */
   warning(
     message: string,
     link: {
@@ -84,9 +84,9 @@ export class AlertService {
   }
 
   /**
-   * Creates error alert toast. 
-   * @deprecated There will be a more rebust method available in a future version. 
-  */
+   * Creates error alert toast.
+   * @deprecated There will be a more rebust method available in a future version.
+   */
   error(
     message: string,
     link?: {

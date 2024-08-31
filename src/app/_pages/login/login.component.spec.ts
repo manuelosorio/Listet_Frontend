@@ -11,16 +11,9 @@ describe('LoginComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        LoginComponent
-    ],
-    providers: [
-        UntypedFormBuilder
-    ]
-})
-    .compileComponents();
+      imports: [RouterTestingModule, HttpClientTestingModule, LoginComponent],
+      providers: [UntypedFormBuilder],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -14,7 +14,10 @@ export class ListsService {
   private commentSubject$: Subject<any>;
   public comment$: Observable<any>;
 
-  constructor(private http: HttpClient, private userService: UsersService) {
+  constructor(
+    private http: HttpClient,
+    private userService: UsersService
+  ) {
     this.commentSubject$ = new Subject<any>();
     this.comment$ = this.commentSubject$.asObservable();
   }

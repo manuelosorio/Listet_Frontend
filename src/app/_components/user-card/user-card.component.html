@@ -1,5 +1,5 @@
-<ng-template *ngIf="user.avatar else icon">
-  <img [src]="user.avatar" alt="User profile image">
+<ng-template *ngIf="user.avatar; else icon">
+  <img [src]="user.avatar" alt="User profile image" />
 </ng-template>
 <p>{{ user.firstName }} {{ user.lastName }}</p>
 <a routerLink="/u/{{ user.username }}">{{ user.username }}</a>

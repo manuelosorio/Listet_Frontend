@@ -32,7 +32,10 @@ export class SearchComponent {
     '/settings/**',
   ];
   public hideSearch: boolean;
-  constructor(public router: Router, private formBuilder: UntypedFormBuilder) {
+  constructor(
+    public router: Router,
+    private formBuilder: UntypedFormBuilder
+  ) {
     this.searchForm = this.formBuilder.group({
       search: ['', [Validators.minLength(1)]],
     });

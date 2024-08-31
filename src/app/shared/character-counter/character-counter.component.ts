@@ -3,11 +3,11 @@ import { FeatherModule } from 'angular-feather';
 import { NgIf, NgStyle } from '@angular/common';
 
 @Component({
-    selector: 'app-character-counter',
-    templateUrl: './character-counter.component.html',
-    styleUrls: ['./character-counter.component.sass'],
-    standalone: true,
-    imports: [NgIf, NgStyle, FeatherModule]
+  selector: 'app-character-counter',
+  templateUrl: './character-counter.component.html',
+  styleUrls: ['./character-counter.component.sass'],
+  standalone: true,
+  imports: [NgIf, NgStyle, FeatherModule],
 })
 export class CharacterCounterComponent implements OnInit {
   public characterCount!: number;
@@ -36,8 +36,7 @@ export class CharacterCounterComponent implements OnInit {
         ? circleLength - this.coloredArea2
         : 0;
   }
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.radius = 27.5;

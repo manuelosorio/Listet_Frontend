@@ -1,40 +1,68 @@
-<div style='max-width: 90%; margin: 0 auto;'>
+<div style="max-width: 90%; margin: 0 auto">
   <h1>Profile Information</h1>
 </div>
-<form [formGroup]='profileForm' (ngSubmit)='submit(profileForm.value)'>
-    <fieldset class='form__fieldset form__fieldset--row'>
-      <div class='form__column'>
-        <input placeholder='First Name' class='form__input' type='text' formControlName='firstName' id='firstName'>
-        <label class='form__label' for='firstName'>First Name</label>
-      </div>
-      <div class='form__column'>
-        <input placeholder='Last Name' class='form__input' type='text' formControlName='lastName' id='lastName'>
-        <label class='form__label' for='lastName'>Last Name</label>
-        <!--   If Last Name is Valid   -->
-        <i-feather class="form__input--validation valid" *ngIf="lastName.valid" name='check'></i-feather>
-        <!--   If Last Name is Invalid   -->
-        <ng-container *ngIf="lastName.invalid && lastName.touched">
-          <i-feather class="form__input--validation invalid" name='x'></i-feather>
-          <div class="error__message">
-            Last Name is required.
-          </div>
-        </ng-container>
-      </div>
-    </fieldset>
-    <fieldset class='form__fieldset form__fieldset--row' id='email'>
-      <input placeholder='Email' class='form__input' type='email' formControlName='email'>
-      <label class='form__label' for='email'>Email</label>
-      <!--   If Email is Valid   -->
-      <i-feather class="form__input--validation valid" *ngIf="email.valid" name='check'></i-feather>
-      <!--   If Email is Invalid   -->
-      <ng-container *ngIf="email.invalid && email.touched">
-        <i-feather class="form__input--validation invalid" name='x'></i-feather>
-        <div class="error__message">
-          Valid Email is required.
-        </div>
-      </ng-container>
-    </fieldset>
-    <div class='form__row'>
-      <button [class.btn--primary]='profileForm.valid' [class.btn--disabled]='profileForm.invalid' [disabled]='profileForm.invalid'><i-feather name='save'></i-feather><span style='margin-left: 1rem'>Save Changes</span></button>
+<form [formGroup]="profileForm" (ngSubmit)="submit(profileForm.value)">
+  <fieldset class="form__fieldset form__fieldset--row">
+    <div class="form__column">
+      <input
+        placeholder="First Name"
+        class="form__input"
+        type="text"
+        formControlName="firstName"
+        id="firstName"
+      />
+      <label class="form__label" for="firstName">First Name</label>
     </div>
+    <div class="form__column">
+      <input
+        placeholder="Last Name"
+        class="form__input"
+        type="text"
+        formControlName="lastName"
+        id="lastName"
+      />
+      <label class="form__label" for="lastName">Last Name</label>
+      <!--   If Last Name is Valid   -->
+      <i-feather
+        class="form__input--validation valid"
+        *ngIf="lastName.valid"
+        name="check"
+      ></i-feather>
+      <!--   If Last Name is Invalid   -->
+      <ng-container *ngIf="lastName.invalid && lastName.touched">
+        <i-feather class="form__input--validation invalid" name="x"></i-feather>
+        <div class="error__message">Last Name is required.</div>
+      </ng-container>
+    </div>
+  </fieldset>
+  <fieldset class="form__fieldset form__fieldset--row" id="email">
+    <input
+      placeholder="Email"
+      class="form__input"
+      type="email"
+      formControlName="email"
+    />
+    <label class="form__label" for="email">Email</label>
+    <!--   If Email is Valid   -->
+    <i-feather
+      class="form__input--validation valid"
+      *ngIf="email.valid"
+      name="check"
+    ></i-feather>
+    <!--   If Email is Invalid   -->
+    <ng-container *ngIf="email.invalid && email.touched">
+      <i-feather class="form__input--validation invalid" name="x"></i-feather>
+      <div class="error__message">Valid Email is required.</div>
+    </ng-container>
+  </fieldset>
+  <div class="form__row">
+    <button
+      [class.btn--primary]="profileForm.valid"
+      [class.btn--disabled]="profileForm.invalid"
+      [disabled]="profileForm.invalid"
+    >
+      <i-feather name="save"></i-feather
+      ><span style="margin-left: 1rem">Save Changes</span>
+    </button>
+  </div>
 </form>

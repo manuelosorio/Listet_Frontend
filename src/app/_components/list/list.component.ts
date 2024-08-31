@@ -80,7 +80,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.meta.title += `${this.route.snapshot.params['username']}'s Lists`;
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = (data as unknown) as ListModel[];
+            this.lists = data as unknown as ListModel[];
             await this.show(this.lists);
           },
           error: err => {
@@ -92,7 +92,7 @@ export class ListComponent implements OnInit, OnDestroy {
       default: {
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = (data as unknown) as ListModel[];
+            this.lists = data as unknown as ListModel[];
             await this.show(this.lists);
           },
           error: err => {

@@ -11,16 +11,9 @@ describe('UserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        UserComponent
-    ],
-    providers: [
-        UntypedFormBuilder
-    ]
-})
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule, UserComponent],
+      providers: [UntypedFormBuilder],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

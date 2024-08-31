@@ -4,11 +4,11 @@ import { FeatherModule } from 'angular-feather';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-deadline',
-    templateUrl: './deadline.component.html',
-    styleUrls: ['./deadline.component.sass'],
-    standalone: true,
-    imports: [NgIf, FeatherModule]
+  selector: 'app-deadline',
+  templateUrl: './deadline.component.html',
+  styleUrls: ['./deadline.component.sass'],
+  standalone: true,
+  imports: [NgIf, FeatherModule],
 })
 export class DeadlineComponent implements OnChanges {
   @Input()

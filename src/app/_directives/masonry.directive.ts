@@ -11,11 +11,12 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
-    selector: '[appMasonry]',
-    standalone: true
+  selector: '[appMasonry]',
+  standalone: true,
 })
 export class MasonryDirective
-  implements AfterViewInit, AfterViewChecked, OnDestroy {
+  implements AfterViewInit, AfterViewChecked, OnDestroy
+{
   private resizeListener?: () => void;
   private mutationObserver?: MutationObserver;
   private readonly isBrowser: boolean;

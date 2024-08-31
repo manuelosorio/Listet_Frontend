@@ -11,16 +11,13 @@ describe('CreateCommentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [
+      imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        CreateCommentComponent
-    ],
-    providers: [
-        UntypedFormBuilder
-    ]
-})
-    .compileComponents();
+        CreateCommentComponent,
+      ],
+      providers: [UntypedFormBuilder],
+    }).compileComponents();
   });
 
   beforeEach(() => {

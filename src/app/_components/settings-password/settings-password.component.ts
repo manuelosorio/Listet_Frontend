@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { EndpointResponse } from '../../models/response/endpoint.response';
 import { ErrorResponse } from '../../models/response/errors/error.response';
 import { AlertService } from '../../_services/alert.service';
@@ -8,11 +16,11 @@ import { FeatherModule } from 'angular-feather';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-settings-password',
-    templateUrl: './settings-password.component.html',
-    styleUrls: ['./settings-password.component.sass'],
-    standalone: true,
-    imports: [ReactiveFormsModule, NgIf, FeatherModule]
+  selector: 'app-settings-password',
+  templateUrl: './settings-password.component.html',
+  styleUrls: ['./settings-password.component.sass'],
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf, FeatherModule],
 })
 export class SettingsPasswordComponent {
   public passwordForm: UntypedFormGroup;

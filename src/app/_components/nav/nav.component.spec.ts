@@ -10,13 +10,8 @@ describe('NavComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NavComponent
-    ]
-})
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule, NavComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

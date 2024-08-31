@@ -15,11 +15,11 @@ import { ListItemsComponent } from '../../_components/list-items/list-items.comp
 import { ListHeaderComponent } from '../../_components/list-header/list-header.component';
 
 @Component({
-    selector: 'app-list-details',
-    templateUrl: './list-details.component.html',
-    styleUrls: ['./list-details.component.sass'],
-    standalone: true,
-    imports: [ListHeaderComponent, ListItemsComponent, ListCommentsComponent]
+  selector: 'app-list-details',
+  templateUrl: './list-details.component.html',
+  styleUrls: ['./list-details.component.sass'],
+  standalone: true,
+  imports: [ListHeaderComponent, ListItemsComponent, ListCommentsComponent],
 })
 export class ListDetailsComponent implements OnInit, OnDestroy {
   username!: string;

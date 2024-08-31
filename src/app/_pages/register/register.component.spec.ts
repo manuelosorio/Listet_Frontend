@@ -11,17 +11,13 @@ describe('RegisterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
+      imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        RegisterComponent
-    ],
-    providers: [
-        UntypedFormBuilder,
-        ReactiveFormsModule
-    ]
-})
-    .compileComponents();
+        RegisterComponent,
+      ],
+      providers: [UntypedFormBuilder, ReactiveFormsModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
