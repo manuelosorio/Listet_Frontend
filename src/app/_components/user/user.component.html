@@ -1,8 +1,10 @@
 <p>user works!</p>
 
-<ul *ngFor="let user of users">
-  <li>
-    <div>Username: {{ user['username'] }}</div>
-    <div>Name: {{ user['firstName'] }} {{ user['lastName'] }}</div>
-  </li>
-</ul>
+@for (user of users; track user) {
+  <ul>
+    <li>
+      <div>Username: {{ user['username'] }}</div>
+      <div>Name: {{ user['firstName'] }} {{ user['lastName'] }}</div>
+    </li>
+  </ul>
+}

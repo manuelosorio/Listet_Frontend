@@ -4,7 +4,7 @@
     [formGroup]="registrationForm"
     (ngSubmit)="onSubmit(registrationForm.value)"
     class="form"
-  >
+    >
     {{ errorMessage }}
     <div class="form__fieldset--row">
       <!--   Start First Name   -->
@@ -17,22 +17,23 @@
           class="form__input"
           id="first-name"
           placeholder="e.g. Joe"
-        />
+          />
         <label for="first-name" class="form__label">First Name</label>
         <!--   If First Name is Valid   -->
-        <i-feather
-          class="form__input--validation valid"
-          *ngIf="firstName?.valid"
-          name="check"
-        ></i-feather>
+        @if (firstName?.valid) {
+          <i-feather
+            class="form__input--validation valid"
+            name="check"
+          ></i-feather>
+        }
         <!--   If First Name is Invalid   -->
-        <ng-container *ngIf="firstName?.invalid && firstName?.touched">
+        @if (firstName?.invalid && firstName?.touched) {
           <i-feather
             class="form__input--validation invalid"
             name="x"
           ></i-feather>
           <div class="error__message">First Name is required.</div>
-        </ng-container>
+        }
         <!--   End First Name Validation   -->
       </fieldset>
       <!--   End Fist Name   -->
@@ -45,22 +46,23 @@
           autocomplete="family-name"
           id="last-name"
           placeholder="Last Name"
-        />
+          />
         <label for="last-name" class="form__label">Last Name</label>
         <!--   If Last Name is Valid   -->
-        <i-feather
-          class="form__input--validation valid"
-          *ngIf="lastName?.valid"
-          name="check"
-        ></i-feather>
+        @if (lastName?.valid) {
+          <i-feather
+            class="form__input--validation valid"
+            name="check"
+          ></i-feather>
+        }
         <!--   If Last Name is Invalid   -->
-        <ng-container *ngIf="lastName?.invalid && lastName?.touched">
+        @if (lastName?.invalid && lastName?.touched) {
           <i-feather
             class="form__input--validation invalid"
             name="x"
           ></i-feather>
           <div class="error__message">Last Name is required.</div>
-        </ng-container>
+        }
         <!--   End Last Name Validation   -->
       </fieldset>
     </div>
@@ -74,24 +76,29 @@
         autocomplete="username"
         id="username"
         placeholder="Username"
-      />
+        />
       <label for="username" class="form__label">Username</label>
       <!--   If Username is Valid   -->
-      <i-feather
-        class="form__input--validation valid"
-        *ngIf="username?.valid"
-        name="check"
-      ></i-feather>
+      @if (username?.valid) {
+        <i-feather
+          class="form__input--validation valid"
+          name="check"
+        ></i-feather>
+      }
       <!--   If Username is Invalid   -->
-      <ng-container *ngIf="username?.invalid && username?.touched">
+      @if (username?.invalid && username?.touched) {
         <i-feather class="form__input--validation invalid" name="x"></i-feather>
-        <div class="error__message" *ngIf="username?.errors?.required">
-          Username is required.
-        </div>
-        <div class="error__message" *ngIf="username?.errors?.pattern">
-          Username is invalid
-        </div>
-      </ng-container>
+        @if (username?.errors?.required) {
+          <div class="error__message">
+            Username is required.
+          </div>
+        }
+        @if (username?.errors?.pattern) {
+          <div class="error__message">
+            Username is invalid
+          </div>
+        }
+      }
       <!--   End Username Validation   -->
     </fieldset>
     <!--   End Username   -->
@@ -104,19 +111,20 @@
         autocomplete="email"
         id="email"
         placeholder="Email"
-      />
+        />
       <label for="email" class="form__label">Email</label>
       <!--   If Email is Valid   -->
-      <i-feather
-        class="form__input--validation valid"
-        *ngIf="email?.valid"
-        name="check"
-      ></i-feather>
+      @if (email?.valid) {
+        <i-feather
+          class="form__input--validation valid"
+          name="check"
+        ></i-feather>
+      }
       <!--   If Email is Invalid   -->
-      <ng-container *ngIf="email?.invalid && email?.touched">
+      @if (email?.invalid && email?.touched) {
         <i-feather class="form__input--validation invalid" name="x"></i-feather>
         <div class="error__message">Valid Email is required.</div>
-      </ng-container>
+      }
       <!--   End Email Validation   -->
     </fieldset>
     <!--   End Email   -->
@@ -128,35 +136,41 @@
         class="form__input"
         id="password"
         placeholder="Password"
-      />
+        />
       <label for="password" class="form__label">Password</label>
       <!--   If Password is Valid   -->
-      <i-feather
-        class="form__input--validation valid"
-        *ngIf="password?.valid"
-        name="check"
-      ></i-feather>
+      @if (password?.valid) {
+        <i-feather
+          class="form__input--validation valid"
+          name="check"
+        ></i-feather>
+      }
       <!--   If Password is Invalid   -->
-      <ng-container *ngIf="password?.invalid && password?.touched">
+      @if (password?.invalid && password?.touched) {
         <i-feather class="form__input--validation invalid" name="x"></i-feather>
         <div class="error__message">Valid Password is required.</div>
-      </ng-container>
+      }
       <!--   End Password Validation   -->
     </fieldset>
     <!--   End Password   -->
     <div class="form__row">
-      <button
-        *ngIf="registrationForm.invalid; else submit"
-        class="btn btn--disabled form__btn"
-        [disabled]="true"
-        type="submit"
-      >
-        Register
-      </button>
+      @if (registrationForm.invalid) {
+        <button
+          class="btn btn--disabled form__btn"
+          [disabled]="true"
+          type="submit"
+          >
+          Register
+        </button>
+      } @else {
+        <button class="btn btn--primary form__btn">
+          Register
+        </button>
+      }
       <ng-template #submit
         ><button class="btn btn--primary form__btn">
-          Register
-        </button></ng-template
+        Register
+      </button></ng-template
       >
       <a routerLink="/login" class="btn">Existing User?</a>
     </div>

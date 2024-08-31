@@ -19,14 +19,14 @@ import { CommentEvents } from '../../helper/comment.events';
 import { WebsocketService } from '../../_services/websocket.service';
 import { CommentModel } from '../../models/comment.model';
 import { CharacterCounterComponent } from '../../shared/character-counter/character-counter.component';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-create-comment',
   templateUrl: './create-comment.component.html',
   styleUrls: ['./create-comment.component.sass'],
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, CharacterCounterComponent],
+  imports: [ReactiveFormsModule, CharacterCounterComponent],
 })
 export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;

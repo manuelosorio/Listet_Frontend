@@ -10,7 +10,7 @@ import {
 import { ListsService } from '../../_services/lists.service';
 import { AlertService } from '../../_services/alert.service';
 import { Response } from '../../_pages/create-list/create-list.component';
-import { formatDate, NgIf } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
@@ -26,7 +26,7 @@ interface OnSubmitParams<Data extends ListModel> {
   templateUrl: './edit-list.component.html',
   styleUrls: ['./edit-list.component.sass'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, FeatherModule, ActionButtonComponent],
+  imports: [ReactiveFormsModule, FeatherModule, ActionButtonComponent],
 })
 export class EditListComponent implements OnInit {
   @Input() list: ListModel;

@@ -1,9 +1,9 @@
-<ng-container *ngIf="commentsEnabled">
+@if (commentsEnabled) {
   <form
     class="card__inset"
     [formGroup]="commentForm"
     (ngSubmit)="onSubmit(commentForm.value)"
-  >
+    >
     <fieldset class="form__fieldset--row">
       <textarea
         formControlName="comment"
@@ -17,15 +17,18 @@
     <div
       class="form__fieldset--row"
       style="flex-direction: row; align-items: center"
-    >
-      <button
-        *ngIf="comment.invalid; else submit"
-        class="btn btn--disabled form__btn"
-        [disabled]="true"
-        type="submit"
       >
-        Comment
-      </button>
+      @if (comment.invalid) {
+        <button
+          class="btn btn--disabled form__btn"
+          [disabled]="true"
+          type="submit"
+          >
+          Comment
+        </button>
+      } @else {
+        <button class="btn btn--primary form__btn">Comment</button>
+      }
       <app-character-counter
         [minimumCharacters]="20"
         [maximumCharacters]="500"
@@ -34,8 +37,8 @@
       ></app-character-counter>
     </div>
   </form>
-</ng-container>
+}
 
 <ng-template #submit
   ><button class="btn btn--primary form__btn">Comment</button></ng-template
->
+  >

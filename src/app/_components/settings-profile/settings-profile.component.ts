@@ -9,14 +9,14 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FeatherModule } from 'angular-feather';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-settings-profile',
   templateUrl: './settings-profile.component.html',
   styleUrls: ['./settings-profile.component.sass'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, FeatherModule],
+  imports: [ReactiveFormsModule, FeatherModule],
 })
 export class SettingsProfileComponent implements OnInit, OnDestroy {
   public profileForm: UntypedFormGroup;

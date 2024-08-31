@@ -1,54 +1,63 @@
 <section class="l-container" id="comments">
-  <h3 *ngIf="commentsEnabled">Comments ({{ count ? count : 0 }})</h3>
+  @if (commentsEnabled) {
+    <h3>Comments ({{ count ? count : 0 }})</h3>
+  }
   <div class="l-row">
-    <ng-container *ngIf="isAuth; else commentAuth">
+    @if (isAuth) {
       <app-create-comment class="app-create-comment"></app-create-comment>
-    </ng-container>
+    } @else {
+      <p>
+        You must be logged in to create comment.
+        <a routerLink="/login" [queryParams]="{ returnUrl: this.returnUrl }">
+          Login to account.
+        </a>
+      </p>
+    }
   </div>
-  <ng-container *ngIf="commentsEnabled; else commentsDisabled">
-    <ng-container *ngFor="let comment of comments">
-      <article class="card comment" *ngIf="!comment.isEditing; else isEditing">
-        <div class="l-row comment__info">
-          <a routerLink="/u/{{ comment['username'] }}">{{
-            comment['username']
-          }}</a>
-          <em>
-            <span *ngIf="comment.date_updated; else created">Updated</span>
-            <ng-template #created>Created</ng-template>
-            {{ comment['time_difference'] }}
-            <span class="tooltip">{{
-              comment['formatted_creation_date']
-            }}</span>
-          </em>
-        </div>
-        <div>
-          <ng-container *ngIf="isListOwner || comment.is_owner">
-            <button *ngIf="comment.is_owner" (click)="edit(comment)">
-              <i-feather name="edit"></i-feather> Edit
-            </button>
-            <button (click)="delete(comment.id)">
-              <i-feather name="trash"></i-feather> Delete
-            </button>
-          </ng-container>
-        </div>
-        <p class="comment__message">{{ comment['comment'] }}</p>
-      </article>
+  @if (commentsEnabled) {
+    @for (comment of comments; track comment) {
+      @if (!comment.isEditing) {
+        <article class="card comment">
+          <div class="l-row comment__info">
+            <a routerLink="/u/{{ comment['username'] }}">{{
+              comment['username']
+            }}</a>
+            <em>
+              @if (comment.date_updated) {
+                <span>Updated</span>
+              } @else {
+                Created
+              }
+              {{ comment['time_difference'] }}
+              <span class="tooltip">{{
+                comment['formatted_creation_date']
+              }}</span>
+            </em>
+          </div>
+          <div>
+            @if (isListOwner || comment.is_owner) {
+              @if (comment.is_owner) {
+                <button (click)="edit(comment)">
+                  <i-feather name="edit"></i-feather> Edit
+                </button>
+              }
+              <button (click)="delete(comment.id)">
+                <i-feather name="trash"></i-feather> Delete
+              </button>
+            }
+          </div>
+          <p class="comment__message">{{ comment['comment'] }}</p>
+        </article>
+      } @else {
+        <app-edit-comment [commentModel]="comment"></app-edit-comment>
+      }
       <ng-template #isEditing>
         <app-edit-comment [commentModel]="comment"></app-edit-comment>
       </ng-template>
-    </ng-container>
-  </ng-container>
+    }
+  } @else {
+    <div class="l-row">
+      <p>This list doesn't have comments enabled</p>
+    </div>
+  }
 </section>
-<ng-template #commentsDisabled>
-  <div class="l-row">
-    <p>This list doesn't have comments enabled</p>
-  </div>
-</ng-template>
-<ng-template #commentAuth>
-  <p>
-    You must be logged in to create comment.
-    <a routerLink="/login" [queryParams]="{ returnUrl: this.returnUrl }">
-      Login to account.
-    </a>
-  </p>
-</ng-template>

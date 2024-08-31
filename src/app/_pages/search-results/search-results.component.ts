@@ -13,13 +13,13 @@ import { SearchDataService } from '../../shared/search-data.service';
 import { UserModel } from '../../models/user.model';
 import { UserCardComponent } from '../../_components/user-card/user-card.component';
 import { ListComponent } from '../../_components/list/list.component';
-import { NgForOf } from '@angular/common';
+
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.sass'],
-  imports: [UserCardComponent, ListComponent, RouterLink, NgForOf],
+  imports: [UserCardComponent, ListComponent, RouterLink],
   standalone: true,
 })
 export class SearchResultsComponent {

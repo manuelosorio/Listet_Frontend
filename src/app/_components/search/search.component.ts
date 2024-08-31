@@ -8,13 +8,13 @@ import {
 } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { IconsModule } from '../../_modules/icons/icons.module';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.sass'],
-  imports: [ReactiveFormsModule, IconsModule, CommonModule],
+  imports: [ReactiveFormsModule, IconsModule],
   standalone: true,
 })
 export class SearchComponent {

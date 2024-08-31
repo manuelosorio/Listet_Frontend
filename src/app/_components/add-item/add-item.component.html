@@ -1,4 +1,4 @@
-<ng-container *ngIf="isOwner">
+@if (isOwner) {
   <form [formGroup]="listItemForm" (ngSubmit)="onSubmit(listItemForm.value)">
     <div class="l-row">
       <fieldset class="form__fieldset">
@@ -8,7 +8,7 @@
           id="list_item"
           class="form__input"
           placeholder="List Item"
-        />
+          />
         <label class="form__label" for="list_item">List Item Name</label>
       </fieldset>
       <fieldset class="form__fieldset">
@@ -19,26 +19,29 @@
           class="form__input"
           placeholder="Deadline"
           pattern="\d{4}-\d{2}-\d{2}"
-        />
+          />
         <label class="form__label" for="deadline">Deadline (Optional)</label>
       </fieldset>
     </div>
     <div class="l-row">
-      <button
-        *ngIf="item.invalid; else submit"
-        class="btn btn--disabled form__btn"
-        [disabled]="true"
-        type="submit"
-      >
-        Add Item
-      </button>
+      @if (item.invalid) {
+        <button
+          class="btn btn--disabled form__btn"
+          [disabled]="true"
+          type="submit"
+          >
+          Add Item
+        </button>
+      } @else {
+        <button class="btn btn--primary form__btn">Add Item</button>
+      }
     </div>
   </form>
-</ng-container>
+}
 
 <!-- Templates -->
 <!-- Submit Button -->
 <ng-template #submit
   ><button class="btn btn--primary form__btn">Add Item</button></ng-template
->
-<!-- End Templates -->
+  >
+  <!-- End Templates -->

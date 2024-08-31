@@ -13,14 +13,14 @@ import { ListDataService } from '../../shared/list-data.service';
 import { WebsocketService } from '../../_services/websocket.service';
 import { ListItemEvents } from '../../helper/list-item.events';
 import { ListItemModel } from '../../models/list-item.model';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.sass'],
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
 })
 export class AddItemComponent implements OnInit {
   listItemForm: UntypedFormGroup;

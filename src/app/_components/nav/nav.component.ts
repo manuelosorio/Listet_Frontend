@@ -4,13 +4,13 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { UserCircle } from '../../shared/other-icons';
-import { NgIf } from '@angular/common';
+
 import { IconsModule } from '../../_modules/icons/icons.module';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.sass'],
-  imports: [RouterLink, NgIf, IconsModule],
+  imports: [RouterLink, IconsModule],
   standalone: true,
 })
 export class NavComponent implements OnDestroy {

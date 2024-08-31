@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { ListVisibility } from '../../helper/list-visibility';
 import { ListModel } from '../../models/list.model';
 import { IconsModule } from '../../_modules/icons/icons.module';
-import { NgIf } from '@angular/common';
+
 
 export interface Response {
   message: string;
@@ -23,7 +23,7 @@ export interface Response {
   selector: 'app-create-list',
   templateUrl: './create-list.component.html',
   styleUrls: ['./create-list.component.sass'],
-  imports: [ReactiveFormsModule, IconsModule, NgIf],
+  imports: [ReactiveFormsModule, IconsModule],
   standalone: true,
 })
 export class CreateListComponent implements OnInit {

@@ -9,7 +9,7 @@ import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
-import { formatDate, isPlatformBrowser, NgIf, NgFor } from '@angular/common';
+import { formatDate, isPlatformBrowser } from '@angular/common';
 import { ListDataService } from '../../shared/list-data.service';
 import { DateUtil } from '../../utils/dateUtil';
 import { CommentModel } from '../../models/comment.model';
@@ -24,13 +24,11 @@ import { CreateCommentComponent } from '../create-comment/create-comment.compone
   styleUrls: ['./list-comments.component.sass'],
   standalone: true,
   imports: [
-    NgIf,
     CreateCommentComponent,
-    NgFor,
     RouterLink,
     FeatherModule,
-    EditCommentComponent,
-  ],
+    EditCommentComponent
+],
 })
 export class ListCommentsComponent implements OnInit, OnDestroy {
   private username: string;

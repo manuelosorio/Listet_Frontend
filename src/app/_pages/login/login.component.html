@@ -7,10 +7,12 @@
     [formGroup]="loginForm"
     (ngSubmit)="onSubmit(loginForm.value)"
     class="form"
-  >
-    <div class="flag--err" *ngIf="errorMessage !== null">
-      {{ errorMessage }}
-    </div>
+    >
+    @if (errorMessage !== null) {
+      <div class="flag--err">
+        {{ errorMessage }}
+      </div>
+    }
     <fieldset class="form__fieldset">
       <input
         type="text"
@@ -20,11 +22,13 @@
         id="email"
         class="form__input"
         placeholder="email"
-      />
+        />
       <label for="email" class="form__label">Email</label>
-      <div class="error__message" *ngIf="email?.invalid && email?.touched">
-        email is required.
-      </div>
+      @if (email?.invalid && email?.touched) {
+        <div class="error__message">
+          email is required.
+        </div>
+      }
     </fieldset>
     <fieldset class="form__fieldset">
       <input
@@ -35,14 +39,15 @@
         name="password"
         class="form__input"
         placeholder="password"
-      />
+        />
       <label for="password" class="form__label">Password</label>
-      <div
-        class="error__message"
-        *ngIf="password?.invalid && password?.touched"
-      >
-        Password is required.
-      </div>
+      @if (password?.invalid && password?.touched) {
+        <div
+          class="error__message"
+          >
+          Password is required.
+        </div>
+      }
     </fieldset>
     <div class="form__row">
       <fieldset class="form__fieldset form__fieldset--row">
@@ -53,32 +58,36 @@
           formControlName="remember"
           class="form__input--checkbox"
           (change)="checked($event)"
-        />
+          />
         <label for="remember-me">
-          <ng-container *ngIf="isChecked === true; else iconDefault"
-            ><i-feather name="check-square"></i-feather
-          ></ng-container>
-          <ng-template #iconDefault
-            ><i-feather name="square"></i-feather
-          ></ng-template>
-          <span>Remember Me</span></label
-        >
-      </fieldset>
-      <a routerLink="/forgot-password" class="forgot">Forgot Password?</a>
-    </div>
-    <div class="form__row">
-      <button
-        *ngIf="email?.invalid || password?.invalid; else submit"
-        class="btn btn--disabled form__btn"
-        [disabled]="true"
-        type="submit"
-      >
-        Log In
-      </button>
-      <ng-template #submit
-        ><button class="btn btn--primary form__btn">Log In</button></ng-template
-      >
-      <a routerLink="/register" class="btn">New User?</a>
-    </div>
-  </form>
-</div>
+          @if (isChecked === true) {
+            <i-feather name="check-square"></i-feather
+              >
+            } @else {
+              <i-feather name="square"></i-feather
+                >
+              }
+              <span>Remember Me</span></label
+              >
+            </fieldset>
+            <a routerLink="/forgot-password" class="forgot">Forgot Password?</a>
+          </div>
+          <div class="form__row">
+            @if (email?.invalid || password?.invalid) {
+              <button
+                class="btn btn--disabled form__btn"
+                [disabled]="true"
+                type="submit"
+                >
+                Log In
+              </button>
+            } @else {
+              <button class="btn btn--primary form__btn">Log In</button>
+            }
+            <ng-template #submit
+              ><button class="btn btn--primary form__btn">Log In</button></ng-template
+              >
+              <a routerLink="/register" class="btn">New User?</a>
+            </div>
+          </form>
+        </div>

@@ -9,7 +9,7 @@ import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
-import { CommonModule } from '@angular/common';
+
 import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 import { IconsModule } from '../../_modules/icons/icons.module';
 
@@ -19,10 +19,9 @@ import { IconsModule } from '../../_modules/icons/icons.module';
   styleUrls: ['./register.component.sass'],
   imports: [
     ReactiveFormsModule,
-    CommonModule,
     BackButtonComponent,
-    IconsModule,
-  ],
+    IconsModule
+],
   standalone: true,
 })
 export class RegisterComponent implements OnInit {

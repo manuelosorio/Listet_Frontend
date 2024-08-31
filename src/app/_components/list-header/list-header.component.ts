@@ -16,7 +16,7 @@ import { ListModel } from '../../models/list.model';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
 import { AlertService } from '../../_services/alert.service';
-import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { EditListComponent } from '../edit-list/edit-list.component';
 import { FeatherModule } from 'angular-feather';
@@ -28,13 +28,11 @@ import { DeadlineComponent } from '../../shared/deadline/deadline.component';
   styleUrls: ['./list-header.component.sass'],
   standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     RouterLink,
     DeadlineComponent,
     FeatherModule,
-    EditListComponent,
-  ],
+    EditListComponent
+],
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: Array<ListModel>;

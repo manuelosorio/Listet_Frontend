@@ -18,12 +18,12 @@ import { DateUtil } from '../../utils/dateUtil';
 import { MasonryDirective } from '../../_directives/masonry.directive';
 import { AlertService } from '../../_services/alert.service';
 import { DeadlineComponent } from '../../shared/deadline/deadline.component';
-import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass'],
-  imports: [DeadlineComponent, RouterLink, MasonryDirective, CommonModule],
+  imports: [DeadlineComponent, RouterLink, MasonryDirective],
   standalone: true,
 })
 export class ListComponent implements OnInit, OnDestroy {

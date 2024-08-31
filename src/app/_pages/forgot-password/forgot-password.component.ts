@@ -9,13 +9,13 @@ import { SeoService } from '../../_services/seo.service';
 import { MetaTagModel } from '../../models/metatag.model';
 import { environment } from '../../../environments/environment';
 import { BackButtonComponent } from '../../_components/back-button/back-button.component';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.sass'],
-  imports: [BackButtonComponent, ReactiveFormsModule, NgIf],
+  imports: [BackButtonComponent, ReactiveFormsModule],
   standalone: true,
 })
 export class ForgotPasswordComponent implements OnInit {

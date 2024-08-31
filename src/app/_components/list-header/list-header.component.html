@@ -1,26 +1,27 @@
-<ng-container *ngFor="let head of header">
+@for (head of header; track head) {
   <section class="l-container">
-    <div *ngIf="head['isEditing'] === false; else editList">
-      <p>{{ head.name }}</p>
-      <a [routerLink]="['/u/' + head.owner_username]">{{
-        head.owner_username
-      }}</a>
-      <p>Created: {{ formattedCreationDate }}</p>
-      <app-deadline [deadline]="deadline" [isComplete]="false"></app-deadline>
-      <ng-container *ngIf="isOwner">
-        <div class="">
-          <button (click)="edit()">
-            <i-feather name="edit"></i-feather> Edit
-          </button>
-          <button (click)="delete()">
-            <i-feather name="trash"></i-feather> Delete
-          </button>
-        </div>
-      </ng-container>
-      <p class="description">{{ head.description }}</p>
-    </div>
+    @if (head['isEditing'] === false) {
+      <div>
+        <p>{{ head.name }}</p>
+        <a [routerLink]="['/u/' + head.owner_username]">{{
+          head.owner_username
+        }}</a>
+        <p>Created: {{ formattedCreationDate }}</p>
+        <app-deadline [deadline]="deadline" [isComplete]="false"></app-deadline>
+        @if (isOwner) {
+          <div class="">
+            <button (click)="edit()">
+              <i-feather name="edit"></i-feather> Edit
+            </button>
+            <button (click)="delete()">
+              <i-feather name="trash"></i-feather> Delete
+            </button>
+          </div>
+        }
+        <p class="description">{{ head.description }}</p>
+      </div>
+    } @else {
+      <app-edit-list [list]="head"></app-edit-list>
+    }
   </section>
-  <ng-template #editList>
-    <app-edit-list [list]="head"></app-edit-list>
-  </ng-template>
-</ng-container>
+}

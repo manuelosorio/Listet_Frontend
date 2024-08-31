@@ -10,14 +10,14 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { FeatherModule } from 'angular-feather';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-settings-delete-account',
   templateUrl: './settings-delete-account.component.html',
   styleUrls: ['./settings-delete-account.component.sass'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, FeatherModule],
+  imports: [ReactiveFormsModule, FeatherModule],
 })
 export class SettingsDeleteAccountComponent {
   private deactivateAccount$!: Subscription;

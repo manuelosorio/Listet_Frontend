@@ -1,6 +1,4 @@
-<ng-container
-  *ngIf="minimumCharacters !== undefined; else maximumCharacterCounter"
->
+@if (minimumCharacters !== undefined) {
   <svg>
     <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
     <circle
@@ -16,11 +14,12 @@
       "
       [ngStyle]="{ 'stroke-dasharray': [coloredArea, greyedArea] }"
     ></circle>
-    <ng-container *ngIf="maximumCharacters !== undefined">
-      <circle
-        [attr.r]="radius2"
-        cx="50%"
-        cy="50%"
+    @if (maximumCharacters !== undefined) {
+      <ng-container>
+        <circle
+          [attr.r]="radius2"
+          cx="50%"
+          cy="50%"
         [class]="
           maxCharacterCount === 0
             ? ''
@@ -31,17 +30,25 @@
                 ? 'circle-fg__success'
                 : 'circle-bg'
         "
-        [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
-      ></circle>
-    </ng-container>
+          [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
+        ></circle>
+      </ng-container>
+    }
   </svg>
   <small>
-    <ng-container *ngIf="characterCount < minimumCharacters; else status">
+    @if (characterCount < minimumCharacters) {
       {{ characterCount }}/{{ minimumCharacters }}
-    </ng-container>
+    } @else {
+      @if (
+        maximumCharacters === undefined ||
+        maxCharacterCount < maximumCharacters - 20) {
+        <i-feather name="check" class="check-mark"></i-feather>
+      } @else {
+        {{ maximumCharacters - maxCharacterCount }}
+      }
+    }
   </small>
-</ng-container>
-<ng-template #maximumCharacterCounter>
+} @else {
   <svg>
     <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
     <circle
@@ -61,27 +68,11 @@
     ></circle>
   </svg>
   <small>
-    <ng-container
-      *ngIf="
-        maxCharacterCount < maximumCharacters - 20;
-        else remainingCharacters
-      "
-    >
+    @if (
+      maxCharacterCount < maximumCharacters - 20) {
       <i-feather name="check" class="check-mark"></i-feather>
-    </ng-container>
+    } @else {
+      {{ maximumCharacters - maxCharacterCount }}
+    }
   </small>
-</ng-template>
-<ng-template #status>
-  <ng-container
-    *ngIf="
-      maximumCharacters === undefined ||
-        maxCharacterCount < maximumCharacters - 20;
-      else remainingCharacters
-    "
-  >
-    <i-feather name="check" class="check-mark"></i-feather>
-  </ng-container>
-</ng-template>
-<ng-template #remainingCharacters>
-  {{ maximumCharacters - maxCharacterCount }}
-</ng-template>
+}

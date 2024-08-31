@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
-import { NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-character-counter',
   templateUrl: './character-counter.component.html',
   styleUrls: ['./character-counter.component.sass'],
   standalone: true,
-  imports: [NgIf, NgStyle, FeatherModule],
+  imports: [NgStyle, FeatherModule],
 })
 export class CharacterCounterComponent implements OnInit {
   public characterCount!: number;

@@ -5,7 +5,7 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ListsService } from '../../_services/lists.service';
 import { ListDataService } from '../../shared/list-data.service';
@@ -24,13 +24,11 @@ import { FeatherModule } from 'angular-feather';
   styleUrls: ['./list-items.component.sass'],
   standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     FeatherModule,
     DeadlineComponent,
     EditListItemComponent,
-    AddItemComponent,
-  ],
+    AddItemComponent
+],
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: object;
