@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -8,7 +9,6 @@ import {
 } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { IconsModule } from '../../_modules/icons/icons.module';
-
 
 @Component({
   selector: 'app-search',
@@ -20,6 +20,8 @@ import { IconsModule } from '../../_modules/icons/icons.module';
 export class SearchComponent {
   public searchForm: UntypedFormGroup;
   public windowWidth: number;
+
+  private isBrowser: boolean = isPlatformBrowser(this.platformId);
 
   private hidePaths = [
     '/create-list',
@@ -33,6 +35,7 @@ export class SearchComponent {
   ];
   public hideSearch: boolean;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     public router: Router,
     private formBuilder: UntypedFormBuilder
   ) {
@@ -50,7 +53,9 @@ export class SearchComponent {
           this.hideSearch = false;
         }
       });
-    this.windowWidth = window.innerWidth;
+    if (this.isBrowser) {
+      this.windowWidth = window.innerWidth;
+    }
   }
 
   @HostListener('window:resize', ['$event'])

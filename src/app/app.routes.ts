@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 // Components
 import { ListComponent } from './_components/list/list.component';
@@ -24,7 +23,7 @@ import { SearchResultsComponent } from './_pages/search-results/search-results.c
 
 import { environment } from '../environments/environment';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
@@ -121,14 +120,14 @@ const routes: Routes = [
   { path: '**', component: NotFoundComponent },
 ];
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledBlocking',
-      preloadingStrategy: PreloadAllModules,
-      onSameUrlNavigation: 'reload',
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
+// @NgModule({
+//   imports: [
+//     RouterModule.forRoot(routes, {
+//       initialNavigation: 'enabledBlocking',
+//       preloadingStrategy: PreloadAllModules,
+//       onSameUrlNavigation: 'reload',
+//     }),
+//   ],
+//   exports: [RouterModule],
+// })
+// export class AppRoutes {}

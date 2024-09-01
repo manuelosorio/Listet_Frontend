@@ -13,7 +13,7 @@
           <i-feather name="alert-circle"></i-feather
             >
           }</span>
-          <em>{{ formattedDeadline }}</em>
+          <em>{{ formattedDeadline | date: 'mediumDate' }}</em>
         </small>
       }
     } @else {

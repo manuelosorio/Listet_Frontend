@@ -1,14 +1,6 @@
-import {
-  Component,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-  ViewChild,
-} from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { skip, Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
@@ -18,23 +10,20 @@ import { DateUtil } from '../../utils/dateUtil';
 import { MasonryDirective } from '../../_directives/masonry.directive';
 import { AlertService } from '../../_services/alert.service';
 import { DeadlineComponent } from '../../shared/deadline/deadline.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass'],
-  imports: [DeadlineComponent, RouterLink, MasonryDirective],
+  imports: [DeadlineComponent, RouterLink, MasonryDirective, DatePipe],
+  host: { ngSkipHydration: 'true' },
   standalone: true,
 })
 export class ListComponent implements OnInit, OnDestroy {
   private readonly meta: MetaTagModel;
   private listSearchData$!: Subscription;
-  @Input() public pageType!:
-    | 'Lists'
-    | 'Home'
-    | 'User'
-    | 'AuthedUser'
-    | 'SearchResults';
+  @Input() public pageType!: 'Lists' | 'Home' | 'User' | 'AuthedUser' | 'SearchResults';
   @Input() public profileUser?: string;
   private errorMessage?: String;
   lists: ListModel[];
@@ -62,26 +51,24 @@ export class ListComponent implements OnInit, OnDestroy {
         this.listService.getAuthUserLists().subscribe({
           next: async (data?: any) => {
             this.lists = data as ListModel[];
-            await this.show(this.lists);
+            this.show(this.lists);
           },
         });
         break;
       }
       case 'SearchResults': {
-        this.listSearchData$ = this.searchData.listResults$.subscribe(
-          async (res: ListModel[]) => {
-            this.lists = res;
-            await this.show(this.lists);
-          }
-        );
+        this.listSearchData$ = this.searchData.listResults$.subscribe(async (res: ListModel[]) => {
+          this.lists = res;
+          this.show(this.lists);
+        });
         break;
       }
       case 'User': {
         this.meta.title += `${this.route.snapshot.params['username']}'s Lists`;
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = data as unknown as ListModel[];
-            await this.show(this.lists);
+            this.lists = (data as unknown) as ListModel[];
+            this.show(this.lists);
           },
           error: err => {
             this.errorMessage = err.message;
@@ -92,8 +79,8 @@ export class ListComponent implements OnInit, OnDestroy {
       default: {
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = data as unknown as ListModel[];
-            await this.show(this.lists);
+            this.lists = (data as unknown) as ListModel[];
+            this.show(this.lists);
           },
           error: err => {
             this.errorMessage = err.message;
@@ -104,7 +91,11 @@ export class ListComponent implements OnInit, OnDestroy {
     this.meta ? this.seoService.updateInfo(this.meta) : '';
   }
 
-  private show(listsObj: any): void {
+  private show(listsObj: ListModel[]): void {
+    if (!Array.isArray(listsObj)) {
+      this.alertService.error('Invalid data structure. Expected an array.');
+      return;
+    }
     this.parseLists(this.lists).then(
       () => {},
       err => {

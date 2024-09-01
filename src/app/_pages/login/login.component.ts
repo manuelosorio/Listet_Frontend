@@ -10,21 +10,16 @@ import { ErrorResponse } from '../../models/response/errors/error.response';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { AlertService } from '../../_services/alert.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 import { IconsModule } from '../../_modules/icons/icons.module';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
-  imports: [
-    BackButtonComponent,
-    ReactiveFormsModule,
-    IconsModule
-],
+  imports: [BackButtonComponent, ReactiveFormsModule, IconsModule, RouterLink],
   standalone: true,
 })
 export class LoginComponent implements OnInit {

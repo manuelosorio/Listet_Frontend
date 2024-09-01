@@ -11,6 +11,7 @@ import { IconsModule } from '../../_modules/icons/icons.module';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.sass'],
   imports: [RouterLink, IconsModule],
+  host: { ngSkipHydration: 'true' },
   standalone: true,
 })
 export class NavComponent implements OnDestroy {
@@ -29,10 +30,7 @@ export class NavComponent implements OnDestroy {
   public username: string;
   public fullName: string;
   public userCircle;
-  constructor(
-    private userService: UsersService,
-    private router: Router
-  ) {
+  constructor(private userService: UsersService, private router: Router) {
     this.authenticated$ = this.userService.authenticated$.subscribe(
       authenticated => {
         this.authenticated = authenticated;

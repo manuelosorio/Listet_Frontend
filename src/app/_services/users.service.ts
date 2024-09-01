@@ -2,15 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {
-  BehaviorSubject,
-  catchError,
-  Observable,
-  of,
-  Subject,
-  takeUntil,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, Subject, takeUntil, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorResponse } from '../models/response/errors/error.response';
@@ -42,16 +34,10 @@ export class UsersService implements OnDestroy {
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
-  constructor(
-    private alertService: AlertService,
-    private http: HttpClient,
-    private router: Router
-  ) {
+  constructor(private alertService: AlertService, private http: HttpClient, private router: Router) {
     this.userInfo = {} as UserModel;
     this.authenticated = false;
-    this.authenticatedSubject = new BehaviorSubject<boolean>(
-      this.authenticated
-    );
+    this.authenticatedSubject = new BehaviorSubject<boolean>(this.authenticated);
     this.authenticationErrSubject = new Subject();
     this.authenticated$ = this.authenticatedSubject.asObservable();
     this.authenticationErr = this.authenticationErrSubject.asObservable();
@@ -103,9 +89,7 @@ export class UsersService implements OnDestroy {
             username: res.username,
           });
           res && res.firstName && res.lastName
-            ? this.alertService.success(
-                `Welcome back, ${res.firstName} ${res.lastName}`
-              )
+            ? this.alertService.success(`Welcome back, ${res.firstName} ${res.lastName}`)
             : this.alertService.success('Welcome back!');
           if (!res.verified) {
             this.alertService.warning(
@@ -212,7 +196,6 @@ export class UsersService implements OnDestroy {
       .pipe(
         map((response: unknown) => {
           const res = response as UserResponse;
-          console.log('isAuth response: ', res);
           this.authenticatedSubject.next(res.authenticated);
           this.userInfoSubject.next({
             email: '',
@@ -224,13 +207,13 @@ export class UsersService implements OnDestroy {
         }),
         catchError(err => {
           console.info('Error: ', { environment });
-          // console.error(err);
-          // if (err.error) {
-          //   this.authenticationErrSubject.next({
-          //     error: { message: err.error.message, code: err.status },
-          //   });
-          //   console.error(err.error.message);
-          // }
+          console.error(err);
+          if (err.error) {
+            this.authenticationErrSubject.next({
+              error: { message: err.error.message, code: err.status },
+            });
+            console.error(err.error.message);
+          }
           return of(false);
         }),
         takeUntil(this.onDestroy$)
@@ -259,9 +242,7 @@ export class UsersService implements OnDestroy {
           }
         },
         error: () => {
-          this.alertService.error(
-            'Oops, something went wrong getting the verification status'
-          );
+          this.alertService.error('Oops, something went wrong getting the verification status');
         },
       });
   }

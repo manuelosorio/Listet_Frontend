@@ -27,12 +27,7 @@ import { DeadlineComponent } from '../../shared/deadline/deadline.component';
   templateUrl: './list-header.component.html',
   styleUrls: ['./list-header.component.sass'],
   standalone: true,
-  imports: [
-    RouterLink,
-    DeadlineComponent,
-    FeatherModule,
-    EditListComponent
-],
+  imports: [RouterLink, DeadlineComponent, FeatherModule, EditListComponent],
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: Array<ListModel>;

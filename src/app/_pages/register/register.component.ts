@@ -12,16 +12,13 @@ import { environment } from '../../../environments/environment';
 
 import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 import { IconsModule } from '../../_modules/icons/icons.module';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass'],
-  imports: [
-    ReactiveFormsModule,
-    BackButtonComponent,
-    IconsModule
-],
+  imports: [ReactiveFormsModule, BackButtonComponent, IconsModule, RouterLink],
   standalone: true,
 })
 export class RegisterComponent implements OnInit {

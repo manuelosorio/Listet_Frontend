@@ -15,17 +15,18 @@ import { isPlatformBrowser } from '@angular/common';
   standalone: true,
 })
 export class MasonryDirective
-  implements AfterViewInit, AfterViewChecked, OnDestroy
-{
+  implements AfterViewInit, AfterViewChecked, OnDestroy {
   private resizeListener?: () => void;
   private mutationObserver?: MutationObserver;
   private readonly isBrowser: boolean;
+  private readonly gap: any;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private el: ElementRef,
     private renderer: Renderer2
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+    this.gap = 16; // Adjust the value "16" to control the gap between items
   }
 
   ngAfterViewInit(): void {
@@ -75,7 +76,7 @@ export class MasonryDirective
 
     Array.from(items).forEach((item: any): void => {
       const columnIndex = columnHeights.indexOf(Math.min(...columnHeights));
-      const posX = columnIndex * (columnWidth + 16); // Adjust the value "16" to control the gap between items
+      const posX = columnIndex * (columnWidth + this.gap);
       const posY = columnHeights[columnIndex];
 
       this.renderer.setStyle(
@@ -83,7 +84,7 @@ export class MasonryDirective
         'transform',
         `translateX(${posX}px) translateY(${posY}px)`
       );
-      columnHeights[columnIndex] += item.offsetHeight + 16; // Adjust the value "16" to control the gap between items
+      columnHeights[columnIndex] += item.offsetHeight + this.gap;
     });
 
     this.renderer.setStyle(

@@ -21,7 +21,6 @@
     "paths": {
       "rxjs": ["node_modules/rxjs"],
       "socket.io-client": ["node_modules/socket.io-client"],
-      "ev-emitter/ev-emitter": ["node_modules/ev-emitter/ev-emitter"]
     }
   },
   "angularCompilerOptions": {
