@@ -1,9 +1,10 @@
+@use "src/sass/variables"
 svg.feather
-  transition: $t-easeOutBack
+  transition: variables.$t-easeOutBack
   &-menu
     line
-      stroke: $grey
-      transition: $t-easeOutBack
+      stroke: variables.$grey
+      transition: variables.$t-easeOutBack
 
 .is-active
   svg.feather-menu
@@ -11,7 +12,7 @@ svg.feather
     transition-duration: 0.5s
     transform-origin: center
     line
-      stroke: $black
+      stroke: variables.$black
       transform-origin: center
       &:first-child
         transform: rotate(90deg)
