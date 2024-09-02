@@ -6,7 +6,7 @@
     [formGroup]="createListForm"
     (ngSubmit)="onSubmit(createListForm.value)"
     class="form"
-    >
+  >
     <fieldset class="form__fieldset">
       <!-- Title -->
       <input
@@ -15,7 +15,7 @@
         id="title"
         class="form__input"
         placeholder="Title"
-        />
+      />
       <label for="title" class="form__label">Title</label>
     </fieldset>
     <!-- Deadline -->
@@ -25,7 +25,7 @@
         formControlName="deadline"
         id="deadline"
         class="form__input"
-        />
+      />
       <label for="deadline" class="form__label">Deadline (Optional)</label>
     </fieldset>
     <!-- Description -->
@@ -39,89 +39,88 @@
       ></textarea>
       <label for="description" class="form__label"
         >Description (Optional)</label
-        >
-      </fieldset>
-      <!-- Allow Comments -->
-      <fieldset class="form__fieldset--row allow-comments">
+      >
+    </fieldset>
+    <!-- Allow Comments -->
+    <fieldset class="form__fieldset--row allow-comments">
+      <input
+        type="checkbox"
+        value="allow_comments"
+        id="allow_comments"
+        formControlName="allow_comments"
+        class="form__input--checkbox"
+        (change)="allowCommentsChecked($event)"
+      />
+      <label class="form__label" for="allow_comments">
+        @if (allowComments) {
+          <i-feather name="check-square"></i-feather>
+        } @else {
+          <i-feather name="square"></i-feather>
+        }
+        <span>Allow Comments</span></label
+      >
+    </fieldset>
+    <!-- End Allow Comments -->
+    <!-- List Visibility -->
+    <fieldset class="form__fieldset--row" id="visibility">
+      <legend>List Visibility</legend>
+      <div>
         <input
-          type="checkbox"
-          value="allow_comments"
-          id="allow_comments"
-          formControlName="allow_comments"
-          class="form__input--checkbox"
-          (change)="allowCommentsChecked($event)"
-          />
-        <label class="form__label" for="allow_comments">
-          @if (allowComments) {
-            <i-feather name="check-square"></i-feather
-              >
-            } @else {
-              <i-feather name="square"></i-feather>
-            }
-            <span>Allow Comments</span></label
-            >
-          </fieldset>
-          <!-- End Allow Comments -->
-          <!-- List Visibility -->
-          <fieldset class="form__fieldset--row" id="visibility">
-            <legend>List Visibility</legend>
-            <div>
-              <input
-                type="radio"
-                [value]="visibilityOptions[0]"
-                id="private"
-                formControlName="visibility"
-                class="form__input--radio"
-                />
+          type="radio"
+          [value]="visibilityOptions[0]"
+          id="private"
+          formControlName="visibility"
+          class="form__input--radio"
+        />
 
-              <label class="form__label" for="private"
-                ><i class="form__radio">&nbsp;</i><span>Private</span></label
-                >
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  [value]="visibilityOptions[1]"
-                  id="unlisted"
-                  formControlName="visibility"
-                  class="form__input--radio"
-                  />
-                <label class="form__label" for="unlisted"
-                  ><i class="form__radio">&nbsp;</i><span>Unlisted</span></label
-                  >
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    [value]="visibilityOptions[2]"
-                    id="public"
-                    formControlName="visibility"
-                    class="form__input--radio"
-                    />
-                  <label class="form__label" for="public"
-                    ><i class="form__radio">&nbsp;</i><span>Public</span></label
-                    >
-                  </div>
-                </fieldset>
-                <!-- End List Visibility -->
-                @if (title.invalid) {
-                  <button
-                    class="btn btn--disabled form__btn"
-                    [disabled]="true"
-                    type="submit"
-                    >
-                    Create List
-                  </button>
-                } @else {
-                  <button class="btn btn--primary form__btn">Create List</button>
-                }
-              </form>
-            </div>
+        <label class="form__label" for="private"
+          ><i class="form__radio">&nbsp;</i><span>Private</span></label
+        >
+      </div>
+      <div>
+        <input
+          type="radio"
+          [value]="visibilityOptions[1]"
+          id="unlisted"
+          formControlName="visibility"
+          class="form__input--radio"
+        />
+        <label class="form__label" for="unlisted"
+          ><i class="form__radio">&nbsp;</i><span>Unlisted</span></label
+        >
+      </div>
+      <div>
+        <input
+          type="radio"
+          [value]="visibilityOptions[2]"
+          id="public"
+          formControlName="visibility"
+          class="form__input--radio"
+        />
+        <label class="form__label" for="public"
+          ><i class="form__radio">&nbsp;</i><span>Public</span></label
+        >
+      </div>
+    </fieldset>
+    <!-- End List Visibility -->
+    @if (title.invalid) {
+      <button
+        class="btn btn--disabled form__btn"
+        [disabled]="true"
+        type="submit"
+      >
+        Create List
+      </button>
+    } @else {
+      <button class="btn btn--primary form__btn">Create List</button>
+    }
+  </form>
+</div>
 
-            <!-- Templates -->
-            <!-- Check Box -->
-            <!-- Submit Button -->
-            <ng-template #submit
-              ><button class="btn btn--primary form__btn">Create List</button></ng-template
-              >
-              <!-- End Templates -->
+<!-- Templates -->
+<!-- Check Box -->
+<!-- Submit Button -->
+<ng-template #submit
+  ><button class="btn btn--primary form__btn">Create List</button></ng-template
+>
+<!-- End Templates -->

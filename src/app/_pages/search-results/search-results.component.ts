@@ -14,7 +14,6 @@ import { UserModel } from '../../models/user.model';
 import { UserCardComponent } from '../../_components/user-card/user-card.component';
 import { ListComponent } from '../../_components/list/list.component';
 
-
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',

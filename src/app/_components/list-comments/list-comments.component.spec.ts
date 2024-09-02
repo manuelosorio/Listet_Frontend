@@ -4,7 +4,10 @@ import { ListCommentsComponent } from './list-comments.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BackButtonComponent } from '../back-button/back-button.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('ListCommentsComponent', () => {
   let component: ListCommentsComponent;
@@ -12,11 +15,13 @@ describe('ListCommentsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [BackButtonComponent],
-    imports: [RouterTestingModule,
-        ListCommentsComponent],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [BackButtonComponent],
+      imports: [RouterTestingModule, ListCommentsComponent],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

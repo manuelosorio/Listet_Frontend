@@ -4,7 +4,10 @@ import { UserComponent } from './user.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { UntypedFormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -12,9 +15,13 @@ describe('UserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [RouterTestingModule, UserComponent],
-    providers: [UntypedFormBuilder, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [RouterTestingModule, UserComponent],
+      providers: [
+        UntypedFormBuilder,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

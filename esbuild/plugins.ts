@@ -22,7 +22,8 @@ const EnvPlugin: Plugin = definePlugin({
       BUILD_TIMESTAMP: process.env.BUILD_TIMESTAMP || new Date().toISOString(),
       HOST: process.env.HOST || '',
       WEBSOCKET: process.env.WEBSOCKET || '',
-      NODE_TLS_REJECT_UNAUTHORIZED: process.env.NODE_TLS_REJECT_UNAUTHORIZED || '0',
+      NODE_TLS_REJECT_UNAUTHORIZED:
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED || '0',
     },
   },
 });

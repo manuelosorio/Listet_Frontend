@@ -2,7 +2,7 @@
   [class]="pageType ? '' : 'lists-container'"
   class="lists-container masonry-parent"
   appMasonry
-  >
+>
   @for (list of masonryLists; track list) {
     <div class="masonry-item">
       <div class="list card" [routerLink]="['/l/' + list['slug']]">

@@ -11,7 +11,6 @@ import {
 } from '@angular/forms';
 import { FeatherModule } from 'angular-feather';
 
-
 @Component({
   selector: 'app-settings-delete-account',
   templateUrl: './settings-delete-account.component.html',

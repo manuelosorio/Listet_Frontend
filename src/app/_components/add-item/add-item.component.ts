@@ -14,7 +14,6 @@ import { WebsocketService } from '../../_services/websocket.service';
 import { ListItemEvents } from '../../helper/list-item.events';
 import { ListItemModel } from '../../models/list-item.model';
 
-
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',

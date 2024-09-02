@@ -10,7 +10,6 @@ import { MetaTagModel } from '../../models/metatag.model';
 import { environment } from '../../../environments/environment';
 import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 
-
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',

@@ -27,8 +27,8 @@ import { FeatherModule } from 'angular-feather';
     FeatherModule,
     DeadlineComponent,
     EditListItemComponent,
-    AddItemComponent
-],
+    AddItemComponent,
+  ],
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: object;

@@ -30,7 +30,10 @@ export class NavComponent implements OnDestroy {
   public username: string;
   public fullName: string;
   public userCircle;
-  constructor(private userService: UsersService, private router: Router) {
+  constructor(
+    private userService: UsersService,
+    private router: Router
+  ) {
     this.authenticated$ = this.userService.authenticated$.subscribe(
       authenticated => {
         this.authenticated = authenticated;

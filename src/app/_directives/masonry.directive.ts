@@ -15,7 +15,8 @@ import { isPlatformBrowser } from '@angular/common';
   standalone: true,
 })
 export class MasonryDirective
-  implements AfterViewInit, AfterViewChecked, OnDestroy {
+  implements AfterViewInit, AfterViewChecked, OnDestroy
+{
   private resizeListener?: () => void;
   private mutationObserver?: MutationObserver;
   private readonly isBrowser: boolean;

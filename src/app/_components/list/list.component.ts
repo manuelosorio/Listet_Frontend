@@ -1,4 +1,12 @@
-import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { skip, Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
@@ -23,7 +31,12 @@ import { DatePipe } from '@angular/common';
 export class ListComponent implements OnInit, OnDestroy {
   private readonly meta: MetaTagModel;
   private listSearchData$!: Subscription;
-  @Input() public pageType!: 'Lists' | 'Home' | 'User' | 'AuthedUser' | 'SearchResults';
+  @Input() public pageType!:
+    | 'Lists'
+    | 'Home'
+    | 'User'
+    | 'AuthedUser'
+    | 'SearchResults';
   @Input() public profileUser?: string;
   private errorMessage?: String;
   lists: ListModel[];
@@ -57,17 +70,19 @@ export class ListComponent implements OnInit, OnDestroy {
         break;
       }
       case 'SearchResults': {
-        this.listSearchData$ = this.searchData.listResults$.subscribe(async (res: ListModel[]) => {
-          this.lists = res;
-          this.show(this.lists);
-        });
+        this.listSearchData$ = this.searchData.listResults$.subscribe(
+          async (res: ListModel[]) => {
+            this.lists = res;
+            this.show(this.lists);
+          }
+        );
         break;
       }
       case 'User': {
         this.meta.title += `${this.route.snapshot.params['username']}'s Lists`;
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = (data as unknown) as ListModel[];
+            this.lists = data as unknown as ListModel[];
             this.show(this.lists);
           },
           error: err => {
@@ -79,7 +94,7 @@ export class ListComponent implements OnInit, OnDestroy {
       default: {
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = (data as unknown) as ListModel[];
+            this.lists = data as unknown as ListModel[];
             this.show(this.lists);
           },
           error: err => {

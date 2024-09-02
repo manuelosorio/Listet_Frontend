@@ -10,13 +10,10 @@
       formControlName="password"
       class="form__input"
       id="password"
-      />
+    />
     <label for="password" class="form__label">password</label>
     @if (password.valid) {
-      <i-feather
-        class="form__input--validation valid"
-        name="check"
-      ></i-feather>
+      <i-feather class="form__input--validation valid" name="check"></i-feather>
     }
     @if (password.invalid && password.touched) {
       <i-feather class="form__input--validation invalid" name="x"></i-feather>
@@ -30,7 +27,7 @@
       [class.btn--disabled__ghost]="formGroup.invalid"
       [disabled]="formGroup.invalid"
       (click)="deleteAccount(formGroup.value)"
-      >
+    >
       Delete Account
     </button>
     <button
@@ -39,7 +36,7 @@
       [class.btn--disabled]="formGroup.invalid"
       [disabled]="formGroup.invalid"
       (click)="deactivateAccount(formGroup.value)"
-      >
+    >
       Deactivate Account
     </button>
   </fieldset>

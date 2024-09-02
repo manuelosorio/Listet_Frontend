@@ -7,7 +7,10 @@ import { ListHeaderComponent } from '../../_components/list-header/list-header.c
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FeatherComponent } from 'angular-feather';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('ListDetailsComponent', () => {
   let component: ListDetailsComponent;
@@ -15,14 +18,19 @@ describe('ListDetailsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [FeatherComponent],
-    imports: [RouterTestingModule,
+      declarations: [FeatherComponent],
+      imports: [
+        RouterTestingModule,
         ListDetailsComponent,
         ListItemsComponent,
         ListCommentsComponent,
-        ListHeaderComponent],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        ListHeaderComponent,
+      ],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

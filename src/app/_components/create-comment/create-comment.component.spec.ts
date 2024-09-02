@@ -4,7 +4,10 @@ import { CreateCommentComponent } from './create-comment.component';
 import { UntypedFormBuilder } from '@angular/forms';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('CreateCommentComponent', () => {
   let component: CreateCommentComponent;
@@ -12,10 +15,13 @@ describe('CreateCommentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [RouterTestingModule,
-        CreateCommentComponent],
-    providers: [UntypedFormBuilder, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [RouterTestingModule, CreateCommentComponent],
+      providers: [
+        UntypedFormBuilder,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

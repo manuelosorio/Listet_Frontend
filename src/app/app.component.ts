@@ -19,8 +19,8 @@ import { SearchComponent } from './_components/search/search.component';
     RouterOutlet,
     NavComponent,
     AlertComponent,
-    SearchComponent
-],
+    SearchComponent,
+  ],
 })
 export class AppComponent implements OnInit {
   title = 'Listet';

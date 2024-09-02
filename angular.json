@@ -85,7 +85,6 @@
             }
           },
           "defaultConfiguration": "production"
-
         },
         "serve": {
           "builder": "@angular-builders/custom-esbuild:dev-server",

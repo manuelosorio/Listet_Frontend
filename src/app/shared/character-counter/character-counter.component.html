@@ -20,16 +20,16 @@
           [attr.r]="radius2"
           cx="50%"
           cy="50%"
-        [class]="
-          maxCharacterCount === 0
-            ? ''
-            : maxCharacterCount >= maximumCharacters - 20 ||
-                maxCharacterCount < minimumCharacters
-              ? 'circle-fg'
-              : maxCharacterCount < maximumCharacters
-                ? 'circle-fg__success'
-                : 'circle-bg'
-        "
+          [class]="
+            maxCharacterCount === 0
+              ? ''
+              : maxCharacterCount >= maximumCharacters - 20 ||
+                  maxCharacterCount < minimumCharacters
+                ? 'circle-fg'
+                : maxCharacterCount < maximumCharacters
+                  ? 'circle-fg__success'
+                  : 'circle-bg'
+          "
           [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
         ></circle>
       </ng-container>
@@ -41,7 +41,8 @@
     } @else {
       @if (
         maximumCharacters === undefined ||
-        maxCharacterCount < maximumCharacters - 20) {
+        maxCharacterCount < maximumCharacters - 20
+      ) {
         <i-feather name="check" class="check-mark"></i-feather>
       } @else {
         {{ maximumCharacters - maxCharacterCount }}
@@ -68,8 +69,7 @@
     ></circle>
   </svg>
   <small>
-    @if (
-      maxCharacterCount < maximumCharacters - 20) {
+    @if (maxCharacterCount < maximumCharacters - 20) {
       <i-feather name="check" class="check-mark"></i-feather>
     } @else {
       {{ maximumCharacters - maxCharacterCount }}

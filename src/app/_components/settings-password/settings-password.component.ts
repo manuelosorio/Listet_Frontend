@@ -14,7 +14,6 @@ import { ErrorResponse } from '../../models/response/errors/error.response';
 import { AlertService } from '../../_services/alert.service';
 import { FeatherModule } from 'angular-feather';
 
-
 @Component({
   selector: 'app-settings-password',
   templateUrl: './settings-password.component.html',

@@ -4,7 +4,7 @@
     [formGroup]="registrationForm"
     (ngSubmit)="onSubmit(registrationForm.value)"
     class="form"
-    >
+  >
     {{ errorMessage }}
     <div class="form__fieldset--row">
       <!--   Start First Name   -->
@@ -17,7 +17,7 @@
           class="form__input"
           id="first-name"
           placeholder="e.g. Joe"
-          />
+        />
         <label for="first-name" class="form__label">First Name</label>
         <!--   If First Name is Valid   -->
         @if (firstName?.valid) {
@@ -46,7 +46,7 @@
           autocomplete="family-name"
           id="last-name"
           placeholder="Last Name"
-          />
+        />
         <label for="last-name" class="form__label">Last Name</label>
         <!--   If Last Name is Valid   -->
         @if (lastName?.valid) {
@@ -76,7 +76,7 @@
         autocomplete="username"
         id="username"
         placeholder="Username"
-        />
+      />
       <label for="username" class="form__label">Username</label>
       <!--   If Username is Valid   -->
       @if (username?.valid) {
@@ -89,14 +89,10 @@
       @if (username?.invalid && username?.touched) {
         <i-feather class="form__input--validation invalid" name="x"></i-feather>
         @if (username?.errors?.required) {
-          <div class="error__message">
-            Username is required.
-          </div>
+          <div class="error__message">Username is required.</div>
         }
         @if (username?.errors?.pattern) {
-          <div class="error__message">
-            Username is invalid
-          </div>
+          <div class="error__message">Username is invalid</div>
         }
       }
       <!--   End Username Validation   -->
@@ -111,7 +107,7 @@
         autocomplete="email"
         id="email"
         placeholder="Email"
-        />
+      />
       <label for="email" class="form__label">Email</label>
       <!--   If Email is Valid   -->
       @if (email?.valid) {
@@ -136,7 +132,7 @@
         class="form__input"
         id="password"
         placeholder="Password"
-        />
+      />
       <label for="password" class="form__label">Password</label>
       <!--   If Password is Valid   -->
       @if (password?.valid) {
@@ -159,18 +155,16 @@
           class="btn btn--disabled form__btn"
           [disabled]="true"
           type="submit"
-          >
+        >
           Register
         </button>
       } @else {
-        <button class="btn btn--primary form__btn">
-          Register
-        </button>
+        <button class="btn btn--primary form__btn">Register</button>
       }
       <ng-template #submit
         ><button class="btn btn--primary form__btn">
-        Register
-      </button></ng-template
+          Register
+        </button></ng-template
       >
       <a routerLink="/login" class="btn">Existing User?</a>
     </div>

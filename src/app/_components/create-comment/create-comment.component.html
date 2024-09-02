@@ -3,7 +3,7 @@
     class="card__inset"
     [formGroup]="commentForm"
     (ngSubmit)="onSubmit(commentForm.value)"
-    >
+  >
     <fieldset class="form__fieldset--row">
       <textarea
         formControlName="comment"
@@ -17,13 +17,13 @@
     <div
       class="form__fieldset--row"
       style="flex-direction: row; align-items: center"
-      >
+    >
       @if (comment.invalid) {
         <button
           class="btn btn--disabled form__btn"
           [disabled]="true"
           type="submit"
-          >
+        >
           Comment
         </button>
       } @else {
@@ -41,4 +41,4 @@
 
 <ng-template #submit
   ><button class="btn btn--primary form__btn">Comment</button></ng-template
-  >
+>

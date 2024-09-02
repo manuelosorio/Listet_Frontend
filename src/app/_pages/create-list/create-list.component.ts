@@ -13,7 +13,6 @@ import { ListVisibility } from '../../helper/list-visibility';
 import { ListModel } from '../../models/list.model';
 import { IconsModule } from '../../_modules/icons/icons.module';
 
-
 export interface Response {
   message: string;
   url: any;

@@ -10,7 +10,7 @@
         type="text"
         formControlName="firstName"
         id="firstName"
-        />
+      />
       <label class="form__label" for="firstName">First Name</label>
     </div>
     <div class="form__column">
@@ -20,7 +20,7 @@
         type="text"
         formControlName="lastName"
         id="lastName"
-        />
+      />
       <label class="form__label" for="lastName">Last Name</label>
       <!--   If Last Name is Valid   -->
       @if (lastName.valid) {
@@ -42,14 +42,11 @@
       class="form__input"
       type="email"
       formControlName="email"
-      />
+    />
     <label class="form__label" for="email">Email</label>
     <!--   If Email is Valid   -->
     @if (email.valid) {
-      <i-feather
-        class="form__input--validation valid"
-        name="check"
-      ></i-feather>
+      <i-feather class="form__input--validation valid" name="check"></i-feather>
     }
     <!--   If Email is Invalid   -->
     @if (email.invalid && email.touched) {
@@ -62,9 +59,9 @@
       [class.btn--primary]="profileForm.valid"
       [class.btn--disabled]="profileForm.invalid"
       [disabled]="profileForm.invalid"
-      >
+    >
       <i-feather name="save"></i-feather
-        ><span style="margin-left: 1rem">Save Changes</span>
-      </button>
-    </div>
-  </form>
+      ><span style="margin-left: 1rem">Save Changes</span>
+    </button>
+  </div>
+</form>

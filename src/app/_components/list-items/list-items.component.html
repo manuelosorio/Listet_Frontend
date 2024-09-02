@@ -10,12 +10,12 @@
             class="form__input--checkbox"
             id="item-{{ item['id'] }}"
             type="checkbox"
-            />
+          />
           <label
             [class.list-item__checkbox--disabled]="!isOwner"
             class="list-item"
             for="item-{{ item['id'] }}"
-            >
+          >
             <span>
               <i-feather
                 [name]="item['completed'] === 0 ? 'square' : 'check-square'"

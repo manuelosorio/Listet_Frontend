@@ -1,4 +1,9 @@
-import { APP_ID, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import {
+  APP_ID,
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -11,7 +16,11 @@ import { NgOptimizedImage } from '@angular/common';
 import { ListDataService } from './shared/list-data.service';
 import { SearchDataService } from './shared/search-data.service';
 import { UsersService } from './_services/users.service';
-import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideClientHydration,

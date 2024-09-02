@@ -20,7 +20,6 @@ import { WebsocketService } from '../../_services/websocket.service';
 import { CommentModel } from '../../models/comment.model';
 import { CharacterCounterComponent } from '../../shared/character-counter/character-counter.component';
 
-
 @Component({
   selector: 'app-create-comment',
   templateUrl: './create-comment.component.html',

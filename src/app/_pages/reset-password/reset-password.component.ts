@@ -12,7 +12,6 @@ import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
 import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 
-
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',

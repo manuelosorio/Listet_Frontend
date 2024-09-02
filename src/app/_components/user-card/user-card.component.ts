@@ -3,7 +3,6 @@ import { UserModel } from '../../models/user.model';
 import { RouterLink } from '@angular/router';
 import { IconsModule } from '../../_modules/icons/icons.module';
 
-
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',

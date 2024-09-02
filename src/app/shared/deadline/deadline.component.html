@@ -5,20 +5,19 @@
     </small>
   } @else {
     <small [class.danger]="isOverDue">
-      <span
-        >@if (!isOverDue) {
-        <i-feather name="clock"></i-feather
-          >
+      <span>
+        @if (!isOverDue) {
+          <i-feather name="clock"></i-feather>
         } @else {
-          <i-feather name="alert-circle"></i-feather
-            >
-          }</span>
-          <em>{{ formattedDeadline | date: 'mediumDate' }}</em>
-        </small>
-      }
-    } @else {
-      <small class="no-deadline">
-        <span><i-feather name="clock"></i-feather></span>
-        <em>No Deadline</em>
-      </small>
-    }
+          <i-feather name="alert-circle"></i-feather>
+        }
+      </span>
+      <em>{{ formattedDeadline | date: 'mediumDate' }}</em>
+    </small>
+  }
+} @else {
+  <small class="no-deadline">
+    <span><i-feather name="clock"></i-feather></span>
+    <em>No Deadline</em>
+  </small>
+}

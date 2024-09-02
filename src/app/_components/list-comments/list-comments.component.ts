@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,7 +23,12 @@ import { CreateCommentComponent } from '../create-comment/create-comment.compone
   templateUrl: './list-comments.component.html',
   styleUrls: ['./list-comments.component.sass'],
   standalone: true,
-  imports: [CreateCommentComponent, RouterLink, FeatherModule, EditCommentComponent],
+  imports: [
+    CreateCommentComponent,
+    RouterLink,
+    FeatherModule,
+    EditCommentComponent,
+  ],
   host: { ngSkipHydration: 'true' },
 })
 export class ListCommentsComponent implements OnInit, OnDestroy {
@@ -71,29 +82,35 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
         return this.comments;
       });
 
-      this.onCreateComment$ = this.websocketService.onCreateComment().subscribe((comment: CommentModel) => {
-        this.count += 1;
-        this.updateTimeDifference();
-        const creationDate = new DateUtil(new Date(), comment.comment);
-        comment.time_difference = creationDate.getFormattedTimeDifference();
-        comment.formatted_creation_date = creationDate.format();
-        this.comments.unshift(comment);
-      });
-      this.onDeleteComment$ = this.websocketService.onDeleteComment().subscribe(id => {
-        this.count -= 1;
-        this.comments = this.comments.filter(comment => {
-          return comment.id != ((id as unknown) as CommentModel['id']);
+      this.onCreateComment$ = this.websocketService
+        .onCreateComment()
+        .subscribe((comment: CommentModel) => {
+          this.count += 1;
+          this.updateTimeDifference();
+          const creationDate = new DateUtil(new Date(), comment.comment);
+          comment.time_difference = creationDate.getFormattedTimeDifference();
+          comment.formatted_creation_date = creationDate.format();
+          this.comments.unshift(comment);
         });
-      });
-      this.onEditComment$ = this.websocketService.onUpdateComment().subscribe((res: CommentModel) => {
-        this.comments.filter(comment => {
-          if (comment.id == res.id) {
-            comment.comment = res.comment;
-            comment.date_updated = res.date_updated;
-            this.updateTimeDifference();
-          }
+      this.onDeleteComment$ = this.websocketService
+        .onDeleteComment()
+        .subscribe(id => {
+          this.count -= 1;
+          this.comments = this.comments.filter(comment => {
+            return comment.id != (id as unknown as CommentModel['id']);
+          });
         });
-      });
+      this.onEditComment$ = this.websocketService
+        .onUpdateComment()
+        .subscribe((res: CommentModel) => {
+          this.comments.filter(comment => {
+            if (comment.id == res.id) {
+              comment.comment = res.comment;
+              comment.date_updated = res.date_updated;
+              this.updateTimeDifference();
+            }
+          });
+        });
     }
   }
   public edit(comment) {
@@ -109,12 +126,20 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       if (comment.date_updated) {
         const dateUpdated = new DateUtil(comment.date_updated, comment.comment);
         comment.time_difference = dateUpdated.getFormattedTimeDifference();
-        comment.formatted_creation_date = formatDate(comment.creation_date, 'MMM d, YYYY', 'en');
+        comment.formatted_creation_date = formatDate(
+          comment.creation_date,
+          'MMM d, YYYY',
+          'en'
+        );
         return comment;
       }
       const creationDate = new DateUtil(comment.creation_date, comment.comment);
       comment.time_difference = creationDate.getFormattedTimeDifference();
-      comment.formatted_creation_date = formatDate(comment.creation_date, 'MMM d, YYYY', 'en');
+      comment.formatted_creation_date = formatDate(
+        comment.creation_date,
+        'MMM d, YYYY',
+        'en'
+      );
       return comment;
     });
   }
