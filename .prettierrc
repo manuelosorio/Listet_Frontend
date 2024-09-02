@@ -4,7 +4,6 @@
   "embeddedLanguageFormatting": "auto",
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
-  "jsxBracketSameLine": false,
   "singleQuote": true,
   "jsxSingleQuote": true,
   "printWidth": 120,
