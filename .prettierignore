@@ -1,0 +1,11 @@
+/dist
+.github
+.browserslistrc
+.yarn/
+.yarnrc.yml
+yarn.lock
+src/assets/fonts/
+*.{png,jpg,jpeg,gif,svg}
+ssl/
+logs/
+node_modules/

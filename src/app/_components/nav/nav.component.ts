@@ -1,62 +1,72 @@
 import { Component, OnDestroy } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { UserCircle } from '../../shared/other-icons';
+
+import { IconsModule } from '../../_modules/icons/icons.module';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.sass'],
+  imports: [RouterLink, IconsModule],
+  host: { ngSkipHydration: 'true' },
+  standalone: true,
 })
 export class NavComponent implements OnDestroy {
-  public authenticated: boolean;
+  public authenticated?: boolean;
   private authenticated$: Subscription;
   private hideNavPaths = [
     '/login',
     '/register',
     '/forgot-password',
     '/reset-password',
-    '/reset-password/**'
+    '/reset-password/**',
   ];
 
-  public loginPath: boolean;
+  public loginPath: boolean = false;
   public isActive = false;
-  public username: string;
-  public fullName: string
+  public username?: string;
+  public fullName?: string;
   public userCircle;
-  constructor(
-    private userService: UsersService,
-    private router: Router
-  ) {
-    this.authenticated$ = this.userService.authenticated$.subscribe(authenticated => {
-      this.authenticated = authenticated;
-    });
+  constructor(private userService: UsersService, private router: Router) {
+    this.authenticated$ = this.userService.authenticated$.subscribe(
+      authenticated => {
+        this.authenticated = authenticated;
+      }
+    );
     this.userService.userInfo$.subscribe(res => {
       try {
         this.username = res.username;
-        this.fullName = `${res.firstName} ${res.lastName}`
+        this.fullName = `${res.firstName} ${res.lastName}`;
       } catch (e) {}
     });
     this.userCircle = UserCircle;
-    router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-      ).subscribe((event: NavigationEnd) => {
-        for (const path of this.hideNavPaths) {
-          if (event.urlAfterRedirects.indexOf(path) === 0) {
-            this.loginPath = true;
-            break;
+    router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe({
+        next: e => {
+          const event = e as NavigationEnd;
+          for (const path of this.hideNavPaths) {
+            if (event.urlAfterRedirects.indexOf(path) === 0) {
+              this.loginPath = true;
+              break;
+            }
+            this.loginPath = false;
           }
-          this.loginPath = false;
-        }
+        },
       });
   }
   login() {
-    this.router.navigate(["/login"], {
-      queryParams: { returnUrl: this.router.routerState.snapshot.url }
-    }).catch(e => {
-      console.error(e.message)
-    }).then();
+    this.router
+      .navigate(['/login'], {
+        queryParams: { returnUrl: this.router.routerState.snapshot.url },
+      })
+      .catch(e => {
+        console.error(e.message);
+      })
+      .then();
   }
   logout() {
     this.userService.logoutUser();
@@ -64,10 +74,10 @@ export class NavComponent implements OnDestroy {
     //       accomplish this same effect.
     setTimeout(() => {
       location.reload();
-      }, 100);
+    }, 100);
   }
   toggleActive() {
-    this.isActive  = !this.isActive;
+    this.isActive = !this.isActive;
   }
 
   ngOnDestroy() {

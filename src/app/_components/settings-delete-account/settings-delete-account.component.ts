@@ -2,16 +2,25 @@ import { Component } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { FeatherModule } from 'angular-feather';
 
 @Component({
   selector: 'app-settings-delete-account',
   templateUrl: './settings-delete-account.component.html',
-  styleUrls: ['./settings-delete-account.component.sass']
+  styleUrls: ['./settings-delete-account.component.sass'],
+  standalone: true,
+  imports: [ReactiveFormsModule, FeatherModule],
 })
 export class SettingsDeleteAccountComponent {
-  private deactivateAccount$: Subscription;
-  private deleteAccount$: Subscription;
+  private deactivateAccount$!: Subscription;
+  private deleteAccount$!: Subscription;
   public formGroup: UntypedFormGroup;
 
   constructor(
@@ -20,16 +29,12 @@ export class SettingsDeleteAccountComponent {
     private formBuilder: UntypedFormBuilder
   ) {
     this.formGroup = this.formBuilder.group({
-      password: ['',
-        [
-          Validators.required
-        ]
-      ]
+      password: ['', [Validators.required]],
     });
   }
 
   get password(): AbstractControl {
-    return this.formGroup.get('password');
+    return <AbstractControl<any, string>>this.formGroup.get('password');
   }
 
   deactivateAccount(password: string): void {

@@ -1,12 +1,15 @@
-<ng-container *ngIf="(alert$ | async) as alert">
-  <div class="alert" [ngClass]="this.cssClasses[alert.type] + ' ' + animationClass">
+@if (alert$ | async; as alert) {
+  <div
+    class="alert"
+    [ngClass]="this.cssClasses[alert.type] + ' ' + animationClass"
+  >
     <div class="alert__message">
-      <p>{{alert.message}}</p>
-      <ng-container *ngIf="alert.link">
+      <p>{{ alert.message }}</p>
+      @if (alert.link) {
         <a [routerLink]="alert.link.url" class="alert__link">
-          {{alert.link.text}}
+          {{ alert.link.text }}
         </a>
-      </ng-container>
+      }
     </div>
     <div class="alert__close" (click)="clear()">
       <span class="icon__wrap">
@@ -14,4 +17,4 @@
       </span>
     </div>
   </div>
-</ng-container>
+}

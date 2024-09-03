@@ -1,15 +1,23 @@
-<ng-container *ngIf="hasDeadline">
-  <ng-container *ngIf="isComplete else notComplete">
+@if (hasDeadline) {
+  @if (isComplete) {
     <small class="complete">
       <em>Completed</em>
     </small>
-  </ng-container>
-
-  <ng-template #notComplete>
+  } @else {
     <small [class.danger]="isOverDue">
-      <span><i-feather *ngIf="!isOverDue else overdue" name="clock"></i-feather></span>
-      <ng-template #overdue><i-feather name="alert-circle"></i-feather></ng-template>
-      <em>{{formattedDeadline}}</em>
+      <span>
+        @if (!isOverDue) {
+          <i-feather name="clock"></i-feather>
+        } @else {
+          <i-feather name="alert-circle"></i-feather>
+        }
+      </span>
+      <em>{{ deadlineDate | date: 'mediumDate' : 'UTC00:00'}}</em>
     </small>
-  </ng-template>
-</ng-container>
+  }
+} @else {
+  <small class="no-deadline">
+    <span><i-feather name="clock"></i-feather></span>
+    <em>No Deadline</em>
+  </small>
+}

@@ -1,22 +1,38 @@
 <section>
-  <ng-container *ngFor="let item of items">
+  @for (item of items; track item) {
     <ng-container>
-      <div *ngIf='item.isEditing === false else editItem'>
-        <input (change)="checked($event)" [checked]="item['completed'] === 1" [disabled]="!isOwner"
-               class="form__input--checkbox" id="item-{{item['id']}}" type="checkbox">
-        <label [class.list-item__checkbox--disabled]="!isOwner" class="list-item" for="item-{{item['id']}}">
+      @if (item.isEditing === false) {
+        <div>
+          <input
+            (change)="checked($event)"
+            [checked]="item['completed'] === 1"
+            [disabled]="!isOwner"
+            class="form__input--checkbox"
+            id="item-{{ item['id'] }}"
+            type="checkbox"
+          />
+          <label
+            [class.list-item__checkbox--disabled]="!isOwner"
+            class="list-item"
+            for="item-{{ item['id'] }}"
+          >
           <span>
-                <i-feather [name]="item['completed'] === 0 ? 'square' : 'check-square'"></i-feather>
+            <i-feather
+              [name]="item['completed'] === 0 ? 'square' : 'check-square'"
+            ></i-feather>
           </span>
           <span class="list-item__info">
-            {{item["item"]}}
+            {{ item['item'] }}
           </span>
-          <app-deadline [deadline]="item['deadline']" [isComplete]="item['completed']"></app-deadline>
-          <ng-container *ngIf="isOwner">
+          <app-deadline
+            [deadline]="item['deadline']"
+            [isComplete]="item['completed']"
+          ></app-deadline>
+          @if (isOwner) {
             <button class="more">
               <i-feather name="more-vertical"></i-feather>
               <span class="more__options card">
-                <button (click)='edit(item)'>
+                <button (click)="edit(item)">
                   <i-feather name="edit"></i-feather> Edit
                 </button>
                 <button (click)="deleteListItem(item['id'])">
@@ -24,13 +40,13 @@
                 </button>
               </span>
             </button>
-          </ng-container>
-        </label>
-      </div>
+          }
+          </label>
+        </div>
+      } @else {
+        <app-edit-list-item [listItem]="item"></app-edit-list-item>
+      }
     </ng-container>
-    <ng-template #editItem>
-      <app-edit-list-item [listItem]='item'></app-edit-list-item>
-    </ng-template>
-  </ng-container>
+  }
 </section>
 <app-add-item></app-add-item>

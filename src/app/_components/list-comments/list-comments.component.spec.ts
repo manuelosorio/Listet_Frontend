@@ -1,9 +1,13 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ListCommentsComponent } from './list-comments.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BackButtonComponent } from '../back-button/back-button.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('ListCommentsComponent', () => {
   let component: ListCommentsComponent;
@@ -11,13 +15,13 @@ describe('ListCommentsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListCommentsComponent, BackButtonComponent ],
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ]
-    })
-    .compileComponents();
+      declarations: [BackButtonComponent],
+      imports: [RouterTestingModule, ListCommentsComponent],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

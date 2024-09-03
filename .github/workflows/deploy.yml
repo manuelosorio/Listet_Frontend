@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
       - uses: actions/cache@v3
         with:
           path: ~/.yarn-cache
@@ -24,9 +24,8 @@ jobs:
           echo HOST="${{ secrets.CLIENT_HOST }}" >> prod.env
           echo URL="${{ secrets.CLIENT_URL }}" >> prod.env
           echo WEBSOCKET="${{ secrets.CLIENT_WEBSOCKET }}" >> prod.env
-      - name: Build Angular SSR
-        run:
-          yarn build:ssr
+      - name: Build Angular Production
+        run: yarn build:prod
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:

@@ -11,33 +11,32 @@ import { ListEvents } from '../helper/list.events';
 import { ListModel } from '../models/list.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WebsocketService {
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  private socket: Socket;
-  private connectionData: string;
+  private socket!: Socket;
+  private connectionData?: string;
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
-  connect(connectionData) {
+  connect(connectionData: string) {
     if (this.isBrowser) {
       this.connectionData = connectionData;
-      this.socket = io(environment.websocket, {
-        withCredentials: true,
-        path: '/socket-io',
-        transports: ['polling'],
-      });
+      if (environment.websocket) {
+        this.socket = io(environment.websocket, {
+          withCredentials: true,
+          path: '/socket-io',
+          transports: ['polling'],
+        });
+      }
       this.socket.emit('join', connectionData);
     }
   }
 
   listen(event: Partial<string | CommentEvents | ListItemEvents>) {
     return new Observable((subscriber: Subscriber<any>) => {
-      this.socket.on(event, (data) => {
+      this.socket.on(event, (data: any) => {
         subscriber.next(data);
       });
     });
@@ -52,7 +51,7 @@ export class WebsocketService {
   }
   /* --------- End List Events ---------- */
   /* --------- List Items Events -------------- */
-  public onAddItem(): Observable<Partial<ListItemModel & { isEditing: boolean }>> {
+  public onAddItem(): Observable<ListItemModel> {
     return fromEvent(this.socket, ListItemEvents.ADD_ITEM);
   }
 

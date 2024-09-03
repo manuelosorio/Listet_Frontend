@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://listet.manuelosorio.me/assets/sitemap.xml
+Sitemap: https://listet.app/assets/sitemap.xml

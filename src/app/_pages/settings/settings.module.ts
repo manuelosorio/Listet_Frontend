@@ -7,6 +7,7 @@ import { SettingsDeleteAccountComponent } from '../../_components/settings-delet
 import { SettingsPasswordComponent } from '../../_components/settings-password/settings-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '../../_modules/icons/icons.module';
+// import { AlertComponent } from 'src/app/_components/alert/alert.component';
 const routes: Routes = [
   {
     path: '',
@@ -15,27 +16,22 @@ const routes: Routes = [
       { path: '', component: SettingsProfileComponent },
       { path: 'change-password', component: SettingsPasswordComponent },
       { path: 'delete-account', component: SettingsDeleteAccountComponent },
-    ]
+    ],
   },
 ];
 
 @NgModule({
-  declarations: [
-    SettingsComponent,
-    SettingsDeleteAccountComponent,
-    SettingsPasswordComponent,
-    SettingsProfileComponent
-  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    IconsModule
+    IconsModule,
+    SettingsComponent,
+    SettingsDeleteAccountComponent,
+    SettingsPasswordComponent,
+    SettingsProfileComponent,
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule],
 })
-export class SettingsModule {
-}
+export class SettingsModule {}

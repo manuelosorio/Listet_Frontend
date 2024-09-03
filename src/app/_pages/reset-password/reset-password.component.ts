@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { UsersService } from '../../_services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
+import { BackButtonComponent } from '../../_components/back-button/back-button.component';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.sass']
+  styleUrls: ['./reset-password.component.sass'],
+  imports: [BackButtonComponent, ReactiveFormsModule],
+  standalone: true,
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: UntypedFormGroup;
-  private token: string;
+  private token: string = '';
   private readonly meta: MetaTagModel;
 
   constructor(
@@ -23,10 +31,15 @@ export class ResetPasswordComponent implements OnInit {
     private seoService: SeoService
   ) {
     this.resetPasswordForm = formBuilder.group({
-      password: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/)
-      ]]
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/
+          ),
+        ],
+      ],
     });
     this.meta = {
       author: 'Manuel Osorio',
@@ -34,12 +47,12 @@ export class ResetPasswordComponent implements OnInit {
       title: 'Listet App - Reset Password',
       openGraphImage: `${environment.url}/assets/images/listet-open-graph.jpg`,
       twitterImage: `${environment.url}/assets/images/listet-twitter.jpg`,
-      url: `${environment.url}/reset-password/`
+      url: `${environment.url}/reset-password/`,
     };
   }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
+    this.token = this.route.snapshot.params['token'];
     this.seoService.updateInfo(this.meta);
   }
 
@@ -47,7 +60,7 @@ export class ResetPasswordComponent implements OnInit {
     return this.resetPasswordForm.get('password');
   }
 
-  onSubmit(data) {
+  onSubmit(data: unknown) {
     this.userService.resetPassword(this.token, data);
   }
 }

@@ -1,7 +1,7 @@
 @use "src/sass/variables"
-@use "src/sass/utils/size" as *
+@use "src/sass/utils"
 svg
-  +size(100%)
+  +utils.size(100%)
   position: absolute
   top: 50%
   left: 50%
@@ -21,7 +21,7 @@ svg
         stroke: variables.$green
 \:host
   position: relative
-  +size(55px)
+  +utils.size(55px)
 small
   position: absolute
   top: 50%

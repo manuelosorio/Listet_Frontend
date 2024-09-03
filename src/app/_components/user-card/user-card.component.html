@@ -1,8 +1,9 @@
-<ng-template *ngIf="user.avatar else icon">
-  <img [src]="user.avatar" alt="User profile image">
-</ng-template>
-<p>{{ user.firstName }} {{ user.lastName }}</p>
-<a routerLink="/u/{{ user.username }}">{{ user.username }}</a>
-<ng-template #icon>
-  <i-feather name="User-Circle" class="card__icon"></i-feather>
-</ng-template>
+@if (user) {
+  @if (user.avatar) {
+    <img [src]='user.avatar' alt='User profile image' />
+  } @else {
+    <i-feather name='User-Circle' class='card__icon'></i-feather>
+  }
+  <p>{{ user.firstName }} {{ user.lastName }}</p>
+  <a routerLink='/u/{{ user.username }}'>{{ user.username }}</a>
+}

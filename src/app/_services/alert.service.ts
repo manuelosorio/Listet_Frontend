@@ -7,16 +7,16 @@ import { Alert } from '../models/alerts.model';
   providedIn: 'root',
 })
 export class AlertService {
-  private alert: Alert;
-  private alertSubject: BehaviorSubject<Alert>;
+  private readonly alert!: Alert;
+  private alertSubject: BehaviorSubject<Alert | null>;
   private cssClasses: Record<string, string> = {
     success: 'alert--success',
     warning: 'alert--warning',
     error: 'alert--error',
   };
-  private keepAfterRouteChange = false;
+  private keepAfterRouteChange: boolean = false;
   constructor(private route: Router) {
-    this.alertSubject = new BehaviorSubject<Alert>(this.alert);
+    this.alertSubject = new BehaviorSubject<Alert | null>(this.alert);
     this.route.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.keepAfterRouteChange) {
@@ -29,24 +29,34 @@ export class AlertService {
   }
 
   getAlert(): Observable<Alert> {
-    return this.alertSubject.asObservable();
+    return this.alertSubject.asObservable() as Observable<Alert>;
   }
 
   getCssClass() {
     return this.cssClasses;
   }
 
+  /**
+   * Creates success alert toast.
+   * example
+   * this.alertService.success('This is a success message', { text: 'Click here', url: '/link' }, 5000, true);
+   * @param message The message to display.
+   * @param link An object containing the text and url for the link.
+   * @param timeout The time in milliseconds to display the alert.
+   * @param keepAfterRouterChange Whether to keep the alert after a router change.
+   * @deprecated There will be a more robust method available in a future version.
+   */
   success(
     message: string,
     link?: {
       text: string;
       url: string;
-    },
+    } | null,
     timeout?: number,
     keepAfterRouterChange?: boolean
   ): void {
     this.alertSubject.next(null);
-    this.keepAfterRouteChange = keepAfterRouterChange;
+    this.keepAfterRouteChange = keepAfterRouterChange ?? false;
     this.alertSubject.next({
       type: 'success',
       message,
@@ -56,16 +66,26 @@ export class AlertService {
     });
   }
 
+  /**
+   * Creates warning alert toast.
+   * @example
+   * this.alertService.warning('This is a warning message', { text: 'Click here', url: '/link' }, 5000, true);
+   * @param message The message to display.
+   * @param link An object containing the text and url for the link.
+   * @param timeout The time in milliseconds to display the alert.
+   * @param keepAfterRouterChange Whether to keep the alert after a router change.
+   * @deprecated There will be a more robust method available in a future version.
+   */
   warning(
     message: string,
-    link?: {
+    link: {
       text: string;
       url: string;
-    },
+    } | null,
     timeout?: number,
     keepAfterRouterChange?: boolean
   ): void {
-    this.keepAfterRouteChange = keepAfterRouterChange;
+    this.keepAfterRouteChange = keepAfterRouterChange ?? false;
     this.alertSubject.next({
       type: 'warning',
       message,
@@ -75,16 +95,26 @@ export class AlertService {
     });
   }
 
+  /**
+   * Creates error alert toast.
+   * example
+   * this.alertService.error('This is an error message', { text: 'Click here', url: '/link' }, 5000, true);
+   * @param message The message to display.
+   * @param link An object containing the text and url for the link.
+   * @param timeout The time in milliseconds to display the alert.
+   * @param keepAfterRouterChange Whether to keep the alert after a router change.
+   * @deprecated There will be a more robust method available in a future version.
+   */
   error(
     message: string,
     link?: {
       text: string;
       url: string;
-    },
+    } | null,
     timeout?: number,
     keepAfterRouterChange?: boolean
   ): void {
-    this.keepAfterRouteChange = keepAfterRouterChange;
+    this.keepAfterRouteChange = keepAfterRouterChange ?? false;
     this.alertSubject.next({
       type: 'error',
       message,

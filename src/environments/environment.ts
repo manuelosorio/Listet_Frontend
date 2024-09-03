@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   host: process.env.HOST,
   url: process.env.URL,
-  websocket: process.env.WEBSOCKET
+  websocket: process.env.WEBSOCKET,
 };
 
 /*

@@ -1,13 +1,29 @@
 @use "src/sass/variables"
+@use "src/sass/utils/breakpoint/breakpoint" as bp
 ul, li
   list-style-type: none
   margin: 0
   padding: 0
-.masonry-item
-  width: 100%
-  margin-top: 1rem
-  @media (min-width: variables.$breakpoint-medium)
-    width: 46%
+.masonry
+  &-parent
+    display: flex
+    justify-content: flex-start
+    flex-wrap: wrap
+  &-item
+    opacity: 0
+    animation-name: fadeIn
+    animation-duration: 0.5s // Adjust this value to control the duration of the animation
+    animation-fill-mode: forwards
+
+    width: 100%
+    position: absolute
+    +bp.breakpoint('md')
+      width: calc(50% - 16px)
+    //grid-row-end: span 999
+    //width: 100%
+    //margin-top: 1rem
+    //@media (min-width: variables.$breakpoint-medium)
+    //  width: 46%
 .list
   display: block
   color: variables.$black
@@ -18,6 +34,7 @@ ul, li
   padding: 0 1.35rem
   &__description
     height: 2ch
+    max-width: 250px
     text-overflow: ellipsis
     overflow: hidden
 
@@ -53,3 +70,13 @@ ul, li
 //  padding: 1rem
 //  position: relative
 //  width: 46%
+@keyframes fadeIn
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+// Staggered fade-in animations
+@for $i from 1 through 10
+  .masonry-item:nth-child(#{$i})
+    animation-delay: 0.1s * $i

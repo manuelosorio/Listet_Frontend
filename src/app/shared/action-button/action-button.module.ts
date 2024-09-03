@@ -3,18 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ActionButtonComponent } from './action-button.component';
 import { IconsModule } from '../../_modules/icons/icons.module';
 
-
-
 @NgModule({
-  declarations: [
-    ActionButtonComponent
-  ],
-  imports: [
-    CommonModule,
-    IconsModule
-  ],
-  exports: [
-    ActionButtonComponent
-  ]
+  imports: [CommonModule, IconsModule, ActionButtonComponent],
+  exports: [ActionButtonComponent],
 })
-export class ActionButtonModule { }
+export class ActionButtonModule {}

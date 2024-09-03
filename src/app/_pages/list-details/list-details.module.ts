@@ -14,18 +14,25 @@ import { ActionButtonModule } from '../../shared/action-button/action-button.mod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateCommentComponent } from '../../_components/create-comment/create-comment.component';
 import { CharacterCounterModule } from '../../shared/character-counter/character-counter.module';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListDetailsComponent
+    component: ListDetailsComponent,
   },
 ];
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    IconsModule,
+    DeadlineModule,
+    ActionButtonModule,
+    CharacterCounterModule,
+    ReactiveFormsModule,
+    FormsModule,
     AddItemComponent,
     CreateCommentComponent,
     EditListItemComponent,
@@ -36,20 +43,6 @@ const routes: Routes = [
     ListCommentsComponent,
     ListItemsComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    IconsModule,
-    DeadlineModule,
-    ActionButtonModule,
-    HttpClientModule,
-    CharacterCounterModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule],
 })
-export class ListDetailsModule {
-}
+export class ListDetailsModule {}

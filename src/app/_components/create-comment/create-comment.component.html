@@ -1,17 +1,44 @@
-<ng-container *ngIf="commentsEnabled">
-  <form class="card__inset" [formGroup]="commentForm" (ngSubmit)='onSubmit(commentForm.value)'>
+@if (commentsEnabled) {
+  <form
+    class="card__inset"
+    [formGroup]="commentForm"
+    (ngSubmit)="onSubmit(commentForm.value)"
+  >
     <fieldset class="form__fieldset--row">
-      <textarea formControlName="comment" name="comment" id="comment" placeholder="Write a comment..." class="form__input--textarea"></textarea>
+      <textarea
+        formControlName="comment"
+        name="comment"
+        id="comment"
+        placeholder="Write a comment..."
+        class="form__input--textarea"
+      ></textarea>
       <label for="comment" class="form__label">Create Comment</label>
     </fieldset>
-    <div class="form__fieldset--row" style="flex-direction: row; align-items: center">
-      <button *ngIf="comment.invalid else submit" class='btn btn--disabled form__btn' [disabled]="true" type='submit'>Comment</button>
-      <app-character-counter [minimumCharacters]='20'
-                             [maximumCharacters]='500'
-                             [minCharacterCounter]='commentCharacterCount'
-                             [maxCharacterCounter]='commentCharacterCount'></app-character-counter>
+    <div
+      class="form__fieldset--row"
+      style="flex-direction: row; align-items: center"
+    >
+      @if (comment.invalid) {
+        <button
+          class="btn btn--disabled form__btn"
+          [disabled]="true"
+          type="submit"
+        >
+          Comment
+        </button>
+      } @else {
+        <button class="btn btn--primary form__btn">Comment</button>
+      }
+      <app-character-counter
+        [minimumCharacters]="20"
+        [maximumCharacters]="500"
+        [minCharacterCounter]="commentCharacterCount"
+        [maxCharacterCounter]="commentCharacterCount"
+      ></app-character-counter>
     </div>
   </form>
-</ng-container>
+}
 
-<ng-template #submit><button class='btn btn--primary form__btn'>Comment</button></ng-template>
+<ng-template #submit
+  ><button class="btn btn--primary form__btn">Comment</button></ng-template
+>

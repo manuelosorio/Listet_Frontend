@@ -4,9 +4,13 @@ import { ListDetailsComponent } from './list-details.component';
 import { ListItemsComponent } from '../../_components/list-items/list-items.component';
 import { ListCommentsComponent } from '../../_components/list-comments/list-comments.component';
 import { ListHeaderComponent } from '../../_components/list-header/list-header.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FeatherComponent } from 'angular-feather';
 import { RouterTestingModule } from '@angular/router/testing';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('ListDetailsComponent', () => {
   let component: ListDetailsComponent;
@@ -14,13 +18,19 @@ describe('ListDetailsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListDetailsComponent, ListItemsComponent, ListCommentsComponent, ListHeaderComponent, FeatherComponent ],
+      declarations: [FeatherComponent],
       imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ]
-    })
-    .compileComponents();
+        RouterTestingModule,
+        ListDetailsComponent,
+        ListItemsComponent,
+        ListCommentsComponent,
+        ListHeaderComponent,
+      ],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

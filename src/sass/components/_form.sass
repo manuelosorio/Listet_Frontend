@@ -1,14 +1,14 @@
-@use '../variables' as vars
-@use 'src/sass/utils/size' as *
+@use 'src/sass/variables'
+@use 'src/sass/utils'
 .form
   display: flex
   flex-direction: column
   margin: auto
-  box-shadow: vars.$shadow
+  box-shadow: variables.$shadow
   padding: 4rem 2rem
   width: 100%
   justify-content: center
-  border: 1px solid vars.$silver
+  border: 1px solid variables.$silver
   border-radius: 20px
   &__column
     position: relative
@@ -37,28 +37,28 @@
         margin-left: 0
       @extend .form__row
   &__input
-    background: vars.$bg
+    background: variables.$bg
     width: 100%
     //padding: 0.75rem 0 0.75rem 1.15rem
     padding: 0.75rem 1.15rem
-    border: 1px vars.$grey solid
+    border: 1px variables.$grey solid
     border-radius: 10px
-    transition: vars.$t-easeOutBack
+    transition: variables.$t-easeOutBack
     font-size: 1rem
     &:focus
       outline: none
-      border: 2px vars.$black solid
+      border: 2px variables.$black solid
     &:focus, &:not(:placeholder-shown)
       ~ .form__label
-        background: vars.$bg
+        background: variables.$bg
         top: -6px
         transform: translateY(0)
-        font-weight: vars.$f-weight--light
+        font-weight: variables.$f-weight--light
         font-size: .8rem
     &:-webkit-autofill
-      box-shadow: 0 0 0 1000px inset vars.$bg
+      box-shadow: 0 0 0 1000px inset variables.$bg
       transition: background-color 200ms
-      -webkit-text-fill-color: vars.$black
+      -webkit-text-fill-color: variables.$black
     &::placeholder
       color: transparent
       opacity: 0
@@ -84,8 +84,8 @@
         display: flex
         align-items: center
         position: relative
-        font-weight: vars.$f-weight--light
-        color: vars.$black
+        font-weight: variables.$f-weight--light
+        color: variables.$black
         left: 0.5rem
         flex-basis: 50%
         flex-grow: 1
@@ -101,15 +101,15 @@
       top: 50%
       transform: translateY(-50%)
       &.valid
-        color: vars.$green
+        color: variables.$green
       &.invalid
-        color: vars.$red
+        color: variables.$red
   &__label
     position: absolute
     top: 50%
     transform: translateY(-50%)
     left: .70rem
-    transition: vars.$t-easeOutBack
+    transition: variables.$t-easeOutBack
     transition-property: transform, top
     padding: 0 .8rem
   &__row
@@ -124,7 +124,7 @@
       margin-top: 1.35rem
     a
       display: block
-    @media (min-width: vars.$breakpoint-medium)
+    @media (min-width: variables.$breakpoint-medium)
       flex-direction: row
       .form__column
         width: 48%
@@ -137,29 +137,29 @@
       transform: none
   &__radio
     background: transparent
-    border: vars.$black 2px solid
+    border: variables.$black 2px solid
     border-radius: 50%
-    +size(1.2rem)
+    +utils.size(1.2rem)
     display: block
     position: absolute
-    transition: vars.$t-easeOutBack
+    transition: variables.$t-easeOutBack
     &:after
       content: ''
       position: absolute
-      background: vars.$black
+      background: variables.$black
       border-radius: 50%
       top: 50%
       left: 50%
       transform: scale(0) translate(-50%, -50%)
       transform-origin: center
-      transition: vars.$t-easeOutBack
-      +size(.5rem)
+      transition: variables.$t-easeOutBack
+      +utils.size(.5rem)
 .form__row + .form__fieldset
   margin-top: 1.5rem
 .ng-valid ~ .error__message
   display: none
 .error__message
-  color: vars.$red
+  color: variables.$red
   position: absolute
   top: -1.35rem
   font-size: 0.85rem

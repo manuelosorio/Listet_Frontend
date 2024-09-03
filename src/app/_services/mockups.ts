@@ -1,7 +1,14 @@
 export let mockedLists: {
-  id: number, name: string, description: string, author: string,
-  date: string, deadline: string,  image: string, public: number,
-  items: { name: string, deadline: string, completed: boolean }[]}[];
+  id: number;
+  name: string;
+  description: string;
+  author: string;
+  date: string;
+  deadline: string;
+  image: string;
+  public: number;
+  items: { name: string; deadline: string; completed: boolean }[];
+}[];
 mockedLists = [
   {
     id: 0,
@@ -33,7 +40,7 @@ mockedLists = [
         deadline: '12-02-2020',
         completed: false,
       },
-    ]
+    ],
   },
   {
     id: 1,
@@ -65,7 +72,7 @@ mockedLists = [
         deadline: '12-02-2020',
         completed: false,
       },
-    ]
+    ],
   },
   {
     id: 2,
@@ -97,11 +104,18 @@ mockedLists = [
         deadline: '12-02-2020',
         completed: false,
       },
-    ]
+    ],
   },
 ];
 
-export let mockedUsers: { firstName: string, lastName: string, password: string, email: string,
-        username: string, admin: number, deactivate: number, }[];
+export let mockedUsers: {
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+  username: string;
+  admin: number;
+  deactivate: number;
+}[];
 
 mockedUsers = [];

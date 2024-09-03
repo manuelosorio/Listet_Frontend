@@ -2,85 +2,109 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
+import { ListItemModel } from '../models/list-item.model';
+import { CommentModel } from '../models/comment.model';
+import { ListModel } from '../models/list.model';
+import { UsersService } from './users.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListsService {
   private commentSubject$: Subject<any>;
   public comment$: Observable<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UsersService) {
     this.commentSubject$ = new Subject<any>();
     this.comment$ = this.commentSubject$.asObservable();
   }
+
   getLists() {
     return this.http.get(environment.host + '/lists', {
-      withCredentials: true
+      withCredentials: true,
     });
   }
+
   getAuthUserLists() {
     return this.http.get(environment.host + '/your-lists', {
-      withCredentials: true
-    });
-  }
-  getList(slug) {
-    return this.http.get(environment.host + `/list/${slug}`, {
-      withCredentials: true
-    });
-  }
-
-  getListItems(username, slug) {
-    return this.http.get(environment.host + `/list/${slug}/items`, {
-      withCredentials: true
-    });
-  }
-
-  getListComments(slug) {
-    return this.http.get(environment.host + `/list/${slug}/comments`, {
       withCredentials: true,
-    }).subscribe((data) => {
-      this.commentSubject$.next(data);
     });
   }
 
+  getList(slug: any) {
+    return this.http.get(environment.host + `/list/${slug}`, {
+      withCredentials: true,
+    });
+  }
 
-  createList(data) {
+  getListItems(username: any, slug: any) {
+    return this.http.get(environment.host + `/list/${slug}/items`, {
+      withCredentials: true,
+    });
+  }
+
+  getListComments(slug: string) {
+    return this.http
+      .get(environment.host + `/list/${slug}/comments`, {
+        withCredentials: true,
+      })
+      .subscribe(data => {
+        this.commentSubject$.next(data);
+      });
+  }
+
+  createList(data: ListModel) {
     return this.http.post(environment.host + '/create-list', data, {
-      withCredentials: true
+      withCredentials: true,
     });
   }
-  createComment(data) {
+
+  createComment(data: CommentModel) {
     return this.http.post(environment.host + '/create-comment', data, {
-      withCredentials: true
+      withCredentials: true,
     });
   }
-  createListItem(data) {
+
+  commentDeletePermissible(id: number) {
+    return this.http
+      .get(environment.host + `/comment/${id}/delete-permissible`, {
+        withCredentials: true,
+      })
+      .subscribe(data => {
+        return data;
+      });
+  }
+
+  createListItem(data: ListItemModel) {
     return this.http.post(environment.host + '/add-item', data, {
-      withCredentials: true
+      withCredentials: true,
     });
   }
-  completeListItem(data) {
+
+  completeListItem(data: ListItemModel) {
     return this.http.put(environment.host + '/update-item-status', data, {
-      withCredentials: true
+      withCredentials: true,
     });
   }
-  updateList(data, id: number) {
+
+  updateList(data: any, id: number) {
     return this.http.put(environment.host + `/update-list/${id}`, data, {
-      withCredentials: true
-    })
+      withCredentials: true,
+    });
   }
-  updateItem(data, id: number) {
-    return this.http.put(environment.host +   `/update-item/${id}`, data, {
-      withCredentials: true
-    })
+
+  updateItem(data: ListItemModel, id: number) {
+    return this.http.put(environment.host + `/update-item/${id}`, data, {
+      withCredentials: true,
+    });
   }
-  updateComment(data, id: number) {
+
+  updateComment(data: CommentModel, id: number) {
     return this.http.put(environment.host + `/update-comment/${id}`, data, {
-      withCredentials: true
-    })
+      withCredentials: true,
+    });
   }
-  deleteList(id) {
+  deleteList(id: number) {
     return this.http.delete(environment.host + `/delete-list/${id}`, {
       withCredentials: true,
     });
@@ -90,7 +114,7 @@ export class ListsService {
       withCredentials: true,
     });
   }
-  deleteComment(id) {
+  deleteComment(id: number) {
     return this.http.delete(environment.host + `/delete-comment/${id}`, {
       withCredentials: true,
     });

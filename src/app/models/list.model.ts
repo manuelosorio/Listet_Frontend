@@ -5,15 +5,15 @@ export interface ListModel {
   description: string;
   creation_date: Date | string;
   is_complete: number;
-  deadline: string | null;
+  deadline: Date | string | null;
   visibility: number;
-  allow_comments: number;
+  allow_comments: boolean | number;
   firstName: string;
   lastName: string;
   owner_username: string;
   is_owner: boolean;
   isEditing?: boolean;
   featured?: boolean;
-  cached?: boolean,
-  data?: ListModel[]
+  cached?: boolean;
+  data?: ListModel[];
 }
