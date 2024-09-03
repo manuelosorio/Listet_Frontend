@@ -10944,17 +10944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-parser@npm:~4.2.1":
-  version: 4.2.2
-  resolution: "socket.io-parser@npm:4.2.2"
-  dependencies:
-    "@socket.io/component-emitter": "npm:~3.1.0"
-    debug: "npm:~4.3.1"
-  checksum: 10c0/463d8aa73ee877adb2047e2e590fb5f3db562d99dbe6dcb32ea08fc756f0654345476e326287645b8a43bc1c137018f7525fc4d0291828749fb7445bcc56631b
-  languageName: node
-  linkType: hard
-
-"socket.io-parser@npm:~4.2.4":
+"socket.io-parser@npm:~4.2.1, socket.io-parser@npm:~4.2.4":
   version: 4.2.4
   resolution: "socket.io-parser@npm:4.2.4"
   dependencies:
