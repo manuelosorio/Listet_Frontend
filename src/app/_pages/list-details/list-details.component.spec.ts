@@ -1,37 +1,62 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ListDetailsComponent } from './list-details.component';
-import { ListItemsComponent } from '../../_components/list-items/list-items.component';
-import { ListCommentsComponent } from '../../_components/list-comments/list-comments.component';
-import { ListHeaderComponent } from '../../_components/list-header/list-header.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { FeatherComponent } from 'angular-feather';
-import { RouterTestingModule } from '@angular/router/testing';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { IconsModule } from '../../_modules/icons/icons.module';
+import { ActivatedRoute } from '@angular/router';
+import { WebsocketService } from '../../_services/websocket.service';
+import { Observable } from 'rxjs';
 
 describe('ListDetailsComponent', () => {
   let component: ListDetailsComponent;
   let fixture: ComponentFixture<ListDetailsComponent>;
-
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [FeatherComponent],
-      imports: [
-        RouterTestingModule,
-        ListDetailsComponent,
-        ListItemsComponent,
-        ListCommentsComponent,
-        ListHeaderComponent,
-      ],
-      providers: [
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting(),
-      ],
-    }).compileComponents();
-  }));
+  let mockedWebSocketService: Partial<WebsocketService>;
+  beforeEach(
+    waitForAsync(() => {
+      mockedWebSocketService = {
+        connect: jest.fn(),
+        emit: jest.fn(),
+        listen: jest.fn().mockReturnValue(new Observable()), // Ensure all methods return observables
+        disconnect: jest.fn(),
+        onCompleteItem: jest.fn().mockReturnValue(new Observable()),
+        onAddItem: jest.fn().mockReturnValue(new Observable()),
+        onUpdateItem: jest.fn().mockReturnValue(new Observable()),
+        onDeleteItem: jest.fn().mockReturnValue(new Observable()),
+        onDeleteList: jest.fn().mockReturnValue(new Observable()),
+        onEditList: jest.fn().mockReturnValue(new Observable()),
+        onCreateComment: jest.fn().mockReturnValue(new Observable()),
+        onDeleteComment: jest.fn().mockReturnValue(new Observable()),
+        onUpdateComment: jest.fn().mockReturnValue(new Observable()),
+      };
+      TestBed.configureTestingModule({
+        imports: [ListDetailsComponent, IconsModule],
+        providers: [
+          provideHttpClient(withInterceptorsFromDi()),
+          provideHttpClientTesting(),
+          WebsocketService,
+          {
+            provide: WebsocketService,
+            useValue: mockedWebSocketService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              snapshot: {
+                params: {
+                  username: 'mockeduser',
+                  slug: 'mockedslug',
+                },
+              },
+            },
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListDetailsComponent);

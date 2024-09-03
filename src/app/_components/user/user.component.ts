@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
 import { Subscription } from 'rxjs';
+import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -9,12 +10,12 @@ import { Subscription } from 'rxjs';
   standalone: true,
 })
 export class UserComponent implements OnInit, OnDestroy {
-  private getUsers$: Subscription;
+  private getUsers$: Subscription = new Subscription();
   constructor(private userService: UsersService) {}
-  public users: object;
+  public users: UserModel[] = [];
 
   ngOnInit(): void {
-    this.getUsers$ = this.userService.getUsers().subscribe(data => {
+    this.getUsers$ = this.userService.getUsers().subscribe((data: any) => {
       this.users = data;
     });
   }

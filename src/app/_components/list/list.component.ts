@@ -8,9 +8,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { skip, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ListsService } from '../../_services/lists.service';
-import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { SearchDataService } from '../../shared/search-data.service';
 import { ListModel } from '../../models/list.model';
@@ -19,17 +18,19 @@ import { MasonryDirective } from '../../_directives/masonry.directive';
 import { AlertService } from '../../_services/alert.service';
 import { DeadlineComponent } from '../../shared/deadline/deadline.component';
 import { DatePipe } from '@angular/common';
+import { WebsocketService } from '../../_services/websocket.service';
+import { MetaTagModel } from '../../models/metatag.model';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass'],
   imports: [DeadlineComponent, RouterLink, MasonryDirective, DatePipe],
-  host: { ngSkipHydration: 'true' },
+  providers: [SeoService, AlertService, SearchDataService, WebsocketService],
   standalone: true,
+  host: { ngSkipHydration: 'true' },
 })
 export class ListComponent implements OnInit, OnDestroy {
-  private readonly meta: MetaTagModel;
   private listSearchData$!: Subscription;
   @Input() public pageType!:
     | 'Lists'
@@ -44,7 +45,6 @@ export class ListComponent implements OnInit, OnDestroy {
   @ViewChild(MasonryDirective, { static: false })
   masonryDirective!: MasonryDirective;
   public masonryLists: ListModel[] = [];
-
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -54,7 +54,6 @@ export class ListComponent implements OnInit, OnDestroy {
     private searchData: SearchDataService,
     private alertService: AlertService
   ) {
-    this.meta = this.route.snapshot.data[0];
     this.lists = [];
   }
 
@@ -79,10 +78,11 @@ export class ListComponent implements OnInit, OnDestroy {
         break;
       }
       case 'User': {
-        this.meta.title += `${this.route.snapshot.params['username']}'s Lists`;
+        const meta = this.getMeta();
+        meta.title = `Listet App - ${this.route.snapshot.params['username']}'s Lists`;
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = data as unknown as ListModel[];
+            this.lists = (data as unknown) as ListModel[];
             this.show(this.lists);
           },
           error: err => {
@@ -94,7 +94,7 @@ export class ListComponent implements OnInit, OnDestroy {
       default: {
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = data as unknown as ListModel[];
+            this.lists = (data as unknown) as ListModel[];
             this.show(this.lists);
           },
           error: err => {
@@ -103,9 +103,14 @@ export class ListComponent implements OnInit, OnDestroy {
         });
       }
     }
-    this.meta ? this.seoService.updateInfo(this.meta) : '';
+    const meta = this.getMeta();
+    if (meta) {
+      this.seoService.updateInfo(meta);
+    }
   }
-
+  getMeta(): MetaTagModel {
+    return this.route?.snapshot?.data[0] ?? {};
+  }
   private show(listsObj: ListModel[]): void {
     if (!Array.isArray(listsObj)) {
       this.alertService.error('Invalid data structure. Expected an array.');

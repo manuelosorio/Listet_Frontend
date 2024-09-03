@@ -1,12 +1,15 @@
+// profile.component.ts
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListComponent } from '../../_components/list/list.component';
+import { SearchDataService } from '../../shared/search-data.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.sass'],
   imports: [ListComponent],
+  providers: [SearchDataService],
   standalone: true,
 })
 export class ProfileComponent {
@@ -16,3 +19,4 @@ export class ProfileComponent {
     this.user = route.snapshot.params['username'];
   }
 }
+``;

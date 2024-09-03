@@ -31,6 +31,7 @@ import { ListDataModel } from '../../models/list-data.model';
     EditListItemComponent,
     AddItemComponent,
   ],
+  providers: [ListsService, ListDataService, WebsocketService],
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: ListModel[] = [];

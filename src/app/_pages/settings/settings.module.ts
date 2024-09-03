@@ -7,11 +7,13 @@ import { SettingsDeleteAccountComponent } from '../../_components/settings-delet
 import { SettingsPasswordComponent } from '../../_components/settings-password/settings-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '../../_modules/icons/icons.module';
+import { provideHttpClient } from '@angular/common/http';
 // import { AlertComponent } from 'src/app/_components/alert/alert.component';
 const routes: Routes = [
   {
     path: '',
     component: SettingsComponent,
+    providers: [provideHttpClient()],
     children: [
       { path: '', component: SettingsProfileComponent },
       { path: 'change-password', component: SettingsPasswordComponent },
