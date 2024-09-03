@@ -30,15 +30,14 @@ import { CharacterCounterComponent } from '../../shared/character-counter/charac
 export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;
   public commentForm: UntypedFormGroup;
-  public commentData;
-  public commentCharacterCount: number;
+  public commentData?: CommentModel;
+  public commentCharacterCount: number = 0;
 
-  private id;
-  public commentsEnabled: boolean;
+  private id?: number;
+  public commentsEnabled?: boolean;
   private readonly username: string;
   private readonly slug: string;
   constructor(
-    // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: object,
     private formBuilder: UntypedFormBuilder,
     private listService: ListsService,
@@ -69,17 +68,23 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
     });
   }
   get comment(): AbstractControl {
-    const comment = this.commentForm.get('comment');
+    const comment = this.commentForm.get('comment') as AbstractControl<
+      any,
+      string
+    >;
     this.commentCharacterCount = comment.value
       ? comment.value.trim().length
       : 0;
     return comment;
   }
   onSubmit(data: CommentModel): void {
+    if (!this.id) {
+      return;
+    }
     data.list_id = this.id;
     data.listInfo = this.slug;
-    this.listService.createComment(data).subscribe(
-      () => {
+    this.listService.createComment(data).subscribe({
+      next: () => {
         this.commentData = data;
         this.websocketService.emit(
           CommentEvents.CREATE_COMMENT,
@@ -88,10 +93,10 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
         this.commentForm.reset();
         this.commentCharacterCount = 0;
       },
-      error => {
+      error: error => {
         console.error(error);
-      }
-    );
+      },
+    });
   }
   ngOnDestroy(): void {
     this.listData.unsubscribe();

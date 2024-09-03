@@ -23,10 +23,10 @@ import { ListItemModel } from '../../models/list-item.model';
 })
 export class AddItemComponent implements OnInit {
   listItemForm: UntypedFormGroup;
-  isOwner: boolean;
-  private listData: Subscription;
+  isOwner: boolean = false;
+  private listData: Subscription = new Subscription();
   private readonly listOwner: string;
-  private id: number;
+  private id!: number;
   private readonly slug: string;
   private readonly username: string;
 
@@ -56,18 +56,18 @@ export class AddItemComponent implements OnInit {
   onSubmit(data: ListItemModel): void {
     data.list_id = this.id;
     data.slug = this.slug;
-    this.listService.createListItem(data).subscribe(
-      res => {
+    this.listService.createListItem(data).subscribe({
+      next: res => {
         this.listItemForm.reset();
         this.webSocketService.emit(ListItemEvents.ADD_ITEM, res);
       },
-      error => {
+      error: error => {
         console.error(error);
-      }
-    );
+      },
+    });
   }
 
   get item(): AbstractControl {
-    return this.listItemForm.get('item');
+    return <AbstractControl<any, string>>this.listItemForm.get('item');
   }
 }

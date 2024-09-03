@@ -13,5 +13,5 @@ import { IconsModule } from '../../_modules/icons/icons.module';
 })
 export class UserCardComponent {
   constructor() {}
-  @Input() user: UserModel;
+  @Input() user?: UserModel;
 }

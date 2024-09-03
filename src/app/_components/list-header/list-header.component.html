@@ -6,8 +6,8 @@
         <a [routerLink]="['/u/' + head.owner_username]">{{
           head.owner_username
         }}</a>
-        <p>Created: {{ formattedCreationDate }}</p>
-        <app-deadline [deadline]="deadline" [isComplete]="false"></app-deadline>
+        <p>Created: {{ head.creation_date | date: 'mediumDate'}}</p>
+        <app-deadline [deadline]="head.deadline" [isComplete]="false"></app-deadline>
         @if (isOwner) {
           <div class="">
             <button (click)="edit()">

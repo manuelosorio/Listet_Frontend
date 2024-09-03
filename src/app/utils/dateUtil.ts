@@ -19,7 +19,15 @@ export class DateUtil {
     'Nov.',
     'Dec.',
   ];
-
+  /**
+   * Converts the date to a formatted string.
+   * @param format The format to use. Default is 'mmm dd, yyyy'.
+   * @returns The formatted date string.
+   * @example
+   * const date = new DateUtil(new Date());
+   * date.format('yyyy-mm-dd');
+   * @deprecated Use the built-in Date Pipe in Angular.
+   */
   format(format?: string) {
     if (!!this.date) {
       const date = new Date(this.date);
@@ -57,6 +65,10 @@ export class DateUtil {
       Math.floor(new Date(this.date).getTime() / 1000)
     );
   }
+  /**
+   * Returns the difference between the current date and the date passed in the constructor.
+   * @returns The difference in seconds.
+   */
   getFormattedTimeDifference() {
     const seconds = this.difference();
     const minutes = Math.floor(seconds / 60);

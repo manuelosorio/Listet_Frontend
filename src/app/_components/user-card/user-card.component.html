@@ -1,10 +1,9 @@
-@if (user.avatar) {
-  <img [src]="user.avatar" alt="User profile image" />
-} @else {
-  <i-feather name="User-Circle" class="card__icon"></i-feather>
+@if (user) {
+  @if (user.avatar) {
+    <img [src]='user.avatar' alt='User profile image' />
+  } @else {
+    <i-feather name='User-Circle' class='card__icon'></i-feather>
+  }
+  <p>{{ user.firstName }} {{ user.lastName }}</p>
+  <a routerLink='/u/{{ user.username }}'>{{ user.username }}</a>
 }
-<p>{{ user.firstName }} {{ user.lastName }}</p>
-<a routerLink="/u/{{ user.username }}">{{ user.username }}</a>
-<ng-template #icon>
-  <i-feather name="User-Circle" class="card__icon"></i-feather>
-</ng-template>

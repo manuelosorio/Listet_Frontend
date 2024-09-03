@@ -32,20 +32,20 @@ import { CreateCommentComponent } from '../create-comment/create-comment.compone
   host: { ngSkipHydration: 'true' },
 })
 export class ListCommentsComponent implements OnInit, OnDestroy {
-  private username: string;
+  private username?: string;
   private readonly slug: string;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  private getComments: Subscription;
-  public commentsEnabled: boolean;
-  public comments: Array<CommentModel>;
-  private listData: Subscription;
-  private onCreateComment$: Subscription;
-  private onDeleteComment$: Subscription;
-  private onEditComment$: Subscription;
-  public count: number;
-  public isListOwner: boolean;
-  public isAuth: boolean;
-  private authenticated$: Subscription;
+  private getComments: Subscription = new Subscription();
+  public commentsEnabled?: boolean;
+  public comments: Array<CommentModel> = [];
+  private listData: Subscription = new Subscription();
+  private onCreateComment$: Subscription = new Subscription();
+  private onDeleteComment$: Subscription = new Subscription();
+  private onEditComment$: Subscription = new Subscription();
+  public count: number = 0;
+  public isListOwner?: boolean;
+  public isAuth?: boolean;
+  private authenticated$: Subscription = new Subscription();
   public returnUrl: string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -97,7 +97,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
         .subscribe(id => {
           this.count -= 1;
           this.comments = this.comments.filter(comment => {
-            return comment.id != (id as unknown as CommentModel['id']);
+            return comment.id != ((id as unknown) as CommentModel['id']);
           });
         });
       this.onEditComment$ = this.websocketService
@@ -113,10 +113,10 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
         });
     }
   }
-  public edit(comment) {
+  public edit(comment: CommentModel) {
     comment.isEditing = true;
   }
-  public delete(id) {
+  public delete(id: number) {
     if (confirm('Are you sure you want to delete this comment?')) {
       this.listService.deleteComment(id).subscribe();
     }

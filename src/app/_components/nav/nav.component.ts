@@ -15,7 +15,7 @@ import { IconsModule } from '../../_modules/icons/icons.module';
   standalone: true,
 })
 export class NavComponent implements OnDestroy {
-  public authenticated: boolean;
+  public authenticated?: boolean;
   private authenticated$: Subscription;
   private hideNavPaths = [
     '/login',
@@ -25,15 +25,12 @@ export class NavComponent implements OnDestroy {
     '/reset-password/**',
   ];
 
-  public loginPath: boolean;
+  public loginPath: boolean = false;
   public isActive = false;
-  public username: string;
-  public fullName: string;
+  public username?: string;
+  public fullName?: string;
   public userCircle;
-  constructor(
-    private userService: UsersService,
-    private router: Router
-  ) {
+  constructor(private userService: UsersService, private router: Router) {
     this.authenticated$ = this.userService.authenticated$.subscribe(
       authenticated => {
         this.authenticated = authenticated;
@@ -48,14 +45,17 @@ export class NavComponent implements OnDestroy {
     this.userCircle = UserCircle;
     router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        for (const path of this.hideNavPaths) {
-          if (event.urlAfterRedirects.indexOf(path) === 0) {
-            this.loginPath = true;
-            break;
+      .subscribe({
+        next: e => {
+          const event = e as NavigationEnd;
+          for (const path of this.hideNavPaths) {
+            if (event.urlAfterRedirects.indexOf(path) === 0) {
+              this.loginPath = true;
+              break;
+            }
+            this.loginPath = false;
           }
-          this.loginPath = false;
-        }
+        },
       });
   }
   login() {

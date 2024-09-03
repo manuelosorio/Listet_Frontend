@@ -29,11 +29,11 @@ interface OnSubmitParams<Data extends ListModel> {
   imports: [ReactiveFormsModule, FeatherModule, ActionButtonComponent],
 })
 export class EditListComponent implements OnInit {
-  @Input() list: ListModel;
+  @Input() list!: ListModel;
   public editListForm: UntypedFormGroup;
-  public visibility: number;
+  public visibility?: number;
   public visibilityOptions: ListVisibility[];
-  public allowComments: boolean;
+  public allowComments?: boolean;
 
   constructor(
     private alertService: AlertService,
@@ -73,17 +73,18 @@ export class EditListComponent implements OnInit {
   }
   onSubmit(data: OnSubmitParams<any>): void {
     data.prevSlug = this.route.snapshot.params.slug;
-    this.listService.updateList(data, this.list.id).subscribe(
-      async (res: Response) => {
-        this.alertService.success(res.message);
+    this.listService.updateList(data, this.list.id).subscribe({
+      next: async (res: object) => {
+        const response = res as Response;
+        this.alertService.success(response.message);
         this.list.isEditing = false;
       },
-      error => {
+      error: error => {
         this.alertService.error(
           `Error: ${error.status} - ${error.error.message}`
         );
-      }
-    );
+      },
+    });
   }
   visibilityChecked(event: any): HTMLInputElement {
     return (this.visibility = event.target.checked);
@@ -94,9 +95,9 @@ export class EditListComponent implements OnInit {
   }
 
   get title(): AbstractControl {
-    return this.editListForm.get('title');
+    return <AbstractControl<any, string>>this.editListForm.get('title');
   }
   get visibilityValidation(): AbstractControl {
-    return this.editListForm.get('visibility');
+    return <AbstractControl<any, string>>this.editListForm.get('visibility');
   }
 }

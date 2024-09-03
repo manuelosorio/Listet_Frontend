@@ -7,8 +7,6 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ListsService } from '../../_services/lists.service';
-import { ListDataService } from '../../shared/list-data.service';
-import { formatDate } from '@angular/common';
 import { ListItemModel } from '../../models/list-item.model';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 
@@ -21,12 +19,11 @@ import { ActionButtonComponent } from '../../shared/action-button/action-button.
   imports: [ReactiveFormsModule, ActionButtonComponent],
 })
 export class EditListItemComponent implements OnInit {
-  @Input() listItem;
-  public listItemForm: UntypedFormGroup;
+  @Input() listItem!: ListItemModel;
+  public listItemForm!: UntypedFormGroup;
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private listService: ListsService,
-    private _listDataService: ListDataService
+    private listService: ListsService
   ) {}
   cancel(): void {
     this.listItem.isEditing = false;
@@ -34,14 +31,14 @@ export class EditListItemComponent implements OnInit {
 
   submit(data: ListItemModel): void {
     data.list_id = this.listItem.list_id;
-    this.listService.updateItem(data, this.listItem.id).subscribe(
-      _res => {
+    this.listService.updateItem(data, this.listItem.id).subscribe({
+      next: _res => {
         this.listItem.isEditing = false;
       },
-      error => {
+      error: error => {
         console.error(error);
-      }
-    );
+      },
+    });
   }
   ngOnInit(): void {
     this.listItemForm = this.formBuilder.group({
@@ -50,13 +47,10 @@ export class EditListItemComponent implements OnInit {
     });
     this.listItemForm.setValue({
       item: this.listItem.item,
-      deadline:
-        this.listItem.deadline != null
-          ? formatDate(this.listItem.deadline, 'YYYY-MM-dd', 'en')
-          : '',
+      deadline: this.listItem.deadline ?? null,
     });
   }
   get item(): AbstractControl {
-    return this.listItemForm.get('item');
+    return <AbstractControl<any, string>>this.listItemForm.get('item');
   }
 }

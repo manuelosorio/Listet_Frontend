@@ -51,9 +51,7 @@ export class WebsocketService {
   }
   /* --------- End List Events ---------- */
   /* --------- List Items Events -------------- */
-  public onAddItem(): Observable<
-    Partial<ListItemModel & { isEditing: boolean }>
-  > {
+  public onAddItem(): Observable<ListItemModel> {
     return fromEvent(this.socket, ListItemEvents.ADD_ITEM);
   }
 

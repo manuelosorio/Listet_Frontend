@@ -8,7 +8,7 @@
     (ngSubmit)="onSubmit(loginForm.value)"
     class="form"
   >
-    @if (errorMessage !== null) {
+    @if (errorMessage !== '') {
       <div class="flag--err">
         {{ errorMessage }}
       </div>
@@ -54,7 +54,7 @@
           (change)="checked($event)"
         />
         <label for="remember-me">
-          @if (isChecked === true) {
+          @if (isChecked) {
             <i-feather name="check-square"></i-feather>
           } @else {
             <i-feather name="square"></i-feather>

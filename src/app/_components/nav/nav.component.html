@@ -4,7 +4,7 @@
       ><img src="assets/images/logo.svg" alt="Listet"
     /></a>
     <div class="visibility--flex">
-      @if (this.loginPath === false) {
+      @if (!loginPath) {
         <button class="navigation--menu" (click)="toggleActive()">
           <i-feather name="menu" [class.is-active]="isActive"></i-feather
           ><span class="menu--text">Menu</span>
@@ -36,13 +36,13 @@
       }
     </div>
   </div>
-  @if (this.loginPath === false) {
+  @if (!this.loginPath) {
     <ul class="navigation--links" [class.is-active]="isActive">
       <li class="navigation--links-item"><a routerLink="/">Home</a></li>
       <li class="navigation--links-item">
         <a routerLink="/lists">All Lists</a>
       </li>
-      @if (authenticated === true) {
+      @if (authenticated) {
         <li class="navigation--links-item">
           <a routerLink="your-lists">Your Lists</a>
         </li>

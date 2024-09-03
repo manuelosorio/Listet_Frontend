@@ -16,31 +16,31 @@
             class="list-item"
             for="item-{{ item['id'] }}"
           >
-            <span>
-              <i-feather
-                [name]="item['completed'] === 0 ? 'square' : 'check-square'"
-              ></i-feather>
-            </span>
-            <span class="list-item__info">
-              {{ item['item'] }}
-            </span>
-            <app-deadline
-              [deadline]="item['deadline']"
-              [isComplete]="item['completed']"
-            ></app-deadline>
-            @if (isOwner) {
-              <button class="more">
-                <i-feather name="more-vertical"></i-feather>
-                <span class="more__options card">
-                  <button (click)="edit(item)">
-                    <i-feather name="edit"></i-feather> Edit
-                  </button>
-                  <button (click)="deleteListItem(item['id'])">
-                    <i-feather name="trash"></i-feather> Delete
-                  </button>
-                </span>
-              </button>
-            }
+          <span>
+            <i-feather
+              [name]="item['completed'] === 0 ? 'square' : 'check-square'"
+            ></i-feather>
+          </span>
+          <span class="list-item__info">
+            {{ item['item'] }}
+          </span>
+          <app-deadline
+            [deadline]="item['deadline']"
+            [isComplete]="item['completed']"
+          ></app-deadline>
+          @if (isOwner) {
+            <button class="more">
+              <i-feather name="more-vertical"></i-feather>
+              <span class="more__options card">
+                <button (click)="edit(item)">
+                  <i-feather name="edit"></i-feather> Edit
+                </button>
+                <button (click)="deleteListItem(item['id'])">
+                  <i-feather name="trash"></i-feather> Delete
+                </button>
+              </span>
+            </button>
+          }
           </label>
         </div>
       } @else {

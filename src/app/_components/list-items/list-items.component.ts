@@ -17,6 +17,8 @@ import { AddItemComponent } from '../add-item/add-item.component';
 import { EditListItemComponent } from '../edit-list-item/edit-list-item.component';
 import { DeadlineComponent } from '../../shared/deadline/deadline.component';
 import { FeatherModule } from 'angular-feather';
+import { ListModel } from '../../models/list.model';
+import { ListDataModel } from '../../models/list-data.model';
 
 @Component({
   selector: 'app-list-items',
@@ -31,20 +33,19 @@ import { FeatherModule } from 'angular-feather';
   ],
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
-  public lists: object;
-  public items;
-  public isOwner: boolean;
-  public isEditing: boolean;
+  public lists: ListModel[] = [];
+  public items: ListItemModel[] = [];
+  public isOwner?: boolean;
+  public isEditing: boolean = false;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private username: any;
   private slug: any;
-  isChecked: boolean;
   private listData$: Subscription;
   private getListItems$: Subscription;
-  private onCompleteItem$: Subscription;
-  private onDeleteItem$: Subscription;
-  private onAddItem$: Subscription;
-  private onUpdateItem$: Subscription;
+  private onCompleteItem$: Subscription = new Subscription();
+  private onDeleteItem$: Subscription = new Subscription();
+  private onAddItem$: Subscription = new Subscription();
+  private onUpdateItem$: Subscription = new Subscription();
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -57,91 +58,98 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.getListItems$ = this.listService
       .getListItems(this.username, this.slug)
       .subscribe(data => {
-        this.items = data;
-        this.items.filter(item => {
+        this.items = (data as unknown) as ListItemModel[];
+        this.items.filter((item: ListItemModel) => {
           return (item.isEditing = false);
         });
         return this.items;
       });
-    this.listData$ = this.listDataService.listData$.subscribe(data => {
-      this.isOwner = data[`isOwner`];
-    });
-  }
-  public checked(event) {
-    const targetId = event.target.id.replace('item-', '');
-    const filterItem = this.items.filter(item => item.id == targetId)[0];
-    filterItem.completed = event.target.checked ? 1 : 0;
-    this.listService.completeListItem(filterItem).subscribe(
-      () => {
-        this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, filterItem);
-      },
-      error => {
-        console.error(error);
-      },
-      () => {}
+    this.listData$ = this.listDataService.listData$.subscribe(
+      (data: ListDataModel) => {
+        this.isOwner = data[`isOwner`] as boolean;
+      }
     );
   }
-  public edit(item) {
+  public checked(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const targetId = Number(inputElement.id.replace('item-', ''));
+    const filterItem = this.items.filter(
+      (item: ListItemModel) => item.id == targetId
+    )[0];
+    filterItem.completed = inputElement.checked ? 1 : 0;
+    this.listService.completeListItem(filterItem).subscribe({
+      next: () => {
+        this.webSocketService.emit(ListItemEvents.COMPLETE_ITEM, filterItem);
+      },
+      error: error => {
+        console.error(error);
+      },
+      complete: () => {},
+    });
+  }
+  public edit(item: ListItemModel) {
     item.isEditing = true;
   }
-  public deleteListItem(id) {
+  public deleteListItem(id: number) {
     if (confirm('Are you sure you want to delete this item?')) {
-      this.listService.deleteListItem(id).subscribe(
-        () => {
+      this.listService.deleteListItem(id).subscribe({
+        next: () => {
           this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
         },
-        error => {
+        error: error => {
           console.error(error);
-        }
-      );
+        },
+      });
     }
   }
-  private deleteArrObject(id) {
+  private deleteArrObject(id: number) {
     this.items = this.items.filter(item => {
       return item.id != id;
     });
   }
   ngOnInit(): void {
     if (this.isBrowser) {
-      this.onCompleteItem$ = this.webSocketService.onCompleteItem().subscribe(
-        (res: ListItemModel | any) => {
+      this.onCompleteItem$ = this.webSocketService.onCompleteItem().subscribe({
+        next: (res: ListItemModel) => {
           const item = this.items.filter(i => i.id == res.id)[0];
           item.completed = res.completed;
         },
-        error => {
+        error: error => {
           console.error(error);
-        }
-      );
-      this.onAddItem$ = this.webSocketService.onAddItem().subscribe(
-        item => {
+        },
+      });
+      this.onAddItem$ = this.webSocketService.onAddItem().subscribe({
+        next: (item: ListItemModel) => {
           item.isEditing = false;
           this.items.push(item);
         },
-        error => {
+        error: error => {
           console.error(error);
-        }
-      );
+        },
+      });
       this.onUpdateItem$ = this.webSocketService
         .onUpdateItem()
         .subscribe((res: ListItemModel) => {
-          return this.items.filter(item => {
+          return this.items.filter((item: ListItemModel) => {
             if (item.id == res.id) {
               item.item = res.item;
               item.deadline = res.deadline;
+              return item;
+            } else {
               return item;
             }
           });
         });
       this.onDeleteItem$ = this.webSocketService
         .listen(ListItemEvents.DELETE_ITEM)
-        .subscribe(
-          (res: ListItemModel | any) => {
+        .subscribe({
+          next: (res: ListItemModel | any) => {
             this.deleteArrObject(res);
           },
-          error => {
+          error: error => {
             console.error(error);
-          }
-        );
+          },
+        });
     }
   }
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-@if (minimumCharacters !== undefined) {
+@if (minimumCharacters) {
   <svg>
     <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
     <circle
@@ -14,7 +14,7 @@
       "
       [ngStyle]="{ 'stroke-dasharray': [coloredArea, greyedArea] }"
     ></circle>
-    @if (maximumCharacters !== undefined) {
+    @if (maximumCharacters) {
       <ng-container>
         <circle
           [attr.r]="radius2"
@@ -40,7 +40,7 @@
       {{ characterCount }}/{{ minimumCharacters }}
     } @else {
       @if (
-        maximumCharacters === undefined ||
+        maximumCharacters ||
         maxCharacterCount < maximumCharacters - 20
       ) {
         <i-feather name="check" class="check-mark"></i-feather>

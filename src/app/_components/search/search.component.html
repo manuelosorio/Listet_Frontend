@@ -2,7 +2,7 @@
   <form
     class="search__form"
     [formGroup]="searchForm"
-    (ngSubmit)="onSubmit(search.value)"
+    (ngSubmit)="onSubmit(search?.value)"
   >
     <fieldset class="form__fieldset search">
       <input

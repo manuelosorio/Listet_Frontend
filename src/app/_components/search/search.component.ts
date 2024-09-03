@@ -19,7 +19,7 @@ import { IconsModule } from '../../_modules/icons/icons.module';
 })
 export class SearchComponent {
   public searchForm: UntypedFormGroup;
-  public windowWidth: number;
+  public windowWidth: number = 0;
 
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
 
@@ -33,7 +33,7 @@ export class SearchComponent {
     '/settings',
     '/settings/**',
   ];
-  public hideSearch: boolean;
+  public hideSearch: boolean = false;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     public router: Router,
@@ -44,14 +44,17 @@ export class SearchComponent {
     });
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        for (const path of this.hidePaths) {
-          if (event.urlAfterRedirects.indexOf(path) === 0) {
-            this.hideSearch = true;
-            break;
+      .subscribe({
+        next: e => {
+          const event = e as NavigationEnd;
+          for (const path of this.hidePaths) {
+            if (event.urlAfterRedirects.indexOf(path) === 0) {
+              this.hideSearch = true;
+              break;
+            }
+            this.hideSearch = false;
           }
-          this.hideSearch = false;
-        }
+        },
       });
     if (this.isBrowser) {
       this.windowWidth = window.innerWidth;
@@ -65,7 +68,7 @@ export class SearchComponent {
   get search() {
     return this.searchForm.get('search');
   }
-  onSubmit(query) {
+  onSubmit(query: string) {
     this.router.navigate(['/search', query]).then();
   }
 }

@@ -46,7 +46,6 @@ export class SettingsProfileComponent implements OnInit, OnDestroy {
       });
     });
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   submit(data: any): void {
     this.updateAccountInfo$ = this.userService.updateAccountInfo(data);
   }

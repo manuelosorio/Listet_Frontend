@@ -11,39 +11,44 @@ import { MetaTagModel } from '../../models/metatag.model';
 import { SeoService } from '../../_services/seo.service';
 import { ListDataService } from '../../shared/list-data.service';
 import { UsersService } from '../../_services/users.service';
-import { DateUtil } from '../../utils/dateUtil';
 import { ListModel } from '../../models/list.model';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../_services/websocket.service';
 import { AlertService } from '../../_services/alert.service';
-import { isPlatformBrowser } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { EditListComponent } from '../edit-list/edit-list.component';
 import { FeatherModule } from 'angular-feather';
 import { DeadlineComponent } from '../../shared/deadline/deadline.component';
+import { ListDataModel } from '../../models/list-data.model';
 
 @Component({
   selector: 'app-list-header',
   templateUrl: './list-header.component.html',
   styleUrls: ['./list-header.component.sass'],
   standalone: true,
-  imports: [RouterLink, DeadlineComponent, FeatherModule, EditListComponent],
+  imports: [
+    RouterLink,
+    DeadlineComponent,
+    FeatherModule,
+    EditListComponent,
+    DatePipe,
+  ],
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
-  public header: Array<ListModel>;
-  public listId: number;
-  public listData;
-  public isOwner: boolean;
-  public formattedCreationDate: string;
-  public deadline: Date | string;
+  public header: ListModel[] = [];
+  public listId!: number;
+  public listData?: ListDataModel;
+  public isOwner?: boolean;
+  public deadline?: Date | string;
   private readonly username: any;
   private readonly slug: any;
-  private meta: MetaTagModel;
-  private onDelete$: Subscription;
-  private onEdit$: Subscription;
-  private getList$: Subscription;
+  private meta?: MetaTagModel;
+  private onDelete$: Subscription = new Subscription();
+  private onEdit$: Subscription = new Subscription();
+  private getList$: Subscription = new Subscription();
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  private prevSlug: string;
+  private prevSlug?: string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -55,7 +60,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     private websocketService: WebsocketService,
     private alertService: AlertService
   ) {
-    userService.isAuth();
+    this.userService.isAuth();
     this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;
 
@@ -79,13 +84,12 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getList$ = this.listService.getList(this.slug).subscribe(
-      (data: Array<ListModel>) => {
-        const creationDate = new DateUtil(data[0].creation_date);
+    this.getList$ = this.listService.getList(this.slug).subscribe({
+      next: (httpData: object) => {
+        const data = httpData as ListModel[];
         if (!!data[0].deadline) {
           this.deadline = new Date(data[0].deadline);
         }
-        this.formattedCreationDate = creationDate.format();
         this.header = data;
         this.header[0].isEditing = false;
         this.listId = data[0].id;
@@ -97,10 +101,12 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
         };
         this.listDataService.setData(this.listData);
         this.metaTags(data);
-        this.seoService.updateInfo(this.meta);
+        if (this.meta) {
+          this.seoService.updateInfo(this.meta);
+        }
         return this.header;
       },
-      error => {
+      error: error => {
         if (error.status === 404 || error.status === 403) {
           this.router
             .navigateByUrl('/404', {
@@ -108,8 +114,8 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
             })
             .then();
         }
-      }
-    );
+      },
+    });
   }
 
   edit() {
@@ -159,7 +165,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     (this.header as ListModel[]).filter((head: ListModel) => {
       head.id = data.id;
       head.name = data.name;
-      head.deadline = new DateUtil(data.deadline).format();
+      head.deadline = data.deadline;
       head.description = data.description;
       head.visibility = data.visibility;
       head.allow_comments = data.allow_comments;
@@ -172,7 +178,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
     this.listData = {
       id: this.listId,
       allow_comments: data.allow_comments,
-      isOwner: this.isOwner,
+      isOwner: this.isOwner ?? false,
     };
     this.listDataService.setData(this.listData);
     return this.header;

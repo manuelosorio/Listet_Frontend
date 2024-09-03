@@ -38,7 +38,13 @@ export class AlertService {
 
   /**
    * Creates success alert toast.
-   * @deprecated There will be a more rebust method available in a future version.
+   * example
+   * this.alertService.success('This is a success message', { text: 'Click here', url: '/link' }, 5000, true);
+   * @param message The message to display.
+   * @param link An object containing the text and url for the link.
+   * @param timeout The time in milliseconds to display the alert.
+   * @param keepAfterRouterChange Whether to keep the alert after a router change.
+   * @deprecated There will be a more robust method available in a future version.
    */
   success(
     message: string,
@@ -62,7 +68,13 @@ export class AlertService {
 
   /**
    * Creates warning alert toast.
-   * @deprecated There will be a more rebust method available in a future version.
+   * @example
+   * this.alertService.warning('This is a warning message', { text: 'Click here', url: '/link' }, 5000, true);
+   * @param message The message to display.
+   * @param link An object containing the text and url for the link.
+   * @param timeout The time in milliseconds to display the alert.
+   * @param keepAfterRouterChange Whether to keep the alert after a router change.
+   * @deprecated There will be a more robust method available in a future version.
    */
   warning(
     message: string,
@@ -85,7 +97,13 @@ export class AlertService {
 
   /**
    * Creates error alert toast.
-   * @deprecated There will be a more rebust method available in a future version.
+   * example
+   * this.alertService.error('This is an error message', { text: 'Click here', url: '/link' }, 5000, true);
+   * @param message The message to display.
+   * @param link An object containing the text and url for the link.
+   * @param timeout The time in milliseconds to display the alert.
+   * @param keepAfterRouterChange Whether to keep the alert after a router change.
+   * @deprecated There will be a more robust method available in a future version.
    */
   error(
     message: string,

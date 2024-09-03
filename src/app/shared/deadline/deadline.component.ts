@@ -21,19 +21,18 @@ export class DeadlineComponent implements OnChanges {
   private _deadline?: Date | string | null;
   @Input() isComplete!: boolean | number;
   isOverDue = false;
-  formattedDeadline?: string;
   hasDeadline?: boolean;
+  deadlineDate?: Date;
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['deadline']) {
       let currentDeadline = changes['deadline'].currentValue;
       // let prevDeadline = changes.deadline.previousValue;
-      let date = new DateUtil(currentDeadline);
-      this.formattedDeadline = date.format();
+      this.deadlineDate = currentDeadline;
+      let date = new Date(currentDeadline);
       this.hasDeadline = !(
-        this.formattedDeadline === undefined ||
-        this.formattedDeadline.length === 0
+        currentDeadline === null || currentDeadline === undefined
       );
       this.isOverDue = this.hasDeadline
         ? date.getTime() <= new Date().getTime()

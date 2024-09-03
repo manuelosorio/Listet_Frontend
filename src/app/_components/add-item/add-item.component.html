@@ -24,24 +24,14 @@
       </fieldset>
     </div>
     <div class="l-row">
-      @if (item.invalid) {
-        <button
-          class="btn btn--disabled form__btn"
-          [disabled]="true"
-          type="submit"
-        >
-          Add Item
-        </button>
-      } @else {
-        <button class="btn btn--primary form__btn">Add Item</button>
-      }
+      <button
+        class="btn btn--primary form__btn"
+        [class.btn--disabled]='item.invalid'
+        [disabled]="item.invalid"
+        type="submit"
+      >
+        Add Item
+      </button>
     </div>
   </form>
 }
-
-<!-- Templates -->
-<!-- Submit Button -->
-<ng-template #submit
-  ><button class="btn btn--primary form__btn">Add Item</button></ng-template
->
-<!-- End Templates -->

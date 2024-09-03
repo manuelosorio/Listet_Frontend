@@ -23,9 +23,9 @@ import { ActionButtonComponent } from '../../shared/action-button/action-button.
   ],
 })
 export class EditCommentComponent implements OnInit {
-  @Input() commentModel: CommentModel;
-  public commentForm: UntypedFormGroup;
-  public commentCharacterCount: number;
+  @Input() commentModel!: CommentModel;
+  public commentForm!: UntypedFormGroup;
+  public commentCharacterCount: number = 0;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private listService: ListsService
@@ -61,8 +61,11 @@ export class EditCommentComponent implements OnInit {
     );
   }
   get comment(): AbstractControl {
-    const comment = this.commentForm.get('comment');
-    this.commentCharacterCount = comment.value.length ?? 0;
+    const comment = this.commentForm.get('comment') as AbstractControl<
+      any,
+      string
+    >;
+    this.commentCharacterCount = comment!.value.length ?? 0;
     return comment;
   }
 }

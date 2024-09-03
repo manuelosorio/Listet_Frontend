@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
   private token;
-  private verifyAccount$: Subscription;
+  private verifyAccount$: Subscription = new Subscription();
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute
