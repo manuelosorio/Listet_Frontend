@@ -7,8 +7,8 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - uses: actions/cache@v3
@@ -24,5 +24,7 @@ jobs:
           echo HOST="${{ secrets.CLIENT_HOST }}" >> prod.env
           echo URL="${{ secrets.CLIENT_URL }}" >> prod.env
           echo WEBSOCKET="${{ secrets.CLIENT_WEBSOCKET }}" >> prod.env
+      - name: Test Angular
+        run: yarn test
       - name: Build Angular Production
         run: yarn build:prod

@@ -7,23 +7,26 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/.yarn-cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - run: yarn install
+      - name: Test Angular
+        run: yarn test
       - name: Env
         run: |
           touch prod.env
           echo HOST="${{ secrets.CLIENT_HOST }}" >> prod.env
           echo URL="${{ secrets.CLIENT_URL }}" >> prod.env
           echo WEBSOCKET="${{ secrets.CLIENT_WEBSOCKET }}" >> prod.env
+
       - name: Build Angular Production
         run: yarn build:prod
       - name: SFTP Deploy
