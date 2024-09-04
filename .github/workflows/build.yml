@@ -18,13 +18,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: yarn install
+      - name: Test Angular
+        run: yarn test
       - name: Env
         run: |
           touch prod.env
           echo HOST="${{ secrets.CLIENT_HOST }}" >> prod.env
           echo URL="${{ secrets.CLIENT_URL }}" >> prod.env
           echo WEBSOCKET="${{ secrets.CLIENT_WEBSOCKET }}" >> prod.env
-      - name: Test Angular
-        run: yarn test
       - name: Build Angular Production
         run: yarn build:prod
