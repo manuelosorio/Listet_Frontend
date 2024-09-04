@@ -20,6 +20,7 @@ import { ListComponent } from '../../_components/list/list.component';
   styleUrls: ['./search-results.component.sass'],
   imports: [UserCardComponent, ListComponent, RouterLink],
   standalone: true,
+  host: { ngSkipHydration: 'true' },
 })
 export class SearchResultsComponent {
   private listSearch$!: Subscription;

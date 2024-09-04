@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaTagModel } from '../models/metatag.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SeoService {
-  constructor(
-    private meta: Meta,
-    private title: Title
-  ) {}
+export class SeoService implements OnDestroy {
+  constructor(private meta: Meta, private title: Title) {}
 
   updateInfo(metaData: MetaTagModel) {
     this.title.setTitle(metaData.title);
@@ -47,5 +44,17 @@ export class SeoService {
       name: 'twitter:creator',
       content: '@theManuelOsorio',
     });
+  }
+
+  removeMeta() {
+    this.meta.removeTag("name='description'");
+    this.meta.removeTag("name='author'");
+    this.meta.removeTag("property='og:type'");
+    this.meta.removeTag("property='og:title'");
+    this.meta.removeTag("property='og:description'");
+  }
+
+  ngOnDestroy(): void {
+    this.removeMeta();
   }
 }

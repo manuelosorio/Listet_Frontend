@@ -17,6 +17,7 @@ import { ListDataService } from './shared/list-data.service';
 import { SearchDataService } from './shared/search-data.service';
 import { UsersService } from './_services/users.service';
 import {
+  HttpClient,
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi,
@@ -43,7 +44,6 @@ export const appConfig: ApplicationConfig = {
     SearchDataService,
     UsersService,
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
-
     provideAnimations(),
     provideClientHydration(withNoHttpTransferCache()),
     {

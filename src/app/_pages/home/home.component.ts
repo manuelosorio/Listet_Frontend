@@ -4,12 +4,16 @@ import { SeoService } from '../../_services/seo.service';
 import { environment } from '../../../environments/environment';
 import { ListComponent } from '../../_components/list/list.component';
 import { RouterLink } from '@angular/router';
+import { ListsService } from '../../_services/lists.service';
+import { HttpClient } from '@angular/common/http';
+import { SearchDataService } from '../../shared/search-data.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
   imports: [ListComponent, RouterLink],
+  providers: [SeoService, ListsService, HttpClient, SearchDataService],
   standalone: true,
 })
 export class HomeComponent implements OnInit {

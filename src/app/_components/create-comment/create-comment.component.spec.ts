@@ -3,11 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateCommentComponent } from './create-comment.component';
 import { UntypedFormBuilder } from '@angular/forms';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { IconsModule } from '../../_modules/icons/icons.module';
+import { ActivatedRoute } from '@angular/router';
 
 describe('CreateCommentComponent', () => {
   let component: CreateCommentComponent;
@@ -15,11 +16,22 @@ describe('CreateCommentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, CreateCommentComponent],
+      imports: [CreateCommentComponent, IconsModule],
       providers: [
         UntypedFormBuilder,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              params: {
+                username: 'mockeduser',
+                slug: 'mockedslug',
+              },
+            },
+          },
+        },
       ],
     }).compileComponents();
   });
