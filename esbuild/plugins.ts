@@ -3,6 +3,7 @@
 import { Plugin } from 'esbuild';
 import { definePlugin } from 'esbuild-plugin-define';
 import { config } from 'dotenv';
+
 const { PROD } = process.env;
 if (PROD !== 'true') {
   config({
