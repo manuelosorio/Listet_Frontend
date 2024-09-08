@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
 // Components
-import { ListComponent } from './_components/list/list.component';
-import { VerifyAccountComponent } from './_components/verify-account/verify-account.component';
+import { ListComponent } from '@components/list/list.component';
+import { VerifyAccountComponent } from '@components/verify-account/verify-account.component';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -10,18 +10,18 @@ import { GuestGuard } from './guards/guest.guard';
 import { VerifiedGuard } from './guards/verified.guard';
 
 // Pages
-import { HomeComponent } from './_pages/home/home.component';
-import { ForgotPasswordComponent } from './_pages/forgot-password/forgot-password.component';
-import { LoginComponent } from './_pages/login/login.component';
-import { NotFoundComponent } from './_pages/not-found/not-found.component';
-import { RegisterComponent } from './_pages/register/register.component';
-import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
-import { CreateListComponent } from './_pages/create-list/create-list.component';
-import { ProfileComponent } from './_pages/profile/profile.component';
-import { YourListComponent } from './_pages/your-list/your-list.component';
-import { SearchResultsComponent } from './_pages/search-results/search-results.component';
+import { HomeComponent } from '@pages/home/home.component';
+import { ForgotPasswordComponent } from '@pages/forgot-password/forgot-password.component';
+import { LoginComponent } from '@pages/login/login.component';
+import { NotFoundComponent } from '@pages/not-found/not-found.component';
+import { RegisterComponent } from '@pages/register/register.component';
+import { ResetPasswordComponent } from '@pages/reset-password/reset-password.component';
+import { CreateListComponent } from '@pages/create-list/create-list.component';
+import { ProfileComponent } from '@pages/profile/profile.component';
+import { YourListComponent } from '@pages/your-list/your-list.component';
+import { SearchResultsComponent } from '@pages/search-results/search-results.component';
 
-import { environment } from '../environments/environment';
+import { environment } from '@environments/environment';
 
 export const routes: Routes = [
   {

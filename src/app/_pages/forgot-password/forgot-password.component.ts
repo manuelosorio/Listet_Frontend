@@ -4,11 +4,11 @@ import {
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
-import { UsersService } from '../../_services/users.service';
-import { SeoService } from '../../_services/seo.service';
-import { MetaTagModel } from '../../models/metatag.model';
-import { environment } from '../../../environments/environment';
-import { BackButtonComponent } from '../../_components/back-button/back-button.component';
+import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { environment } from '@environments/environment';
+import { MetaTagModel } from '@models/metatag.model';
+import { UsersService } from '@services/users.service';
+import { SeoService } from '@services/seo.service';
 
 @Component({
   selector: 'app-forgot-password',

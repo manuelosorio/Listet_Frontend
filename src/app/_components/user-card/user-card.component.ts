@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '@models/user.model';
 import { RouterLink } from '@angular/router';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { IconsModule } from '@modules/icons/icons.module';
 
 @Component({
   selector: 'app-user-card',

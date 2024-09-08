@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
-import { ListItemModel } from '../models/list-item.model';
-import { CommentModel } from '../models/comment.model';
-import { ListModel } from '../models/list.model';
+import { environment } from '@environments/environment';
+import { ListItemModel } from '@models/list-item.model';
+import { CommentModel } from '@models/comment.model';
+import { ListModel } from '@models/list.model';
 import { UsersService } from './users.service';
 
 @Injectable({

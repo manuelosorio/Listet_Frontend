@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { RegisterComponent } from './register.component';
-import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { UsersService } from '../../_services/users.service';
-import { SeoService } from '../../_services/seo.service';
 import { Subject } from 'rxjs';
-import { BackButtonComponent } from '../../_components/back-button/back-button.component';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { RegisterComponent } from './register.component';
+import { UsersService } from '@services/users.service';
+import { SeoService } from '@services/seo.service';
+import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { IconsModule } from '@modules/icons/icons.module';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;

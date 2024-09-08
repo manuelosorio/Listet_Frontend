@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ListsService } from '../../_services/lists.service';
-import { ListDataService } from '../../shared/list-data.service';
-import { WebsocketService } from '../../_services/websocket.service';
-import { ListItemEvents } from '../../helper/list-item.events';
-import { ListItemModel } from '../../models/list-item.model';
+import { ListsService } from '@services/lists.service';
+import { ListDataService } from '@shared/list-data.service';
+import { WebsocketService } from '@services/websocket.service';
+import { ListItemEvents } from '@helpers/list-item.events';
+import { ListItemModel } from '@models/list-item.model';
 
 @Component({
   selector: 'app-add-item',

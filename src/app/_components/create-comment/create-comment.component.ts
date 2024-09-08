@@ -1,24 +1,24 @@
 import {
   Component,
   Inject,
-  OnInit,
   OnDestroy,
+  OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ListsService } from '../../_services/lists.service';
-import { ListDataService } from '../../shared/list-data.service';
-import { CommentEvents } from '../../helper/comment.events';
-import { WebsocketService } from '../../_services/websocket.service';
-import { CommentModel } from '../../models/comment.model';
-import { CharacterCounterComponent } from '../../shared/character-counter/character-counter.component';
+import { ListsService } from '@services/lists.service';
+import { ListDataService } from '@shared/list-data.service';
+import { CommentEvents } from '@helpers/comment.events';
+import { WebsocketService } from '@services/websocket.service';
+import { CommentModel } from '@models/comment.model';
+import { CharacterCounterComponent } from '@shared/character-counter/character-counter.component';
 
 @Component({
   selector: 'app-create-comment',

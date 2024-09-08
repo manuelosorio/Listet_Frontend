@@ -7,12 +7,12 @@ import {
   RouterLink,
 } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ListModel } from '../../models/list.model';
 import { filter } from 'rxjs/operators';
-import { SearchDataService } from '../../shared/search-data.service';
-import { UserModel } from '../../models/user.model';
-import { UserCardComponent } from '../../_components/user-card/user-card.component';
-import { ListComponent } from '../../_components/list/list.component';
+import { ListModel } from '@models/list.model';
+import { SearchDataService } from '@shared/search-data.service';
+import { UserModel } from '@models/user.model';
+import { UserCardComponent } from '@components/user-card/user-card.component';
+import { ListComponent } from '@components/list/list.component';
 
 @Component({
   selector: 'app-search-results',

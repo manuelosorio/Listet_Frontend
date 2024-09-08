@@ -5,18 +5,18 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { ListsService } from '../../_services/lists.service';
+import { ListsService } from '@services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from '../../_services/websocket.service';
+import { WebsocketService } from '@services/websocket.service';
 import { formatDate, isPlatformBrowser } from '@angular/common';
-import { ListDataService } from '../../shared/list-data.service';
-import { DateUtil } from '../../utils/dateUtil';
-import { CommentModel } from '../../models/comment.model';
-import { UsersService } from '../../_services/users.service';
-import { EditCommentComponent } from '../edit-comment/edit-comment.component';
+import { ListDataService } from '@shared/list-data.service';
+import { DateUtil } from '@utilities/dateUtil';
+import { CommentModel } from '@models/comment.model';
+import { UsersService } from '@services/users.service';
+import { EditCommentComponent } from '@components/edit-comment/edit-comment.component';
 import { FeatherModule } from 'angular-feather';
-import { CreateCommentComponent } from '../create-comment/create-comment.component';
+import { CreateCommentComponent } from '@components/create-comment/create-comment.component';
 
 @Component({
   selector: 'app-list-comments',

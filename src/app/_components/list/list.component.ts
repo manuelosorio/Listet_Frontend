@@ -9,17 +9,17 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ListsService } from '../../_services/lists.service';
-import { SeoService } from '../../_services/seo.service';
-import { SearchDataService } from '../../shared/search-data.service';
-import { ListModel } from '../../models/list.model';
-import { DateUtil } from '../../utils/dateUtil';
+import { ListsService } from '@services/lists.service';
+import { SeoService } from '@services/seo.service';
+import { SearchDataService } from '@shared/search-data.service';
+import { ListModel } from '@models/list.model';
+import { DateUtil } from '@utilities/dateUtil';
 import { MasonryDirective } from '../../_directives/masonry.directive';
-import { AlertService } from '../../_services/alert.service';
-import { DeadlineComponent } from '../../shared/deadline/deadline.component';
+import { AlertService } from '@services/alert.service';
+import { DeadlineComponent } from '@shared/deadline/deadline.component';
 import { DatePipe } from '@angular/common';
-import { WebsocketService } from '../../_services/websocket.service';
-import { MetaTagModel } from '../../models/metatag.model';
+import { WebsocketService } from '@services/websocket.service';
+import { MetaTagModel } from '@models/metatag.model';
 
 @Component({
   selector: 'app-list',

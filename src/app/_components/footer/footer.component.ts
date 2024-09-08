@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { Component } from '@angular/core';
+import { IconsModule } from '@modules/icons/icons.module';
 
 @Component({
   selector: 'app-footer',

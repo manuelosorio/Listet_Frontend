@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CanonicalService } from './shared/canonical.service';
-import { UsersService } from './_services/users.service';
-import { environment } from '../environments/environment';
-
-import { FooterComponent } from './_components/footer/footer.component';
+import { CanonicalService } from '@shared/canonical.service';
 import { RouterOutlet } from '@angular/router';
-import { NavComponent } from './_components/nav/nav.component';
-import { AlertComponent } from './_components/alert/alert.component';
-import { SearchComponent } from './_components/search/search.component';
+import { FooterComponent } from '@components/footer/footer.component';
+import { NavComponent } from '@components/nav/nav.component';
+import { AlertComponent } from '@components/alert/alert.component';
+import { SearchComponent } from '@components/search/search.component';
+import { environment } from '@environments/environment';
+import { UsersService } from '@services/users.service';
 
 @Component({
   selector: 'app-root',

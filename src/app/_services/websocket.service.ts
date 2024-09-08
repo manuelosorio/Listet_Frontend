@@ -2,13 +2,13 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { EMPTY, fromEvent, Observable, Subscriber } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { environment } from '../../environments/environment';
-import { CommentModel } from '../models/comment.model';
-import { CommentEvents } from '../helper/comment.events';
-import { ListItemEvents } from '../helper/list-item.events';
-import { ListItemModel } from '../models/list-item.model';
-import { ListEvents } from '../helper/list.events';
-import { ListModel } from '../models/list.model';
+import { environment } from '@environments/environment';
+import { CommentEvents } from '@helpers/comment.events';
+import { ListItemEvents } from '@helpers/list-item.events';
+import { ListEvents } from '@helpers/list.events';
+import { CommentModel } from '@models/comment.model';
+import { ListModel } from '@models/list.model';
+import { ListItemModel } from '@models/list-item.model';
 
 @Injectable({
   providedIn: 'root',

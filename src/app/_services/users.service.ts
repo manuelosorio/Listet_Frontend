@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 import {
   BehaviorSubject,
   catchError,
@@ -9,14 +9,13 @@ import {
   of,
   Subject,
   takeUntil,
-  throwError,
 } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { ErrorResponse } from '../models/response/errors/error.response';
+import { environment } from '@environments/environment';
+import { ErrorResponse } from '@models/response/errors/error.response';
+import { UserModel, UserResponse } from '@models/user.model';
+import { EndpointResponse } from '@models/response/endpoint.response';
 import { AlertService } from './alert.service';
-import { UserModel, UserResponse } from '../models/user.model';
-import { EndpointResponse } from '../models/response/endpoint.response';
 
 @Injectable({
   providedIn: 'root',

@@ -5,8 +5,8 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { UsersService } from '../_services/users.service';
 import { filter, map, take } from 'rxjs/operators';
+import { UsersService } from '@services/users.service';
 
 export const GuestGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,

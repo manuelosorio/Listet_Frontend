@@ -4,15 +4,14 @@ import {
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
-import { UsersService } from '../../_services/users.service';
-import { ErrorResponse } from '../../models/response/errors/error.response';
-import { MetaTagModel } from '../../models/metatag.model';
-import { SeoService } from '../../_services/seo.service';
-import { environment } from '../../../environments/environment';
-
-import { BackButtonComponent } from '../../_components/back-button/back-button.component';
-import { IconsModule } from '../../_modules/icons/icons.module';
 import { RouterLink } from '@angular/router';
+import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { environment } from '@environments/environment';
+import { ErrorResponse } from '@models/response/errors/error.response';
+import { MetaTagModel } from '@models/metatag.model';
+import { IconsModule } from '@modules/icons/icons.module';
+import { SeoService } from '@services/seo.service';
+import { UsersService } from '@services/users.service';
 
 @Component({
   selector: 'app-signup',

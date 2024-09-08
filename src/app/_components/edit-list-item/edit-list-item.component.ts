@@ -1,14 +1,14 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
-import { ListsService } from '../../_services/lists.service';
-import { ListItemModel } from '../../models/list-item.model';
-import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
+import { ListsService } from '@services/lists.service';
+import { ListItemModel } from '@models/list-item.model';
+import { ActionButtonComponent } from '@shared/action-button/action-button.component';
 
 @Component({
   selector: 'app-edit-list-item',

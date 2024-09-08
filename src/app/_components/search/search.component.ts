@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { filter } from 'rxjs/operators';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { IconsModule } from '@modules/icons/icons.module';
 
 @Component({
   selector: 'app-search',

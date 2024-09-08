@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SettingsComponent } from './settings.component';
-import { SettingsProfileComponent } from '../../_components/settings-profile/settings-profile.component';
-import { SettingsDeleteAccountComponent } from '../../_components/settings-delete-account/settings-delete-account.component';
-import { SettingsPasswordComponent } from '../../_components/settings-password/settings-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IconsModule } from '../../_modules/icons/icons.module';
 import { provideHttpClient } from '@angular/common/http';
-// import { AlertComponent } from 'src/app/_components/alert/alert.component';
+import { SettingsComponent } from './settings.component';
+import { SettingsProfileComponent } from '@components/settings-profile/settings-profile.component';
+import { SettingsDeleteAccountComponent } from '@components/settings-delete-account/settings-delete-account.component';
+import { SettingsPasswordComponent } from '@components/settings-password/settings-password.component';
+import { IconsModule } from '@modules/icons/icons.module';
+
 const routes: Routes = [
   {
     path: '',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListComponent } from '../../_components/list/list.component';
+import { ListComponent } from '@components/list/list.component';
 
 @Component({
   selector: 'app-your-list',

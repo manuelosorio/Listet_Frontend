@@ -6,12 +6,12 @@ import {
   PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
-import { AlertService } from '../../_services/alert.service';
+import { AlertService } from '@services/alert.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe, isPlatformBrowser, NgClass } from '@angular/common';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { IconsModule } from '@modules/icons/icons.module';
 import { RouterLink } from '@angular/router';
-import { Alert } from '../../models/alerts.model';
+import { Alert } from '@models/alerts.model';
 import { map } from 'rxjs/operators';
 
 @Component({

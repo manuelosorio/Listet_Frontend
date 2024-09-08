@@ -1,11 +1,11 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { CanonicalService } from './shared/canonical.service';
+import { CanonicalService } from '@shared/canonical.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
-import { UsersService } from './_services/users.service';
+import { UsersService } from '@services/users.service';
 import { BehaviorSubject, of } from 'rxjs';
-import { IconsModule } from './_modules/icons/icons.module';
+import { IconsModule } from '@modules/icons/icons.module';
 
 describe('AppComponent', () => {
   let mockUserService: Partial<UsersService>;

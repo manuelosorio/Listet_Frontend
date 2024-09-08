@@ -7,18 +7,18 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ListsService } from '../../_services/lists.service';
-import { ListDataService } from '../../shared/list-data.service';
-import { WebsocketService } from '../../_services/websocket.service';
-import { ListItemEvents } from '../../helper/list-item.events';
-import { ListItemModel } from '../../models/list-item.model';
 import { Subscription } from 'rxjs';
-import { AddItemComponent } from '../add-item/add-item.component';
-import { EditListItemComponent } from '../edit-list-item/edit-list-item.component';
-import { DeadlineComponent } from '../../shared/deadline/deadline.component';
 import { FeatherModule } from 'angular-feather';
-import { ListModel } from '../../models/list.model';
-import { ListDataModel } from '../../models/list-data.model';
+import { DeadlineComponent } from '@shared/deadline/deadline.component';
+import { ListDataService } from '@shared/list-data.service';
+import { AddItemComponent } from '@components/add-item/add-item.component';
+import { EditListItemComponent } from '@components/edit-list-item/edit-list-item.component';
+import { ListItemEvents } from '@helpers/list-item.events';
+import { ListItemModel } from '@models/list-item.model';
+import { ListModel } from '@models/list.model';
+import { ListDataModel } from '@models/list-data.model';
+import { ListsService } from '@services/lists.service';
+import { WebsocketService } from '@services/websocket.service';
 
 @Component({
   selector: 'app-list-items',

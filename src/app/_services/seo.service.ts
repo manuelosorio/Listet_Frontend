@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { MetaTagModel } from '../models/metatag.model';
+import { MetaTagModel } from '@models/metatag.model';
 
 @Injectable({
   providedIn: 'root',

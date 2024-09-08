@@ -1,20 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ListModel } from '../../models/list.model';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
-import { ListsService } from '../../_services/lists.service';
-import { AlertService } from '../../_services/alert.service';
-import { Response } from '../../_pages/create-list/create-list.component';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ListVisibility } from '../../helper/list-visibility';
-import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 import { FeatherModule } from 'angular-feather';
+import { ListModel } from '@models/list.model';
+import { ListsService } from '@services/lists.service';
+import { AlertService } from '@services/alert.service';
+import { Response } from '@pages/create-list/create-list.component';
+import { ListVisibility } from '@helpers/list-visibility';
+import { ActionButtonComponent } from '@shared/action-button/action-button.component';
 
 interface OnSubmitParams<Data extends ListModel> {
   data?: Data;

@@ -5,9 +5,9 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { UsersService } from '../_services/users.service';
 import { filter, map, take } from 'rxjs/operators';
-import { AlertService } from '../_services/alert.service';
+import { AlertService } from '@services/alert.service';
+import { UsersService } from '@services/users.service';
 
 export const VerifiedGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
