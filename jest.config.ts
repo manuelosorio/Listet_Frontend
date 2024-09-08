@@ -90,7 +90,19 @@ const config: Config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^@components/(.*)$': '<rootDir>/src/app/_components/$1',
+    '^@layouts/(.*)$': '<rootDir>/src/app/_layouts/$1',
+    '^@pages/(.*)$': '<rootDir>/src/app/_pages/$1',
+    '^@services/(.*)$': '<rootDir>/src/app/_services/$1',
+    '^@helpers/(.*)$': '<rootDir>/src/app/helper/$1',
+    '^@utilities/(.*)$': '<rootDir>/src/app/utils/$1',
+    '^@assets/(.*)$': '<rootDir>/src/assets/$1',
+    '^@environments/(.*)$': '<rootDir>/src/environments/$1',
+    '^@models/(.*)$': '<rootDir>/src/app/models/$1',
+    '^@modules/(.*)$': '<rootDir>/src/app/_modules/$1',
+    '^@shared/(.*)$': '<rootDir>/src/app/shared/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
