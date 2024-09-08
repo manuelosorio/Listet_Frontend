@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UsersService } from '../../_services/users.service';
+import { UsersService } from '@services/users.service';
 import {
   AbstractControl,
   UntypedFormBuilder,

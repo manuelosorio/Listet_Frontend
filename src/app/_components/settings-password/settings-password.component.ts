@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../../_services/users.service';
+import { UsersService } from '@services/users.service';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -9,9 +9,9 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { EndpointResponse } from '../../models/response/endpoint.response';
-import { ErrorResponse } from '../../models/response/errors/error.response';
-import { AlertService } from '../../_services/alert.service';
+import { EndpointResponse } from '@models/response/endpoint.response';
+import { ErrorResponse } from '@models/response/errors/error.response';
+import { AlertService } from '@services/alert.service';
 import { FeatherModule } from 'angular-feather';
 
 @Component({

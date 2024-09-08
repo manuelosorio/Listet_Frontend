@@ -8,7 +8,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { WebsocketService } from '../../_services/websocket.service';
+import { WebsocketService } from '@services/websocket.service';
 import { Observable } from 'rxjs';
 
 describe('ListCommentsComponent', () => {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ListModel } from '../models/list.model';
-import { UserModel } from '../models/user.model';
+import { ListModel } from '@models/list.model';
+import { UserModel } from '@models/user.model';
 export class SearchDataService {
   @Injectable({
     providedIn: 'root',

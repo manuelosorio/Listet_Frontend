@@ -5,11 +5,11 @@ import {
   provideRouter,
 } from '@angular/router';
 import { ListComponent } from './list.component';
-import { SeoService } from '../../_services/seo.service';
-import { ListsService } from '../../_services/lists.service';
+import { SeoService } from '@services/seo.service';
+import { ListsService } from '@services/lists.service';
 import { of, Subject } from 'rxjs';
-import { IconsModule } from '../../_modules/icons/icons.module';
-import { WebsocketService } from '../../_services/websocket.service';
+import { IconsModule } from '@modules/icons/icons.module';
+import { WebsocketService } from '@services/websocket.service';
 
 describe('ListComponent', () => {
   let component: ListComponent;

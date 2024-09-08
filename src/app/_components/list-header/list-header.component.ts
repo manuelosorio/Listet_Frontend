@@ -5,22 +5,23 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { ListsService } from '../../_services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { MetaTagModel } from '../../models/metatag.model';
-import { SeoService } from '../../_services/seo.service';
-import { ListDataService } from '../../shared/list-data.service';
-import { UsersService } from '../../_services/users.service';
-import { ListModel } from '../../models/list.model';
+import { ListDataService } from '@app/shared/list-data.service';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from '../../_services/websocket.service';
-import { AlertService } from '../../_services/alert.service';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
-import { environment } from '../../../environments/environment';
-import { EditListComponent } from '../edit-list/edit-list.component';
 import { FeatherModule } from 'angular-feather';
-import { DeadlineComponent } from '../../shared/deadline/deadline.component';
-import { ListDataModel } from '../../models/list-data.model';
+
+import { DeadlineComponent } from '@app/shared/deadline/deadline.component';
+import { EditListComponent } from '@components/edit-list/edit-list.component';
+import { environment } from '@environments/environment';
+import { ListModel } from '@models/list.model';
+import { MetaTagModel } from '@models/metatag.model';
+import { AlertService } from '@services/alert.service';
+import { ListsService } from '@services/lists.service';
+import { ListDataModel } from '@models/list-data.model';
+import { SeoService } from '@services/seo.service';
+import { WebsocketService } from '@services/websocket.service';
+import { UsersService } from '@services/users.service';
 
 @Component({
   selector: 'app-list-header',

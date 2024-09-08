@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { DateUtil } from '../../utils/dateUtil';
-import { FeatherModule } from 'angular-feather';
 import { DatePipe } from '@angular/common';
+import { FeatherModule } from 'angular-feather';
 
 @Component({
   selector: 'app-deadline',

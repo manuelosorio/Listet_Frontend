@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ProfileComponent } from './profile.component';
-import { IconsModule } from '../../_modules/icons/icons.module';
 import { of } from 'rxjs';
+import { ProfileComponent } from './profile.component';
+import { IconsModule } from '@modules/icons/icons.module';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;

@@ -24,7 +24,7 @@ import {
   X,
   XCircle,
 } from 'angular-feather/icons';
-import { UserCircle } from '../../shared/other-icons';
+import { UserCircle } from '@app/shared/other-icons';
 import { FeatherModule } from 'angular-feather';
 
 const icons: { [key: string]: string } = {

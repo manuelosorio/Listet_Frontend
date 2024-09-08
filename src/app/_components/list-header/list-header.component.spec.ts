@@ -6,10 +6,10 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { IconsModule } from '../../_modules/icons/icons.module';
 import { ActivatedRoute } from '@angular/router';
-import { WebsocketService } from '../../_services/websocket.service';
 import { Observable } from 'rxjs';
+import { IconsModule } from '@modules/icons/icons.module';
+import { WebsocketService } from '@services/websocket.service';
 
 describe('ListHeaderComponent', () => {
   let component: ListHeaderComponent;

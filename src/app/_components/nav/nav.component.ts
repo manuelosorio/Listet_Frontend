@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { UsersService } from '../../_services/users.service';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { UserCircle } from '../../shared/other-icons';
+import { UserCircle } from '@app/shared/other-icons';
+import { IconsModule } from '@modules/icons/icons.module';
+import { UsersService } from '@services/users.service';
 
-import { IconsModule } from '../../_modules/icons/icons.module';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',

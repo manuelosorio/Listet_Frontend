@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../_services/alert.service';
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -7,11 +6,12 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { ListsService } from '../../_services/lists.service';
 import { Router } from '@angular/router';
-import { ListVisibility } from '../../helper/list-visibility';
-import { ListModel } from '../../models/list.model';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { ListVisibility } from '@helpers/list-visibility';
+import { ListModel } from '@models/list.model';
+import { IconsModule } from '@modules/icons/icons.module';
+import { AlertService } from '@services/alert.service';
+import { ListsService } from '@services/lists.service';
 
 export interface Response {
   message: string;

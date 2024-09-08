@@ -7,7 +7,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { IconsModule } from '@modules/icons/icons.module';
 import { ActivatedRoute } from '@angular/router';
 
 describe('CreateCommentComponent', () => {

@@ -5,14 +5,14 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { WebsocketService } from '../../_services/websocket.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { AlertService } from '../../_services/alert.service';
-import { ListCommentsComponent } from '../../_components/list-comments/list-comments.component';
-import { ListItemsComponent } from '../../_components/list-items/list-items.component';
-import { ListHeaderComponent } from '../../_components/list-header/list-header.component';
+import { ListCommentsComponent } from '@components/list-comments/list-comments.component';
+import { ListItemsComponent } from '@components/list-items/list-items.component';
+import { ListHeaderComponent } from '@components/list-header/list-header.component';
+import { WebsocketService } from '@services/websocket.service';
+import { AlertService } from '@services/alert.service';
 
 @Component({
   selector: 'app-list-details',
