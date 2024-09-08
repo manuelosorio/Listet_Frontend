@@ -10,7 +10,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '@services/websocket.service';
 import { formatDate, isPlatformBrowser } from '@angular/common';
-import { ListDataService } from '@app/shared/list-data.service';
+import { ListDataService } from '@shared/list-data.service';
 import { DateUtil } from '@utilities/dateUtil';
 import { CommentModel } from '@models/comment.model';
 import { UsersService } from '@services/users.service';

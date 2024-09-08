@@ -9,15 +9,14 @@ import { NgOptimizedImage } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './app.routes';
-import { ActionButtonModule } from './shared/action-button/action-button.module';
-import { CharacterCounterModule } from './shared/character-counter/character-counter.module';
-import { DeadlineModule } from './shared/deadline/deadline.module';
-import { ListDataService } from './shared/list-data.service';
-import { SearchDataService } from './shared/search-data.service';
+import { ActionButtonModule } from '@shared/action-button/action-button.module';
+import { CharacterCounterModule } from '@shared/character-counter/character-counter.module';
+import { DeadlineModule } from '@shared/deadline/deadline.module';
+import { ListDataService } from '@shared/list-data.service';
+import { SearchDataService } from '@shared/search-data.service';
 import { IconsModule } from '@modules/icons/icons.module';
 import { UsersService } from '@services/users.service';
 import {
-  HttpClient,
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi,
@@ -25,7 +24,6 @@ import {
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideClientHydration,
-  withHttpTransferCacheOptions,
   withNoHttpTransferCache,
 } from '@angular/platform-browser';
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { UserCircle } from '@app/shared/other-icons';
+import { UserCircle } from '@shared/other-icons';
 import { IconsModule } from '@modules/icons/icons.module';
 import { UsersService } from '@services/users.service';
 

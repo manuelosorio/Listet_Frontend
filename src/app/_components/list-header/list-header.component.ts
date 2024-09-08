@@ -6,12 +6,12 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ListDataService } from '@app/shared/list-data.service';
+import { ListDataService } from '@shared/list-data.service';
 import { Subscription } from 'rxjs';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { FeatherModule } from 'angular-feather';
 
-import { DeadlineComponent } from '@app/shared/deadline/deadline.component';
+import { DeadlineComponent } from '@shared/deadline/deadline.component';
 import { EditListComponent } from '@components/edit-list/edit-list.component';
 import { environment } from '@environments/environment';
 import { ListModel } from '@models/list.model';

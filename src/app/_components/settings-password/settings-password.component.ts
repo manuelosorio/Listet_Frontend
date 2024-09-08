@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { UsersService } from '@services/users.service';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { EndpointResponse } from '@models/response/endpoint.response';
 import { ErrorResponse } from '@models/response/errors/error.response';

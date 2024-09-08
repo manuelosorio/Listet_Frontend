@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListComponent } from '@components/list/list.component';
-import { SearchDataService } from '@app/shared/search-data.service';
+import { SearchDataService } from '@shared/search-data.service';
 
 @Component({
   selector: 'app-profile',

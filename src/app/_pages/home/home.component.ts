@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SearchDataService } from '@app/shared/search-data.service';
+import { SearchDataService } from '@shared/search-data.service';
 import { ListComponent } from '@components/list/list.component';
 import { environment } from '@environments/environment';
 import { MetaTagModel } from '@models/metatag.model';

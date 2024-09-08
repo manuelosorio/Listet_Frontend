@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { ListsService } from '@services/lists.service';
 import { AlertService } from '@services/alert.service';
 import { Response } from '@pages/create-list/create-list.component';
 import { ListVisibility } from '@helpers/list-visibility';
-import { ActionButtonComponent } from '@app/shared/action-button/action-button.component';
+import { ActionButtonComponent } from '@shared/action-button/action-button.component';
 
 interface OnSubmitParams<Data extends ListModel> {
   data?: Data;

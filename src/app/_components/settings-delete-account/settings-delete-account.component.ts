@@ -3,10 +3,10 @@ import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { FeatherModule } from 'angular-feather';
 import { UsersService } from '@services/users.service';

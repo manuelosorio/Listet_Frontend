@@ -2,14 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommentModel } from '@models/comment.model';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { ListsService } from '@services/lists.service';
-import { CharacterCounterComponent } from '@app/shared/character-counter/character-counter.component';
-import { ActionButtonComponent } from '@app/shared/action-button/action-button.component';
+import { CharacterCounterComponent } from '@shared/character-counter/character-counter.component';
+import { ActionButtonComponent } from '@shared/action-button/action-button.component';
 
 @Component({
   selector: 'app-edit-comment',

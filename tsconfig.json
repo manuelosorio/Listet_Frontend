@@ -2,6 +2,19 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/app/_components/*"],
+      "@environments/*": ["src/environments/*"],
+      "@helpers/*": ["src/app/helper/*"],
+      "@layouts/*": ["src/app/_layouts/*"],
+      "@models/*": ["src/app/models/*"],
+      "@modules/*": ["src/app/_modules/*"],
+      "@pages/*": ["src/app/_pages/*"],
+      "@services/*": ["src/app/_services/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@utilities/*": ["src/app/utils/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "esModuleInterop": true,
@@ -17,22 +30,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
-    "paths": {
-      "rxjs": ["node_modules/rxjs"],
-      "socket.io-client": ["node_modules/socket.io-client"],
-      "@components/*": ["src/app/_components/*"],
-      "@layouts/*": ["src/app/_layouts/*"],
-      "@pages/*": ["src/app/_pages/*"],
-      "@services/*": ["src/app/_services/*"],
-      "@helpers/*": ["src/app/helper/*"],
-      "@utilities/*": ["src/app/utils/*"],
-      "@assets/*": ["src/assets/*"],
-      "@environments/*": ["src/environments/*"],
-      "@models/*": ["src/app/models/*"],
-      "@modules/*": ["src/app/_modules/*"],
-      "@app/*": ["src/app/*"],
-    },
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

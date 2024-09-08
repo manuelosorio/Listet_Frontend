@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CanonicalService } from './shared/canonical.service';
+import { CanonicalService } from '@shared/canonical.service';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '@components/footer/footer.component';
 import { NavComponent } from '@components/nav/nav.component';
