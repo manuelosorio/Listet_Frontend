@@ -39,7 +39,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private username: any;
   private slug: any;
-  private listData: Subscription = new Subscription();
+  private listData$: Subscription = new Subscription();
   private getListItems$: Subscription = new Subscription();
   private onCompleteItem$: Subscription = new Subscription();
   private onDeleteItem$: Subscription = new Subscription();
@@ -106,7 +106,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
-    this.listData = this.listDataService.listData$.subscribe({
+    this.listData$ = this.listDataService.listData$.subscribe({
       next: (data: any) => {
         this.isOwner = data.isOwner;
       },
@@ -158,7 +158,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.getListItems$.unsubscribe();
-    this.listData.unsubscribe();
+    this.listData$.unsubscribe();
     if (this.isBrowser) {
       this.onAddItem$.unsubscribe();
       this.onCompleteItem$.unsubscribe();
