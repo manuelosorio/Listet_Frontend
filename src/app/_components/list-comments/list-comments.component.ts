@@ -8,15 +8,15 @@ import {
 import { ListsService } from '@services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from '@services/websocket.service';
-import { formatDate, isPlatformBrowser } from '@angular/common';
-import { ListDataService } from '@shared/list-data.service';
-import { DateUtil } from '@utilities/dateUtil';
-import { CommentModel } from '@models/comment.model';
-import { UsersService } from '@services/users.service';
-import { EditCommentComponent } from '@components/edit-comment/edit-comment.component';
 import { FeatherModule } from 'angular-feather';
+import { formatDate, isPlatformBrowser } from '@angular/common';
 import { CreateCommentComponent } from '@components/create-comment/create-comment.component';
+import { EditCommentComponent } from '@components/edit-comment/edit-comment.component';
+import { CommentModel } from '@models/comment.model';
+import { ListDataService } from '@shared/list-data.service';
+import { WebsocketService } from '@services/websocket.service';
+import { UsersService } from '@services/users.service';
+import { DateUtil } from '@utilities/dateUtil';
 
 @Component({
   selector: 'app-list-comments',
@@ -71,9 +71,14 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       this.isAuth = res;
     });
     if (this.isBrowser) {
-      this.listData = this.listDataService.listData$.subscribe((data: any) => {
-        this.isListOwner = data.isOwner;
-        this.commentsEnabled = data.allow_comments === 1;
+      this.listData = this.listDataService.listData$.subscribe({
+        next: (data: any) => {
+          this.isListOwner = data.isOwner;
+          this.commentsEnabled = data.allow_comments === 1;
+        },
+        error: error => {
+          console.error(error);
+        },
       });
       this.getComments = this.listService.comment$.subscribe(comments => {
         this.comments = comments;

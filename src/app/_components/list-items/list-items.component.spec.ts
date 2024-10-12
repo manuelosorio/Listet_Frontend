@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ListItemsComponent } from './list-items.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { ListItemsComponent } from './list-items.component';
 import { IconsModule } from '@modules/icons/icons.module';
 import { WebsocketService } from '@services/websocket.service';
 import { ListDataService } from '@shared/list-data.service';
 import { ListsService } from '@services/lists.service';
-import { Subject } from 'rxjs';
 
 describe('ListItemsComponent', () => {
   let component: ListItemsComponent;

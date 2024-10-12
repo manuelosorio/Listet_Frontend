@@ -6,9 +6,9 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { IconsModule } from '../../_modules/icons/icons.module';
+import { IconsModule } from '@modules/icons/icons.module';
 import { ActivatedRoute } from '@angular/router';
-import { WebsocketService } from '../../_services/websocket.service';
+import { WebsocketService } from '@services/websocket.service';
 import { Observable } from 'rxjs';
 
 describe('ListDetailsComponent', () => {
@@ -66,5 +66,17 @@ describe('ListDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should render list header component', () => {
+    const listHeader = fixture.nativeElement.querySelector('app-list-header');
+    expect(listHeader).toBeTruthy();
+  });
+  it('should render list items component', () => {
+    const listItems = fixture.nativeElement.querySelector('app-list-items');
+    expect(listItems).toBeTruthy();
+  });
+  it('should render comments component', () => {
+    const comments = fixture.nativeElement.querySelector('app-list-comments');
+    expect(comments).toBeTruthy();
   });
 });
