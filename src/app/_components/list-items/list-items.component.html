@@ -1,7 +1,6 @@
 <section>
   @for (item of items; track item) {
-    <ng-container>
-      @if (item.isEditing === false) {
+      @if (!item.isEditing) {
         <div>
           <input
             (change)="checked($event)"
@@ -21,9 +20,7 @@
               [name]="item['completed'] === 0 ? 'square' : 'check-square'"
             ></i-feather>
           </span>
-          <span class="list-item__info">
-            {{ item['item'] }}
-          </span>
+          <span class="list-item__info">{{ item['item'] }}</span>
           <app-deadline
             [deadline]="item['deadline']"
             [isComplete]="item['completed']"
@@ -32,10 +29,10 @@
             <button class="more">
               <i-feather name="more-vertical"></i-feather>
               <span class="more__options card">
-                <button (click)="edit(item)">
+                <button class='edit' (click)="edit(item)">
                   <i-feather name="edit"></i-feather> Edit
                 </button>
-                <button (click)="deleteListItem(item['id'])">
+                <button class="delete" (click)="deleteListItem(item['id'])">
                   <i-feather name="trash"></i-feather> Delete
                 </button>
               </span>
@@ -46,7 +43,8 @@
       } @else {
         <app-edit-list-item [listItem]="item"></app-edit-list-item>
       }
-    </ng-container>
   }
 </section>
-<app-add-item></app-add-item>
+@if (isOwner) {
+  <app-add-item></app-add-item>
+}

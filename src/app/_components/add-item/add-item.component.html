@@ -1,37 +1,35 @@
-@if (isOwner) {
-  <form [formGroup]="listItemForm" (ngSubmit)="onSubmit(listItemForm.value)">
-    <div class="l-row">
-      <fieldset class="form__fieldset">
-        <input
-          type="text"
-          formControlName="item"
-          id="list_item"
-          class="form__input"
-          placeholder="List Item"
-        />
-        <label class="form__label" for="list_item">List Item Name</label>
-      </fieldset>
-      <fieldset class="form__fieldset">
-        <input
-          type="date"
-          formControlName="deadline"
-          id="deadline"
-          class="form__input"
-          placeholder="Deadline"
-          pattern="\d{4}-\d{2}-\d{2}"
-        />
-        <label class="form__label" for="deadline">Deadline (Optional)</label>
-      </fieldset>
-    </div>
-    <div class="l-row">
-      <button
-        class="btn btn--primary form__btn"
-        [class.btn--disabled]='item.invalid'
-        [disabled]="item.invalid"
-        type="submit"
-      >
-        Add Item
-      </button>
-    </div>
-  </form>
-}
+<form [formGroup]="listItemForm" (ngSubmit)="onSubmit(listItemForm.value)">
+  <div class="l-row">
+    <fieldset class="form__fieldset">
+      <input
+        type="text"
+        formControlName="item"
+        id="list_item"
+        class="form__input"
+        placeholder="List Item"
+      />
+      <label class="form__label" for="list_item">List Item Name</label>
+    </fieldset>
+    <fieldset class="form__fieldset">
+      <input
+        type="date"
+        formControlName="deadline"
+        id="deadline"
+        class="form__input"
+        placeholder="Deadline"
+        pattern="\d{4}-\d{2}-\d{2}"
+      />
+      <label class="form__label" for="deadline">Deadline (Optional)</label>
+    </fieldset>
+  </div>
+  <div class="l-row">
+    <button
+      class="btn btn--primary form__btn"
+      [class.btn--disabled]='item.invalid'
+      [disabled]="item.invalid"
+      type="submit"
+    >
+      Add Item
+    </button>
+  </div>
+</form>
