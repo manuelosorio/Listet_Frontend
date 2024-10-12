@@ -107,7 +107,6 @@ describe('ListItemsComponent', () => {
     expect(listItemContextMenu).toBeFalsy();
   });
   it('should render add item component', () => {
-    console.log(component.isOwner);
     const addItemComponent = fixture.nativeElement.querySelector(
       'app-add-item'
     );
