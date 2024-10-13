@@ -40,6 +40,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   public commentsEnabled?: boolean;
   public comments: Array<CommentModel> = [];
   private listData$: Subscription = new Subscription();
+  private userData$: Subscription = new Subscription();
   private onCreateComment$: Subscription = new Subscription();
   private onDeleteComment$: Subscription = new Subscription();
   private onEditComment$: Subscription = new Subscription();
@@ -61,7 +62,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     this.returnUrl = this.router.routerState.snapshot.url;
     this.listService.getListComments(this.slug);
 
-    this.userService.userInfo$.subscribe(res => {
+    this.userData$ = this.userService.userInfo$.subscribe(res => {
       try {
         this.username = res.username;
       } catch (e) {}
@@ -91,6 +92,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       this.onCreateComment$ = this.websocketService
         .onCreateComment()
         .subscribe((comment: CommentModel) => {
+          comment.is_owner = comment.username === this.username;
           this.count += 1;
           this.updateTimeDifference();
           const creationDate = new DateUtil(new Date(), comment.comment);
@@ -144,6 +146,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.getComments$.unsubscribe();
       this.listData$.unsubscribe();
+      this.userData$.unsubscribe();
       this.onCreateComment$.unsubscribe();
       this.onDeleteComment$.unsubscribe();
       this.onEditComment$.unsubscribe();
