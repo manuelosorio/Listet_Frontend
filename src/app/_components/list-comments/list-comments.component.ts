@@ -9,7 +9,7 @@ import { ListsService } from '@services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FeatherModule } from 'angular-feather';
-import { formatDate, isPlatformBrowser } from '@angular/common';
+import { DatePipe, formatDate, isPlatformBrowser } from '@angular/common';
 import { CreateCommentComponent } from '@components/create-comment/create-comment.component';
 import { EditCommentComponent } from '@components/edit-comment/edit-comment.component';
 import { CommentModel } from '@models/comment.model';
@@ -28,6 +28,7 @@ import { DateUtil } from '@utilities/dateUtil';
     RouterLink,
     FeatherModule,
     EditCommentComponent,
+    DatePipe,
   ],
   host: { ngSkipHydration: 'true' },
 })
@@ -35,10 +36,10 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   private username?: string;
   private readonly slug: string;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
-  private getComments: Subscription = new Subscription();
+  private getComments$: Subscription = new Subscription();
   public commentsEnabled?: boolean;
   public comments: Array<CommentModel> = [];
-  private listData: Subscription = new Subscription();
+  private listData$: Subscription = new Subscription();
   private onCreateComment$: Subscription = new Subscription();
   private onDeleteComment$: Subscription = new Subscription();
   private onEditComment$: Subscription = new Subscription();
@@ -71,7 +72,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       this.isAuth = res;
     });
     if (this.isBrowser) {
-      this.listData = this.listDataService.listData$.subscribe({
+      this.listData$ = this.listDataService.listData$.subscribe({
         next: (data: any) => {
           this.isListOwner = data.isOwner;
           this.commentsEnabled = data.allow_comments === 1;
@@ -80,7 +81,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
           console.error(error);
         },
       });
-      this.getComments = this.listService.comment$.subscribe(comments => {
+      this.getComments$ = this.listService.comment$.subscribe(comments => {
         this.comments = comments;
         this.updateTimeDifference();
         this.count = this.comments.length;
@@ -94,7 +95,6 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
           this.updateTimeDifference();
           const creationDate = new DateUtil(new Date(), comment.comment);
           comment.time_difference = creationDate.getFormattedTimeDifference();
-          comment.formatted_creation_date = creationDate.format();
           this.comments.unshift(comment);
         });
       this.onDeleteComment$ = this.websocketService
@@ -131,20 +131,10 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
       if (comment.date_updated) {
         const dateUpdated = new DateUtil(comment.date_updated, comment.comment);
         comment.time_difference = dateUpdated.getFormattedTimeDifference();
-        comment.formatted_creation_date = formatDate(
-          comment.creation_date,
-          'MMM d, YYYY',
-          'en'
-        );
         return comment;
       }
       const creationDate = new DateUtil(comment.creation_date, comment.comment);
       comment.time_difference = creationDate.getFormattedTimeDifference();
-      comment.formatted_creation_date = formatDate(
-        comment.creation_date,
-        'MMM d, YYYY',
-        'en'
-      );
       return comment;
     });
   }
@@ -152,8 +142,8 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authenticated$.unsubscribe();
     if (this.isBrowser) {
-      this.getComments.unsubscribe();
-      this.listData.unsubscribe();
+      this.getComments$.unsubscribe();
+      this.listData$.unsubscribe();
       this.onCreateComment$.unsubscribe();
       this.onDeleteComment$.unsubscribe();
       this.onEditComment$.unsubscribe();

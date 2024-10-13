@@ -27,9 +27,13 @@
                 Created
               }
               {{ comment['time_difference'] }}
-              <span class="tooltip">{{
-                comment['formatted_creation_date']
-              }}</span>
+              <span class="tooltip">
+                @if (comment.date_updated) {
+                  {{ comment.date_updated | date: 'mediumDate' }}
+                } @else {
+                  {{ comment.creation_date | date: 'mediumDate' }}
+                }
+              </span>
             </em>
           </div>
           <div>
