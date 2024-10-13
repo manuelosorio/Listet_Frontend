@@ -1,78 +1,69 @@
-@if (minimumCharacters) {
-  <svg>
-    <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
-    <circle
-      [attr.r]="radius"
-      cx="50%"
-      cy="50%"
-      [class]="
-        characterCount > 0 && characterCount < minimumCharacters
-          ? 'circle-fg'
-          : characterCount >= minimumCharacters
-            ? 'circle-fg__success'
-            : 'circle-bg'
-      "
-      [ngStyle]="{ 'stroke-dasharray': [coloredArea, greyedArea] }"
-    ></circle>
-    @if (maximumCharacters) {
-      <ng-container>
-        <circle
-          [attr.r]="radius2"
-          cx="50%"
-          cy="50%"
-          [class]="
-            maxCharacterCount === 0
-              ? ''
-              : maxCharacterCount >= maximumCharacters - 20 ||
-                  maxCharacterCount < minimumCharacters
-                ? 'circle-fg'
-                : maxCharacterCount < maximumCharacters
-                  ? 'circle-fg__success'
-                  : 'circle-bg'
-          "
-          [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
-        ></circle>
-      </ng-container>
-    }
-  </svg>
-  <small>
-    @if (characterCount < minimumCharacters) {
-      {{ characterCount }}/{{ minimumCharacters }}
-    } @else {
-      @if (
-        maximumCharacters ||
-        maxCharacterCount < maximumCharacters - 20
-      ) {
-        <i-feather name="check" class="check-mark"></i-feather>
-      } @else {
-        {{ maximumCharacters - maxCharacterCount }}
-      }
-    }
-  </small>
+@if (minimumCharacters()) {
+<svg>
+  <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
+  <circle [attr.r]="radius" cx="50%" cy="50%"
+    [class]="
+      characterCount > 0 && characterCount < minimumCharacters()
+        ? 'circle-fg'
+        : characterCount >= minimumCharacters()
+        ? 'circle-fg__success'
+        : 'circle-bg'
+    "
+    [ngStyle]="{ 'stroke-dasharray': [coloredArea, greyedArea] }"
+  ></circle>
+  @if (maximumCharacters()) {
+  <circle
+    [attr.r]="radius2"
+    cx="50%"
+    cy="50%"
+    [class]="
+      maxCharacterCount === 0
+        ? ''
+        : maxCharacterCount >= maximumCharacters() - 20 ||
+          maxCharacterCount < minimumCharacters()
+        ? 'circle-fg'
+        : maxCharacterCount < maximumCharacters()
+        ? 'circle-fg__success'
+        : 'circle-bg'
+    "
+    [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
+  ></circle>
+  }
+</svg>
+<small>
+  @if (characterCount < minimumCharacters()) {
+  {{ characterCount }}/{{ minimumCharacters() }}
+  } @else { @if (maximumCharacters() === undefined || maxCharacterCount <
+  maximumCharacters() - 20) {
+  <i-feather name="check" class="check-mark"></i-feather>
+  } @else {
+  {{ maximumCharacters() - maxCharacterCount }}
+  } }
+</small>
 } @else {
-  <svg>
-    <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
-    <circle
-      [attr.r]="radius2"
-      cx="50%"
-      cy="50%"
-      [class]="
-        maxCharacterCount === 0
-          ? 'circle-bg'
-          : maxCharacterCount > maximumCharacters - 20
-            ? 'circle-fg'
-            : maxCharacterCount < maximumCharacters
-              ? 'circle-fg__success'
-              : 'circle-bg'
-      "
-      [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
-    ></circle>
-  </svg>
-  <small>
-    @if (maxCharacterCount < maximumCharacters - 20) {
-      <i-feather name="check" class="check-mark"></i-feather>
-    } @else {
-      {{ maximumCharacters - maxCharacterCount }}
-    }
-  </small>
+<svg>
+  <circle [attr.r]="radius" cx="50%" cy="50%" class="circle-bg"></circle>
+  <circle
+    [attr.r]="radius2"
+    cx="50%"
+    cy="50%"
+    [class]="
+      maxCharacterCount === 0
+        ? 'circle-bg'
+        : maxCharacterCount > maximumCharacters() - 20
+        ? 'circle-fg'
+        : maxCharacterCount < maximumCharacters()
+        ? 'circle-fg__success'
+        : 'circle-bg'
+    "
+    [ngStyle]="{ 'stroke-dasharray': [coloredArea2, greyedArea2] }"
+  ></circle>
+</svg>
+<small>
+  @if (maxCharacterCount < maximumCharacters() - 20) {
+  <i-feather name="check" class="check-mark"></i-feather>
+  } @else {
+  {{ maximumCharacters() - maxCharacterCount }}
+  }
+</small>
 }
