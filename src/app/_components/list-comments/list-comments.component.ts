@@ -9,7 +9,7 @@ import { ListsService } from '@services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FeatherModule } from 'angular-feather';
-import { DatePipe, formatDate, isPlatformBrowser } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { CreateCommentComponent } from '@components/create-comment/create-comment.component';
 import { EditCommentComponent } from '@components/edit-comment/edit-comment.component';
 import { CommentModel } from '@models/comment.model';
