@@ -2,7 +2,7 @@
   <section class="l-container">
     @if (head['isEditing'] === false) {
       <div>
-        <p>{{ head.name }}</p>
+        <h1 class='title'>{{ head.name }}</h1>
         <a [routerLink]="['/u/' + head.owner_username]">{{
           head.owner_username
         }}</a>

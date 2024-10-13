@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  input,
+  InputSignal,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -19,21 +25,26 @@ import { ActionButtonComponent } from '@shared/action-button/action-button.compo
   imports: [ReactiveFormsModule, ActionButtonComponent],
 })
 export class EditListItemComponent implements OnInit {
-  @Input() listItem!: ListItemModel;
+  listItem: InputSignal<ListItemModel> = input.required<ListItemModel>();
   public listItemForm!: UntypedFormGroup;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private listService: ListsService
-  ) {}
+  ) {
+    this.listItemForm = this.formBuilder.group({
+      item: ['', [Validators.required]],
+      deadline: [''],
+    });
+  }
   cancel(): void {
-    this.listItem.isEditing = false;
+    this.listItem().isEditing = false;
   }
 
   submit(data: ListItemModel): void {
-    data.list_id = this.listItem.list_id;
-    this.listService.updateItem(data, this.listItem.id).subscribe({
+    data.list_id = this.listItem().list_id;
+    this.listService.updateItem(data, this.listItem().id).subscribe({
       next: _res => {
-        this.listItem.isEditing = false;
+        this.listItem().isEditing = false;
       },
       error: error => {
         console.error(error);
@@ -41,13 +52,13 @@ export class EditListItemComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.listItemForm = this.formBuilder.group({
-      item: ['', [Validators.required]],
-      deadline: [''],
-    });
+    const { deadline, item } = this.listItem();
+    const formattedDeadline = deadline
+      ? new Date(deadline).toISOString().substring(0, 10)
+      : null;
     this.listItemForm.setValue({
-      item: this.listItem.item,
-      deadline: this.listItem.deadline ?? null,
+      item,
+      deadline: formattedDeadline,
     });
   }
   get item(): AbstractControl {

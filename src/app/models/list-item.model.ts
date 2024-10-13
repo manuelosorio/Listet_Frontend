@@ -1,7 +1,7 @@
 export interface ListItemModel {
   id: number;
   item: string;
-  deadline: Date;
+  deadline: Date | null;
   completed: number | boolean;
   list_id: number;
   username: string;

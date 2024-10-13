@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { FeatherModule } from 'angular-feather';
 import { DeadlineComponent } from '@shared/deadline/deadline.component';
 import { ListDataService } from '@shared/list-data.service';
@@ -16,7 +16,6 @@ import { EditListItemComponent } from '@components/edit-list-item/edit-list-item
 import { ListItemEvents } from '@helpers/list-item.events';
 import { ListItemModel } from '@models/list-item.model';
 import { ListModel } from '@models/list.model';
-import { ListDataModel } from '@models/list-data.model';
 import { ListsService } from '@services/lists.service';
 import { WebsocketService } from '@services/websocket.service';
 
@@ -31,22 +30,22 @@ import { WebsocketService } from '@services/websocket.service';
     EditListItemComponent,
     AddItemComponent,
   ],
-  providers: [ListsService, ListDataService, WebsocketService],
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: ListModel[] = [];
   public items: ListItemModel[] = [];
-  public isOwner?: boolean;
+  public isOwner: boolean = false;
   public isEditing: boolean = false;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private username: any;
   private slug: any;
-  private listData$: Subscription;
-  private getListItems$: Subscription;
+  private listData$: Subscription = new Subscription();
+  private getListItems$: Subscription = new Subscription();
   private onCompleteItem$: Subscription = new Subscription();
   private onDeleteItem$: Subscription = new Subscription();
   private onAddItem$: Subscription = new Subscription();
   private onUpdateItem$: Subscription = new Subscription();
+  private unsubscribe$: Subject<void> = new Subject<void>();
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private listService: ListsService,
@@ -65,11 +64,6 @@ export class ListItemsComponent implements OnInit, OnDestroy {
         });
         return this.items;
       });
-    this.listData$ = this.listDataService.listData$.subscribe(
-      (data: ListDataModel) => {
-        this.isOwner = data[`isOwner`] as boolean;
-      }
-    );
   }
   public checked(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -93,14 +87,17 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   public deleteListItem(id: number) {
     if (confirm('Are you sure you want to delete this item?')) {
-      this.listService.deleteListItem(id).subscribe({
-        next: () => {
-          this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
-        },
-        error: error => {
-          console.error(error);
-        },
-      });
+      this.listService
+        .deleteListItem(id)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe({
+          next: () => {
+            this.webSocketService.emit(ListItemEvents.DELETE_ITEM, id);
+          },
+          error: error => {
+            console.error(error);
+          },
+        });
     }
   }
   private deleteArrObject(id: number) {
@@ -109,6 +106,14 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
+    this.listData$ = this.listDataService.listData$.subscribe({
+      next: (data: any) => {
+        this.isOwner = data.isOwner;
+      },
+      error: error => {
+        console.error(error);
+      },
+    });
     if (this.isBrowser) {
       this.onCompleteItem$ = this.webSocketService.onCompleteItem().subscribe({
         next: (res: ListItemModel) => {
@@ -141,16 +146,14 @@ export class ListItemsComponent implements OnInit, OnDestroy {
             }
           });
         });
-      this.onDeleteItem$ = this.webSocketService
-        .listen(ListItemEvents.DELETE_ITEM)
-        .subscribe({
-          next: (res: ListItemModel | any) => {
-            this.deleteArrObject(res);
-          },
-          error: error => {
-            console.error(error);
-          },
-        });
+      this.onDeleteItem$ = this.webSocketService.onDeleteItem().subscribe({
+        next: (res: number | any) => {
+          this.deleteArrObject(res);
+        },
+        error: error => {
+          console.error(error);
+        },
+      });
     }
   }
   ngOnDestroy(): void {

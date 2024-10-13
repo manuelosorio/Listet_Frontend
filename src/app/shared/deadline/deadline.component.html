@@ -15,9 +15,4 @@
       <em>{{ deadlineDate | date: 'mediumDate' : 'UTC00:00'}}</em>
     </small>
   }
-} @else {
-  <small class="no-deadline">
-    <span><i-feather name="clock"></i-feather></span>
-    <em>No Deadline</em>
-  </small>
-}
+} @else {}
