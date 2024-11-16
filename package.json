@@ -67,7 +67,7 @@
     "cypress": "latest",
     "dotenv": "^16.4.5",
     "esbuild-plugin-define": "^0.5.0",
-    "eslint": "^9.0.0",
+    "eslint": "^9.15.0",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.2.2",
     "socket.io": "^4.7.5",
