@@ -36,7 +36,7 @@
     "angular-feather": "^6.5.1",
     "bufferutil": "^4.0.8",
     "core-js": "^3.38.1",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "helmet": "^7.1.0",
     "rxjs": "~7.5.0",
     "socket.io-client": "^4.7.5",
