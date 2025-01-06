@@ -38,7 +38,7 @@
     "core-js": "^3.38.1",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
-    "rxjs": "~7.5.0",
+    "rxjs": "~7.8.1",
     "socket.io-client": "^4.7.5",
     "tslib": "^2.6.3",
     "utf-8-validate": "^5.0.9",
