@@ -18,6 +18,7 @@ import { ListItemModel } from '@models/list-item.model';
 import { ListModel } from '@models/list.model';
 import { ListsService } from '@services/lists.service';
 import { WebsocketService } from '@services/websocket.service';
+import { ListDataModel } from '@models/list-data.model';
 
 @Component({
   selector: 'app-list-items',
@@ -34,7 +35,7 @@ import { WebsocketService } from '@services/websocket.service';
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: ListModel[] = [];
   public items: ListItemModel[] = [];
-  public isOwner: boolean = false;
+  public isOwner: boolean | number = false;
   public isEditing: boolean = false;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private username: any;
@@ -58,7 +59,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
     this.getListItems$ = this.listService
       .getListItems(this.username, this.slug)
       .subscribe(data => {
-        this.items = (data as unknown) as ListItemModel[];
+        this.items = data as unknown as ListItemModel[];
         this.items.filter((item: ListItemModel) => {
           return (item.isEditing = false);
         });
@@ -107,8 +108,8 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.listData$ = this.listDataService.listData$.subscribe({
-      next: (data: any) => {
-        this.isOwner = data.isOwner;
+      next: (data: ListDataModel) => {
+        this.isOwner = Boolean(data.isOwner);
       },
       error: error => {
         console.error(error);

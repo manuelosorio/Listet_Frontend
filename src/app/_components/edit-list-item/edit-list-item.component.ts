@@ -15,6 +15,7 @@ import {
 import { ListsService } from '@services/lists.service';
 import { ListItemModel } from '@models/list-item.model';
 import { ActionButtonComponent } from '@shared/action-button/action-button.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-edit-list-item',
@@ -42,6 +43,7 @@ export class EditListItemComponent implements OnInit {
 
   submit(data: ListItemModel): void {
     data.list_id = this.listItem().list_id;
+    console.log(data);
     this.listService.updateItem(data, this.listItem().id).subscribe({
       next: _res => {
         this.listItem().isEditing = false;
@@ -54,7 +56,7 @@ export class EditListItemComponent implements OnInit {
   ngOnInit(): void {
     const { deadline, item } = this.listItem();
     const formattedDeadline = deadline
-      ? new Date(deadline).toISOString().substring(0, 10)
+      ? formatDate(deadline, 'YYYY-MM-dd', 'en', 'UTC')
       : null;
     this.listItemForm.setValue({
       item,

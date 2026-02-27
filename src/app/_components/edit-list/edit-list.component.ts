@@ -60,7 +60,7 @@ export class EditListComponent implements OnInit {
       title: this.list.name,
       description: this.list.description,
       deadline: this.list.deadline
-        ? formatDate(this.list.deadline, 'YYYY-MM-dd', 'en')
+        ? formatDate(this.list.deadline, 'YYYY-MM-dd', 'en', 'UTC')
         : '',
       visibility: this.visibilityOptions[this.list.visibility],
       allow_comments: !!this.list.allow_comments,
@@ -71,7 +71,7 @@ export class EditListComponent implements OnInit {
   cancel(): void {
     this.list.isEditing = false;
   }
-  onSubmit(data: OnSubmitParams<any>): void {
+  onSubmit(data: ListModel): void {
     data.prevSlug = this.route.snapshot.params.slug;
     this.listService.updateList(data, this.list.id).subscribe({
       next: async (res: object) => {

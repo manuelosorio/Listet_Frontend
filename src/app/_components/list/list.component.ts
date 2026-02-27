@@ -69,12 +69,15 @@ export class ListComponent implements OnInit, OnDestroy {
         break;
       }
       case 'SearchResults': {
-        this.listSearchData$ = this.searchData.listResults$.subscribe(
-          async (res: ListModel[]) => {
+        this.listSearchData$ = this.searchData.listResults$.subscribe({
+          next: async (res: ListModel[]) => {
             this.lists = res;
             this.show(this.lists);
-          }
-        );
+          },
+          error: err => {
+            this.errorMessage = err.message;
+          },
+        });
         break;
       }
       case 'User': {
@@ -82,7 +85,7 @@ export class ListComponent implements OnInit, OnDestroy {
         meta.title = `Listet App - ${this.route.snapshot.params['username']}'s Lists`;
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = (data as unknown) as ListModel[];
+            this.lists = data as unknown as ListModel[];
             this.show(this.lists);
           },
           error: err => {
@@ -94,7 +97,7 @@ export class ListComponent implements OnInit, OnDestroy {
       default: {
         this.listService.getLists().subscribe({
           next: async (data: any) => {
-            this.lists = (data as unknown) as ListModel[];
+            this.lists = data as unknown as ListModel[];
             this.show(this.lists);
           },
           error: err => {
