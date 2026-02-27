@@ -52,7 +52,7 @@ export class AlertService {
       text: string;
       url: string;
     } | null,
-    timeout?: number,
+    timeout: number = 5000,
     keepAfterRouterChange?: boolean
   ): void {
     this.alertSubject.next(null);
@@ -82,7 +82,7 @@ export class AlertService {
       text: string;
       url: string;
     } | null,
-    timeout?: number,
+    timeout: number = 5000,
     keepAfterRouterChange?: boolean
   ): void {
     this.keepAfterRouteChange = keepAfterRouterChange ?? false;
@@ -111,7 +111,7 @@ export class AlertService {
       text: string;
       url: string;
     } | null,
-    timeout?: number,
+    timeout: number = 5000,
     keepAfterRouterChange?: boolean
   ): void {
     this.keepAfterRouteChange = keepAfterRouterChange ?? false;
