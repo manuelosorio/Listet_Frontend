@@ -1,17 +1,20 @@
 @use "sass:math"
+@use "sass:color"
 
 // Colors
 $primary: #edd135
-$primary-darken: darken($primary, 12%)
+$primary-darken: color.adjust($primary, $lightness: -12%)
 $black: #131313
-$black-darken: darken($black, 100%)
+$black-darken: #000
 $bg: #F8F8F8
 $grey: #707070
 $silver: #EDEDED
-$disabled: darken($silver, 5%)
-$disabled-text: lighten($black, 30%)
+$disabled: color.adjust($silver, $lightness: 5%)
+$disabled-text: color.adjust($black, $lightness: 30%)
 $green: #2A9D32
+$green-darken: color.adjust($green, $lightness: -5%)
 $red: #E83518
+$red-darken: color.adjust($red, $lightness: -5%)
 // Shadows
 $shadow: 0px 20px 15px -15px rgba($black, 0.2), 0px 0px 15px rgba($black, 0.1)
 $shadow-hover: 0px 11px 13px -6px rgba($black, 0.2), 0px 0px 10px rgba($black, 0.25)
