@@ -15,12 +15,11 @@ import { Alert } from '@models/alerts.model';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.sass'],
-  encapsulation: ViewEncapsulation.ShadowDom,
-  imports: [IconsModule, NgClass, RouterLink, AsyncPipe],
-  standalone: true,
+    selector: 'app-alert',
+    templateUrl: './alert.component.html',
+    styleUrls: ['./alert.component.sass'],
+    encapsulation: ViewEncapsulation.ShadowDom,
+    imports: [IconsModule, NgClass, RouterLink, AsyncPipe]
 })
 export class AlertComponent implements OnInit, OnDestroy {
   private currentAlert?: Alert | null;

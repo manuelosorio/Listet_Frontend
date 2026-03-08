@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
 
 @Component({
-  selector: 'app-action-button',
-  templateUrl: './action-button.component.html',
-  styleUrls: ['action-button.component.sass'],
-  standalone: true,
-  imports: [FeatherModule],
+    selector: 'app-action-button',
+    templateUrl: './action-button.component.html',
+    styleUrls: ['action-button.component.sass'],
+    imports: [FeatherModule]
 })
 export class ActionButtonComponent {
   @Input() buttonStyle: 'default' | 'primary';

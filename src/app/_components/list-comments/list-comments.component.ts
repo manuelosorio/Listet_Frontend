@@ -19,18 +19,17 @@ import { UsersService } from '@services/users.service';
 import { DateUtil } from '@utilities/dateUtil';
 
 @Component({
-  selector: 'app-list-comments',
-  templateUrl: './list-comments.component.html',
-  styleUrls: ['./list-comments.component.sass'],
-  standalone: true,
-  imports: [
-    CreateCommentComponent,
-    RouterLink,
-    FeatherModule,
-    EditCommentComponent,
-    DatePipe,
-  ],
-  host: { ngSkipHydration: 'true' },
+    selector: 'app-list-comments',
+    templateUrl: './list-comments.component.html',
+    styleUrls: ['./list-comments.component.sass'],
+    imports: [
+        CreateCommentComponent,
+        RouterLink,
+        FeatherModule,
+        EditCommentComponent,
+        DatePipe,
+    ],
+    host: { ngSkipHydration: 'true' }
 })
 export class ListCommentsComponent implements OnInit, OnDestroy {
   private username?: string;

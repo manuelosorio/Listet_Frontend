@@ -15,12 +15,11 @@ import { UserCardComponent } from '@components/user-card/user-card.component';
 import { ListComponent } from '@components/list/list.component';
 
 @Component({
-  selector: 'app-search-results',
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.sass'],
-  imports: [UserCardComponent, ListComponent, RouterLink],
-  standalone: true,
-  host: { ngSkipHydration: 'true' },
+    selector: 'app-search-results',
+    templateUrl: './search-results.component.html',
+    styleUrls: ['./search-results.component.sass'],
+    imports: [UserCardComponent, ListComponent, RouterLink],
+    host: { ngSkipHydration: 'true' }
 })
 export class SearchResultsComponent {
   private listSearch$!: Subscription;

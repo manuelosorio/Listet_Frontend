@@ -12,15 +12,14 @@ import { CharacterCounterComponent } from '@shared/character-counter/character-c
 import { ActionButtonComponent } from '@shared/action-button/action-button.component';
 
 @Component({
-  selector: 'app-edit-comment',
-  templateUrl: './edit-comment.component.html',
-  styleUrls: ['./edit-comment.component.sass'],
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    ActionButtonComponent,
-    CharacterCounterComponent,
-  ],
+    selector: 'app-edit-comment',
+    templateUrl: './edit-comment.component.html',
+    styleUrls: ['./edit-comment.component.sass'],
+    imports: [
+        ReactiveFormsModule,
+        ActionButtonComponent,
+        CharacterCounterComponent,
+    ]
 })
 export class EditCommentComponent implements OnInit {
   @Input() commentModel!: CommentModel;

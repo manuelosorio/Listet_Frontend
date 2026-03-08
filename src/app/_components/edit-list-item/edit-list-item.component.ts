@@ -18,12 +18,11 @@ import { ActionButtonComponent } from '@shared/action-button/action-button.compo
 import { formatDate } from '@angular/common';
 
 @Component({
-  selector: 'app-edit-list-item',
-  templateUrl: './edit-list-item.component.html',
-  styleUrls: ['./edit-list-item.component.sass'],
-  encapsulation: ViewEncapsulation.Emulated,
-  standalone: true,
-  imports: [ReactiveFormsModule, ActionButtonComponent],
+    selector: 'app-edit-list-item',
+    templateUrl: './edit-list-item.component.html',
+    styleUrls: ['./edit-list-item.component.sass'],
+    encapsulation: ViewEncapsulation.Emulated,
+    imports: [ReactiveFormsModule, ActionButtonComponent]
 })
 export class EditListItemComponent implements OnInit {
   listItem: InputSignal<ListItemModel> = input.required<ListItemModel>();

@@ -19,11 +19,10 @@ export interface Response {
 }
 
 @Component({
-  selector: 'app-create-list',
-  templateUrl: './create-list.component.html',
-  styleUrls: ['./create-list.component.sass'],
-  imports: [ReactiveFormsModule, IconsModule],
-  standalone: true,
+    selector: 'app-create-list',
+    templateUrl: './create-list.component.html',
+    styleUrls: ['./create-list.component.sass'],
+    imports: [ReactiveFormsModule, IconsModule]
 })
 export class CreateListComponent implements OnInit {
   public createListForm: UntypedFormGroup;

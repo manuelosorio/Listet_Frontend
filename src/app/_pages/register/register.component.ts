@@ -14,11 +14,10 @@ import { SeoService } from '@services/seo.service';
 import { UsersService } from '@services/users.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass'],
-  imports: [ReactiveFormsModule, BackButtonComponent, IconsModule, RouterLink],
-  standalone: true,
+    selector: 'app-signup',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.sass'],
+    imports: [ReactiveFormsModule, BackButtonComponent, IconsModule, RouterLink]
 })
 export class RegisterComponent implements OnInit {
   registrationForm;

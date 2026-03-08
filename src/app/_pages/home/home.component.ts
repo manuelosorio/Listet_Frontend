@@ -9,12 +9,11 @@ import { SeoService } from '@services/seo.service';
 import { ListsService } from '@services/lists.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass'],
-  imports: [ListComponent, RouterLink],
-  providers: [SeoService, ListsService, HttpClient, SearchDataService],
-  standalone: true,
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.sass'],
+    imports: [ListComponent, RouterLink],
+    providers: [SeoService, ListsService, HttpClient, SearchDataService]
 })
 export class HomeComponent implements OnInit {
   private readonly meta: MetaTagModel;

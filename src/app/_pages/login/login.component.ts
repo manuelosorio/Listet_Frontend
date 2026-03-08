@@ -16,11 +16,10 @@ import { SeoService } from '@services/seo.service';
 import { UsersService } from '@services/users.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass'],
-  imports: [BackButtonComponent, ReactiveFormsModule, IconsModule, RouterLink],
-  standalone: true,
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.sass'],
+    imports: [BackButtonComponent, ReactiveFormsModule, IconsModule, RouterLink]
 })
 export class LoginComponent implements OnInit {
   loginForm: UntypedFormGroup;

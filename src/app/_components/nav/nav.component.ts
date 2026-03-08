@@ -7,12 +7,11 @@ import { IconsModule } from '@modules/icons/icons.module';
 import { UsersService } from '@services/users.service';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.sass'],
-  imports: [RouterLink, IconsModule],
-  host: { ngSkipHydration: 'true' },
-  standalone: true,
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.sass'],
+    imports: [RouterLink, IconsModule],
+    host: { ngSkipHydration: 'true' }
 })
 export class NavComponent implements OnDestroy {
   public authenticated?: boolean;

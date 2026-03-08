@@ -1,6 +1,7 @@
 @use "src/sass/variables"
 @use "src/sass/utils/breakpoint/breakpoint" as bp
 @use "src/sass/components/form"
+@use "sass:color"
 .search
   display: flex
   flex-direction: row
@@ -32,7 +33,7 @@
     box-shadow: none
     padding: 0.65em 1em
     &:hover
-      background: darken(variables.$primary, 8%)
+      background: color.adjust(variables.$primary, $lightness: -8%)
     &:active
       box-shadow: variables.$shadow-inset
       transform: none

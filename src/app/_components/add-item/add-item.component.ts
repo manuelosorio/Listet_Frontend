@@ -15,11 +15,10 @@ import { ListItemEvents } from '@helpers/list-item.events';
 import { ListItemModel } from '@models/list-item.model';
 
 @Component({
-  selector: 'app-add-item',
-  templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.sass'],
-  standalone: true,
-  imports: [ReactiveFormsModule],
+    selector: 'app-add-item',
+    templateUrl: './add-item.component.html',
+    styleUrls: ['./add-item.component.sass'],
+    imports: [ReactiveFormsModule]
 })
 export class AddItemComponent implements OnInit {
   listItemForm: UntypedFormGroup;

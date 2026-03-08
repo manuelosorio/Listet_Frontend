@@ -22,11 +22,10 @@ interface OnSubmitParams<Data extends ListModel> {
 }
 
 @Component({
-  selector: 'app-edit-list',
-  templateUrl: './edit-list.component.html',
-  styleUrls: ['./edit-list.component.sass'],
-  standalone: true,
-  imports: [ReactiveFormsModule, FeatherModule, ActionButtonComponent],
+    selector: 'app-edit-list',
+    templateUrl: './edit-list.component.html',
+    styleUrls: ['./edit-list.component.sass'],
+    imports: [ReactiveFormsModule, FeatherModule, ActionButtonComponent]
 })
 export class EditListComponent implements OnInit {
   @Input() list!: ListModel;

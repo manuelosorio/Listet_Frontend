@@ -1,5 +1,6 @@
 @use "src/sass/variables"
 @use "src/sass/utils/breakpoint/breakpoint" as bp
+@use "sass:string"
 
 $breakpoints: ("xs", "sm", "md", "lg")
 [class*="l-column"]
@@ -12,10 +13,10 @@ $breakpoints: ("xs", "sm", "md", "lg")
         @for $i from 1 through variables.$columns
           .l-column-#{$size}
             &-#{$i}
-              max-width: unquote((variables.$grid-width * $i) - variables.$gutter + (variables.$gutter-space * $i) + '%')
-              flex-basis: unquote((variables.$grid-width * $i) - variables.$gutter + (variables.$gutter-space * $i) + '%')
+              max-width: string.unquote((variables.$grid-width * $i) - variables.$gutter + (variables.$gutter-space * $i) + '%')
+              flex-basis: string.unquote((variables.$grid-width * $i) - variables.$gutter + (variables.$gutter-space * $i) + '%')
               margin: 0
             &-order-#{$i}
               order: $i
         [class*='l-column-#{$size}'] + [class*='l-column-#{$size}']
-          margin-left: unquote(variables.$gutter + "%")
+          margin-left: string.unquote(variables.$gutter + "%")
