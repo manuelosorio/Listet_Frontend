@@ -7,7 +7,7 @@ import { NgIf, NgStyle } from '@angular/common';
   templateUrl: './character-counter.component.html',
   styleUrls: ['./character-counter.component.sass'],
   standalone: true,
-  imports: [NgStyle, FeatherModule, NgIf],
+  imports: [NgStyle, FeatherModule],
 })
 export class CharacterCounterComponent implements OnInit {
   public characterCount!: number;

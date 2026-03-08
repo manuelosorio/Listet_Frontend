@@ -15,11 +15,10 @@ import { AlertService } from '@services/alert.service';
 import { FeatherModule } from 'angular-feather';
 
 @Component({
-  selector: 'app-settings-password',
-  templateUrl: './settings-password.component.html',
-  styleUrls: ['./settings-password.component.sass'],
-  standalone: true,
-  imports: [ReactiveFormsModule, FeatherModule],
+    selector: 'app-settings-password',
+    templateUrl: './settings-password.component.html',
+    styleUrls: ['./settings-password.component.sass'],
+    imports: [ReactiveFormsModule, FeatherModule]
 })
 export class SettingsPasswordComponent {
   public passwordForm: UntypedFormGroup;

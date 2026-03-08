@@ -12,11 +12,10 @@ import { FeatherModule } from 'angular-feather';
 import { UsersService } from '@services/users.service';
 
 @Component({
-  selector: 'app-settings-delete-account',
-  templateUrl: './settings-delete-account.component.html',
-  styleUrls: ['./settings-delete-account.component.sass'],
-  standalone: true,
-  imports: [ReactiveFormsModule, FeatherModule],
+    selector: 'app-settings-delete-account',
+    templateUrl: './settings-delete-account.component.html',
+    styleUrls: ['./settings-delete-account.component.sass'],
+    imports: [ReactiveFormsModule, FeatherModule]
 })
 export class SettingsDeleteAccountComponent {
   private deactivateAccount$!: Subscription;

@@ -21,16 +21,15 @@ import { WebsocketService } from '@services/websocket.service';
 import { ListDataModel } from '@models/list-data.model';
 
 @Component({
-  selector: 'app-list-items',
-  templateUrl: './list-items.component.html',
-  styleUrls: ['./list-items.component.sass'],
-  standalone: true,
-  imports: [
-    FeatherModule,
-    DeadlineComponent,
-    EditListItemComponent,
-    AddItemComponent,
-  ],
+    selector: 'app-list-items',
+    templateUrl: './list-items.component.html',
+    styleUrls: ['./list-items.component.sass'],
+    imports: [
+        FeatherModule,
+        DeadlineComponent,
+        EditListItemComponent,
+        AddItemComponent,
+    ]
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
   public lists: ListModel[] = [];

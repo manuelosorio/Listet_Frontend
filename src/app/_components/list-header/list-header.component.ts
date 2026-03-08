@@ -24,17 +24,16 @@ import { WebsocketService } from '@services/websocket.service';
 import { UsersService } from '@services/users.service';
 
 @Component({
-  selector: 'app-list-header',
-  templateUrl: './list-header.component.html',
-  styleUrls: ['./list-header.component.sass'],
-  standalone: true,
-  imports: [
-    RouterLink,
-    DeadlineComponent,
-    FeatherModule,
-    EditListComponent,
-    DatePipe,
-  ],
+    selector: 'app-list-header',
+    templateUrl: './list-header.component.html',
+    styleUrls: ['./list-header.component.sass'],
+    imports: [
+        RouterLink,
+        DeadlineComponent,
+        FeatherModule,
+        EditListComponent,
+        DatePipe,
+    ]
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
   public header: ListModel[] = [];

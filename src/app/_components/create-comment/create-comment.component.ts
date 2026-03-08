@@ -21,11 +21,10 @@ import { CommentModel } from '@models/comment.model';
 import { CharacterCounterComponent } from '@shared/character-counter/character-counter.component';
 
 @Component({
-  selector: 'app-create-comment',
-  templateUrl: './create-comment.component.html',
-  styleUrls: ['./create-comment.component.sass'],
-  standalone: true,
-  imports: [ReactiveFormsModule, CharacterCounterComponent],
+    selector: 'app-create-comment',
+    templateUrl: './create-comment.component.html',
+    styleUrls: ['./create-comment.component.sass'],
+    imports: [ReactiveFormsModule, CharacterCounterComponent]
 })
 export class CreateCommentComponent implements OnInit, OnDestroy {
   public listData;

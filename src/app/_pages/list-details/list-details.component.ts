@@ -15,11 +15,10 @@ import { WebsocketService } from '@services/websocket.service';
 import { AlertService } from '@services/alert.service';
 
 @Component({
-  selector: 'app-list-details',
-  templateUrl: './list-details.component.html',
-  styleUrls: ['./list-details.component.sass'],
-  standalone: true,
-  imports: [ListHeaderComponent, ListItemsComponent, ListCommentsComponent],
+    selector: 'app-list-details',
+    templateUrl: './list-details.component.html',
+    styleUrls: ['./list-details.component.sass'],
+    imports: [ListHeaderComponent, ListItemsComponent, ListCommentsComponent]
 })
 export class ListDetailsComponent implements OnInit, OnDestroy {
   username!: string;

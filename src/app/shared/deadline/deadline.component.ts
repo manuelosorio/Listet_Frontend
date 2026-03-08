@@ -3,11 +3,10 @@ import { DatePipe } from '@angular/common';
 import { FeatherModule } from 'angular-feather';
 
 @Component({
-  selector: 'app-deadline',
-  templateUrl: './deadline.component.html',
-  styleUrls: ['./deadline.component.sass'],
-  standalone: true,
-  imports: [FeatherModule, DatePipe],
+    selector: 'app-deadline',
+    templateUrl: './deadline.component.html',
+    styleUrls: ['./deadline.component.sass'],
+    imports: [FeatherModule, DatePipe]
 })
 export class DeadlineComponent implements OnChanges {
   @Input()

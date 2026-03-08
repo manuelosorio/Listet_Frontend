@@ -4,12 +4,11 @@ import { RouterLink } from '@angular/router';
 import { IconsModule } from '@modules/icons/icons.module';
 
 @Component({
-  selector: 'app-user-card',
-  templateUrl: './user-card.component.html',
-  styleUrls: ['./user-card.component.sass'],
-  encapsulation: ViewEncapsulation.Emulated,
-  imports: [RouterLink, IconsModule],
-  standalone: true,
+    selector: 'app-user-card',
+    templateUrl: './user-card.component.html',
+    styleUrls: ['./user-card.component.sass'],
+    encapsulation: ViewEncapsulation.Emulated,
+    imports: [RouterLink, IconsModule]
 })
 export class UserCardComponent {
   constructor() {}

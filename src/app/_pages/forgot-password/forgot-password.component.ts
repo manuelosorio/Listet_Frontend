@@ -11,11 +11,10 @@ import { UsersService } from '@services/users.service';
 import { SeoService } from '@services/seo.service';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.sass'],
-  imports: [BackButtonComponent, ReactiveFormsModule],
-  standalone: true,
+    selector: 'app-forgot-password',
+    templateUrl: './forgot-password.component.html',
+    styleUrls: ['./forgot-password.component.sass'],
+    imports: [BackButtonComponent, ReactiveFormsModule]
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm;

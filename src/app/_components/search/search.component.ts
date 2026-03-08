@@ -11,11 +11,10 @@ import { filter } from 'rxjs/operators';
 import { IconsModule } from '@modules/icons/icons.module';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.sass'],
-  imports: [ReactiveFormsModule, IconsModule],
-  standalone: true,
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.sass'],
+    imports: [ReactiveFormsModule, IconsModule]
 })
 export class SearchComponent {
   public searchForm: UntypedFormGroup;

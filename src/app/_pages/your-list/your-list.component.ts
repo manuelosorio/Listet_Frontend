@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { ListComponent } from '@components/list/list.component';
 
 @Component({
-  selector: 'app-your-list',
-  templateUrl: './your-list.component.html',
-  styleUrls: ['./your-list.component.sass'],
-  imports: [ListComponent],
-  standalone: true,
+    selector: 'app-your-list',
+    templateUrl: './your-list.component.html',
+    styleUrls: ['./your-list.component.sass'],
+    imports: [ListComponent]
 })
 export class YourListComponent {
   constructor() {}

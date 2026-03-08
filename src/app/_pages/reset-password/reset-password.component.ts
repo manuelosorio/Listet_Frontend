@@ -13,11 +13,10 @@ import { environment } from '@environments/environment';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.sass'],
-  imports: [BackButtonComponent, ReactiveFormsModule],
-  standalone: true,
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.sass'],
+    imports: [BackButtonComponent, ReactiveFormsModule]
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: UntypedFormGroup;

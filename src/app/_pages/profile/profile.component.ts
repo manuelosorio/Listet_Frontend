@@ -5,12 +5,11 @@ import { ListComponent } from '@components/list/list.component';
 import { SearchDataService } from '@shared/search-data.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.sass'],
-  imports: [ListComponent],
-  providers: [SearchDataService],
-  standalone: true,
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.sass'],
+    imports: [ListComponent],
+    providers: [SearchDataService]
 })
 export class ProfileComponent {
   public user: string;

@@ -22,13 +22,12 @@ import { WebsocketService } from '@services/websocket.service';
 import { MetaTagModel } from '@models/metatag.model';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.sass'],
-  imports: [DeadlineComponent, RouterLink, MasonryDirective, DatePipe],
-  providers: [SeoService, AlertService, SearchDataService, WebsocketService],
-  standalone: true,
-  host: { ngSkipHydration: 'true' },
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.sass'],
+    imports: [DeadlineComponent, RouterLink, MasonryDirective, DatePipe],
+    providers: [SeoService, AlertService, SearchDataService, WebsocketService],
+    host: { ngSkipHydration: 'true' }
 })
 export class ListComponent implements OnInit, OnDestroy {
   private listSearchData$!: Subscription;
