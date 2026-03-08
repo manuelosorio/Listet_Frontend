@@ -1,6 +1,6 @@
 import { Component, input, Input, InputSignal, OnInit } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
-import { NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-character-counter',
