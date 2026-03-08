@@ -60,7 +60,7 @@ export class SearchComponent {
     }
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onWindowResize() {
     this.windowWidth = window.innerWidth;
   }
