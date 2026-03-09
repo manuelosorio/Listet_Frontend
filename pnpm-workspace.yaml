@@ -1,0 +1,10 @@
+allowBuilds:
+  '@parcel/watcher': true
+  bufferutil: true
+  core-js: true
+  cypress: true
+  esbuild: true
+  lmdb: false
+  msgpackr-extract: false
+  unrs-resolver: false
+  utf-8-validate: true
