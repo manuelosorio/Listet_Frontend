@@ -135,6 +135,9 @@ importers:
       dotenv:
         specifier: ^16.6.1
         version: 16.6.1
+      esbuild:
+        specifier: ^0.27.3
+        version: 0.27.3
       esbuild-plugin-define:
         specifier: ^0.5.0
         version: 0.5.0(esbuild@0.27.3)
