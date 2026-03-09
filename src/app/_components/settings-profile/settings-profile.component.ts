@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FeatherModule } from 'angular-feather';
+import { emailPattern } from '@utilities/regex-patterns';
 
 @Component({
     selector: 'app-settings-profile',
@@ -19,6 +20,7 @@ import { FeatherModule } from 'angular-feather';
 export class SettingsProfileComponent implements OnInit, OnDestroy {
   private userService = inject(UsersService);
   private formBuilder = inject(UntypedFormBuilder);
+
   public profileForm: UntypedFormGroup;
   private updateAccountInfo$!: Subscription;
   constructor() {
@@ -27,7 +29,7 @@ export class SettingsProfileComponent implements OnInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/),
+          Validators.pattern(emailPattern),
         ],
       ],
       firstName: ['', [Validators.required]],

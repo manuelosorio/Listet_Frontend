@@ -11,6 +11,7 @@ import { MetaTagModel } from '@models/metatag.model';
 import { SeoService } from '@services/seo.service';
 import { environment } from '@environments/environment';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { passwordPattern } from '@utilities/regex-patterns';
 
 @Component({
     selector: 'app-reset-password',
@@ -37,7 +38,7 @@ export class ResetPasswordComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern(
-            /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/
+            passwordPattern
           ),
         ],
       ],

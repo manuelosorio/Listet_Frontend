@@ -12,6 +12,7 @@ import { MetaTagModel } from '@models/metatag.model';
 import { IconsModule } from '@modules/icons/icons.module';
 import { SeoService } from '@services/seo.service';
 import { UsersService } from '@services/users.service';
+import { emailPattern, passwordPattern, usernamePattern } from '@utilities/regex-patterns';
 
 @Component({
     selector: 'app-signup',
@@ -38,7 +39,7 @@ export class RegisterComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/),
+          Validators.pattern(emailPattern),
         ],
       ],
       username: [
@@ -46,7 +47,7 @@ export class RegisterComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern(
-            /^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/i
+            usernamePattern
           ),
         ],
       ],
@@ -55,7 +56,7 @@ export class RegisterComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern(
-            /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/
+            passwordPattern
           ),
         ],
       ],

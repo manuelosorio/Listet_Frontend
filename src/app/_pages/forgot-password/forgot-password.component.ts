@@ -9,6 +9,7 @@ import { environment } from '@environments/environment';
 import { MetaTagModel } from '@models/metatag.model';
 import { UsersService } from '@services/users.service';
 import { SeoService } from '@services/seo.service';
+import { emailPattern } from '@utilities/regex-patterns';
 
 @Component({
     selector: 'app-forgot-password',
@@ -32,7 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/),
+          Validators.pattern(emailPattern)
         ],
       ],
     });

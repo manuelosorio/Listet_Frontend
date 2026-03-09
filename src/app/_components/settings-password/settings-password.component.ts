@@ -13,6 +13,7 @@ import { EndpointResponse } from '@models/response/endpoint.response';
 import { ErrorResponse } from '@models/response/errors/error.response';
 import { AlertService } from '@services/alert.service';
 import { FeatherModule } from 'angular-feather';
+import { passwordPattern } from '@utilities/regex-patterns';
 
 @Component({
     selector: 'app-settings-password',
@@ -33,9 +34,7 @@ export class SettingsPasswordComponent {
           '',
           [
             Validators.required,
-            Validators.pattern(
-              /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*#?&])([a-zA-Z0-9\d@$!%*#?&]+){8,}$/
-            ),
+            Validators.pattern(passwordPattern),
           ],
         ],
         confirmPassword: ['', [Validators.required]],
