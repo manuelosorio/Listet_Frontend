@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { UsersService } from '@services/users.service';
 import {
   AbstractControl,
@@ -17,12 +17,11 @@ import { FeatherModule } from 'angular-feather';
     imports: [ReactiveFormsModule, FeatherModule]
 })
 export class SettingsProfileComponent implements OnInit, OnDestroy {
+  private userService = inject(UsersService);
+  private formBuilder = inject(UntypedFormBuilder);
   public profileForm: UntypedFormGroup;
   private updateAccountInfo$!: Subscription;
-  constructor(
-    private userService: UsersService,
-    private formBuilder: UntypedFormBuilder
-  ) {
+  constructor() {
     this.profileForm = this.formBuilder.group({
       email: [
         '',

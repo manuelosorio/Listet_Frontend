@@ -1,10 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -27,6 +21,13 @@ import { CharacterCounterComponent } from '@shared/character-counter/character-c
     imports: [ReactiveFormsModule, CharacterCounterComponent]
 })
 export class CreateCommentComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private formBuilder = inject(UntypedFormBuilder);
+  private listService = inject(ListsService);
+  private listDataService = inject(ListDataService);
+  private route = inject(ActivatedRoute);
+  private websocketService = inject(WebsocketService);
+
   public listData;
   public commentForm: UntypedFormGroup;
   public commentData?: CommentModel;
@@ -36,14 +37,9 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   public commentsEnabled?: boolean;
   private readonly username: string;
   private readonly slug: string;
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private formBuilder: UntypedFormBuilder,
-    private listService: ListsService,
-    private listDataService: ListDataService,
-    private route: ActivatedRoute,
-    private websocketService: WebsocketService
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.listData = this.listDataService.listData$.subscribe((data: any) => {

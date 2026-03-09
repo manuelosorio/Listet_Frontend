@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -25,18 +25,20 @@ export interface Response {
     imports: [ReactiveFormsModule, IconsModule]
 })
 export class CreateListComponent implements OnInit {
+  private alertService = inject(AlertService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private listService = inject(ListsService);
+  private router = inject(Router);
+
   public createListForm: UntypedFormGroup;
   public allowComments!: boolean;
   public visibilityOptions!: ListVisibility[];
   private redirectURL!: string;
 
   // errorMessage: string;
-  constructor(
-    private alertService: AlertService,
-    private formBuilder: UntypedFormBuilder,
-    private listService: ListsService,
-    private router: Router
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.createListForm = formBuilder.group({
       title: ['', [Validators.required]],
       description: [''],

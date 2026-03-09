@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CanonicalService } from '@shared/canonical.service';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '@components/footer/footer.component';
@@ -21,11 +21,10 @@ import { UsersService } from '@services/users.service';
     ]
 })
 export class AppComponent implements OnInit {
+  private canonicalService = inject(CanonicalService);
+  private userService = inject(UsersService);
+
   title = 'Listet';
-  constructor(
-    private canonicalService: CanonicalService,
-    private userService: UsersService
-  ) {}
   ngOnInit() {
     this.userService.isAuth().subscribe();
     this.canonicalService.setCanonicalURL(`${environment.url}`);

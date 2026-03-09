@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -18,15 +18,15 @@ import { UsersService } from '@services/users.service';
     imports: [ReactiveFormsModule, FeatherModule]
 })
 export class SettingsDeleteAccountComponent {
+  private userService = inject(UsersService);
+  private httpClient = inject(HttpClient);
+  private formBuilder = inject(UntypedFormBuilder);
+
   private deactivateAccount$!: Subscription;
   private deleteAccount$!: Subscription;
   public formGroup: UntypedFormGroup;
 
-  constructor(
-    private userService: UsersService,
-    private httpClient: HttpClient,
-    private formBuilder: UntypedFormBuilder
-  ) {
+  constructor() {
     this.formGroup = this.formBuilder.group({
       password: ['', [Validators.required]],
     });

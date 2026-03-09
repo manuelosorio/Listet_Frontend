@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 
@@ -6,7 +6,8 @@ import { environment } from '@environments/environment';
   providedIn: 'root',
 })
 export class SearchService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
   listSearch(query: string) {
     return this.http.get(`${environment.host}/search/list/${query}`, {
       withCredentials: true,

@@ -1,11 +1,12 @@
-import { Inject, Injectable, DOCUMENT } from '@angular/core';
+import { Injectable, DOCUMENT, inject } from '@angular/core';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class CanonicalService {
-  constructor(@Inject(DOCUMENT) private dom: Document) {}
+  private dom = inject<Document>(DOCUMENT);
+
   setCanonicalURL(url: string) {
     let canonicalURL;
     if (

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -22,19 +22,21 @@ import { UsersService } from '@services/users.service';
     imports: [BackButtonComponent, ReactiveFormsModule, IconsModule, RouterLink]
 })
 export class LoginComponent implements OnInit {
+  private alertService = inject(AlertService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private userService = inject(UsersService);
+  private seoService = inject(SeoService);
+  private route = inject(ActivatedRoute);
+
   loginForm: UntypedFormGroup;
   isChecked!: boolean;
   errorMessage: string = '';
   private readonly meta: MetaTagModel;
   private returnUrl: string = '';
 
-  constructor(
-    private alertService: AlertService,
-    private formBuilder: UntypedFormBuilder,
-    private userService: UsersService,
-    private seoService: SeoService,
-    private route: ActivatedRoute
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.loginForm = formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],

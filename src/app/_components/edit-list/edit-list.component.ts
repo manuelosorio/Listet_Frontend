@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -28,18 +28,20 @@ interface OnSubmitParams<Data extends ListModel> {
     imports: [ReactiveFormsModule, FeatherModule, ActionButtonComponent]
 })
 export class EditListComponent implements OnInit {
+  private alertService = inject(AlertService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private listService = inject(ListsService);
+  private route = inject(ActivatedRoute);
+
   @Input() list!: ListModel;
   public editListForm: UntypedFormGroup;
   public visibility?: number;
   public visibilityOptions: ListVisibility[];
   public allowComments?: boolean;
 
-  constructor(
-    private alertService: AlertService,
-    private formBuilder: UntypedFormBuilder,
-    private listService: ListsService,
-    private route: ActivatedRoute
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.editListForm = formBuilder.group({
       title: ['', [Validators.required]],
       description: [''],

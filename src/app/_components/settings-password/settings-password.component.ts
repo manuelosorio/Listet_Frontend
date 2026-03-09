@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UsersService } from '@services/users.service';
 import {
   AbstractControl,
@@ -21,12 +21,12 @@ import { FeatherModule } from 'angular-feather';
     imports: [ReactiveFormsModule, FeatherModule]
 })
 export class SettingsPasswordComponent {
+  private userService = inject(UsersService);
+  private alertService = inject(AlertService);
+  private formBuilder = inject(UntypedFormBuilder);
+
   public passwordForm: UntypedFormGroup;
-  constructor(
-    private userService: UsersService,
-    private alertService: AlertService,
-    private formBuilder: UntypedFormBuilder
-  ) {
+  constructor() {
     this.passwordForm = this.formBuilder.group(
       {
         newPassword: [

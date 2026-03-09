@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NavigationStart, Router } from '@angular/router';
 import { Alert } from '@models/alerts.model';
@@ -7,6 +7,8 @@ import { Alert } from '@models/alerts.model';
   providedIn: 'root',
 })
 export class AlertService {
+  private route = inject(Router);
+
   private readonly alert!: Alert;
   private alertSubject: BehaviorSubject<Alert | null>;
   private cssClasses: Record<string, string> = {
@@ -15,7 +17,7 @@ export class AlertService {
     error: 'alert--error',
   };
   private keepAfterRouteChange: boolean = false;
-  constructor(private route: Router) {
+  constructor() {
     this.alertSubject = new BehaviorSubject<Alert | null>(this.alert);
     this.route.events.subscribe(event => {
       if (event instanceof NavigationStart) {

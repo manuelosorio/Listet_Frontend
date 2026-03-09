@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,9 @@ import { UsersService } from '@services/users.service';
     host: { ngSkipHydration: 'true' }
 })
 export class NavComponent implements OnDestroy {
+  private userService = inject(UsersService);
+  private router = inject(Router);
+
   public authenticated?: boolean;
   private authenticated$: Subscription;
   private hideNavPaths = [
@@ -29,7 +32,9 @@ export class NavComponent implements OnDestroy {
   public username?: string;
   public fullName?: string;
   public userCircle;
-  constructor(private userService: UsersService, private router: Router) {
+  constructor() {
+    const router = this.router;
+
     this.authenticated$ = this.userService.authenticated$.subscribe(
       authenticated => {
         this.authenticated = authenticated;

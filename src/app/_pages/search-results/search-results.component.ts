@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SearchService } from '../../_services/search.service';
 import {
   ActivatedRoute,
@@ -22,6 +22,11 @@ import { ListComponent } from '@components/list/list.component';
     host: { ngSkipHydration: 'true' }
 })
 export class SearchResultsComponent {
+  private searchService = inject(SearchService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private searchData = inject(SearchDataService);
+
   private listSearch$!: Subscription;
   private userSearch$!: Subscription;
   public currentRoute: string = '';
@@ -30,12 +35,7 @@ export class SearchResultsComponent {
   public listResultAmount: number = 0;
   public userResultAmount = 0;
   public lists: ListModel[] = [];
-  constructor(
-    private searchService: SearchService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private searchData: SearchDataService
-  ) {
+  constructor() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe({

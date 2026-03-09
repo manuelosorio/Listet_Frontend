@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaTagModel } from '@models/metatag.model';
 
@@ -6,7 +6,9 @@ import { MetaTagModel } from '@models/metatag.model';
   providedIn: 'root',
 })
 export class SeoService implements OnDestroy {
-  constructor(private meta: Meta, private title: Title) {}
+  private meta = inject(Meta);
+  private title = inject(Title);
+
 
   updateInfo(metaData: MetaTagModel) {
     this.title.setTitle(metaData.title);

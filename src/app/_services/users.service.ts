@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -21,6 +21,10 @@ import { AlertService } from './alert.service';
   providedIn: 'root',
 })
 export class UsersService implements OnDestroy {
+  private alertService = inject(AlertService);
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
   authenticated: boolean;
   private authenticatedSubject: BehaviorSubject<boolean>;
   public authenticated$: Observable<boolean>;
@@ -41,11 +45,7 @@ export class UsersService implements OnDestroy {
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
-  constructor(
-    private alertService: AlertService,
-    private http: HttpClient,
-    private router: Router
-  ) {
+  constructor() {
     this.userInfo = {} as UserModel;
     this.authenticated = false;
     this.authenticatedSubject = new BehaviorSubject<boolean>(
@@ -213,7 +213,7 @@ export class UsersService implements OnDestroy {
           const res = response as UserResponse;
           this.authenticatedSubject.next(res.authenticated);
           this.userInfoSubject.next({
-            email: '',
+            email: res.email,
             firstName: res.firstName,
             lastName: res.lastName,
             username: res.username,

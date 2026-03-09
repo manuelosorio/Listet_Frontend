@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -20,15 +20,17 @@ import { UsersService } from '@services/users.service';
     imports: [ReactiveFormsModule, BackButtonComponent, IconsModule, RouterLink]
 })
 export class RegisterComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private userService = inject(UsersService);
+  private seoService = inject(SeoService);
+
   registrationForm;
   errorMessage?: string;
   private readonly meta: MetaTagModel;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private userService: UsersService,
-    private seoService: SeoService
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.registrationForm = formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],

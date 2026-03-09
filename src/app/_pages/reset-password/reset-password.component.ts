@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -19,16 +19,18 @@ import { BackButtonComponent } from '@components/back-button/back-button.compone
     imports: [BackButtonComponent, ReactiveFormsModule]
 })
 export class ResetPasswordComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private userService = inject(UsersService);
+  private route = inject(ActivatedRoute);
+  private seoService = inject(SeoService);
+
   resetPasswordForm: UntypedFormGroup;
   private token: string = '';
   private readonly meta: MetaTagModel;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private userService: UsersService,
-    private route: ActivatedRoute,
-    private seoService: SeoService
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.resetPasswordForm = formBuilder.group({
       password: [
         '',

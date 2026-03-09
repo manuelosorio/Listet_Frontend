@@ -1,10 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -21,17 +15,17 @@ import { AlertService } from '@services/alert.service';
     imports: [ListHeaderComponent, ListItemsComponent, ListCommentsComponent]
 })
 export class ListDetailsComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private webSocketService = inject(WebsocketService);
+  private alertService = inject(AlertService);
+
   username!: string;
   slug!: string;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   onListEdit$!: Subscription;
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private route: ActivatedRoute,
-    private router: Router,
-    private webSocketService: WebsocketService,
-    private alertService: AlertService
-  ) {
+  constructor() {
     if (this.isBrowser) {
       this.username = this.route.snapshot.params['username'];
       this.slug = this.route.snapshot.params['slug'];

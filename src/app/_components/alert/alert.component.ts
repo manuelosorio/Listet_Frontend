@@ -1,11 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, ViewEncapsulation, inject } from '@angular/core';
 import { AlertService } from '@services/alert.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe, isPlatformBrowser, NgClass } from '@angular/common';
@@ -22,15 +15,16 @@ import { map } from 'rxjs/operators';
     imports: [IconsModule, NgClass, RouterLink, AsyncPipe]
 })
 export class AlertComponent implements OnInit, OnDestroy {
+  private alertService = inject(AlertService);
+
   private currentAlert?: Alert | null;
   animationClass: string = '';
   public alert$?: Observable<Alert | any>;
   cssClasses: Record<string, string> = {};
   private readonly isBrowser: boolean;
-  constructor(
-    private alertService: AlertService,
-    @Inject(PLATFORM_ID) platformId: string
-  ) {
+  constructor() {
+    const platformId = inject(PLATFORM_ID);
+
     this.isBrowser = isPlatformBrowser(platformId);
   }
 

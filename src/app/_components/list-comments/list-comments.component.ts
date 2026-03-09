@@ -1,10 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { ListsService } from '@services/lists.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -32,6 +26,14 @@ import { DateUtil } from '@utilities/dateUtil';
     host: { ngSkipHydration: 'true' }
 })
 export class ListCommentsComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private listService = inject(ListsService);
+  private listDataService = inject(ListDataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private websocketService = inject(WebsocketService);
+  private userService = inject(UsersService);
+
   private username?: string;
   private readonly slug: string;
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
@@ -48,15 +50,7 @@ export class ListCommentsComponent implements OnInit, OnDestroy {
   public isAuth?: boolean;
   private authenticated$: Subscription = new Subscription();
   public returnUrl: string;
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private listService: ListsService,
-    private listDataService: ListDataService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private websocketService: WebsocketService,
-    private userService: UsersService
-  ) {
+  constructor() {
     this.slug = this.route.snapshot.params.slug;
     this.returnUrl = this.router.routerState.snapshot.url;
     this.listService.getListComments(this.slug);

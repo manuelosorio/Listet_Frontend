@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SearchDataService } from '@shared/search-data.service';
@@ -16,9 +16,11 @@ import { ListsService } from '@services/lists.service';
     providers: [SeoService, ListsService, HttpClient, SearchDataService]
 })
 export class HomeComponent implements OnInit {
+  private seoService = inject(SeoService);
+
   private readonly meta: MetaTagModel;
 
-  constructor(private seoService: SeoService) {
+  constructor() {
     this.meta = {
       author: 'Manuel Osorio',
       description: 'Listet is a social todo list tool.',

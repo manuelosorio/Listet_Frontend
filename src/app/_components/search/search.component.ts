@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -17,6 +17,10 @@ import { IconsModule } from '@modules/icons/icons.module';
     imports: [ReactiveFormsModule, IconsModule]
 })
 export class SearchComponent {
+  private platformId = inject(PLATFORM_ID);
+  router = inject(Router);
+  private formBuilder = inject(UntypedFormBuilder);
+
   public searchForm: UntypedFormGroup;
   public windowWidth: number = 0;
 
@@ -33,11 +37,7 @@ export class SearchComponent {
     '/settings/**',
   ];
   public hideSearch: boolean = false;
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    public router: Router,
-    private formBuilder: UntypedFormBuilder
-  ) {
+  constructor() {
     this.searchForm = this.formBuilder.group({
       search: ['', [Validators.minLength(1)]],
     });

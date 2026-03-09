@@ -1,10 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
@@ -32,6 +26,12 @@ import { ListDataModel } from '@models/list-data.model';
     ]
 })
 export class ListItemsComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private listService = inject(ListsService);
+  private route = inject(ActivatedRoute);
+  private listDataService = inject(ListDataService);
+  private webSocketService = inject(WebsocketService);
+
   public lists: ListModel[] = [];
   public items: ListItemModel[] = [];
   public isOwner: boolean | number = false;
@@ -46,13 +46,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   private onAddItem$: Subscription = new Subscription();
   private onUpdateItem$: Subscription = new Subscription();
   private unsubscribe$: Subject<void> = new Subject<void>();
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private listService: ListsService,
-    private route: ActivatedRoute,
-    private listDataService: ListDataService,
-    private webSocketService: WebsocketService
-  ) {
+  constructor() {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.getListItems$ = this.listService

@@ -1,12 +1,4 @@
-import {
-  Component,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ListsService } from '@services/lists.service';
@@ -30,6 +22,14 @@ import { MetaTagModel } from '@models/metatag.model';
     host: { ngSkipHydration: 'true' }
 })
 export class ListComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private listService = inject(ListsService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private seoService = inject(SeoService);
+  private searchData = inject(SearchDataService);
+  private alertService = inject(AlertService);
+
   private listSearchData$!: Subscription;
   @Input() public pageType!:
     | 'Lists'
@@ -44,15 +44,7 @@ export class ListComponent implements OnInit, OnDestroy {
   @ViewChild(MasonryDirective, { static: false })
   masonryDirective!: MasonryDirective;
   public masonryLists: ListModel[] = [];
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private listService: ListsService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private seoService: SeoService,
-    private searchData: SearchDataService,
-    private alertService: AlertService
-  ) {
+  constructor() {
     this.lists = [];
   }
 

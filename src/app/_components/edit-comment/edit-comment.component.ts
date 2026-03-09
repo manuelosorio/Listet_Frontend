@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommentModel } from '@models/comment.model';
 import {
   AbstractControl,
@@ -22,13 +22,12 @@ import { ActionButtonComponent } from '@shared/action-button/action-button.compo
     ]
 })
 export class EditCommentComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private listService = inject(ListsService);
+
   @Input() commentModel!: CommentModel;
   public commentForm!: UntypedFormGroup;
   public commentCharacterCount: number = 0;
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private listService: ListsService
-  ) {}
 
   ngOnInit(): void {
     this.commentForm = this.formBuilder.group({

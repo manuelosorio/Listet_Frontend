@@ -1,5 +1,5 @@
 // profile.component.ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListComponent } from '@components/list/list.component';
 import { SearchDataService } from '@shared/search-data.service';
@@ -12,9 +12,13 @@ import { SearchDataService } from '@shared/search-data.service';
     providers: [SearchDataService]
 })
 export class ProfileComponent {
+  private route = inject(ActivatedRoute);
+
   public user: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
+    const route = this.route;
+
     this.user = route.snapshot.params['username'];
   }
 }

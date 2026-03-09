@@ -1,13 +1,4 @@
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  Inject,
-  OnDestroy,
-  PLATFORM_ID,
-  Renderer2,
-} from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Directive, ElementRef, OnDestroy, PLATFORM_ID, Renderer2, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
@@ -16,15 +7,15 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class MasonryDirective
   implements AfterViewInit, AfterViewChecked, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+
   private resizeListener?: () => void;
   private mutationObserver?: MutationObserver;
   private readonly isBrowser: boolean;
   private readonly gap: any;
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private el: ElementRef,
-    private renderer: Renderer2
-  ) {
+  constructor() {
     this.isBrowser = isPlatformBrowser(this.platformId);
     this.gap = 16; // Adjust the value "16" to control the gap between items
   }

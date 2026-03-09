@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { UsersService } from '@services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,12 +10,12 @@ import { Subscription } from 'rxjs';
   standalone: true,
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
+  private userService = inject(UsersService);
+  private route = inject(ActivatedRoute);
+
   private token;
   private verifyAccount$: Subscription = new Subscription();
-  constructor(
-    private userService: UsersService,
-    private route: ActivatedRoute
-  ) {
+  constructor() {
     this.token = this.route.snapshot.params.token;
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   AbstractControl,
@@ -21,6 +21,12 @@ import { ListItemModel } from '@models/list-item.model';
     imports: [ReactiveFormsModule]
 })
 export class AddItemComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private listService = inject(ListsService);
+  private listDataService = inject(ListDataService);
+  private route = inject(ActivatedRoute);
+  private webSocketService = inject(WebsocketService);
+
   listItemForm: UntypedFormGroup;
   isOwner: boolean = false;
   private listData: Subscription = new Subscription();
@@ -29,13 +35,7 @@ export class AddItemComponent implements OnInit {
   private readonly slug: string;
   private readonly username: string;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private listService: ListsService,
-    private listDataService: ListDataService,
-    private route: ActivatedRoute,
-    private webSocketService: WebsocketService
-  ) {
+  constructor() {
     this.username = this.route.snapshot.params.username;
     this.slug = this.route.snapshot.params.slug;
     this.listOwner = this.route.snapshot.params.username;

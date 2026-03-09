@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '@environments/environment';
@@ -11,10 +11,13 @@ import { UsersService } from './users.service';
   providedIn: 'root',
 })
 export class ListsService {
+  private http = inject(HttpClient);
+  private userService = inject(UsersService);
+
   private commentSubject$: Subject<any>;
   public comment$: Observable<any>;
 
-  constructor(private http: HttpClient, private userService: UsersService) {
+  constructor() {
     this.commentSubject$ = new Subject<any>();
     this.comment$ = this.commentSubject$.asObservable();
   }

@@ -1,10 +1,4 @@
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ListDataService } from '@shared/list-data.service';
 import { Subscription } from 'rxjs';
@@ -36,6 +30,16 @@ import { UsersService } from '@services/users.service';
     ]
 })
 export class ListHeaderComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private listService = inject(ListsService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private seoService = inject(SeoService);
+  private listDataService = inject(ListDataService);
+  private userService = inject(UsersService);
+  private websocketService = inject(WebsocketService);
+  private alertService = inject(AlertService);
+
   public header: ListModel[] = [];
   public listId!: number;
   public listData?: ListDataModel;
@@ -49,17 +53,7 @@ export class ListHeaderComponent implements OnInit, OnDestroy {
   private getList$: Subscription = new Subscription();
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private prevSlug?: string;
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    private listService: ListsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private seoService: SeoService,
-    private listDataService: ListDataService,
-    private userService: UsersService,
-    private websocketService: WebsocketService,
-    private alertService: AlertService
-  ) {
+  constructor() {
     this.userService.isAuth();
     this.username = this.route.snapshot.params.slug.split('-')[0];
     this.slug = this.route.snapshot.params.slug;

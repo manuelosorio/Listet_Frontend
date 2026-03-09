@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -17,14 +17,16 @@ import { SeoService } from '@services/seo.service';
     imports: [BackButtonComponent, ReactiveFormsModule]
 })
 export class ForgotPasswordComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private userService = inject(UsersService);
+  private seoService = inject(SeoService);
+
   forgotPasswordForm;
   private readonly meta: MetaTagModel;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private userService: UsersService,
-    private seoService: SeoService
-  ) {
+  constructor() {
+    const formBuilder = this.formBuilder;
+
     this.forgotPasswordForm = formBuilder.group({
       email: [
         '',

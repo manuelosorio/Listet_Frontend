@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { EMPTY, fromEvent, Observable, Subscriber } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
@@ -14,11 +14,11 @@ import { ListItemModel } from '@models/list-item.model';
   providedIn: 'root',
 })
 export class WebsocketService {
+  private platformId = inject(PLATFORM_ID);
+
   private isBrowser: boolean = isPlatformBrowser(this.platformId);
   private socket?: Socket;
   private connectionData?: string;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   connect(connectionData: string) {
     if (this.isBrowser) {

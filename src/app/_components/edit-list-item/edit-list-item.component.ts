@@ -1,10 +1,4 @@
-import {
-  Component,
-  input,
-  InputSignal,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, input, InputSignal, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -25,12 +19,12 @@ import { formatDate } from '@angular/common';
     imports: [ReactiveFormsModule, ActionButtonComponent]
 })
 export class EditListItemComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private listService = inject(ListsService);
+
   listItem: InputSignal<ListItemModel> = input.required<ListItemModel>();
   public listItemForm!: UntypedFormGroup;
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private listService: ListsService
-  ) {
+  constructor() {
     this.listItemForm = this.formBuilder.group({
       item: ['', [Validators.required]],
       deadline: [''],
